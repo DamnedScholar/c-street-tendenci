@@ -1,0 +1,1 @@
+/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/js/admin/custom_reg_form_inline_ordering.js

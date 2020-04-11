@@ -1,0 +1,1 @@
+/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/js/admin/membapp_tabular_inline_ordering.js
