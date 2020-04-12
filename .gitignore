@@ -8,5 +8,9 @@
 !.gitignore
 !.gitkeep
 
+# also don't ignore Gitpod files
+.gitpod.Dockerfile
+.gitpod.yml
+
 whoosh_index/*
 !whoosh_index/README
