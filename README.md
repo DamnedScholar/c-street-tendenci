@@ -1,3 +1,7 @@
+# Commercial Street via Tendenci
+
+This is an experiment in modernizing civic digital interfaces.
+
 # Tendenci Django Project Template
 
 This is a Django Project template for [Tendenci](https://github.com/tendenci/tendenci)
