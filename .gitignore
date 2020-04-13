@@ -12,5 +12,8 @@
 !.gitpod.Dockerfile
 !.gitpod.yml
 
+# ignore files uploaded to the site to save space
+media/*
+
 whoosh_index/*
 !whoosh_index/README
