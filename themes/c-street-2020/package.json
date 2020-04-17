@@ -1,0 +1,15 @@
+{
+  "name": "c-street-tendenci-theme-2020",
+  "version": "1.0.0",
+  "description": "A theme for Tendenci.",
+  "main": "scripts/index.js",
+  "author": "Holland Wilson",
+  "license": "MIT",
+  "dependencies": {
+    "generator-backbox": "^1.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}
