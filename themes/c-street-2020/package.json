@@ -2,14 +2,31 @@
   "name": "c-street-tendenci-theme-2020",
   "version": "1.0.0",
   "description": "A theme for Tendenci.",
-  "main": "scripts/index.js",
+  "private": true,
   "author": "Holland Wilson",
   "license": "MIT",
+  "scripts": {
+    "build": "webpack"
+  },
   "dependencies": {
-    "generator-backbox": "^1.0.0"
+    "@fortawesome/fontawesome-pro": "^5.13.0",
+    "jquery": "^3.5.0",
+    "jquery-focuspoint": "^1.1.3",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "webpack": "^4.42.1",
+    "@babel/core": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "babel-preset-env": "^1.7.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.5.2",
+    "jimp": "^0.10.2",
+    "node-sass": "^4.13.1",
+    "responsive-loader": "^1.2.0",
+    "sass": "^1.26.3",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.4",
+    "webpack": "^5.0.0-beta.13",
     "webpack-cli": "^3.3.11"
   }
 }
