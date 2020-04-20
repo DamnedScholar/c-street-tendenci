@@ -31,14 +31,14 @@ module.exports = {
         "sass-loader"
       ],
       generator: {
-        filename: 'media/css/[file][ext]'
+        filename: '../media/css/[name].css'
       }
     },
     {
       test: /heroes\/\.(jpe?g|png)$/i,
       loader: 'responsive-loader',
       options: {
-        outputPath: 'media/img/heroes/',
+        outputPath: '../media/img/heroes/',
         name: '[name][ext]'
         // If you want to enable sharp support:
         // adapter: require('responsive-loader/sharp')
@@ -52,6 +52,7 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       _: 'lodash',
+      bs: 'bootstrap',
       fa: '@fortawesome/fontawesome-pro'
     })
   ]
