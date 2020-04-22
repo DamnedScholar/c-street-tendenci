@@ -1,3 +1,42 @@
-body
-  color: blue
-  font: "Anonymous Pro", Courier, monospace
+@import '~bootstrap'
+@import '_variables'
+
+@import 't7-base'
+
+.navbar
+  position: absolute
+  background-color: transparent
+
+  li:after
+    content: " "
+    position: absolute
+    right: 10px
+    border-left: 20px solid transparent
+    border-right: 20px solid transparent
+    border-top: 10px solid black
+
+.navbar-obs
+  height: 100vh
+
+.navbar
+  display: flex
+  justify-content: flex-end
+  color: white
+  background: black
+  padding-right: 30px
+  position: fixed
+  width: 95vw
+  border: 1px solid green
+  font-size: 1.5em
+  transition: 0.6s cubic-bezier(0.645, 0.045, 0.355, 1)
+  transition-property: font-size, line-height
+
+  ul
+
+
+img
+  height: 100%
+  width: 100%
+
+p
+  height: 100vh

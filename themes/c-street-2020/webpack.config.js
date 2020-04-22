@@ -24,8 +24,9 @@ module.exports = {
         }
       }
     },
+
     {
-      test: /\.s[ac]ss$/i,
+      test: /\.s[a]ss$/i,
       type: 'asset/resource',
       use: [
         "sass-loader"
