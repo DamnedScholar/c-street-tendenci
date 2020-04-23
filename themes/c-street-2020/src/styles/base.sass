@@ -1,32 +1,26 @@
-@import '_variables'
 @import '~bootstrap'
+@import 'variables'
 
 @import 't7-base'
 
 #site-navbar
-  position: absolute
-  background-color: transparent
-  display: flex
-  justify-content: flex-end
-  padding-right: 30px
-  position: fixed
-  width: 95vw
-  border: 1px solid green
-  font-size: 1.5em
+  // background-color: transparent
+  // font-size: 1.5em
   transition: 0.6s cubic-bezier(0.645, 0.045, 0.355, 1)
   transition-property: font-size, line-height
 
-  li
-    background: black
-    color: white
+  // li
+  //   background: $gray-800
+  //   color: $white
 
-  li:after
+  .dropdown-toggle:after
     content: " "
     position: absolute
     right: 10px
     border-left: 20px solid transparent
     border-right: 20px solid transparent
-    border-top: 10px solid black
+    border-top: 10px solid $blue
+    z-index: 100000
 
 #site-navbar-obs
   height: 100vh
