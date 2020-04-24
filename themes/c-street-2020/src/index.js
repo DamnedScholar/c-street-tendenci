@@ -10,6 +10,9 @@ require('./styles/base.sass')
 // const bs = require('bootstrap')
 // const fa = require('@fortawesome/fontawesome-pro')
 
+window.jQuery = $;
+window.$ = $;
+
 bs
 
 // Application code

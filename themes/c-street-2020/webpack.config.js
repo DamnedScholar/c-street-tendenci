@@ -58,5 +58,8 @@ module.exports = {
     alias: {
       "popper.js": "@popperjs/core"
     }
+  },
+  externals: {
+    // jquery: 'jQuery'
   }
 }
