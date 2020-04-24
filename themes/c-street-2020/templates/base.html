@@ -37,8 +37,8 @@ Fork us at github.com/tendenci  -->
     <link rel="search" type="application/opensearchdescription+xml" title="{{ SITE_GLOBAL_SITEDISPLAYNAME }}" href="{{ SITE_GLOBAL_SITEURL }}{% url 'open_search' %}">
 
     {% block jquery_script %}
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
+    <!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.1.0.min.js"></script> -->
     {% endblock jquery_script %}
 
     {% if request.user.is_authenticated %}
@@ -79,6 +79,9 @@ Fork us at github.com/tendenci  -->
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600;700&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
 
+    <!-- Custom JS for this template
+    =========================================================== -->
+    <script type="text/javascript" src="themes/c-street-2020/dist/main.js"></script>
 
     <!-- FAVICON -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon.ico' %}">
