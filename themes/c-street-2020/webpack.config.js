@@ -47,12 +47,11 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProvidePlugin({
-      // $: 'jquery',
-      // jQuery: 'jquery',
-      // _: 'lodash',
-      // pop: 'popper',
-      // bs: 'bootstrap',
-      // fa: '@fortawesome/fontawesome-pro'
+      $: 'jquery',
+      jQuery: 'jquery',
+      _: 'lodash',
+      bs: 'bootstrap',
+      fa: '@fortawesome/fontawesome-pro'
     })
   ],
   resolve: {

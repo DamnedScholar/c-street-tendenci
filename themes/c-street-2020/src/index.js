@@ -1,9 +1,16 @@
+// Importing styles
 require('./styles/base.sass')
 
-const $ = require('jquery')
-const jQuery = require('jquery')
-const _ = require('lodash')
-const bs = require('bootstrap')
-const fa = require('@fortawesome/fontawesome-pro')
+// Importing JQuery and Lodash
+// const $ = require('jquery')
+// const jQuery = require('jquery')
+// const _ = require('lodash')
+//
+// // Importing Bootstrap and FontAwesome
+// const bs = require('bootstrap')
+// const fa = require('@fortawesome/fontawesome-pro')
 
+bs
+
+// Application code
 document.write("Code will start here")
