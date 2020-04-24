@@ -10,3 +10,4 @@ In order to update the site to Bootstrap 4 compatibility, a significant number o
 * The inline edit links are inconsistently styled. This makes it difficult to change the look and feel of these links across the whole site and impossible to find them with JS. I can override each of them to make them consistent, and perhaps a PR is in order.
   - `navs` looks in `navs/cached_nav.html` and spits out `.t-admin-inline`. The class name makes sense and is unique, but the template name is weird.
   - `boxes` uses `.admin-inline` from `boxes/edit-link.html`. The template name seems perfect here.
+  - Do we really need text after "Edit" for those buttons? It should be obvious what you're editing from the button's position.

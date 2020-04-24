@@ -18,13 +18,10 @@ module.exports = {
       use: {
         loader: "babel-loader",
         options: {
-          presets: [
-            "env"
-          ]
+          presets: ['@babel/preset-env']
         }
       }
     },
-
     {
       test: /\.s[a]ss$/i,
       type: 'asset/resource',
@@ -50,11 +47,17 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      _: 'lodash',
-      bs: 'bootstrap',
-      fa: '@fortawesome/fontawesome-pro'
+      // $: 'jquery',
+      // jQuery: 'jquery',
+      // _: 'lodash',
+      // pop: 'popper',
+      // bs: 'bootstrap',
+      // fa: '@fortawesome/fontawesome-pro'
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      "popper.js": "@popperjs/core"
+    }
+  }
 }
