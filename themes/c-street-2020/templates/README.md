@@ -5,5 +5,8 @@ In order to update the site to Bootstrap 4 compatibility, a significant number o
 ### Significant Changes
 * Navbar classes seem to have changed a lot for Bootstrap 4.
 * `.nav` is redundant with `.navbar-nav` when used inside `.navbar`.
-* There's a `ul` in `header.html` outside the `<% nav >` tags, when the `navs` app spawns a `ul`. There should only be one, and it should be inside the app's templates (because a different app might use different tags).
+* There's a `ul` in `header.html` outside the `<% nav %>` tags, when the `navs` app spawns a `ul`. There should only be one, and it should be inside the app's templates (because a different app might use different tags).
 * Why is there a `.t-main-navbar-nav` that doesn't get used for anything? It's next to `#t-main-navbar-nav-[num]` which is also unused. These names are confusing and non-expressive and should be limited. Anywhere I see something like that, I'm removing the `class` and changing the `id` to something straightforward like `#t-navbar-[num]`.
+* The inline edit links are inconsistently styled. This makes it difficult to change the look and feel of these links across the whole site and impossible to find them with JS. I can override each of them to make them consistent, and perhaps a PR is in order.
+  - `navs` looks in `navs/cached_nav.html` and spits out `.t-admin-inline`. The class name makes sense and is unique, but the template name is weird.
+  - `boxes` uses `.admin-inline` from `boxes/edit-link.html`. The template name seems perfect here.
