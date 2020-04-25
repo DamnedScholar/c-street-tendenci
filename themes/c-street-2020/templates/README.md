@@ -11,3 +11,7 @@ In order to update the site to Bootstrap 4 compatibility, a significant number o
   - `navs` looks in `navs/cached_nav.html` and spits out `.t-admin-inline`. The class name makes sense and is unique, but the template name is weird.
   - `boxes` uses `.admin-inline` from `boxes/edit-link.html`. The template name seems perfect here.
   - Do we really need text after "Edit" for those buttons? It should be obvious what you're editing from the button's position.
+
+
+### Things to Do
+* I hardcoded the link to the template JS in `base.html`. This is bad and should be replaced by a dynamic link as soon as possible.
