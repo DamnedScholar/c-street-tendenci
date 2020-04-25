@@ -4,7 +4,7 @@
 <div id="t-admin-megamenu" class="navbar-inverse navbar-fixed-top yamm t-megamenu" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button id="t-admin-megamenu-toggle" class="navbar-toggle collapsed t-megamenu-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+            <button id="t-admin-megamenu-toggle" class="navbar-toggle t-megamenu-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -17,7 +17,7 @@
 
         <div id="navbar-collapse" class="navbar-collapse navbar-expand-lg navbar-expand-md">
             {# <div class="clearfix visible-sm-block"></div> #}
-            <ul class="nav navbar-nav inner-top-nav">
+            <ul class="navbar-nav inner-top-nav">
                 {% include 'top_menu/_profile_dropdown.html' %}
 
                 {% include 'top_menu/_community_dropdown.html' %}
@@ -48,7 +48,7 @@
               </li>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right inner-top-nav">
+            <ul class="navbar-nav navbar-right inner-top-nav">
                 {% if USER_IS_SUPERUSER %}
                 {% include 'top_menu/_support_dropdown.html' %}
                 {% endif %}
