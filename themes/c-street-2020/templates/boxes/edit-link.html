@@ -1,6 +1,6 @@
 {% if box %}
 {% if user.is_superuser %}
-<a href="{% url "admin:boxes_box_change" box.pk %}?next={{ request.path }}" title="{% trans 'Edit Box' %}" class="admin-inline btn btn-outline-danger btn-sm">{% blocktrans with t=box.title|title %}Edit{% endblocktrans %}</a>
+<a href="{% url "admin:boxes_box_change" box.pk %}?next={{ request.path }}" title="{% trans 'Edit Box' %}" class="t-admin-inline btn btn-outline-danger btn-sm">{% blocktrans with t=box.title|title %}Edit{% endblocktrans %}</a>
 
 {% endif %}
 {% endif %}

@@ -8,7 +8,7 @@
 {% if is_site_map %}
 <ul id="t-site-map">
 {% else %}
-<ul class="navbar-nav container-fluid" id="t-navbar{{ nav.id }}">
+<ul class="navbar-nav container-fluid justify-content-around" id="t-navbar{{ nav.id }}">
 {% endif %}
     {% for item in items %}
         {% nav_item item is_site_map=is_site_map %}

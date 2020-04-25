@@ -3,11 +3,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   mode: "production",
-  // entry: "./src/index.js",
-  // output: {
-  //   path: __dirname + '/dist',
-  //   filename: "[name].js"
-  // },
+  entry: "./src/index.js",
+  output: {
+    path: __dirname + '/media/js',
+    filename: "[name].js"
+  },
   experiments: {
     asset: true
   },
@@ -29,7 +29,7 @@ module.exports = {
         "sass-loader"
       ],
       generator: {
-        filename: '../media/css/[name].css'
+        filename: '../css/[name].css'
       }
     },
     {
