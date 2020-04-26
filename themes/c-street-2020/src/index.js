@@ -16,4 +16,3 @@ window.$ = $;
 bs
 
 // Application code
-document.write("Code will start here")
