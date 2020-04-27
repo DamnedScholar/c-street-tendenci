@@ -11,11 +11,9 @@ require('./styles/base.sass')
 // const fa = require('@fortawesome/fontawesome-pro')
 
 // For Bootstrap compatibility, jQuery needs to be attached to `window`
-window.jQuery = $;
-window.$ = $;
-
-// Focuspoint adds features to jQuery's $, so it needs to follow that.
-require('jquery-focuspoint')
+jquery = $
+window.jQuery = $
+window.$ = $
 
 // For Webpack, we need to call Bootstrap for it to be included in the bundle
 bs
