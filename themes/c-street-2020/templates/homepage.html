@@ -36,6 +36,7 @@
 {% block html_body %}
 <!-- begin: header -->
 {% theme_include "header.html" %}<!-- Pulls in Header Include -->
+<img src="{% static 'img/Streetscape.jpg' %}" alt="An image of Commercial Street, looking east from Boonville.">
 <!-- end: header -->
 <div id="page-top-home" role="main">
    {% list_stories as stories_list limit=3 tags="rotator" quality="90" data-interval="5000" %}
