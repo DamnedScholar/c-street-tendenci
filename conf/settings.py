@@ -13,6 +13,11 @@ from tendenci.settings import *
 # Remove a list item: INSTALLED_APPS.remove('some_app')
 # Remove a hash key: LOGGING['handlers']['mail_admins'].pop('class', None)
 
+INSTALLED_APPS += [
+    'channels',
+    'sockpuppet'
+]
+
 
 # ---------------------------------------------------------------------------- #
 # Debug Setting
