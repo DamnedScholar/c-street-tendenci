@@ -33,7 +33,7 @@ if DEBUG:
 
 # Any site-specific settings that do not fit in the sections below can go here.
 
-ASGI_APPLICATION = 'sockpuppet.routing'
+ASGI_APPLICATION = 'sockpuppet.routing.application'
 
 INSTALLED_APPS += [
     'channels',
