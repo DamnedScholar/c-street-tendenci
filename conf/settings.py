@@ -33,6 +33,8 @@ if DEBUG:
 
 # Any site-specific settings that do not fit in the sections below can go here.
 
+# Channels requires this setting. Right now, it's handled by a file inside
+# `django-sockpuppet`, but
 ASGI_APPLICATION = 'sockpuppet.routing.application'
 
 INSTALLED_APPS += [
