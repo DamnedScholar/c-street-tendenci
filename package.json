@@ -1,0 +1,21 @@
+{
+  "name": "c-street-tendenci",
+  "version": "1.0.0",
+  "description": "This is an experiment in modernizing civic digital interfaces.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "watch": "webpack --watch --info-verbosity verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DamnedScholar/c-street-tendenci.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DamnedScholar/c-street-tendenci/issues"
+  },
+  "homepage": "https://github.com/DamnedScholar/c-street-tendenci#readme"
+}
