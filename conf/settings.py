@@ -13,11 +13,6 @@ from tendenci.settings import *
 # Remove a list item: INSTALLED_APPS.remove('some_app')
 # Remove a hash key: LOGGING['handlers']['mail_admins'].pop('class', None)
 
-INSTALLED_APPS += [
-    'channels',
-    'sockpuppet'
-]
-
 
 # ---------------------------------------------------------------------------- #
 # Debug Setting
@@ -37,6 +32,13 @@ if DEBUG:
 # ---------------------------------------------------------------------------- #
 
 # Any site-specific settings that do not fit in the sections below can go here.
+
+ASGI_APPLICATION = 'sockpuppet.routing'
+
+INSTALLED_APPS += [
+    'channels',
+    'sockpuppet'
+]
 
 
 # ---------------------------------------------------------------------------- #
