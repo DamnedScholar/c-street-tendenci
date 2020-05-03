@@ -1,5 +1,0 @@
-{% if box %}
-{% if user.is_superuser %}
-<a href="{% url "admin:boxes_box_change" box.pk %}?next={{ request.path }}" title="{% trans 'Edit Box' %}" class="t-admin-inline inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-red-dark border-red bg-white hover:bg-red-light hover:text-red-darker py-1 px-2 text-sm leading-tight">{% blocktrans with t=box.title|title %}Edit{% endblocktrans %}</a>
-{% endif %}
-{% endif %}
