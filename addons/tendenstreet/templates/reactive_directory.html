@@ -1,0 +1,12 @@
+
+{% load static %}
+<body>
+    
+    <script src="{% static 'js/reactive_directory.js' %}"></script>
+
+    <a  href="#"
+        data-controller="reactive_directory"
+        data-action="click->reactive_directory#increment"
+        data-count="{{ count }}"
+    >Increment {{ count }}</a>
+</body>
