@@ -14,7 +14,8 @@
 
 # ignore files uploaded to the site to save space
 media/*
-# ignore any node_modules directories in themes
+# ignore any node_modules directories
+node_modules/*
 themes/*/node_modules
 
 whoosh_index/*
