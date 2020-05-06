@@ -1,14 +1,11 @@
 {% load nav_tags %}
-
-
 {% if show_title == "True" %}
     <h2>{{ nav.title }}</h2>
 {% endif %}
-
 {% if is_site_map %}
 <ul id="t-site-map">
 {% else %}
-<ul class="navbar-nav container-fluid justify-content-around" id="t-navbar{{ nav.id }}">
+<ul class="flex flex-wrap list-none p-0 pl-0 mb-0bar-nav container mx-auto mx-auto justify-content-around" id="t-navbar{{ nav.id }}">
 {% endif %}
     {% for item in items %}
         {% nav_item item is_site_map=is_site_map %}

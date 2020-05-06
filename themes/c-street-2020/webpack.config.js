@@ -26,14 +26,34 @@ module.exports = {
       test: /\.s[a]ss$/i,
       type: 'asset/resource',
       use: [
-        "sass-loader"
+        {
+          loader: 'postcss-loader',
+          options: {
+            ident: 'postcss',
+            plugins: [
+              require('tailwindcss'),
+              require('autoprefixer'),
+            ],
+          }
+        },
+        'sass-loader'
       ],
       generator: {
         filename: '../css/[name].css'
       }
     },
+    // {
+    //   test: /\.s[a]ss$/i,
+    //   type: 'asset/resource',
+    //   use: [
+    //     "sass-loader"
+    //   ],
+    //   generator: {
+    //     filename: '../css/[name].css'
+    //   }
+    // },
     {
-      test: /heroes\/\.(jpe?g|png)$/i,
+      test: /heroes\/.*\.(jpe?g|png)$/i,
       loader: 'responsive-loader',
       options: {
         outputPath: '../media/img/heroes/',

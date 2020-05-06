@@ -1,5 +1,6 @@
 // Importing styles
 require('./styles/base.sass')
+require('./styles/tailwind.sass')
 
 // Importing JQuery and Lodash
 // const $ = require('jquery')
@@ -14,8 +15,5 @@ require('./styles/base.sass')
 jquery = $
 window.jQuery = $
 window.$ = $
-
-// For Webpack, we need to call Bootstrap for it to be included in the bundle
-bs
 
 // Application code

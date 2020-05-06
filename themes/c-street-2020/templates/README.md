@@ -1,7 +1,5 @@
 ## Tendenci Theme Update
 In order to update the site to Bootstrap 4 compatibility, a significant number of base theme pages may need to be overridden to apply new styles. Django makes it easy to do this. In the case of files that had "-new" added to their name, the overriding template will be named according to the original name (which makes it easy for me to switch back and forth if I need to; eg. `top_menu/admin_top.html` vs `top_menu/admin_top-new.html`).
-
-
 ### Significant Changes
 * Navbar classes seem to have changed a lot for Bootstrap 4.
 * `.nav` is redundant with `.navbar-nav` when used inside `.navbar`.
@@ -11,7 +9,5 @@ In order to update the site to Bootstrap 4 compatibility, a significant number o
   - `navs` looks in `navs/cached_nav.html` and spits out `.t-admin-inline`. The class name makes sense and is unique, but the template name is weird.
   - `boxes` uses `.admin-inline` from `boxes/edit-link.html`. The template name seems perfect here.
   - Do we really need text after "Edit" for those buttons? It should be obvious what you're editing from the button's position.
-
-
 ### Things to Do
 * I hardcoded the link to the template JS in `base.html`. This is bad and should be replaced by a dynamic link as soon as possible.
