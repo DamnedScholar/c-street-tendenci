@@ -12,9 +12,9 @@ require('./styles/tailwind.sass')
 // const fa = require('@fortawesome/fontawesome-pro')
 
 // For Bootstrap compatibility, jQuery needs to be attached to `window`
-jquery = $
-window.jQuery = $
-window.$ = $
+// jquery = $
+// window.jQuery = $
+// window.$ = $
 
 // Start StimulusJS
 import { Application } from "stimulus"
