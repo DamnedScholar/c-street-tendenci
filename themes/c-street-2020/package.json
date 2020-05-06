@@ -18,10 +18,12 @@
     "postcss-loader": "^3.0.0",
     "stimulus": "^1.1.1",
     "stimulus-image-grid": "^1.0.2",
-    "tailwindcss": "^1.4.5"
+    "tailwindcss": "^1.4.5",
+    "tailwindcss-stimulus-components": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@popperjs/core": "^2.3.3",
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
