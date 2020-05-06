@@ -36,17 +36,19 @@
 {% block html_body %}
 <!-- begin: header -->
 {% theme_include "header.html" %}<!-- Pulls in Header Include -->
-<div class="focuspoint"
-data-focus-x="0.331"
-data-focus-y="0.224"
-data-image-w="400"
-data-image-h="300">
-  <img src="{% static 'img/Streetscape.jpg' %}" alt="An image of Commercial Street, looking east from Boonville.">
+<div id="front-page-hero" class="container object-cover h-screen">
+  <div class="focuspoint"
+  data-focus-x="0.331"
+  data-focus-y="0.224"
+  data-image-w="400"
+  data-image-h="300">
+    <img src="{% static 'img/Streetscape.jpg' %}" alt="An image of Commercial Street, looking east from Boonville.">
+  </div>
 </div>
 <!-- end: header -->
 <div id="page-top-home" role="main">
    {% list_stories as stories_list limit=3 tags="rotator" quality="90" data-interval="5000" %}
-   <div id="frontCarousel" class="carousel slide" data-ride="carousel">
+   <div id="frontCarousel" class="carousel slide hidden" data-ride="carousel">
 
       <!-- begin: carousel-inner -->
       <div class="carousel-inner" id="rotator_inner">
