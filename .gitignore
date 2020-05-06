@@ -13,9 +13,11 @@
 !.gitpod.yml
 
 # ignore files uploaded to the site to save space
-media/*
+media
+# but not theme files
+!themes/*/media
 # ignore any node_modules directories
-node_modules/*
+node_modules
 themes/*/node_modules
 
 whoosh_index/*

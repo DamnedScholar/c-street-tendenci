@@ -3,5 +3,5 @@
 # the /requirements/tendenci.txt file is overwritten on every upgrade
 # https://tendenci.readthedocs.org
 
-django-sockpuppet=0.2
+django-sockpuppet==0.2
 channels

@@ -1,6 +1,6 @@
 ## Bundles are kind of big
-* I'm not making an AJAX application, just a site I'd like to look pretty. I can probably replace JQuery down the line with Alpine.js (https://github.com/alpinejs/alpine) by replacing the Bootstrap interactive components with Alpine code. The code can live peacefully in Django templates, since Alpine works at run time.
-* Once Alpine is handling the interactive parts, the Bootstrap integration can be converted to Tailwind. Tailwind expects to be part of the build pipeline and engages in tree-shaking, so it should be a piece of cake to plug it into the current workflow. Browsing the Tailwind docs, I'm half wondering if I should bother converting more to Bootstrap.
+* I'm not making an AJAX application, just a site I'd like to look pretty. I can probably replace JQuery down the line with Stimulus.js by replacing the Bootstrap interactive components with Stimulus code. The code can live peacefully in Django templates, since Stimulus works at run time.
+* Once Stimulus is handling the interactive parts, the Bootstrap integration can be converted to Tailwind. Tailwind expects to be part of the build pipeline and engages in tree-shaking, so it should be a piece of cake to plug it into the current workflow. Browsing the Tailwind docs, I'm half wondering if I should bother converting more to Bootstrap.
   - https://tailwindcss.com/docs/installation#webpack
   - https://tailwindcss.com/docs/extracting-components#extracting-html-components
 
