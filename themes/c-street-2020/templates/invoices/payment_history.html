@@ -1,7 +1,8 @@
 {% load base_filters %}
+
 {% if payments %}
 <p class="payment-history-header">{% trans 'Payment History' %}</p>
-<table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports" border="0" cellspacing="0" cellpadding="0">
+<table class="table table-tendenci-reports" border="0" cellspacing="0" cellpadding="0">
   <tr class="payment-table-header">
     <td>{% trans 'Information' %}</td>
     <td class="td-right">{% trans 'Line Amount' %}</td>

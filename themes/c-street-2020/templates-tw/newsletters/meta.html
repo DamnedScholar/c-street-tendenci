@@ -1,0 +1,52 @@
+{% load base_tags %}
+{% load base_filters %}
+<ul class="list-unstyled t-meta-data">
+  {% if user.is_authenticated %}
+       {% if newsletter.send_status %}
+        <li><strong>{% trans "Status:" %}</strong> {{ newsletter.send_status|title }}</li>
+     {% endif %}
+     {% if newsletter.date_created %}
+     <li><strong>{% trans "Created:" %}</strong> {{ newsletter.date_created }}</li>
+     {% endif %}
+     {% if newsletter.date_submitted %}
+     <li><strong>{% trans "Submitted:" %}</strong> {{ newsletter.date_submitted }}</li>
+     {% endif %}
+     {% if newsletter.date_email_sent %}
+     <li><strong>{% trans "Sent:" %}</strong> {{ newsletter.date_email_sent }}</li>
+        {% endif %}
+        {% if newsletter.date_last_resent %}
+         <li><strong>{% trans "Resent:" %}</strong> {{ newsletter.date_last_resent }}</li>
+          <li><strong>{% trans "Resend Count:" %}</strong> {{ newsletter.resend_count }}</li>
+        {% endif %}
+    {% endif %}
+</ul>
+{% if user.profile.is_superuser %}
+   <nav class="flex flex-wrap list-none p-0 pl-0 mb-0bar navbar-default t-meta-editor-bar">
+        <div class="container mx-auto mx-auto">
+            <div class="flex-growlapse flex flex-wrap list-none p-0 pl-0 mb-0bar-collapse">
+                <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 t-meta-options-links">
+                    <li>{{ newsletter.obj_perms }}</li>
+                    <li>{{ newsletter.obj_status }}</li>
+                </ul>
+                <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 navbar-right t-meta-options-links">
+                    <li><a class="t-meta-eventlog-link" href="{% url 'event_log.search' %}?application=newsletters&model_name=newsletter&object_id={{ newsletter.pk }}">{% trans "Eventlogs" %}</a></li>
+                    <li><a class="t-meta-edit-link" href="{%  url 'newsletter.action.step4' newsletter.pk %}">{% trans "Edit" %}</a></li>
+                    <li class="relative">
+                        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative" role="button" aria-expanded="false">{% spaceless %}
+                            {% trans "Options" %} <span class="caret"></span>
+                        {% endspaceless %}</a>
+                        <ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded" role="menu">
+                            <li><a class="t-meta-clone-link" href="{% url 'newsletter.clone' newsletter.pk %}" title="Clone">{% trans "Clone" %}</a></li>
+                            {% if not newsletter.date_email_sent %}
+                            <li><a href="{% url 'newsletter.action.step5' newsletter.pk %}">{% trans "Send" %}</a></li>
+                          {% else %}
+                          <li><a class="resend-link" href="{% url 'newsletter.resend.view' newsletter.pk %}" data-title="{{ newsletter.actionname }}" data-href="{% url 'newsletter.resend.view' newsletter.pk %}">{% trans "Resend" %}</a></li>
+                          {% endif %}
+                           <li><a class="t-meta-delete-link" href="{% url 'newsletter.delete' newsletter.pk %}">{% trans "Delete" %}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endif %}

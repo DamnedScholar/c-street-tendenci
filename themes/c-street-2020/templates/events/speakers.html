@@ -4,32 +4,38 @@
 {% load base_tags %}
 {% load category_tags %}
 {% load humanize %}
+
 {% block title %}{{ block.super }}{{ event.get_title }}{% endblock %}
 {% block meta_description %}{{ event.get_description }}{% endblock %}
 {% block meta_keywords %}{{ event.get_keywords }}{% endblock %}
 {% block meta_canonical_url %}<link rel="canonical" href="{{ event.get_canonical_url }}" />{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 <link rel="stylesheet" href="{% static 'css/tipsy.css' %}">
 {% endblock %}
+
 {% block content %}
 <!-- you are here: templates/events/speakers.html -->
+
 <div id="event-speaker-list">
     <div class="speakers-wrap">
         <div class="info">
           <div class="page-header">
-            <h1 class="text-xl font-semibold">{{ event.title }}</h1>
+            <h1>{{ event.title }}</h1>
           </div>
           <ul class="pager">
             <li class="previous"><a href="{% url "event" event.pk %}">&larr; Back to {{ event.title }} Event</a></li>
           </ul>
+          
             <h3>{% trans "Speakers" %}</h3>
+
             {% for speaker in speakers %}
                 <div class="speaker-wrap panel panel-default">
                   <div class="panel-body">
                     {% if speaker.get_photo %}
-                    <div class="speaker-photo sm:w-1/4 pr-4 pl-4">
+                    <div class="speaker-photo col-xs-3">
                       <img alt="Speaker: {{ speaker.name }}" title="Speaker: {{ speaker.name|truncatechars:114 }}" src="{% url "file" speaker.get_photo.pk %}"  width="100" />
                     </div>
                     {% endif %}
@@ -57,7 +63,9 @@
             {% endfor %}
         </div> <!-- end info -->
     </div>
+
 </div>
+
 {% endblock %}
 {% block extra_body %}
     {{ block.super }}
@@ -67,6 +75,7 @@
             $('a.speaker-desc-toggle').on("click", function() {
                 var _this = $(this);
                 var speaker_wrap = _this.parents('.speaker-wrap');
+
                 _this.hide();
                 speaker_wrap.find('div.speaker-desc-short').hide();
                 speaker_wrap.find('div.speaker-desc-long').show();

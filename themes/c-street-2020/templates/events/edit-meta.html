@@ -1,15 +1,19 @@
 {% extends "events/base.html" %}
 {% load event_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }}{% trans 'Edit Meta Information' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_EVENTS_LABEL 'Event' %} {% blocktrans with event.title as event_title %}Meta Information for<br />
+    <h1>{% firstof MODULE_EVENTS_LABEL 'Event' %} {% blocktrans with event.title as event_title %}Meta Information for<br />
     {{ event_title }}{% endblocktrans %}</h1>
+
     <div class="event-wrap">
         <div class="options">
              <div class="quick-options">
@@ -26,6 +30,7 @@
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript">

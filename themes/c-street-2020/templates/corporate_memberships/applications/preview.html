@@ -2,10 +2,12 @@
 {% load base_filters %}
 {% load corporate_memberships_tags %}
 {% load styled_forms %}
+
 {% block title %}{% endblock %}
 {% block meta_description %}{% endblock %}
 {% block meta_keywords %}{% endblock %}
 {% block meta_canonical_url %}<link rel="canonical" href="" />{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -42,11 +44,12 @@
     }
 </style>
 {% endblock %}
+
 {% block content %}
 <div class="t">
 <div class="application-form-wrap">
-        <div class="relative px-3 py-3 mb-4 border rounded text-teal-800 border-teal-600 bg-teal-200 alert-dismissable" role="alert">
-            <button type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3" data-dismiss="relative px-3 py-3 mb-4 border rounded"><span aria-hidden="true">&times;</span><span class="">Close</span></button>
+        <div class="alert alert-info alert-dismissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <p>
                 {% trans 'This is the preview' %}
                 {% if current_app.id == app.id%}
@@ -56,15 +59,21 @@
                 {% endif %}
             </p>
         </div>
-        <h1 class="text-xl font-semibold">{{ app.name }}</h1>
+
+        <h1>{{ app.name }}</h1>
         {{ app.description|safe }}
+
        {% for field_obj in app_fields %}
             {% render_corpmembership_field request field_obj corpprofile_form corpmembership_form %}
         {% endfor %}
-        <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal " type="submit" name="submit" value="{% trans 'Submit' %}" opacity-75="true" />
+
+        <input class="btn" type="submit" name="submit" value="{% trans 'Submit' %}" disabled="true" />
+
 </div>
 </div>
 {% endblock %}
+
+
 {% block extra_body %}
     {{ block.super }}
       <script type="text/javascript"

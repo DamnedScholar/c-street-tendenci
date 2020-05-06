@@ -2,14 +2,18 @@
 {% load help_file_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{% firstof MODULE_HELP_FILES_LABEL_PLURAL trans 'Help Files' %} {% trans "Edit" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/helpfiles.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_HELP_FILES_LABEL_PLURAL trans 'Help Files' %} {% trans "Edit" %}</h1>
+    <h1>{% firstof MODULE_HELP_FILES_LABEL_PLURAL trans 'Help Files' %} {% trans "Edit" %}</h1>
+
     <div class="article-wrap">
         <form action="{% url "help_files.edit" help_file.pk %}" method="post">{% csrf_token %}
         <div class="forms">
@@ -20,6 +24,7 @@
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     {{ form.media }}

@@ -1,0 +1,16 @@
+<form class="search-form flex items-center" action="." method="get">
+  <div class="mb-4">
+    <label for="news_group" class="control-label">{{ form.news_group.label }}</label>:&nbsp;&nbsp;{{ form.news_group }}
+  </div>
+  <div class="mb-4">
+    {% if SITE_GLOBAL_SEARCHINDEX %}
+    {% if form.q.errors %}
+    <div class="text-red-500">{{ form.q.errors }}</div>
+    {% endif %}
+    {{ form.q }}
+    {% endif %}
+    <button type="submit" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default">
+      <i class="glyphicon glyphicon-search" alt="{% trans "Search" %}">
+      </i></button>
+  </div>
+</form>

@@ -1,4 +1,5 @@
 //Populate sub categories with value of main category
+
 $(document).ready(function() {
     $('select#id_file_cat').on("change", function() {
         // Get sub categories through ajax

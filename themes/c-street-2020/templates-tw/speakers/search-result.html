@@ -1,0 +1,34 @@
+{% load speaker_tags %}
+<div class="speaker-search-member">
+  <div class="md:w-1/6 pr-4 pl-42">
+    <div class="flex flex-wrap">
+      <div class="member-photo md:w-1/4 pr-4 pl-4">
+        {% if speaker_member.professional_photo %}
+        <a href="{{ speaker_member.get_absolute_url }}">
+             <img src="{% url "file" speaker_member.professional_photo.pk %}128x128/" title="{{ speaker_member.name }}"  />
+        </a>
+        {% endif %}
+      </div>
+      <div class="member-info md:w-3/4 pr-4 pl-4">
+        {% spaceless %}
+        <h3><a href="{{ speaker_member.get_absolute_url }}">{{ speaker_member.name }}</a></h3>
+        <p>
+          {% if speaker_member.company %}
+          {{  speaker_member.company }}
+          {%  endif %}
+          {% if speaker_member.position %}
+          {{  speaker_member.position }}
+          {%  endif %}
+          {% endspaceless %}
+        </p>
+        {% if speaker_member.biography %}
+        <p>{{ speaker_member.biography|striptags|truncatewords:"80"|safe }}</p>
+        {% endif %}
+      </div>
+    </div>
+    {% if user.is_authenticated %}
+    <br />
+    {% speaker_options request.user speaker_member %}
+    {% endif %}
+  </div>
+</div>

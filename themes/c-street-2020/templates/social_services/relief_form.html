@@ -1,10 +1,13 @@
 {% extends "social_services/base.html" %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }}{% trans 'Relief Assessment Form' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/social_services.css' %}" />
 {% endblock %}
+
 {% block content %}
 <h1 class="capitalize">{% trans "relief assessment form" %}</h1>
 <p class="capitalize">{% trans "date of visit" %}: {{ now|date:"j-F-Y P" }}</p>
@@ -14,7 +17,9 @@
         <input type="submit" value="Submit Information!"/>
     </div>
 </form>
+
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 {{ form.media }}

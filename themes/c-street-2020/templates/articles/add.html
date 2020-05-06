@@ -2,32 +2,40 @@
 {% load article_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
+
 {% block title %}{% firstof MODULE_ARTICLES_LABEL trans "Article" %} {% trans "Add" %}{% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{% static 'timepicker/timepicker.css' %}">
     <link rel="stylesheet" href="{% static 'css/popover.css' %}">
 {% endblock %}
+
 {% block content %}
-    <h1 class="text-xl font-semibold">{% firstof MODULE_ARTICLES_LABEL trans "Article" %} {% trans "Add" %}</h1>
+    <h1>{% firstof MODULE_ARTICLES_LABEL trans "Article" %} {% trans "Add" %}</h1>
+
     <form id="t-articles-article-form" class="form-horizontal" action="{% url 'article.add' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
         {{ form|styled_form }}
+
         <fieldset id="t-articles-category">
             <legend>{% trans "Category" %}</legend>
             {{ categoryform|styled_form }}
         </fieldset>
+
         {% comment %}
-        <fieldset class="boxy-gray-500" >
+        <fieldset class="boxy-grey" >
             <legend id="category-title" style="cursor: pointer"><span>+</span> {% trans "Category" %}</legend>
             <div id="category-form">
                 {{ categoryform|styled_form }}
             </div>
         </fieldset>
         {% endcomment %}
-        <div class="mb-4">
-            <div class=":flex-growsm-offset-3 sm:w-3/4 pr-4 pl-4">
-                <button type="submit" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400 capitalize">
+
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-primary text-capitalize">
                     {% if MODULE_ARTICLES_LABEL %}
                         {% blocktrans with module_articles_label=MODULE_ARTICLES_LABEL %}Add {{ module_articles_label }}{% endblocktrans %}
                     {% else %}
@@ -38,7 +46,10 @@
         </div>
     </form>
 {% endblock %}
+
 {% block extra_body %}
+
+
     {{ block.super }}
     {{ form.media }}
     <script type="text/javascript" src="{% static 'js/global/tinymce.event_handlers.js' %}"></script>
@@ -48,6 +59,7 @@
     <script type="text/javascript" src="{% static 'js/popover.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/gplus-helptexts.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/email-verification.js' %}"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             // Slugify
@@ -58,9 +70,11 @@
                 help: false,
                 limit : 150
             });
+
             // Release Datetime
             $('#id_release_dt_0').datepicker({ dateFormat: 'yy-mm-dd' });
             $('#id_release_dt_1').timepicker({'timeFormat': 'h:i A'});
+
             // G+ Help Texts
             gplusHelpTextsInit('{{ SITE_GLOBAL_SITEURL }}');
         });

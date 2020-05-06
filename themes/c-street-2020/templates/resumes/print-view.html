@@ -1,6 +1,7 @@
 {% extends "resumes/base-print.html" %}
 {% load base_filters %}
 {% load resume_tags %}
+
 {% block title %}{{ resumes.get_title }}{% endblock %}
 {% block meta_description %}{{ resumes.get_description }}{% endblock %}
 {% block meta_keywords %}{{ resumes.get_keywords }}{% endblock %}
@@ -10,17 +11,21 @@
 <link type="text/css" rel="stylesheet" href="{% static 'css/resumes.css' %}" />
 <link type="text/css" rel="stylesheet" href="{% static 'css/resumes-print.css' %}" />
 {% endblock %}
+
 {% block content %}
 <div class="t-print">
+
      <div class="resume-wrap">
         <h2>{{ resume.title }}</h2>
         <h2>{% trans "Resume Information" %}</h2>
+
         {% if resume.description %}
         <div class="section-block">
             <div class="label">{% trans "Description" %}</div>
             <div class="value">{{ resume.description|safe }}</div>
         </div>
         {% endif %}
+
         {% if resume.location %}
         <div class="section-block">
             <div class="label">{% trans "Location" %}</div>
@@ -28,18 +33,21 @@
             <div class="clear"></div>
         </div>
         {% endif %}
+
         {% if resume.experience %}
         <div class="section-block">
             <div class="label">{% trans "Experience" %}</div>
             <div class="value">{{ resume.experience }}</div>
         </div>
         {% endif %}
+
         {% if resume.skills %}
         <div class="section-block">
             <div class="label">{% trans "Skills" %}</div>
             <div class="value">{{ resume.skills }}</div>
         </div>
         {% endif %}
+
         {% if resume.education %}
         <div class="section-block">
             <div class="label">{% trans "Education" %}</div>
@@ -47,6 +55,7 @@
             <div class="clear"></div>
         </div>
         {% endif %}
+
         {% if resume.contact_name %}
         <h2>{% trans "Contact Information" %}</h2>
         <div class="contact-wrap">
@@ -58,5 +67,6 @@
         </div>
         {% endif %}
     </div>
+
 </div>
 {% endblock %}

@@ -1,5 +1,6 @@
 {% extends "django_admin_bootstrapped:admin/change_form.html" %}
 {% load admin_urls admin_modify bootstrapped_goodies_tags %}
+
 {% block extrahead %}
 {{ block.super }}
 {% if original.corporatemembershiptype_set.all|length %}
@@ -10,6 +11,7 @@
 </script>
 {% endif %}
 {% endblock %}
+
 {% block field_sets %}
     {% for fieldset in adminform %}
       {% include "dab_override/fieldset.html" %}

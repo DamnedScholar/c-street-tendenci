@@ -3,7 +3,9 @@
 {% load base_tags %}
 {% load base_filters %}
 {% load styled_forms %}
+
 {% block title %}{% trans 'Import Corporate Memberships from CSV file' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/corporate_memberships.css' %}">
@@ -55,24 +57,30 @@
             width: 60%;
         }
     </style>
+
 {% endblock %}
+
 {% block content %}
 <div class="t">
 <div id="import-wrap">
-    <h1 class="text-xl font-semibold">{% trans "Import Corporate Memberships" %}</h1>
+    <h1>{% trans "Import Corporate Memberships" %}</h1>
+
     {% if not corp_memb_type_exists %}
-    <div class="relative px-3 py-3 mb-4 border rounded">
+    <div class="alert">
         {% url "admin:corporate_memberships_corporatemembershiptype_add"  as corp_add %}
         {% blocktrans %}
         Please <a href="{{ corp_add }}">set up corporate membership types</a> before proceeding.
         {% endblocktrans %}
     </div>
     {% endif %}
+
     <div class="clearfix">
     <div id="import-instruction">
         <p style="margin-bottom:0;">{% trans "<strong>Download</strong> and <strong>fill in</strong> your spreadsheet. <strong>Upload</strong> your updated spreadsheet, <strong>preview</strong> then <strong>submit</strong>." %}</p>
+
+
         <h3>{% trans 'How to prepare the spreadsheet (.csv file)?' %}</h3>
-        <ul class="list-disc pl-4">
+        <ul>
            <li>
                {% trans 'The required fields are the field(s) in the selected key (see the second field below).' %}
            </li>
@@ -104,27 +112,36 @@
                 {{ foreign_keys}}
             </div>
         </div>
+
     </div>
+
     <div class="template-download">
         <a href="{% url "corpmembership.download_template" %}">
         <img src="{% static 'images/icons/xls-icon.gif' %}" alt="Download CSV Template" title="{% trans 'Download CSV Template' %}"/>
         </a>
+
         <div class="link">
             <a href="{% url "corpmembership.download_template" %}">{% trans "Download Template" %}</a>
+
         </div>
     </div>
+
     </div>
+
     <div class="clear"></div>
+
     <form method='post' enctype="multipart/form-data">
     {% csrf_token %}
     <div id="upload-form-wrap">
         <h3 class="import-step">{% trans "Step 1/3 - Upload" %}</h3>
+
         {% if form.errors.values %}
-        <div class="relative px-3 py-3 mb-4 border rounded text-red-800 border-red-600 bg-red-200">
+        <div class="alert alert-danger">
         {% trans 'There were some problems in the form. Please review. Thanks!' %}
         {% for error in form.non_field_errors %}
             <p><a href="#">{{ error }}</a></p>
         {% endfor %}
+
         {% for field in form %}
             {% if field.errors %}
                   {% for error in field.errors %}
@@ -134,9 +151,12 @@
                   {% endfor %}
             {% endif %}
         {% endfor %}
+
         </div>
         {% endif %}
+
         <div class="fields-block">
+
             {% if form.upload_file.errors %}
             <div class="error">
                 {% for error in form.upload_file.errors %}
@@ -144,7 +164,9 @@
                 {% endfor %}
             </div>
             {% endif %}
-             <div class="mb-4">{{ form.upload_file }}</div>
+
+             <div class="form-group">{{ form.upload_file }}</div>
+
             {% if form.override.errors %}
             <div class="error">
                 {% for error in form.override.errors %}
@@ -152,10 +174,12 @@
                 {% endfor %}
             </div>
             {% endif %}
-            <div class="mb-4">
+
+            <div class="form-group">
                 <label for="id_override">{% trans 'Update' %}:</label>
                   {{ form.override }}
              </div>
+
             {% if form.key.errors %}
             <div class="error">
                 {% for error in form.key.errors %}
@@ -163,10 +187,13 @@
                 {% endfor %}
             </div>
             {% endif %}
-            <div class="mb-4">
+
+            <div class="form-group">
                 <label for="id_key">{% trans 'Identify duplicates by' %}:</label>
                   {{ form.key }}
              </div>
+
+
             {% if form.bind_members.errors %}
             <div class="error">
                 {% for error in form.bind_members.errors %}
@@ -174,15 +201,19 @@
                 {% endfor %}
             </div>
             {% endif %}
+
             <div class="checkbox">
                 <label>
                 {{ form.bind_members }} {{ form.bind_members.label }}
                  </label>
              </div>
-            <div class="prev-btn"><input type="submit" value="{% trans 'Preview Import' %}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400"></div>
+
+            <div class="prev-btn"><input type="submit" value="{% trans 'Preview Import' %}" class="btn btn-primary"></div>
         </div>
+
      </div>
     </form>
+
 </div>
 </div>
 {% endblock %}

@@ -8,7 +8,9 @@
  * Licensed under the MIT license:
  * https://www.opensource.org/licenses/MIT
  */
+
 /*global window */
+
 window.locale = {
     "fileupload": {
         "errors": {

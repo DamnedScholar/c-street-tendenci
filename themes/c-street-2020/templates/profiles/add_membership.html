@@ -1,7 +1,9 @@
 {% extends "profiles/base.html" %}
 {% load profile_tags %}
 {% load styled_forms %}
+
 {% block title %}{% trans 'Add User Memberships' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">
@@ -10,9 +12,10 @@
 <link rel="stylesheet" href="{% static 'css/iconrow.css' %}">
 <link rel="stylesheet" href="{% static 'css/profiles.css' %}">
 {% endblock %}
+
 {% block content %}
     <div class="t">
-        <h1 class="text-xl font-semibold">{% trans 'Add User Memberships' %}</h1>
+        <h1>{% trans 'Add User Memberships' %}</h1>
         <h2>User: <a href="{{ user_this.get_absolute_url}}">
         {{ user_this.get_full_name }} ({{ user_this.username}})</a></h2>
         <div class="profile-wrap">
@@ -25,6 +28,7 @@
         </div>
     </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

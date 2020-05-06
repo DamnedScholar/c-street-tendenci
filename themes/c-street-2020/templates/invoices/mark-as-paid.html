@@ -2,23 +2,28 @@
 {% load base_filters %}
 {% load invoice_tags %}
 {% load accounting_tags %}
+
+
 {% block title %}{{ block.super }}{% trans 'Make an Offline Payment'%}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="{% static 'timepicker/timepicker.css' %}" />
 <link rel="stylesheet" href="{% static 'css/invoices.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
   <div class="page-header">
-    <h1 class="text-xl font-semibold">{% blocktrans with invoice.pk as invoice_pk %}Mark Invoice #{{ invoice_pk }} as Paid{% endblocktrans %}</h1>
+    <h1>{% blocktrans with invoice.pk as invoice_pk %}Mark Invoice #{{ invoice_pk }} as Paid{% endblocktrans %}</h1>
   </div>
-  <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="{% url "invoice.view" invoice.pk %}" class="links">View Invoice #{{ invoice.pk }}</a>
+  <a class="btn btn-default" href="{% url "invoice.view" invoice.pk %}" class="links">View Invoice #{{ invoice.pk }}</a>
   <br />
+
   {% with invoice.get_object as object %}
   <div class="invoice-meta">
-    <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports" border="0" cellspacing="0" cellpadding="0">
+    <table class="table table-tendenci-reports" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td>Invoice #</td>
         <td class="td-right">{{ invoice.id }}</td>
@@ -59,6 +64,7 @@
     </table>
   </div>
   {% endwith %}
+
   <br />
   <form method="POST">
     <div id="offline-payment-form-wrap">
@@ -71,12 +77,15 @@
         </tr>
       </table>
       {% endfor %}
+
       <div>
-        <input class="field-submit inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit" value="{% trans 'Save Payment' %}"></div>
+        <input class="field-submit btn btn-primary" type="submit" value="{% trans 'Save Payment' %}"></div>
     </div>
   </form>
+
 </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

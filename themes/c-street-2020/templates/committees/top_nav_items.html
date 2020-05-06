@@ -1,8 +1,10 @@
 {% load base_tags %}
 {% load perm_tags %}
+
 {% has_perm user site_settings.change_setting as can_edit_setting %}
 {% has_perm user committees.add_committee as can_add_committee %}
 {% has_perm user committees.add_position as can_add_position %}
+
 {% if app_object %}
     {% has_perm user committees.view_committee app_object as can_view_committee %}
     {% has_perm user committees.change_committee app_object as can_edit_committee %}
@@ -11,16 +13,19 @@
     {% has_perm user committees.view_committee as can_view_committee %}
     {% has_perm user committees.change_committee as can_edit_committee %}
 {% endif %}
-<ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+
+
+<ul class="dropdown-menu">
     <li>
         <div class="yamm-content custom-yamm-content content-dropdown">
-            <div class="flex flex-wrap">
-                <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+            <div class="row">
+                <ul class="list-unstyled content-dropdown-col col-sm-12 col-xs-12">
                     {% if app_object %}
                         <li>
                             <span class="content-head text-content-head">{% trans 'All Committees' %}</span>
                         </li>
                     {% endif %}
+
                     {% if can_edit_setting %}
                         <li class="content-item">
                             <span class="app-name">
@@ -28,11 +33,13 @@
                             </span>
                         </li>
                     {% endif %}
+
                     <li class="content-item">
                         <span class="app-name">
                             <a href="{% url 'committees.search' %}">{% trans "Search Committees" %}</a>
                         </span>
                     </li>
+
                     {% if can_add_committee %}
                         <li class="content-item">
                             <span class="app-name">
@@ -40,6 +47,7 @@
                             </span>
                         </li>
                     {% endif %}
+
                     {% if can_add_position %}
                         <li class="content-item">
                             <span class="app-name">
@@ -47,13 +55,16 @@
                             </span>
                         </li>
                     {% endif %}
+
                 </ul>
+
                 {% if app_object %}
                     {% if can_view_committee or can_edit_committee %}
-                        <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                        <ul class="list-unstyled content-dropdown-col col-sm-12 col-xs-12">
                             <li>
                                 <span class="content-head text-content-head">{% trans "This Committee" %}</span>
                             </li>
+
                             {% if can_view_committee %}
                                 <li class="content-item">
                                     <span class="app-name">
@@ -61,30 +72,36 @@
                                     </span>
                                 </li>
                             {% endif %}
+
                             {% if can_edit_committee %}
                                 <li class="content-item">
                                     <span class="app-name">
                                         <a href="{% url 'committees.edit' app_object.pk %}">{% trans "Edit Committee" %}</a>
                                     </span>
                                 </li>
+
                                 <li class="content-item">
                                     <span class="app-name">
                                         <a href="{% url 'committees.edit.meta' app_object.pk %}">{% trans "Edit Meta" %}</a>
                                     </span>
                                 </li>
+
                                 <li class="content-item">
                                     <span class="app-name">
                                         <a href="{% url 'category.update' app_object.opt_app_label committee.opt_module_name app_object.pk %}">{% trans "Edit Categories" %}</a>
                                     </span>
                                 </li>
                             {% endif %}
+
                             <li class="content-item">
                                 <span class="app-name">
                                     <a href="{% url 'files' %}?group={{ app_object.group_id }}">{% trans 'Files' %}</a>
                                 </span>
                             </li>
+
                             {% if can_delete_committee %}
                                 <li class="divider"></li>
+
                                 <li class="content-item">
                                     <span class="app-name">
                                         <a class="delete" href="{% url 'committees.delete' app_object.pk %}">{% trans "Delete Committee" %}</a>

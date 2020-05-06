@@ -2,6 +2,7 @@
 {% load invoice_tags %}
 {% load base_tags %}
 {% load base_filters %}
+
 {% block extra_head %}
 {{ block.super }}
 <link type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
@@ -9,10 +10,12 @@
     .ui-datepicker {z-index: 999 !important;}
 </style>
 {% endblock %}
+
 {% block content %}
+
 <div class="t">
      <div class="invoices-wrap">
-        <h1 class="text-xl font-semibold">{% trans "Invoices Export" %}</h1>
+        <h1>{% trans "Invoices Export" %}</h1>
         <div class="content">
             <p>{% blocktrans %}Pick your start and end dates (the default is the last 30 days) for your invoices export. An email will be sent to you at <strong>{{ request.user.email }}</strong> once the export is ready.{% endblocktrans %}</p>
             <form action="." method="POST" >{% csrf_token %}
@@ -41,6 +44,7 @@
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript">

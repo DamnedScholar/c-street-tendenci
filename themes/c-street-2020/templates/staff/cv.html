@@ -4,6 +4,7 @@
 {% load perm_tags %}
 {% load staff_tags %}
 {% load tagging_tags %}
+
 {% block title %}
     {% nowhitespace %}
         {{ staff.name }} Curriculum Vitae (CV)
@@ -15,6 +16,7 @@
         {% endif %}
     {% endnowhitespace %}
 {% endblock %}
+
 {% block meta_keywords %}
     {% nowhitespace %}
         staff {{ staff.name }}
@@ -29,6 +31,7 @@
         {% endif %}
     {% endnowhitespace %}
 {% endblock %}
+
 {% block meta_description %}
     {% nowhitespace %}
         {{ staff.name }}
@@ -41,17 +44,19 @@
         {{ staff.biography|striptags|truncatewords:"50"|safe }}
     {% endnowhitespace %}
 {% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/staff.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
     <div class="view-staff-member">
         <div class="quick-options">
             {% staff_options request.user staff %}
         </div>
-        <h1 class="text-xl font-semibold">
+        <h1>
             {{ staff.name }} Curriculum Vitae (CV)
         </h1>
         {% if staff.cv %}

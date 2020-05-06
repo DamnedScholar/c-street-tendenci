@@ -1,7 +1,10 @@
 {% load base_tags %}
 {% load perm_tags %}
+
+
 {% has_perm user site_settings.change_setting as can_edit_setting %}
 {% has_perm user entities.add_entity as can_add_entity %}
+
 {% if nav_object %}
     {% has_perm user entities.view_entity nav_object as can_view_entity %}
     {% has_perm user entities.change_entity nav_object as can_edit_entity %}
@@ -9,9 +12,11 @@
     {% has_perm user entities.view_entity as can_view_entity %}
     {% has_perm user entities.change_entity as can_edit_entity %}
 {% endif %}
+
 {% if not SITE_GLOBAL_HIDEALLTABS %}
 <div id="showh">
     <ul id="primary">
+
     {% if user.is_authenticated and not SITE_GLOBAL_HIDETENDENCITABS %}
     <li>
         <a href="{% url "dashboard" %}" title="{% trans 'Tendenci Home Page' %}">
@@ -19,6 +24,7 @@
         alt="{% trans 'Tendenci User Home' %}" title="{% trans 'Tendenci' %}" align="top" width="34" height="15"></a>
     </li>
     {% endif %}
+
     <li>
         <span>{% firstof MODULE_ENTITIES_LABEL trans 'Entities' %}</span>
         <ul id="secondary">
@@ -39,6 +45,7 @@
             <li><a href="{% url 'auth_logout' %}">{% trans "Log Off" %}</a></li>
             {% endif %}
         </ul>
+
     </li>
     {% if MODULE_USERS_ENABLED %}
     <li><a href="{% url "profile.search" %}">{% firstof MODULE_USERS_LABEL trans 'Users' %}</a></li>

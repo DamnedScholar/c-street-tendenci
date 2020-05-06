@@ -1,13 +1,16 @@
 {% extends "events/base.html" %}
 {% load event_tags %}
+
 {% block title %}{{ block.super }}{% trans 'Types' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Reassign Event Types" %}</h1>
+    <h1>{% trans "Reassign Event Types" %}</h1>
     <div class="event-wrap">
         <div class="type-wrap">
             <div class="type-item">

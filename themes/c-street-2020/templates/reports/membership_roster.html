@@ -1,11 +1,15 @@
 {% extends "base-print.html" %}
+
 {% block title %}{% trans "Current Members Roster" %} | {{ SITE_GLOBAL_SITEDISPLAYNAME }}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/memberships.css' %}">
 {% endblock %}
+
 {% block content %}
-<h1 class="text-xl font-semibold">{{ SITE_GLOBAL_SITEDISPLAYNAME }} {% trans "Current Members Roster" %}</h1>
+<h1>{{ SITE_GLOBAL_SITEDISPLAYNAME }} {% trans "Current Members Roster" %}</h1>
+
 <div id="member-roster-wrap">
 <table>
 {% for member in members %}
@@ -58,4 +62,5 @@
 </tr>
 </table>
 </div>
+
 {% endblock content %}

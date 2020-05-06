@@ -1,5 +1,6 @@
 {% extends "helpdesk/base.html" %}
 {% block helpdesk_title %}{% trans "Edit followup" %}{% endblock %}
+
 {% block helpdesk_head %}
 <script type="text/javascript">
     $(document).ready(function() {
@@ -7,8 +8,11 @@
     });
 </script>
 {% endblock helpdesk_head %}
+
 {% block helpdesk_body %}
+
 {% include "helpdesk/ticket_desc_table.html" %}
+
 <h3>{% trans "Edit FollowUp" %}</h3>
     <form action="." method="POST" name="edit_followup_form">
         {{ form.non_field_errors }}
@@ -28,6 +32,6 @@
                 <p>If the status was changed, what was it changed to?</p>
         </dl>
         </fieldset>
-        <p><input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit" value="Submit"></p>{% csrf_token %}
+        <p><input class="btn btn-primary" type="submit" value="Submit"></p>{% csrf_token %}
     </form>
 {% endblock helpdesk_body %}

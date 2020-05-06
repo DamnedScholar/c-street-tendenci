@@ -49,15 +49,17 @@
       display: block;
     }
 </style>{% endcomment %}
-<nav class="clearfix flex flex-wrap list-none p-0 pl-0 mb-0igation">
+
+<nav class="clearfix navigation">
 <ul class="t-nav-ul" id="nav-ul-{{ nav.id }}">
 {% for item in items %}
     {% nav_item item %}
 {% endfor %}
 </ul>
+
 {% if user.profile.is_superuser %}
 <div class="admin-inline">
-  <div class="admin-links clear-block"><a href="{% url "flex flex-wrap list-reset pl-0 mb-0s.edit_items" nav.id %}?next={{ request.path }}" title="{% trans 'Edit Nav' %}" class="edit-nav">{% blocktrans with t=nav.title|title %}Edit {{ t }}{% endblocktrans %}</a></div>
+  <div class="admin-links clear-block"><a href="{% url "navs.edit_items" nav.id %}?next={{ request.path }}" title="{% trans 'Edit Nav' %}" class="edit-nav">{% blocktrans with t=nav.title|title %}Edit {{ t }}{% endblocktrans %}</a></div>
 </div>
 {% endif %}
 </nav>

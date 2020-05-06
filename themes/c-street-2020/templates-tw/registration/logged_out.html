@@ -1,0 +1,7 @@
+{% extends "admin/base_site.html" %}
+{% block breadcrumbs %}
+{% endblock %}
+{% block content %}
+<p>{% trans "Thanks for spending some quality time with the Web site today." %}</p>
+<p><a href="{% url 'admin:index' %}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default">{% trans 'Log in again' %}</a></p>
+{% endblock %}

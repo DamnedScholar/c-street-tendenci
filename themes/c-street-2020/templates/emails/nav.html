@@ -1,14 +1,19 @@
 {% load base_tags %}
 {% load perm_tags %}
+
+
 {% has_perm user site_settings.change_setting as can_edit_setting %}
 {% has_perm user emails.add_email as can_add %}
+
 {% if nav_object %}
     {% has_perm user emails.view_email nav_object as can_view %}
     {% has_perm user emails.change_email nav_object as can_edit %}
 {% endif %}
+
 {% if not SITE_GLOBAL_HIDEALLTABS %}
 <div id="showh">
     <ul id="primary">
+
     {% if user.is_authenticated and not SITE_GLOBAL_HIDETENDENCITABS %}
     <li>
         <a href="{% url "dashboard" %}" title="Tendenci Home Page">
@@ -16,6 +21,7 @@
         alt="{% trans 'Tendenci User Home' %}" title="{% trans 'Tendenci User Home' %}" align="top" width="34" height="15"></a>
     </li>
     {% endif %}
+
     <li>
         <span>{% trans "Emails" %}</span>
         <ul id="secondary">
@@ -36,6 +42,7 @@
             <li><a href="{% url "auth_logout" %}">{% trans "Log Off" %}</a></li>
             {% endif %}
         </ul>
+
     </li>
     {% if MODULE_ARTICLES_ENABLED %}
     <li><a href="{% url "articles" %}">{{ MODULE_ARTICLES_LABEL }}</a></li>

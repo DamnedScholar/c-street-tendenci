@@ -1,3 +1,4 @@
+
 {% load perm_tags %}
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "https://www.w3.org/TR/html4/loose.dtd">
@@ -14,6 +15,7 @@
   {% else %}{% blocktrans %}The following news was
   added to the {{ SITE_GLOBAL_SITEDISPLAYNAME }} module {% endblocktrans %}{% firstof MODULE_NEWS_LABEL 'News' %} {% blocktrans with request.user.get_full_name as requser %}
   by {{ requser }} and needs to be activated{% endblocktrans %}{% endif %}:</p>
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="2%">&nbsp;</td>
@@ -29,10 +31,12 @@
 <p>{% blocktrans %}To view the details of this
   news, go to:{% endblocktrans %} <b><a href="{{ SITE_GLOBAL_SITEURL }}{{ object.get_absolute_url }}">{{ SITE_GLOBAL_SITEURL }}{{ object.get_absolute_url }}</a></b><br>
   <br>
+
 {% if object.status_detail != 'active' %}
     <p>{% blocktrans %}To activate this news,
       go to:{% endblocktrans %} <b><a href="{{ SITE_GLOBAL_SITEURL }}{{ object.get_absolute_url }}">{{ SITE_GLOBAL_SITEURL }}{{ object.get_absolute_url }}</a></b> </p>
  {% endif %}
 <P>{% trans "Time submitted:" %} {% now "D d M Y P" %}</P>
+
 </body>
 </html>

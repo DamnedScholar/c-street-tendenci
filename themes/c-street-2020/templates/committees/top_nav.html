@@ -1,7 +1,10 @@
 {% extends 'top_menu/admin_top-new.html' %}
 {% load committee_tags %}
+
 {% block nav_icon_url %}{% static 'famfamfam/icons/group_gear.png' %}{% endblock %}
+
 {% block nav_label %}{% trans 'Committees' %}{% endblock %}
+
 {% block current_app %}
     {% if committee %}
         {% committee_current_app request.user committee %}

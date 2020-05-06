@@ -2,16 +2,20 @@
 {% load event_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }} {{ event.title }} {% trans "Addons" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="{% static 'css/timepicker.css' %}" />
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{{ event.title }} {% trans "Addons" %}</h1>
+    <h1>{{ event.title }} {% trans "Addons" %}</h1>
+
     <div class="addons-wrap">
         {% for addon in addons %}
             <div class="addon-title">
@@ -42,6 +46,7 @@
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     {{ form.media }}

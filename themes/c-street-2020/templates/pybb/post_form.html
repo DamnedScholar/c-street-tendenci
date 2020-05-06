@@ -1,5 +1,5 @@
 {% load pybb_tags %}
-<div class="sm:w-3/4 pr-4 pl-4">
+<div class="col-sm-9">
 <form class="post-form" action="
     {% if forum %}
         {% url 'pybb:add_topic' forum.pk %}
@@ -21,6 +21,7 @@
         <a href='#' title='{{ smile|safe }}'><img src="{% static url %}"></a>
       {% endfor %}
     </div>
+
     {% if request.user|pybb_may_create_poll and form.poll_type %}
       {% include "pybb/poll_edit_form.html" %}
     {% endif %}

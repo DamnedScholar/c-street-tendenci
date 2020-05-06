@@ -1,4 +1,5 @@
 {% load tagging_tags %}
+
 id:{{ object.pk }}
 {% for set in object.photoset.all %}
 set_id:{{ set.pk }}

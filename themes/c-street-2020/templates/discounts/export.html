@@ -2,13 +2,15 @@
 {% load discount_tags %}
 {% load base_tags %}
 {% load base_filters %}
+
 {% block extra_head %}
 {{ block.super }}
 {% endblock %}
+
 {% block content %}
 <div class="t">
     <div class="discounts-wrap">
-        <h1 class="text-xl font-semibold">{% trans "Discounts Export" %}</h1>
+        <h1>{% trans "Discounts Export" %}</h1>
         <div class="content">
             <form action="." method="POST" >{% csrf_token %}
                 <input type="submit" value="{% trans 'Download' %}" />

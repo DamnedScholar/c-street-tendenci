@@ -1,18 +1,23 @@
-<div class="flex-growlapse flex flex-wrap list-none p-0 pl-0 mb-0bar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0">
-<li class="relative">
+
+
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+<li class="dropdown">
     {% with request.user.profile.lang as user_lang %}
-        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative" role="button" aria-expanded="false">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             <i class="fa fa-globe"></i>{% trans 'Language:' %} {% get_language_info for user_lang as l %}<span class="nav-label">{{ l.name_local }}</span><span class="caret"></span>
         </a>
-        <ul id="t-megamenu-lang-dd" class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded lang-dropdown" role="menu">
+
+        <ul id="t-megamenu-lang-dd" class="dropdown-menu lang-dropdown" role="menu">
             {% get_language_info_list for LANGUAGES as languages %}
+
             {% for language in languages %}
                 <li{% if language.code == user_lang %} class="active"{% endif %}>
                     <a href="javascript:void(0);" data-lang="{{ language.code }}">{{ language.name_local }} ({{ language.code }})</a>
                 </li>
             {% endfor %}
         </ul>
+
         <form id="t-megamenu-lang-form" class="hidden" action="{% url 'base.set_language' %}" method="post">
             {% csrf_token %}
             <input name="next" type="hidden" value="{{ redirect_to }}" />
@@ -20,5 +25,6 @@
         </form>
     {% endwith %}
 </li>
+
 </ul>
 </div>

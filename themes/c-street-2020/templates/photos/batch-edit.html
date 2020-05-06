@@ -1,22 +1,27 @@
 {% extends "photos/base-wide.html" %}
+
 {% load photo_tags %}
 {% load base_tags %}
 {% load bootstrap_pagination_tags %}
+
 {% block title %}{% blocktrans %}Batch Edit Photos{% endblocktrans %}{% endblock %}
 {% block extra_head %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static 'css/photos.css' %}">
 {% endblock %}
+
 {% block content %}
     <div class="t" style="width: 100%;">
         <div id="progress_bar"></div>
-        <h1 class="text-xl font-semibold">{% trans "Bulk edit photos" %}</h1>
+        <h1>{% trans "Bulk edit photos" %}</h1>
+
         <form method="POST" action="" class="batch-edit-form">{% csrf_token %}
             <div class="minimize-wrap-link">
-                <h3><a href="#" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default  minimize-all-button" onClick="minimizeAll(); return false;">{% trans "Enable Photo Drag/Drop Reordering" %}</a></h3>
+                <h3><a href="#" class="btn btn-default  minimize-all-button" onClick="minimizeAll(); return false;">{% trans "Enable Photo Drag/Drop Reordering" %}</a></h3>
             </div>
             <div class="clearfix"></div>
             <div class="side-panel">
+
                 <div class="float-anchor"><!-- ie7 fix --></div>
                 <div class="float-window">
                     <div class="photo-bulk-editor">
@@ -38,6 +43,7 @@
                             <div class="field help-text">{{ tag_help_text }}</div>
                         </div>
                     </div>
+
                     <div class="bulk-license">
                         <div class="label"><label>{% trans "Replace all Licenses" %}:</label></div>
                         <div class="field"><select>
@@ -57,18 +63,23 @@
                         </select></div>
                     </div>
                     <div class="save-wrap">
-                        <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit" value="{% trans 'Save all changes' %}" onclick="event.preventDefault(); save_changes('{% url "photoset_details" photo_set.id %}');"/>
+                        <input class="btn btn-primary" type="submit" value="{% trans 'Save all changes' %}" onclick="event.preventDefault(); save_changes('{% url "photoset_details" photo_set.id %}');"/>
                     </div>
                 </div>
             </div>
+
                 {{ photo_formset.management_form }}
             <div class="sortable-photos clearfix">
                 {% for photo_form in photo_formset.forms %}
+
                 <div class="edit-wrap">
+
                     {{ photo_form.id }}
+
                     {% for error in photo_form.errors %}
                         <li><strong>{{ error|escape }}</strong></li>
                     {% endfor %}
+
                     <div class="photo-wrap">
                         <img class="full" src="{% photo_image_url photo_form.instance size=422x700 constrain=True %}" alt="{{ photo_form.instance.title|truncatechars:123 }}" title="{{ photo_form.instance.title|truncatechars:123 }}"/>
                         <img class="square" src="{% photo_image_url photo_form.instance size=102x78 crop=True %}" alt="{{ photo_form.instance.title|truncatechars:123 }}" title="{{ photo_form.instance.title|truncatechars:123 }}"/>
@@ -93,6 +104,7 @@
                         <div class="label">{{ photo_form.position.label_tag }}</div>
                         <div class="field">{{ photo_form.position }}</div>
                     </div>
+
                     <div style="position:relative;">
                         <div class="tags-wrap">
                             <div class="label">{{ photo_form.tags.label_tag }}</div>
@@ -103,6 +115,7 @@
                             <div class="label">{{ photo_form.license.label_tag }}</div>
                             <div class="field">{{ photo_form.license }}</div>
                         </div>
+
                         <div class="group-wrap">
                             <div class="label">{{ photo_form.group.label_tag }}</div>
                             <div class="field">{{ photo_form.group }}</div>
@@ -124,8 +137,10 @@
             {% endfor %}
             </div>
         </form>
+
     </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -139,16 +154,21 @@
     $(".photo-bulk-editor .tags").on("keyup", function(event){
         $('.tags-wrap input').val($(this).val())
     });
+
     $(".photo-bulk-editor .photographer").on("keyup", function(event){
         $('.photographer-wrap input').val($(this).val())
     });
+
     $(".bulk-license select").on("change", function(event) {
         $(".license-wrap select").val($(this).val());
     });
+
     $(".bulk-group select").on("change", function(event) {
         $(".group-wrap select").val($(this).val());
     });
+
     $('.position-wrap').hide();
+
     $(function() {
         $( ".minimize-link" ).on("click", function(){
             $(this).parent().toggleClass('minimize-photo');
@@ -187,6 +207,7 @@
             }
         });
     });
+
     function save_changes(path) {
         $("#progress_bar").progressbar({
             max : $("#id_form-TOTAL_FORMS").val(),
@@ -224,6 +245,7 @@
             });
         });
     }
+
     function minimizeAll() {
         if ($('.minimize-all-button').text() == '{% trans "Enable Photo Drag/Drop Reordering" %}') {
             $( ".sortable-photos" ).css("width", "100%");

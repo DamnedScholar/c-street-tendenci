@@ -2,15 +2,20 @@
 {% load discount_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }} {% trans "Edit" %}{% endblock title %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="{% static 'timepicker/timepicker.css' %}" />
 {% endblock %}
+
 {% block content %}
+
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_DISCOUNTS_LABEL trans "Discount" %} {% trans "Edit" %}</h1>
+    <h1>{% firstof MODULE_DISCOUNTS_LABEL trans "Discount" %} {% trans "Edit" %}</h1>
+
     <div class="discount-wrap">
         <form action="{% url "discount.edit" discount.id %}" method="post">{% csrf_token %}
         <div class="forms">
@@ -19,8 +24,10 @@
         </div>
         </form>
     </div>
+
 </div>
 {% endblock content %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

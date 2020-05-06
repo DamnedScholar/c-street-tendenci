@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+
+
 {% block title %}
     {% if SITE_GLOBAL_SITEPRIMARYKEYWORDS %}{% blocktrans %}{{ SITE_GLOBAL_SITEPRIMARYKEYWORDS }}{% endblocktrans %}: {% endif %}
     {% if MODULE_EMAILS_LABEL_PLURAL %}
@@ -11,12 +13,15 @@
         {% endblocktrans %}
     {% endif %}
 {% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/iconrow.css' %}">
     <link rel="stylesheet" href="{% static 'css/emails.css' %}">
 {% endblock %}
+
 {% block banner %}{% endblock %}
+
 {% block top_bar %}
     {% if request.user.is_authenticated %}
         {% include "emails/top_nav.html" %}

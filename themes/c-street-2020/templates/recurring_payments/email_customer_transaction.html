@@ -1,5 +1,7 @@
 {% load base_filters %}
+
 {% trans "Greetings" %} {{ pt.recurring_payment.user.first_name }}, <br /><br />
+
 {% if pt.status %}
 {% blocktrans with d=pt.recurring_payment.description %}
 The payment has been received for the {{ d }}.
@@ -10,9 +12,12 @@ We attempted a payment for the {{ d }} but was failed. The failed reason is list
 {% endblocktrans %}
 {% endif %}
 <br /><br />
+
 <div><h2>{% trans "Transaction details:" %}</h2></div>
+
 <div>
 <table border="0" width="90%">
+
     <tr>
         <td>{% trans 'Payment amount' %}:</td><td>{{ pt.amount|format_currency }}</td>
     </tr>
@@ -34,15 +39,20 @@ We attempted a payment for the {{ d }} but was failed. The failed reason is list
         <td>{% trans 'Reason failed' %}:</td><td>{{ pt.message_text }}</td>
     </tr>
     {% endif %}
+
 </table>
+
 </div>
+
 <br />
+
 <div>
 {% trans 'To view your account, go to' %}:
 <br />
 <a href="{{ site_url }}{% url "recurring_payment.view_account" pt.recurring_payment.id %}">{{ site_url }}{% url "recurring_payment.view_account" pt.recurring_payment.id %}</a>
 </div>
 <br />
+
 {% if membership %}
 <div>
 {% trans 'To update membership auto renewal and payment method, go to' %}:
@@ -50,7 +60,9 @@ We attempted a payment for the {{ d }} but was failed. The failed reason is list
 <a href="{{ site_url }}{% url "memberships.auto_renew_setup" membership.user.id %}">{{ site_url }}{% url "memberships.auto_renew_setup" membership.user.id %}</a>
 </div>
 <br />
+
 {% else %}
+
 {% if pt.recurring_payment.platform == 'authorizenet' %}
 <div>
 {% trans 'To update your payment method, go to' %}:
@@ -59,10 +71,16 @@ We attempted a payment for the {{ d }} but was failed. The failed reason is list
 </div>
 <br />
 {% endif %}
+
 {% endif %}
+
+
 {% trans 'Your login username is' %}: {{ pt.recurring_payment.user.username }}
+
 <br />
 <br />
 {% trans "Thanks!" %}
 <br /><br />
+
 <P>{{ site_display_name }}</P>
+

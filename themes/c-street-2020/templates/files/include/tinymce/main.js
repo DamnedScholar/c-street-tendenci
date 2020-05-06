@@ -8,16 +8,20 @@
  * Licensed under the MIT license:
  * https://www.opensource.org/licenses/MIT
  */
+
 /*jslint nomen: true, regexp: true */
 /*global $, window, blueimp */
+
 $(function () {
     'use strict';
+
     // Initialize the jQuery File Upload widget:
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
         //url: 'server/php/'
     });
+
     // Enable iframe cross-domain access via redirect option:
     $('#fileupload').fileupload(
         'option',
@@ -27,6 +31,7 @@ $(function () {
             '/cors/result.html?%s'
         )
     );
+
     $('#fileupload').fileupload('option', {
         url: '/files/tinymce/upload/',
         // Enable image resizing, except for Android and Opera,
@@ -38,4 +43,6 @@ $(function () {
         //acceptFileTypes: /(\.|\/)({{ accept_file_types }})$/i
         acceptFileTypes: /(\.)({{ accept_file_types }})$/i
     });
+
+
 });

@@ -23,6 +23,7 @@ address{
     font-style: italic;
 }
 div.invoice-meta{
+
 }
 .table.table-tendenci-reports {
     border: 1px solid #cccccc;
@@ -35,10 +36,13 @@ div.invoice-meta{
 }
 </style>
 </head>
+
 <body>
 <div class="t">
+
+
   <div class="page-header">
-    <h1 class="text-xl font-semibold">{% if obj_name %}{{ obj_name|capfirst}} {% endif %} {% trans "Invoice" %}</h1>
+    <h1>{% if obj_name %}{{ obj_name|capfirst}} {% endif %} {% trans "Invoice" %}</h1>
   </div>
   <table>
       <tr>
@@ -60,7 +64,7 @@ div.invoice-meta{
     <br />
   {% with invoice.get_object as object %}
   <div class="invoice-meta">
-    <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports" border="0" cellspacing="0" cellpadding="0">
+    <table class="table table-tendenci-reports" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td>{% trans "Invoice #" %}</td>
         <td class="td-right">{{ invoice.id }}</td>
@@ -103,7 +107,7 @@ div.invoice-meta{
   {% endwith %}
 <p>&nbsp;</p>
   <div class="invoice-table">
-    <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports" border="0" cellspacing="0" cellpadding="0">
+    <table class="table table-tendenci-reports" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td class="invoice-table-header"><strong>{% trans 'Description' %}</strong></td>
         <td class="td-right"><strong>{% trans 'Line Amount' %}</strong></td>
@@ -111,9 +115,10 @@ div.invoice-meta{
       {% invoice_object_display request invoice %}
     </table>
   </div>
+
   <div class="invoice-total-wrap">
     <div class="invoice-total">
-      <table class="w-full max-w-full mb-4 bg-transparent">
+      <table class="table">
   {% if payment_method %}
   <tr>
     <td></td>
@@ -162,4 +167,5 @@ div.invoice-meta{
   <div style="clear: both"></div>
 </div>
 </body>
+
 </html>

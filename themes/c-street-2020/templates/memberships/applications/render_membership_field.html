@@ -1,5 +1,7 @@
 {% load l10n %}
 {% load styled_forms %}
+
+
 {% if field_obj.field_name == '' %}
     <div class="page-header{% if field_obj.admin_only %} t-membershipapp-admin-only-header{% endif %}{% if field_obj.css_class %} {{ field_obj.css_class }}{% endif %}">
         <h3>{{ field_obj.label }}</h3>
@@ -7,12 +9,12 @@
     </div>
 {% else %}
     {% if field or field_obj.display_only %}
-        <div class="mb-4{% if field_obj.admin_only %} t-membershipapp-admin-only{% endif %}{% if field_obj.css_class %} {{ field_obj.css_class }}{% endif %}">
+        <div class="form-group{% if field_obj.admin_only %} t-membershipapp-admin-only{% endif %}{% if field_obj.css_class %} {{ field_obj.css_class }}{% endif %}">
 			{% if field_obj.display_only %}
-				<label class="sm:w-1/4 pr-4 pl-4 control-label">{{ field_obj.label }}</label>: <div class="sm:w-3/5 pr-4 pl-4" style="padding-top: 7px;">{{ field_obj.display_content|safe }}</div>
+				<label class="col-sm-3 control-label">{{ field_obj.label }}</label>: <div class="col-sm-7" style="padding-top: 7px;">{{ field_obj.display_content|safe }}</div>
 			{% else %}
 	            {% if field_obj.field_stype == 'old_checkboxinput' %}
-	                <div class=":flex-growsm-offset-2 sm:w-1/6 pr-4 pl-40">
+	                <div class="col-sm-offset-2 col-sm-10">
 	                    {% if field.errors %}
 	                        <div class="error">
 	                            {% for error in field.errors %}
@@ -20,11 +22,13 @@
 	                            {% endfor %}
 	                        </div>
 	                    {% endif %}
+	
 	                    <div class="checkbox">
 	                        <label {% if field.field.required %} class="required"{% endif %}>
 	                            {{ field }} {{ field.label }}
 	                        </label>
 	                    </div>
+	
 	                    {% if field.help_text %}
 	                        <div class="help-block">{{ field.help_text|safe }}</div>
 	                    {% endif %}
@@ -32,8 +36,9 @@
 	                <div style="clear: both"><!-- IE7 --></div>
 	            {% else %}
 	                {% if field_obj.field_name == 'password' %}
-	                        <label for="{{ field.id_for_label }}" class="sm:w-1/4 pr-4 pl-4 control-label{% if field_obj.required %} required{% endif %} {{ field_obj.label_type }}">{{ field_obj.label }}</label>
-	                        <div class="sm:w-1/2 pr-4 pl-4 {{ field_obj.field_div_class }}">
+	                        <label for="{{ field.id_for_label }}" class="col-sm-3 control-label{% if field_obj.required %} required{% endif %} {{ field_obj.label_type }}">{{ field_obj.label }}</label>
+	
+	                        <div class="col-sm-6 {{ field_obj.field_div_class }}">
 	                            {% if field.errors %}
 	                                <div class="error">
 	                                    {% for error in field.errors %}
@@ -41,30 +46,37 @@
 	                                    {% endfor %}
 	                                </div>
 	                            {% endif %}
+	
 	                            {{ field }}
+	
 	                            {% if field.help_text %}
 	                                <span class="help-block">{{ field.help_text|safe }}</span>
 	                            {% endif %}
 	                        </div>
 	                    </div>
-	                    <div class="mb-4{% if field_obj.admin_only %} t-membershipapp-admin-only{% endif %}{% if field_obj.css_class %} {{ field_obj.css_class }}{% endif %}">
-	                        <label for="{{ field.id_for_label }}" class="sm:w-1/4 pr-4 pl-4 control-label{% if field_obj.required %} required{% endif %} {{ field_obj.label_type }}">{{ field_pwd.label }}</label>
-	                        <div class="sm:w-1/2 pr-4 pl-4 {{ field_obj.field_div_class }}">
+	
+	                    <div class="form-group{% if field_obj.admin_only %} t-membershipapp-admin-only{% endif %}{% if field_obj.css_class %} {{ field_obj.css_class }}{% endif %}">
+	                        <label for="{{ field.id_for_label }}" class="col-sm-3 control-label{% if field_obj.required %} required{% endif %} {{ field_obj.label_type }}">{{ field_pwd.label }}</label>
+	
+	                        <div class="col-sm-6 {{ field_obj.field_div_class }}">
 	                            {{ field_pwd }}
 	                        </div>
 	                {% else %}
-	                    <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="sm:w-1/4 pr-4 pl-4 control-label{% if field.field.required %} required{% endif %} {{ field_obj.label_type }}">{{ field_obj.label }}</label>
+	                    <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="col-sm-3 control-label{% if field.field.required %} required{% endif %} {{ field_obj.label_type }}">{{ field_obj.label }}</label>
+	
 	                    {% if field|is_checkboxselectmultiple %}
 	                        {% if field.help_text %}
 	                            <span class="help-block checkmultiple">{{ field.help_text|safe }}</span>
 	                        {% endif %}
 	                    {% endif %}
+	
 	                    {% if field|is_fileinput %}
 	                        {% if field.help_text %}
 	                            <span class="help-block">{{ field.help_text|safe }}</span>
 	                        {% endif %}
 	                    {% endif %}
-	                    <div class=":flex-growsm-{{ field|col_sm_width }} {% if field|is_fileinput %}fileinputbox{% else %}{{ field_obj.field_div_class }}{% endif %}">
+	
+	                    <div class="col-sm-{{ field|col_sm_width }} {% if field|is_fileinput %}fileinputbox{% else %}{{ field_obj.field_div_class }}{% endif %}">
 	                        {% if field.errors %}
 	                            <div class="error">
 	                                {% for error in field.errors %}
@@ -72,6 +84,7 @@
 	                                {% endfor %}
 	                            </div>
 	                        {% endif %}
+	
 	                        {% if field|is_checkbox %}
 	                            <div class="checkbox">
 	                                <label>{{ field }}</label>
@@ -95,6 +108,7 @@
 	                        {% else %}
 	                            {{ field }}
 	                        {% endif %}
+	
 	                        {% if not field|is_checkboxselectmultiple and not field|is_fileinput %}
 	                            {% if field.help_text %}
 	                                <span class="help-block">{{ field.help_text|safe }}</span>

@@ -1,33 +1,41 @@
 {% load base_tags %}
 {% load perm_tags %}
+
+
 {% has_perm request.user site_settings.change_setting as can_edit_setting %}
+
 {% if app_object %}
     {% has_perm request.user invoices.view_invoice app_object.invoice as can_view_invoice %}
 {% endif %}
-<ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+
+
+<ul class="dropdown-menu">
     <li>
         <div class="yamm-content custom-yamm-content content-dropdown">
-            <div class="flex flex-wrap">
-                <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+            <div class="row">
+                <ul class="list-unstyled content-dropdown-col col-sm-12 col-xs-12">
                     {% if app_object %}
                         {# "All Payments" Section #}
                         <li>
                             <span class="content-head text-content-head">{% trans "All Payments" %}</span>
                         </li>
                     {% endif %}
+
                     <li class="content-item">
                         <span class="app-name">
                             <a href="{% url 'payment.search' %}">{% trans "Search Payments" %}</a>
                         </span>
                     </li>
                 </ul>
+
                 {% if app_object %}
                     {% if can_view_invoice %}
                         {# "This Payment" Section #}
-                        <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                        <ul class="list-unstyled content-dropdown-col col-sm-12 col-xs-12">
                             <li>
                                 <span class="content-head text-content-head">{% trans "This Payment" %}</span>
                             </li>
+
                             {% if can_view_invoice %}
                                 <li class="content-item">
                                     <span class="app-name">

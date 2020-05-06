@@ -1,7 +1,10 @@
 {% load base_tags %}
 {% load perm_tags %}
+
+
 {% has_perm user site_settings.change_setting as can_edit_setting %}
 {% has_perm user locations.add_location as can_add_location %}
+
 {% if app_object %}
     {% has_perm user locations.view_location app_object as can_view_location %}
     {% has_perm user locations.change_location app_object as can_edit_location %}
@@ -10,16 +13,19 @@
     {% has_perm user locations.view_location as can_view_location %}
     {% has_perm user locations.change_location as can_edit_location %}
 {% endif %}
-<ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+
+
+<ul class="dropdown-menu">
     <li>
         <div class="yamm-content custom-yamm-content content-dropdown">
-            <div class="flex flex-wrap">
-                <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+            <div class="row">
+                <ul class="list-unstyled content-dropdown-col col-sm-12 col-xs-12">
                     {% if app_object %}
                         <li>
                             <span class="content-head text-content-head">{% trans "All" %} {% firstof MODULE_LOCATIONS_LABEL_PLURAL trans 'Locations' %}</span>
                         </li>
                     {% endif %}
+
                     {% if can_edit_setting %}
                         <li class="content-item">
                             <span class="app-name">
@@ -27,28 +33,33 @@
                             </span>
                         </li>
                     {% endif %}
+
                     <li class="content-item">
                         <span class="app-name">
                             <a href="{% url 'locations' %}">{% trans "List of " %} {% firstof MODULE_LOCATIONS_LABEL_PLURAL trans 'Locations' %}</a>
                         </span>
                     </li>
+
                     <li class="content-item">
                         <span class="app-name">
                             <a href="{% url 'location.nearest' %}">{% trans "Nearest" %} {% firstof MODULE_LOCATIONS_LABEL_PLURAL trans 'Locations' %}</a>
                         </span>
                     </li>
+
                     {% if can_add_location %}
                         <li class="content-item">
                             <span class="app-name">
                                 <a href="{% url 'location.add' %}">{% trans "Add" %} {% firstof MODULE_LOCATIONS_LABEL trans 'Location' %}</a>
                             </span>
                         </li>
+
                         <li class="content-item">
                             <span class="app-name">
                                 <a href="{% url 'locations_import_upload_file' %}">{% trans "Import" %} {% firstof MODULE_LOCATIONS_LABEL trans 'Locations' %}</a>
                             </span>
                         </li>
                     {% endif %}
+
                     {% if user.profile.is_superuser %}
                         <li class="content-item">
                             <span class="app-name">
@@ -57,12 +68,14 @@
                         </li>
                     {% endif %}
                 </ul>
+
                 {% if app_object %}
                     {% if can_view_location or can_edit_location %}
-                        <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                        <ul class="list-unstyled content-dropdown-col col-sm-12 col-xs-12">
                             <li>
                                 <span class="content-head text-content-head">{% trans "This" %} {% firstof MODULE_LOCATIONS_LABEL trans 'Location' %}</span>
                             </li>
+
                             {% if can_view_location %}
                                 <li class="content-item">
                                     <span class="app-name">
@@ -70,6 +83,7 @@
                                     </span>
                                 </li>
                             {% endif %}
+
                             {% if can_edit_location %}
                                 <li class="content-item">
                                     <span class="app-name">
@@ -77,8 +91,10 @@
                                     </span>
                                 </li>
                             {% endif %}
+
                             {% if can_delete_location %}
                                 <li class="divider"></li>
+
                                 <li class="content-item">
                                     <span class="app-name">
                                         <a class="delete" href="{% url 'location.delete' app_object.pk %}">{% trans "Delete" %} {% firstof MODULE_LOCATIONS_LABEL trans 'Location' %}</a>

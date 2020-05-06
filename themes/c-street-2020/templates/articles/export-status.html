@@ -3,11 +3,15 @@
 {% load base_tags %}
 {% load base_filters %}
 {% load perm_tags %}
+
+
 {% block content %}
 {% url "article.export_download" identifier as dl_url %}
 <div class="t">
     <div class="article-wrap">
-        <h1 class="text-xl font-semibold">{% trans "Articles Export - Status" %}</h1>
+
+        <h1>{% trans "Articles Export - Status" %}</h1>
+
         <div class="content">
             {% if download_ready %}
             <div>

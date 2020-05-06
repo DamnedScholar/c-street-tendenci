@@ -1,3 +1,4 @@
+
 <li {% if current_file_path == item.path %}class="highlight"{% endif %}>
 {% if item.editable %}
     <a href="{% url "theme_editor.editor" %}?file={{ item.path }}&theme_edit={{ current_theme }}">{{ item.name }}</a>

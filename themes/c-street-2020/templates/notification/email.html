@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>{{ email.title }}</title>
+
 <style type="text/css">
     body {
         margin: 0;
@@ -17,15 +18,19 @@
         padding-right: 7px;
         width: 50px;
     }
+
     iframe {
         border: none;
         border-top: 1px solid #EEE;
         height: 100%;
         width: 100%;
     }
+
 </style>
+
 </head>
 <body>
+
 <table id="t-header">
     <tr>
         <td>{% trans 'from' %}:</td>
@@ -47,7 +52,9 @@
         <td>{{ email.title }}</td>
     </tr>
 </table>
+
 <iframe src="{% url 'notification_email' email.guid %}?only-content"></iframe>
+
 </body>
 </html>
 {% endif %}

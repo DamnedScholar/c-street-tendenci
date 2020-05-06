@@ -4,7 +4,9 @@
 {% load base_tags %}
 {% load perm_tags %}
 {% load search_tags %}
+
 {% block title %}{% trans "Pending Events" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
@@ -12,10 +14,14 @@
 <link rel="stylesheet" href="{% static 'css/events-pending.css' %}">
 <link rel="alternate" type="application/rss+xml" title="Latest Events" href="{% url "event.feed" %}" />
 {% endblock %}
+
 {% block content %}
+
 <div class="t search-view">
-    <h1 class="text-xl font-semibold">{% trans "Pending Events" %}</h1>
+    <h1>{% trans "Pending Events" %}</h1>
+
     {% autopaginate events 10 %}
+
     <div class="events-wrap">
     {% for event in events %}
         {% search_result event %}
@@ -23,9 +29,11 @@
         {% trans "0 Pending Events" %}
     {% endfor %}
     </div>
+
     {% paginate %}
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript">
@@ -38,6 +46,7 @@
             });
         });
     </script>
+
     <script type="text/javascript" src="{% static 'js/global/dropdown.js' %}"></script>
     <script type="text/javascript">
         var iconrow = new dropdown({

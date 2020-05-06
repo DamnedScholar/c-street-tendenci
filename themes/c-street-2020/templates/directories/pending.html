@@ -1,8 +1,11 @@
 {% extends "directories/base.html" %}
 {% load directory_tags %}
+
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Pending Directories" %}</h1>
+    <h1>{% trans "Pending Directories" %}</h1>
+
     <div class="directory-wrap">
     <ul class="pending-directories">
     {% for directory in directories %}

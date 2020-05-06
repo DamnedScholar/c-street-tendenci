@@ -1,16 +1,22 @@
 {% extends form_template %}
 {% load styled_forms %}
 {% load forms_tags %}
+
 {% block title %}{{ form.title }}{% endblock %}
 {% block meta_description %}{{ form.intro }}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+
 {% endblock extra_head %}
+
 {% block content %}
+
 <div class="t">
     <div class="form-wrap">
-        <h1 class="text-xl font-semibold">{% trans "Billing Information" %}</h1>
+        <h1>{% trans "Billing Information" %}</h1>
+
         <div class="form-builder-wrap">
             <form method="post" enctype="multipart/form-data">{% csrf_token %}
             <div style="display:none">

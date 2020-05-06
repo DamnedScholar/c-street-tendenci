@@ -5,45 +5,50 @@
 {% load base_tags %}
 {% load bootstrap_pagination_tags %}
 {% load perm_tags %}
+
 {% block title %}{{ block.super }}{% trans 'Events Financial Report' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="{% static 'timepicker/timepicker.css' %}" />
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 {% endblock %}
+
 {% block content %}
+
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans 'Events Financial Report' %}</h1>
+    <h1>{% trans 'Events Financial Report' %}</h1>
    <form action='' method="GET">
         <div class="form">
-        <div class="mb-4">
-		    <label for="start_dt" class="sm:w-1/4 pr-4 pl-4 control-label">{{ form.start_dt.label }}</label>
-		    <div class="sm:w-3/4 pr-4 pl-4">
+        <div class="form-group">
+		    <label for="start_dt" class="col-sm-3 control-label">{{ form.start_dt.label }}</label>
+		    <div class="col-sm-9">
 		      {{ form.start_dt }}
 		    </div>
 	  	</div>
-	  	<div class="mb-4">
-		    <label for="end_dt" class="sm:w-1/4 pr-4 pl-4 control-label">{{ form.end_dt.label }}</label>
-		    <div class="sm:w-3/4 pr-4 pl-4">
+	  	<div class="form-group">
+		    <label for="end_dt" class="col-sm-3 control-label">{{ form.end_dt.label }}</label>
+		    <div class="col-sm-9">
 		      {{ form.end_dt }}
 		    </div>
 	  	</div>
-	  	<div class="mb-4">
-		    <label for="sort_by" class="sm:w-1/4 pr-4 pl-4 control-label">{{ form.sort_by.label }}</label>
-		    <div class="sm:w-3/4 pr-4 pl-4">
+	  	<div class="form-group">
+		    <label for="sort_by" class="col-sm-3 control-label">{{ form.sort_by.label }}</label>
+		    <div class="col-sm-9">
 		      {{ form.sort_by }} {{ form.sort_direction }}
 		    </div>
 	  	</div>
+
         <div class="text-right">
-        <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" type="submit" value="{% trans 'Filter by Date' %}" />
-        <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-green-100 bg-green-500 hover:bg-green-400" type="submit" name="export" value="{% trans 'Export' %}" />
+        <input class="btn btn-default" type="submit" value="{% trans 'Filter by Date' %}" />
+        <input class="btn btn-success" type="submit" name="export" value="{% trans 'Export' %}" />
         </div>
         </div>
    </form>
    {% autopaginate events 20 %}
    {% with events|discount_used as show_discount_count %}
-    <table class="w-full max-w-full mb-4 bg-transparent table-striped">
+    <table class="table table-striped">
         <thead>
             <tr>
             	<th>{% trans 'Event ID' %}</th>
@@ -89,6 +94,7 @@
     {% paginate %}
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -99,6 +105,7 @@
             //$('.timepicker').timepicker({'step': 1});
             $('#id_start_dt_1').timepicker({'timeFormat': 'h:i A'});
             $('#id_end_dt_1').timepicker({'timeFormat': 'h:i A'});
+
             $( "#id_start_dt_0" ).datepicker({
               defaultDate: "+1m",
               changeMonth: true,

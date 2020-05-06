@@ -2,14 +2,18 @@
 {% load nav_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }} {% trans "Add" %}{% endblock title %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/navs.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_NAVS_LABEL trans "Nav" %}  {% trans "Add" %}</h1>
+    <h1>{% firstof MODULE_NAVS_LABEL trans "Nav" %}  {% trans "Add" %}</h1>
+
     <div class="nav-wrap">
         <form action="{% url "navs.add" %}" method="post">{% csrf_token %}
         <div class="forms">
@@ -18,8 +22,10 @@
         </div>
         </form>
     </div>
+
 </div>
 {% endblock content %}
+
 {% block extra_body %}
     {{ block.super }}
 {% endblock %}

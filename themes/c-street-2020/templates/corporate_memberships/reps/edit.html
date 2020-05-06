@@ -4,16 +4,19 @@
 {% load perm_tags %}
 {% load corporate_memberships_tags %}
 {% load styled_forms %}
+
 {% block title %}{% trans "Corporate Membership Representatives" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="{% static 'css/corporate_memberships-edit_reps.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
 <div class="corp-reps">
-     <h1 class="text-xl font-semibold">{% trans "Representatives for: " %} <a href="{% url "corpmembership.view" corp_membership.id %}">{{ corp_membership.corp_profile.name }}</a></h1>
+     <h1>{% trans "Representatives for: " %} <a href="{% url "corpmembership.view" corp_membership.id %}">{{ corp_membership.corp_profile.name }}</a></h1>
      {% if reps %}
      <table width="90%">
             <tr>
@@ -25,6 +28,7 @@
             {% for rep in reps %}
                 <tr class="corp-rep">
                 <td><a href="{% url "profile" rep.user.username %}">{{ rep.user.get_full_name }} ({{ rep.user.email  }})</a>
+
                 </td>
                 <td>
                     {% if rep.is_dues_rep %}
@@ -52,16 +56,23 @@
      {% else %}
         <div>{% trans "No representative designated yet." %}</div>
      {% endif %}
+
+
     <form action="" method="post">{% csrf_token %}
     <div class="forms">
         {{ form|styled_form }}
             <input type="submit" name="submit" value="{% trans 'Save and Continue Add Another' %}" />
             <input type="submit" name="submit" value="{% trans 'Save' %}" />
     </div>
+
     </form>
+
+
+
 </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 <script>
     if (!(window.jQuery)) {
@@ -71,14 +82,18 @@
         document.getElementsByTagName('head')[0].appendChild(s);}
 </script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
  <script type="text/javascript">
     $(document).ready(function(){
+
         // delete confirmation
         $('.delete').on("click", function(){
             var delete_corp_memb_rep = confirm('Permenantly delete this corporate membership representative?'); // confirm
             if(delete_corp_memb_rep) $(this).parents('.corp-rep').find('form[name="corp-memb-rep-delete"]').submit() // delete: if OK
             return false;   // cancel
         });
+
         $( "#id_user_display" ).autocomplete({
             source: "{% url "corp_membership.reps_lookup" %}",
             selectFirst:true,
@@ -87,6 +102,8 @@
                 $("#id_user").val(ui.item.id)
             }
         });
+
     });
    </script>
+
  {% endblock %}

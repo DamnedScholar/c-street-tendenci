@@ -2,12 +2,16 @@
 {% load nav_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }} {% trans "Items" %}{% endblock title %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/navs.css' %}">
 {% endblock %}
+
 {% block content %}
+
 <div class="t">
     <div class="nav-wrap">
         <div class="nav-edit-menu">
@@ -25,12 +29,12 @@
             <a id="add-custom" >{% trans 'Add a Custom Navigation Item' %}</a>
         </div>
         <div class="nav-edit-content">
-        <h1 class="text-xl font-semibold">{% trans "Items" %} for {{ current_nav.title }}</h1>
+        <h1>{% trans "Items" %} for {{ current_nav.title }}</h1>
             <form method="post" action="">{% csrf_token %}
                 {{ formset.management_form }}
                 <div id="nav-items">
                 {% for form in formset.forms %}
-                <div class="" {% if forloop.first %}id="first-item"{% endif %}>
+                <div class="nav-item" {% if forloop.first %}id="first-item"{% endif %}>
                     <input type="hidden" name="form-{{ forloop.counter0 }}-id" id="id_form-{{ forloop.counter0 }}-id" />
                     <a href="#" class="nav-item-label">
                         + <span class="linklabel">{{ form.instance.label }}</span>&nbsp;<span class="helpertext">({% trans 'edit' %})</span>
@@ -51,7 +55,7 @@
                                     </div>
                                 {% endif %}
                                 {% if form.instance.page %}
-                                    <label class="small-label">{% trans 'URL' %}</label> <input class="url-field" opacity-75="disabled" type="text" value="{{ form.instance.page.get_absolute_url }}">
+                                    <label class="small-label">{% trans 'URL' %}</label> <input class="url-field" disabled="disabled" type="text" value="{{ form.instance.page.get_absolute_url }}">
                                 {% else %}
                                     <label class="small-label">{{ form.url.label }}</label>
                                     {{ form.url }}
@@ -89,6 +93,7 @@
                             </div>
                             <div class="nav-item-field-checkbox">
                             {{ form.new_window }}
+
                             <label>{{ form.new_window.label }}</label>
                             </div>
                         </td>
@@ -104,12 +109,14 @@
                 </div>
             {% endfor %}
             </div>
+
             <input type="submit" id="save-all" value="{% trans 'Save All Navigation Items' %}">
             </form>
+
         </div>
         <div style="clear:both"></div>
         <!-- The next div is a base template for the form in form sets -->
-        <div class="" id="base">
+        <div class="nav-item" id="base">
             <input type="hidden" name="form-0-id" id="id_form-0-id" />
             <a href="#" class="nav-item-label"><b>+ </b></a>
             <a href="#" class="nav-move-right"><img class="nav-move-image" src="{% static 'images/arrow-right.jpg' %}" /></a>
@@ -143,6 +150,7 @@
                 <td>
                 </td>
                 </tr>
+
                 </table>
                 <div style="display: none;" >
                     <div class="position">
@@ -159,6 +167,7 @@
     </div>
 </div>
 {% endblock content %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

@@ -1,5 +1,7 @@
 {% load base_filters %}
+
 <!--<a href="">{% trans 'View Registration' %}</a>-->
+
 {% with obj.registrant_set.all as registrants %}
     {% if registrants %}
         {% for reg in registrants %}

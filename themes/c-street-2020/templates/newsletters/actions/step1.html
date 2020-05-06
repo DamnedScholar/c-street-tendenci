@@ -1,21 +1,24 @@
 {% extends "newsletters/base.html" %}
 {% load base_filters %}
+
 {% block title %}
 {{ block.super }}{% trans 'Tendenci Newsletter Generator - Marketing Action'%}
 {% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 {% endblock %}
+
 {% block content %}
 <div class="t">
   <div id="t-newsletters">
     <div class="page-header">
-      <h1 class="text-xl font-semibold">{% trans 'Edit Newsletter' %}</h1>
+      <h1>{% trans 'Edit Newsletter' %}</h1>
     </div>
     <form action='' method="POST">{% csrf_token %}
       <div class='step-section cf'>
         <div class="step-contents">
-          <div class="mb-4">
+          <div class="form-group">
             <p><label>{% trans 'Newsletter Type: ' %}</label> &nbsp; {{ form.actiontype }}</p>
           </div>
           {% if form.actiontype.errors %}
@@ -32,7 +35,7 @@
             <p><label>Action Name:</label> {{ form.actionname }}</p>
           </div>
           <div class="step-content-item">
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400 py-3 px-4 text-xl leading-tight pull-right" type="submit" value="{% trans 'Continue' %}&nbsp; &rarr;" />
+            <input class="btn btn-primary btn-lg pull-right" type="submit" value="{% trans 'Continue' %}&nbsp; &rarr;" />
           </div>
         </div>
       </div>
@@ -48,6 +51,7 @@
       <div class="step-content-item">
       <strong>{{ object.email.subject }}</strong>
     </div>
+
     </div>
     </div>
       <div class='step-section cf'>
@@ -90,6 +94,8 @@
   </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
+
 {% endblock %}

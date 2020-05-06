@@ -1,14 +1,18 @@
 {% load styled_forms %}
 {% load perm_tags %}
+
 {% has_perm user forms.change_form embed_form as can_edit %}
+
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">
-    <h1 class="text-xl font-semibold">{{ embed_form.title }}</h1>
+
+    <h1>{{ embed_form.title }}</h1>
     <p>{{ embed_form.intro|safe }}</p>
+
     <div class="form-builder-wrap">
         <form method="post" class="form-horizontal" enctype="multipart/form-data" action="{{ embed_form.get_absolute_url }}">{% csrf_token %}
         <div class="forms">
             {{ embed_form_for_form|styled_form }}
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit" value="{% trans 'Submit' %}" />
+            <input class="btn btn-primary" type="submit" value="{% trans 'Submit' %}" />
         </div>
         </form>
     </div>

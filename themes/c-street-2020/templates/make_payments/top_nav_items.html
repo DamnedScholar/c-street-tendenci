@@ -1,14 +1,19 @@
 {% load base_tags %}
 {% load perm_tags %}
+
+
 {% has_perm request.user site_settings.change_setting as can_edit_setting %}
+
 {% if app_object %}
     {% has_perm request.user make_payments.view_make_payment app_object as can_view %}
 {% endif %}
-<ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+
+
+<ul class="dropdown-menu">
     <li>
         <div class="yamm-content custom-yamm-content content-dropdown">
-            <div class="flex flex-wrap">
-                <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+            <div class="row">
+                <ul class="list-unstyled content-dropdown-col col-sm-12 col-xs-12">
                     {% if can_edit_setting %}
                         <li class="content-item">
                             <span class="app-name">
@@ -16,6 +21,7 @@
                             </span>
                         </li>
                     {% endif %}
+
                     {% if app_object %}
                         <li class="content-item">
                             <span class="app-name">
@@ -23,6 +29,7 @@
                             </span>
                         </li>
                     {% endif %}
+
                     <li class="content-item">
                         <span class="app-name">
                             <a href="{% url 'make_payment.add' %}">{% trans "Add" %}</a>

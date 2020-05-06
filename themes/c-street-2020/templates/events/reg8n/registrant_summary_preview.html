@@ -1,13 +1,15 @@
 {% load base_filters %}
 <div id="registrant_summary_{{ forloop.counter0 }}">
     <p><b>#{{ forloop.counter }}</b></p>
-    <ul class="list-disc pl-4">
+    <ul>
         {% trans "Email" as email_label %}
         {% trans "Price" as price_label %}
         {% for field in registrant %}
+
             {% if field.name == "email" %}
                 <li>{{ email_label }}:  {{ field.value.0 }}</li>
             {% elif field.name in flat_ignore_fields %}
+
             {% elif field.name == "pricing" %}
                 {% if not event.free_event %}
                     {% if not registrant.cleaned_data.override %}
@@ -28,9 +30,11 @@
                 <li>{{ field.label }}:  {{ field.value|field_to_string }}</li>
             {% endif %}
         {% endfor %}
+
         {% if registrant.discount > 0 %}
         <li>{% trans 'Discount: ' %} {{ currency_symbol }}{{ registrant.discount }}</li>
          <li>{% trans 'Final Price: ' %} {{ currency_symbol }}{{ registrant.final_price }}</li>
         {% endif %}
+
     </ul>
 </div>

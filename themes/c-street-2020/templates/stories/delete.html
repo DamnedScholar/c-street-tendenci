@@ -1,15 +1,18 @@
 {% extends "stories/base.html" %}
 {% load base_tags %}
+
 {% block title %}{% trans "Delete Story" %} {{ story.title }}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/stories.css' %}">
 <link rel="stylesheet" href="{% static 'css/delete.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
     <div class="story-wrap">
-        <h1 class="text-xl font-semibold">{% trans "Delete a Story" %}</h1>
+        <h1>{% trans "Delete a Story" %}</h1>
         {% if story.image %}
         <div class="photo">
             <img src="{% image_url story.image size=300x300 crop=True quality=88 %}" title="{{ story.title|truncatechars:123 }}"  alt="{{ story.title|truncatechars:123 }}" />

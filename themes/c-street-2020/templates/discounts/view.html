@@ -4,13 +4,18 @@
 {% load category_tags %}
 {% load discount_tags %}
 {% load tagging_tags %}
+
+
 {% block title %}{{ discount.discount_code }}{% endblock %}
+
 {% block content %}
     {% tags_for_object discount as tags %}
+
     <article id="t-discounts-discount-{{ discount.pk }}" class="t-discounts-discount">
         <div class="page-header">
-            <h1 class="text-xl font-semibold"><a href="{{ discount.get_absolute_url }}">{{ discount.discount_code }}</a></h1>
+            <h1><a href="{{ discount.get_absolute_url }}">{{ discount.discount_code }}</a></h1>
         </div>
+
         <div class="t-discounts-discount-body">
             <section class="t-discounts-discount-info">
                 <h2>
@@ -22,24 +27,30 @@
                         {% trans "Discount Information" %}
                     {% endif %}
                 </h2>
+
                 <ul class="list-unstyled t-jobs-job-information-list">
                     <li>
                         <strong>{% trans "Discount Code:" %}</strong> <span>{{ discount.discount_code }}</span>
                     </li>
+
                     <li>
                         <strong>{% trans "Discount Value:" %}</strong> <span>{{ discount.value|format_currency }}</span>
                     </li>
+
                     <li>
                         <strong>{% trans "Number of Uses:" %}</strong> <span>{% blocktrans with num=discount.num_of_uses cap=discount.cap %}{{ num }} out of {{ cap }} max{% endblocktrans %}</span>
                     </li>
+
                     <li>
                         <strong>{% trans "Duration:" %}</strong> <span>{% blocktrans with s=discount.start_dt e=discount.end_dt %}{{ s }} to {{ e }}{% endblocktrans %}</span>
                     </li>
+
                     <li>
                         <strong>{% trans "Still Available:" %}</strong> <span>{% if discount.available %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</span>
                     </li>
                 </ul>
             </section>
+
             {% if discount.discountuse_set.count > 0 %}
                 <section class="t-discounts-discount-usage-report">
                     <h2>
@@ -51,7 +62,8 @@
                             {% trans "Discount Usage Report" %}
                         {% endif %}
                     </h2>
-                    <table class="w-full max-w-full mb-4 bg-transparent table-striped t-discounts-discount-usage-report-table">
+
+                    <table class="table table-striped t-discounts-discount-usage-report-table">
                         <thead>
                             <tr>
                                 <th>{% trans "Username" %}</th>
@@ -59,6 +71,7 @@
                                 <th>{% trans "Invoice Url" %}</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             {% for reg in registrant_list %}
                                 <tr>
@@ -75,6 +88,7 @@
                                     <td><a href="{{ reg.registration.invoice.get_absolute_url }}">{% trans "Invoice URL" %}</a></td>
                                 </tr>
                             {% endfor %}
+
                             {% for mem in membership_list %}
                                 <tr>
                                     <td><a href="{% url 'profile' mem.user.username %}">{{ mem.user.username }}</a></td>

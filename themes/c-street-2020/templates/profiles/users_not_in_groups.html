@@ -3,19 +3,24 @@
 {% load profile_tags %}
 {% load base_filters %}
 {% load perm_tags %}
+
 {% block title %}{% trans 'Users not in Groups' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/reports.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
   <div class="page-header">
-    <h1 class="text-xl font-semibold">{% trans "Users not in Groups" %}</h1>
+    <h1>{% trans "Users not in Groups" %}</h1>
   </div>
+
     <div class="profiles-wrap">
+
         {% if users %}
-        <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports">
+        <table class="table table-tendenci-reports">
         <thead>
             <td>
                 <strong>{% trans 'ID' %}</strong>

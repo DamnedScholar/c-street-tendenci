@@ -2,7 +2,9 @@
 {% load studygroup_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{% firstof MODULE_STUDYGROUPS_LABEL 'Study Group' %} {% trans 'Add' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'chosen/chosen.css' %}">
@@ -12,34 +14,44 @@
 }
 </style>
 {% endblock %}
+
 {% block content %}
+
 <div id="add-studygroups">
+  
   <div class="page-header">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_STUDYGROUPS_LABEL trans 'Study Group' %} {% trans "Add" %}</h1>
+    <h1>{% firstof MODULE_STUDYGROUPS_LABEL trans 'Study Group' %} {% trans "Add" %}</h1>
   </div>
+  
     <div>
       <form action="{% url 'studygroups.add' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+        
       <div class="forms">
           {% studygroup_form form %}
-      <fieldset class="boxy-gray-500" >
+
+      <fieldset class="boxy-grey" >
                 <input id="category-title" style="cursor: pointer"><span>+</span> {% trans "Category" %}</input>
                 <div id="category-form">
                     {{ categoryform|styled_form }}
                 </div>
             </fieldset>
-      <fieldset class="boxy-gray-500">
+        
+      <fieldset class="boxy-grey">
                 <legend id="meta-title" style="cursor: pointer"><span>+</span> {% trans "SEO Meta" %}</legend>
                 <div id="meta-form">
                     {{ metaform|styled_form }}
                 </div>
             </fieldset>
-          <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" type="submit" value="Add {% firstof MODULE_STUDYGROUP_LABEL 'Study Group' %}" />
+
+          <input class="btn btn-default" type="submit" value="Add {% firstof MODULE_STUDYGROUP_LABEL 'Study Group' %}" />
         <br /><br />
     </div>
         </form>
     </div>
+
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     {{ form.media }}

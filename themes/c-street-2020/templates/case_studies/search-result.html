@@ -2,8 +2,10 @@
 {% load case_study_tags %}
 {% load perm_tags %}
 {% load base_filters %}
+
 <div class="panel panel-default">
   <div class="panel-body">
+    
     {% for img in case_study.featured_screenshots %}
     {% if forloop.first %}
     <a href="{{ case_study.get_absolute_url }}">
@@ -11,10 +13,14 @@
     </a>
     {% endif %}
     {% endfor %}
+    
     <h3><a href="{{ case_study.get_absolute_url }}" title="{{ case_study.client }}">
       {{ case_study.client }}
       </a></h3>
-    <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" href="{{ case_study.slug }}">{% trans 'View this Study' %}</a>
+    
+    <a class="btn btn-primary" href="{{ case_study.slug }}">{% trans 'View this Study' %}</a>
+  
    {% include 'case_studies/meta.html' %}
   </div>
+
 </div>

@@ -4,8 +4,10 @@
 {% load base_filters %}
 {% load category_tags %}
 {% load perm_tags %}
+
 {% has_perm user videos.change_video video as can_edit %}
 {% has_perm user videos.delete_video video as can_delete %}
+
 <div class="meta {% if not user.is_authenticated and not category and not nonhash_tags %}anon{% endif %}">
     <div class="meta-left">
         {% if video.category %}
@@ -13,6 +15,7 @@
             <strong>{% trans "Category:" %} </strong><a href="{% url 'video.search' %}?q=category:{{ video.category }}">{{ video.category }}</a>
         </div>
         {% endif %}
+
         {% if user.is_authenticated %}
             <div class="submitted">{% blocktrans with video.create_dt|date:"long" as create_date %}Created on {{ create_date }}
             by:{% endblocktrans %} <a href="{{ video.creator.get_absolute_url }}">
@@ -30,25 +33,28 @@
             </div>
         {% endif %}
     </div>
+
     <div class="meta-right">
         <a class="share-link" >{% trans "Share" %}</a>
     </div>
+
 </div>
 {% if can_edit %}
 <div class="editor-bar">
+
     <div class="perm-status">
-    <ul class="list-disc pl-4">
+    <ul>
         <li>{{ video.obj_perms }}</li>
         <li>{{ video.obj_status }}</li>
     </ul>
     </div>
     <div class="edit-links">
-    <ul class="list-disc pl-4">
+    <ul>
         <li><a class="eventlog-link" href="{% url 'event_log.search' %}?object_id={{ video.pk }}&source={{ video.opt_app_label }}">{% trans "Eventlogs" %}</a></li>
         <li><a class="option-link edit" href="{% url 'admin:videos_video_change' video.pk %}?next={{ request.path }}">{% trans 'Edit' %}</a></li>
         <li><a class="options-link" href="#">{% trans "Options" %} <small>&#9650;</small></a>
         <div class="options-list">
-            <ul class="list-disc pl-4">
+            <ul>
                 {% if can_delete %}
                 <li><a class="option-link delete" href="{% url 'admin:videos_video_delete' video.pk %}">{% trans 'Delete' %}</a></li>
                 {% endif %}

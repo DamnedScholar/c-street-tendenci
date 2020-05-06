@@ -2,16 +2,21 @@
 {% load base_tags %}
 {% load campaign_monitor_tags %}
 {% load perm_tags %}
+
+
 {% block title %}{{ campaign.name }}{% endblock %}
+
 {% block content %}
+
 <div class="t">
     <div class="template-wrap">
+
         <div class="options options-search">
             <div class="quick-options">
                 {% campaign_options request.user campaign %}
             </div>
         </div>
-         <h1 class="text-xl font-semibold">{{ campaign.name }}</h1>
+         <h1>{{ campaign.name }}</h1>
         <div class="content">
             <p><b>{% trans "Subject" %}:</b> {{ campaign.subject }}</p>
             <p><b>{% trans "Status" %}:</b> {{ campaign.get_status_display }}</p>
@@ -31,5 +36,6 @@
             <p><b></b></p>
         </div>
     </div>
+
 </div>
 {% endblock %}

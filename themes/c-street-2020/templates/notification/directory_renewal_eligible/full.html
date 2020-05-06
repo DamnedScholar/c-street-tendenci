@@ -10,6 +10,7 @@
 <body bgcolor="#ffffff" text="#000000">
 <p>
 {% blocktrans %}Your directory listing on {{ SITE_GLOBAL_SITEDISPLAYNAME }} is eligible for renewal. It will expire on {{ directory.expiration_dt }}.{% endblocktrans %}</p>
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="2%">&nbsp;</td>
@@ -31,5 +32,6 @@
     To renew this directory, go to:{% endblocktrans %}
     <b><a href="{{ SITE_GLOBAL_SITEURL }}{{ directory.get_renew_url }}">{{ SITE_GLOBAL_SITEURL }}{{ directory.get_renew_url }}</a></b>
     </p>
+
 </body>
 </html>

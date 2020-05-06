@@ -1,14 +1,17 @@
 {% extends "donations/base.html" %}
 {% load donation_tags %}
 {% load base_filters %}
+
 {% block title %}{% trans 'View a Donation' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/donations.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="donation-view">
-<h1 class="text-xl font-semibold">{% trans 'View a Donation' %}</h1>
+<h1>{% trans 'View a Donation' %}</h1>
 <div class="donation-view">
 <div class="label">{% trans 'Donation Amount' %}:</div><div><b>{{ donation.donation_amount }}</b></div>
 <div class="clear-left"></div>

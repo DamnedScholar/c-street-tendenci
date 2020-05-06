@@ -4,6 +4,7 @@
 <head>
     <title>Tendenci Tinymce File Browser</title>
        <meta charset="UTF-8">
+
      <link rel="stylesheet" href="{% static 'bootstrap3/css/bootstrap.min.css' %}" type="text/css">
      <style>
          .fb-body{
@@ -14,20 +15,22 @@
 <body>
 <div id="content">
     <div class="fb-body">
+
         <div class="clearfix" style="margin: 0px 0px 5px 15px;">
             {% if can_upload_file %}
-            <a href="{% url 'file.tinymce_upload' %}?{{ request.META.QUERY_STRING }}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400 pull-left">Upload</a>
+            <a href="{% url 'file.tinymce_upload' %}?{{ request.META.QUERY_STRING }}" class="btn btn-primary pull-left">Upload</a>
             {% endif %}
-            <form class="flex items-center pull-right">
-                <div class="mb-4">
-                <input type="text" name='q' class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-800 border border-gray-500 rounded" value="{{ q }}" placeholder="Search" />
-                <button type="submit" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default">
+            <form class="form-inline pull-right">
+                <div class="form-group">
+                <input type="text" name='q' class="form-control" value="{{ q }}" placeholder="Search" />
+                <button type="submit" class="btn btn-default">
                   <span class="glyphicon glyphicon-search"></span>
                 </button>
                 </div>
             </form>
         </div>
-        <table class="w-full max-w-full mb-4 bg-transparent table-striped">
+
+        <table class="table table-striped">
             <tr>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
@@ -36,12 +39,13 @@
                 <th>Date</th>
                 <th>Public?</th>
             </tr>
+
             {% for file in files %}
             {% with file.get_size as size %}
             {% with file.get_absolute_url as absolute_url %}
             {% if size %}
             <tr>
-                <td><button type="button" class="insert-file inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-teal-100 bg-teal-500 hover:bg-teal-400 py-1 px-2 text-sm leading-tight" data-src="{{ absolute_url }}">
+                <td><button type="button" class="insert-file btn btn-info btn-sm" data-src="{{ absolute_url }}">
                     <i class="glyphicon glyphicon-arrow-down"></i>
                     <span>Insert</span>
                     </button>
@@ -69,11 +73,12 @@
             {% endwith %}
             {% endfor %}
         </table>
+
         {% if page_range|length  > 1 %}
             <nav>
-              <ul class="flex list-none p-0 pl-0 rounded">
+              <ul class="pagination">
                 {% if page_num == 1 %}
-                <li class="opacity-75">
+                <li class="disabled">
                   <span aria-hidden="true">&laquo;</span>
                 </li>
                 {% else %}
@@ -87,7 +92,7 @@
                 <li {% if n == page_num %}class="active"{% endif %}><a href="?page={{ n }}&&q={{ q }}&&pop=2">{{ n }}</a></li>
                 {% endfor %}
                 {% if page_num == page_range|last %}
-                <li class="opacity-75">
+                <li class="disabled">
                   <span aria-hidden="true">&raquo;</span>
                 </li>
                 {% else %}
@@ -100,11 +105,14 @@
               </ul>
             </nav>
         {% endif %}
+
     </div>
 </div>
+
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" language="javascript">
     {% include 'files/include/tinymce/insert_file.js' %}
 </script>
+
 </body>
 </html>

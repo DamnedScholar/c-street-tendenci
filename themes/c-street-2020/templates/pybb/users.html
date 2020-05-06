@@ -1,12 +1,15 @@
 {% extends 'pybb/base.html' %}
+
 {# DEPRECATED AND WILL BE REMOVED IN NEXT VERSION #}
+
 {% load pybb_tags %}
+
 {% block content %}
-    <h1 class="text-xl font-semibold">{% trans "Users" %}</h1>
+    <h1>{% trans "Users" %}</h1>
     <form method="get" class="filter_form">
         {% csrf_token %}
         {{ form.query }}
-        <input type="submit" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" value="{% trans "Search" %}"/>
+        <input type="submit" class="btn btn-primary" value="{% trans "Search" %}"/>
     </form>
     <ul class="users">
         {% for profile in page.object_list %}
@@ -17,7 +20,9 @@
             </li>
         {% endfor %}
     </ul>
+
     {% with _('Users') as label %}
         {% include "pybb/pagination.html" %}
     {% endwith %}
+
 {% endblock %}

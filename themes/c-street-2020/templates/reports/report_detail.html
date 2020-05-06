@@ -1,16 +1,21 @@
 {% extends 'reports/report_base.html' %}
+
 {% block title %}{% trans 'Report' %} {{ report.pk }} - {{ report.type|title }}{% endblock title %}
+
 {% block content %}
-<h1 class="text-xl font-semibold">{% trans 'Report' %} {{ report.pk }} - {{ report.type|title }}</h1>
+<h1>{% trans 'Report' %} {{ report.pk }} - {{ report.type|title }}</h1>
+
 {% if report.config %}
 <p>{% trans "Report configuration settings" %}</p>
-<ul class="list-disc pl-4">
+<ul>
     {% for option in report.config_options %}
         <li>{{ option.label }}: {{ option.value }}</li>
     {% endfor %}
 </ul>
 {% endif %}
-<p><a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal " href="{% url 'report_run_create' report.pk %}">{% trans 'Run this report with a new date range' %}</a></p>
+
+<p><a class="btn" href="{% url 'report_run_create' report.pk %}">{% trans 'Run this report with a new date range' %}</a></p>
+
 {% if report.runs %}
     <h3>{% trans "Previous report runs" %}</h3>
     <table>
@@ -32,5 +37,7 @@
     {% endfor %}
     </table>
 {% endif %}
+
 <p><a href="{% url 'report_list' %}">&larr; {% trans "Back to All Reports page" %}</a></p>
+
 {% endblock content %}

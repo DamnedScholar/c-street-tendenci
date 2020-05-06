@@ -1,5 +1,6 @@
 {% load styled_forms %}
 {% load base_filters %}
+
 {% if field_obj.field_name == '' %}
     {% if field_obj.field_name == '' %}
         <div class="section-break{% if field_obj.admin_only %} admin-only-header{% endif %}{% if field_obj.css_class %} {{ field_obj.css_class  }}{% endif %}">
@@ -15,6 +16,8 @@
        <div>
            <b>{{ field_obj.label }}</b>: {{ field_obj.display_content|safe }}
        </div>
+
+
    </div>
    {% else %}
        {% if field %}
@@ -35,6 +38,7 @@
                                 {{ field.label_tag }}
                             </span>
                         </div>
+
                         {% if field.help_text %}
                             <div class="help-text">{{ field.help_text|safe }}</div>
                         {% endif %}
@@ -50,9 +54,11 @@
                              </div>
                             {% endif %}
                         {% endif %}
+
                         <div class="{% if field.field.required %}required{% endif %} {{ field_obj.label_type }}">
                             {{ field_obj.label }}
                         </div>
+
                         <div class="field {{ field_obj.field_div_class }}">
                             {{ field }}
                             {% if field_obj.field_stype != 'radioselect' %}
@@ -64,16 +70,21 @@
                              </span>
                             {% endif %}
                             {% endif %}
+
                             {% if field.help_text %}
                                 <div class="help-text"><small>{{ field.help_text|safe }}</small></div>
                             {% endif %}
+
                             {% if field_obj.field_type == 'FileField' and field.value %}
                             <div><small>{% trans 'Currently' %}: {{ field.value|basename }}</small></div>
                             {% endif %}
                         </div>
+
                         {# if field_obj.field_stype == 'textarea' #}
                         <div class="clear"></div>
                         {# endif #}
+
+
                 {% endif %}
              </div>
         </div>

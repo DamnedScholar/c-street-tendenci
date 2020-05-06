@@ -1,7 +1,10 @@
 {% load base_tags %}
 {% load perm_tags %}
+
+
 {% has_perm user site_settings.change_setting as can_edit_setting %}
 {% has_perm user stories.add_story as can_add_story %}
+
 {% if app_object %}
     {% has_perm user stories.view_story app_object as can_view_story %}
     {% has_perm user stories.change_story app_object as can_edit_story %}
@@ -11,17 +14,20 @@
     {% has_perm user stories.change_story as can_edit_story %}
     {% has_perm user stories.delete_story as can_delete_story %}
 {% endif %}
-<ul id="t-admin-megamenu-stories-dd" class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded" role="menu">
+
+
+<ul id="t-admin-megamenu-stories-dd" class="dropdown-menu" role="menu">
     <li>
         <div class="yamm-content content-dropdown">
-            <div class="flex flex-wrap">
-                <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+            <div class="row">
+                <ul class="list-unstyled content-dropdown-col col-sm-12 col-xs-12">
                     {% if app_object %}
                         <li>
                             {# "All Stories" Section #}
                             <span class="content-head text-content-head">{% trans "All Stories" %}</span>
                         </li>
                     {% endif %}
+
                     {% if can_edit_setting %}
                         <li class="content-item">
                             <span class="app-name">
@@ -29,11 +35,13 @@
                             </span>
                         </li>
                     {% endif %}
+
                     <li class="content-item">
                         <span class="app-name">
                             <a href="{% url 'stories' %}">{% trans "Story List" %}</a>
                         </span>
                     </li>
+
                     {% if can_add_story %}
                         <li class="content-item">
                             <span class="app-name">
@@ -41,6 +49,7 @@
                             </span>
                         </li>
                     {% endif %}
+
                     {% if user.profile.is_superuser %}
                         <li class="content-item">
                             <span class="app-name">
@@ -49,12 +58,14 @@
                         </li>
                     {% endif %}
                 </ul>
+
                 {% if app_object %}
                     {% if can_view_story or can_edit_story %}
-                        <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                        <ul class="list-unstyled content-dropdown-col col-sm-12 col-xs-12">
                             <li>
                                 <span class="content-head text-content-head">{% trans "This Story" %}</span>
                             </li>
+
                             {% if can_view_story %}
                                 <li class="content-item">
                                     <span class="app-name">
@@ -62,6 +73,7 @@
                                     </span>
                                 </li>
                             {% endif %}
+
                             {% if can_edit_story %}
                                 <li class="content-item">
                                     <span class="app-name">
@@ -69,8 +81,10 @@
                                     </span>
                                 </li>
                             {% endif %}
+
                             {% if can_delete_story %}
                                 <li class="divider"></li>
+
                                 <li class="content-item">
                                     <span class="app-name">
                                         <a class="delete" href="{% url 'story.delete' story.pk %}">{% trans "Delete Story" %}</a>

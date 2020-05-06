@@ -1,13 +1,16 @@
 {% extends "corporate_memberships/base-wide.html" %}
 {% load corporate_memberships_tags %}
+
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/corporate_memberships.css' %}">
 <link rel="stylesheet" href="{% static 'css/corporate_memberships_reports.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-<h1 class="text-xl font-semibold">{% trans "Corporate Membership Free Passes" %}</h1>
+<h1>{% trans "Corporate Membership Free Passes" %}</h1>
 <div class="corp-fp-list">
     <table class="table-striped">
         <thead>
@@ -27,11 +30,16 @@
                 <td class="align_center">{{ corp_membership.free_pass_avail }}</td>
             </tr>
             {% endfor %}
+
         </tbody>
     </table>
 </div>
+
+
 </div>
+
 {% endblock %}
+
 {% block extra_body %}
 <script>
     $(document).ready(function(){
@@ -44,6 +52,8 @@
                 $(this).removeClass("over");
             });
     });
+
 </script>
+
  {{ block.super }}
 {% endblock extra_body %}

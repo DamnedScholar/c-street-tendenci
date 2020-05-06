@@ -1,5 +1,6 @@
 {% extends "reports/base.html" %}
 {% load bootstrap_pagination_tags %}
+
 {% block extra_head %}
 {{ block.super }}
 <style>
@@ -8,55 +9,62 @@
     }
 </style>
 {% endblock %}
+
 {% block content %}
+
 <div class="page-header">
-  <h1 class="text-xl font-semibold">{% trans "Active Corporate Memberships by Type Report" %}</h1>
+  <h1>{% trans "Active Corporate Memberships by Type Report" %}</h1>
 </div>
-<form class="search-form flex items-center pull-right" action="" method="get">
-<div class="flex flex-wrap"><label class="control-label">{% trans 'Filter by:' %}</label>
-  <div class="mb-4">
+
+<form class="search-form form-inline pull-right" action="" method="get">
+<div class="row"><label class="control-label">{% trans 'Filter by:' %}</label>
+  <div class="form-group">
     <label for="id_days" class="control-label">{{ form.days.label }}</label>
     {{ form.days }}
   </div>
-  <div class="mb-4">
+  <div class="form-group">
     <label for="id_days" class="control-label">{{ form.corp_membership_type.label }}</label>
     {{ form.corp_membership_type }}
   </div>
 </div>
 </form>
+
 <p><em>{{ corp_mems|length }} {% trans "Corporate Memberships listed" %}</em></p>
 {% autopaginate corp_mems 50 %}
-<p><a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="{% url "reports-active-corp-mems-by-type" %}?output=csv{% if request.GET.days %}&days={{ request.GET.days }}{% endif %}{% if request.GET.corp_membership_type %}&corp_membership_type={{ request.GET.corp_membership_type }}{% endif %}">
+
+
+<p><a class="btn btn-default" href="{% url "reports-active-corp-mems-by-type" %}?output=csv{% if request.GET.days %}&days={{ request.GET.days }}{% endif %}{% if request.GET.corp_membership_type %}&corp_membership_type={{ request.GET.corp_membership_type }}{% endif %}">
   {% trans 'Download CSV File' %}</a></p>
+
 <div>
-  <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports">
+  <table class="table table-tendenci-reports">
     <tr>
       {% if active %}
       <th></th>
       <th>
         {% trans "Company Name" %}&nbsp;
-        <span class="sort-arflex flex-wraps">
+        <span class="sort-arrows">
         <a href="?sort=corp_profile" ><i class="fa fa-arrow-up"></i></a>&nbsp;
         <a href="?sort=-corp_profile" ><i class="fa fa-arrow-down"></i></a>
         </span>
       </th>
       <th>
         {% trans "Parent Entity" %}&nbsp;
-        <span class="sort-arflex flex-wraps">
+        <span class="sort-arrows">
         <a href="?sort=parent_entity" ><i class="fa fa-arrow-up"></i></a>&nbsp;
         <a href="?sort=-parent_entity" ><i class="fa fa-arrow-down"></i></a>
         </span>
       </th>
       <th>
         {% trans "Type" %}&nbsp;
-        <span class="sort-arflex flex-wraps">
+        <span class="sort-arrows">
         <a href="?sort=corporate_membership_type" ><i class="fa fa-arrow-up"></i></a>&nbsp;
         <a href="?sort=-corporate_membership_type" ><i class="fa fa-arrow-down"></i></a>
         </span>
       </th>
       <th>
         {% trans "Join" %}&nbsp;
-        <span class="sort-arflex flex-wraps">
+        <span class="sort-arrows">
         <a href="?sort=join_dt" ><i class="fa fa-arrow-up"></i></a>&nbsp;
         <a href="?sort=-join_dt" ><i class="fa fa-arrow-down"></i></a>
         </span>
@@ -104,6 +112,8 @@
     {% endfor %}
    </table>
 </div>
+
 {% paginate %}
 <br /><br />
+
 {% endblock content %}

@@ -1,7 +1,8 @@
 {% extends "reports/base.html" %}
 {% load reports_tags %}
+
 {% block content %}
-<h1 class="text-xl font-semibold">{% trans "Corporate Membership Report" %}</h1>
+<h1>{% trans "Corporate Membership Report" %}</h1>
 <div class="corp-mems-wrap stat-table">
     <table>
         <tr>
@@ -29,4 +30,5 @@
         </tr>
     </table>
 </div>
+
 {% endblock content %}

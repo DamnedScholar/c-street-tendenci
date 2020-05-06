@@ -1,18 +1,24 @@
 {% extends "memberships/base-wide.html" %}
 {% load base_filters %}
+
 {% block title %}{% endblock %}
 {% block meta_description %}{% endblock %}
 {% block meta_keywords %}{% endblock %}
 {% block meta_canonical_url %}<link rel="canonical" href="" />{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/memberships.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
 <div class="application-entry-wrap">
-        <h1 class="text-xl font-semibold">{% trans "Membership Confirmation" %}</h1>
+
+        <h1>{% trans "Membership Confirmation" %}</h1>
+
         {% firstof app.confirmation_text|safe "Thank you for your submission!" %}
+
         {% if membership.is_pending %}
             <p><span style="background-color: #ECF716;">
                     {% if request.user.profile.is_superuser %}
@@ -27,8 +33,9 @@
             <p><a href="{% url "auth_login" %}?next={{ membership.referer_url }}">{% trans 'Please continue registering for your event as a member.' %}</a></p>
             {% endif %}
         {% endif %}
+
         <h4>{% trans 'What would you like to do now?' %}</h4>
-        <ul class="list-disc pl-4">
+        <ul>
             {% if membership.is_pending and request.user.profile.is_superuser %}
             <li>
                 <a href="{% url "admin:memberships_membershipdefault_change" membership.id %}">{% trans 'Admin: Click here to edit and approve this membership ' %}</a>
@@ -41,6 +48,7 @@
             </li>
             {% endif %}
             {% endwith %}
+
             {% if membership.corporate_membership_id %}
             {% with membership.corpmembership as corpmembership %}
             {% if corpmembership %}
@@ -50,10 +58,15 @@
             <li><a href="{% url "corpmembership.view" membership.corporate_membership_id %}">{% trans 'Back to Corporate Membership' %} - {{ corpmembership.corp_profile.name }}</a></li>
             {% endif %}
             {% endwith %}
+
+
+
             {% endif %}
+
             {% if membership.user.profile.is_active %}
             <li><a href="{% url "profile" membership.user.username %}">{% if not user.is_authenticated %}{% trans 'Click Here to Log in and View Your Profile' %}{% else %}{% trans 'View Profile' %}{% endif %}</a></li>
             {% endif %}
+
             {% if not membership.is_pending and MODULE_RECURRING_PAYMENTS_ENABLED %}
             {% if MODULE_MEMBERSHIPS_AUTORENEW %}
             <li>
@@ -62,6 +75,10 @@
             {% endif %}
             {% endif %}
         </ul>
+
+
+
+
         <p>&nbsp;</p>
 </div>
 </div>

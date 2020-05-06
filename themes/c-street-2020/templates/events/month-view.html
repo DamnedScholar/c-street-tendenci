@@ -3,9 +3,11 @@
 {% load tagging_tags %}
 {% load base_tags %}
 {% load category_tags %}
+
 {% block title %}{{ month_names.1 }} {{ year }} {% trans 'Calendar' %} {% endblock %}
 {% block meta_description %} {% endblock %}
 {% block meta_keywords %} {% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="alternate" type="application/rss+xml" title="Latest Events" href="{% url "event.feed" %}" />
@@ -19,68 +21,86 @@
 .month-view .navbar-toggle {
     background-color: #1a242f;
 }
+
 </style>
 {% endblock %}
+
 {% block content %}
+
 <div class="month-view">
-  <div class="flex flex-wrap">
-    <div class="md:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+  <div class="row">
+    <div class="col-md-12 col-xs-12">
+	
       <div class="page-header">
         <ul class="list-inline text-center">
-          <li><h1 class="text-xl font-semibold">{{ month_names.1 }} {{ year }}</h1></li>
-          <li class="pull-left"><h1 class="text-xl font-semibold"><a href="{{ prev_month_url }}"> <i class="fa fa-angle-left"></i></a></h1></li>
-          <li class="pull-right"><h1 class="text-xl font-semibold"><a href="{{ next_month_url }}"><i class="fa fa-angle-right"></i></a></h1></li>
+          <li><h1>{{ month_names.1 }} {{ year }}</h1></li>
+          <li class="pull-left"><h1><a href="{{ prev_month_url }}"> <i class="fa fa-angle-left"></i></a></h1></li>
+          <li class="pull-right"><h1><a href="{{ next_month_url }}"><i class="fa fa-angle-right"></i></a></h1></li>
         </ul>
       </div>
+
       <div style="clear:both;"></div>
       <div class="calendar-wrap">
+      
       	<div class="text-center">
+      	
 		<form id="calendar-search-form" action="{% url 'event.month' %}" method="post">{% csrf_token %}
-		<nav class="flex flex-wrap list-none p-0 pl-0 mb-0bar navbar-default">
-  <div class="container mx-auto mx-auto">
-    <div class="flex flex-wrap list-none p-0 pl-0 mb-0bar-header">
-      <button type="button" class="flex flex-wrap list-none p-0 pl-0 mb-0bar-toggle flex-growlapsed" data-toggle="collapse" data-target="#events-search-navbar-collapse" aria-expanded="false">
-        <span class="">{% trans 'opacity-100 block Events Search' %}</span>
+		
+		<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#events-search-navbar-collapse" aria-expanded="false">
+        <span class="sr-only">{% trans 'Show Events Search' %}</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
     </div>
+
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="flex-growlapse flex flex-wrap list-none p-0 pl-0 mb-0bar-collapse" id="events-search-navbar-collapse">
-	 <div class="flex flex-wrap">
-	 	 <div class="mb-4 sm:w-1/5 pr-4 pl-4 text-left">
+    <div class="collapse navbar-collapse" id="events-search-navbar-collapse">
+    
+	 <div class="row">
+	 	 <div class="form-group col-sm-2 text-left">
 		    <label for="id_events_in">{{ form.events_in.label }}</label>
 		    {{ form.events_in }}
 		 </div>
-		 <div class="mb-4 sm:w-1/5 pr-4 pl-4 text-left">
+		 <div class="form-group col-sm-2 text-left">
 		    <label for="id_search_text">{{ form.search_text.label }}</label>
 		    {{ form.search_text }}
 		 </div>
-		 <div class="mb-4 sm:w-1/4 pr-4 pl-4 text-left">
+		 <div class="form-group col-sm-3 text-left">
 		    <label for="id_group">{{ form.group.label }}</label>
 		    {{ form.group }}
 		  </div>
-		  <div class="mb-4 sm:w-1/5 pr-4 pl-4 text-left">
+		  <div class="form-group col-sm-2 text-left">
 		    <label for="id_event_type">{{ form.event_type.label }}</label>
 		    {{ form.event_type }}
 		  </div>
-		  <div class="sm:w-1/5 pr-4 pl-4 text-left">
+		  <div class="col-sm-2 text-left">
 			<div>&nbsp;</div>
-			<input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400 py-1 px-2 text-sm leading-tight form" type="submit" value="{% trans 'Find Events' %}" />
+			<input class="btn btn-primary btn-sm form" type="submit" value="{% trans 'Find Events' %}" />
 		</div>
-		<div class="sm:w-1/6 pr-4 pl-4 text-right">
+		<div class="col-sm-1 text-right">
             <div>&nbsp;</div>
-             <a href="{% url "event.search" %}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400 py-1 px-2 text-sm leading-tight">{% trans "List View" %}</a>
+             <a href="{% url "event.search" %}" class="btn btn-primary btn-sm">{% trans "List View" %}</a>
         </div>
 	 </div>
+		
 	</div>
 </div>
 </nav>	
+		
+		
 		</form>
+		
 		</div>
+		
+		
 		<p></p>
+
         <div class="month-wrap">
+
           <div class="month-labels">
             {% for weekday in weekdays %}
             <div class="weekday">{{ weekday }}</div>
@@ -90,13 +110,17 @@
             {% endfor %}
             <div style="clear:both;"></div>
           </div>
+
           <div class="month-grid">
             {% for week in cal %}
             {% for day in week %}
+
             <div class="day{% if today == day %} today{% endif %}">
               <div class="date-numeral"><a href="{% url "event.day" day.year day.month day.day %}">{{ day.day }}</a></div>
+
               {% event_list day type 'single_day' group search_text as events %}
               {% if events %}
+
               {% for event in events|slice:"2" %}
               <div class="event-item" title="{{ event.type }}: {{ event }}"
               style="color:{{ event.type.fg_color }}; background-color:{{ event.type.bg_color }}" itemscope itemtype="https://schema.org/Event">
@@ -116,29 +140,40 @@
                 <a class='click-mask' href="{{ event.get_absolute_url }}"></a>
               </div>
               {% endfor %}
+
               {% if events|length|add:"-2" > 0 %}
               <div class="more-events">
                 <a href="{% url "event.day" day.year day.month day.day %}">{% blocktrans with events|length|add:"-2" as events_more %}+{{ events_more }} more{% endblocktrans %}</a>
               </div>
               {% endif %}
+
               {% endif %}
             </div>
+
             {% endfor %}
             {% endfor %}
             <div style="clear:both;"></div>
           </div> <!-- END month-grid -->
+
         </div> <!-- END month-wrap -->
+
       </div> <!-- END calendar-wrap -->
+
     </div> <!-- END col -->
+
   </div> <!-- END row -->
   <br />
   <div class="pull-right">
   	<span class="glyphicon glyphicon-calendar"></span>
   <a href="{% url "event.ics" %}" title="Download ICS-file">{% trans "Export Calendar" %}</a>
   </div>
+  
 </div> <!-- END month-view -->
+
 <br/><br/>
+
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'js/jquery.tipsy.js' %}"></script>
@@ -160,4 +195,5 @@ $('#id_events_in').monthpicker();
         });
     });
 </script>
+
 {% endblock %}

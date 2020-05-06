@@ -2,54 +2,62 @@
 {% load event_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }}{% trans 'Edit' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 <link rel="stylesheet" href="{% static 'timepicker/timepicker.css' %}" />
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
+
 {% endblock %}
+
 {% block content %}
 <!-- you are here: templates/events/edit.html -->
+
 <div class="t">
   <div class="page-header">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_EVENTS_LABEL trans 'Event' %}{% trans " Edit" %}</h1>
+    <h1>{% firstof MODULE_EVENTS_LABEL trans 'Event' %}{% trans " Edit" %}</h1>
   </div>
+  
     <div class="event-tabs">
-        <ul class="flex flex-wrap list-none p-0 pl-0 mb-0 border border-t-0 border-r-0 border-l-0 border-b-1 border-grey-400">
-            <li role="presentation" class="relative {% if label == 'overview' %}active{% endif %}">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="dropdown {% if label == 'overview' %}active{% endif %}">
                 <a href="{% url "event.edit" event.pk %}">{% trans "Overview" %}</a>
             </li>
-            <li role="presentation"  class="relative {% if label == 'location' %}active{% endif %}">
+            <li role="presentation"  class="dropdown {% if label == 'location' %}active{% endif %}">
                 <a href="{% url "event.location_edit" event.pk %}">{% trans "Location" %}</a>
             </li>
-            <li role="presentation"  class="relative {% if label == 'organizer' %}active{% endif %}">
+            <li role="presentation"  class="dropdown {% if label == 'organizer' %}active{% endif %}">
                 <a href="{% url "event.organizer_edit" event.pk %}">{% trans "Organizer" %}</a>
             </li>
-            <li role="presentation"  class="relative {% if label == 'sponsor' %}active{% endif %}">
+            <li role="presentation"  class="dropdown {% if label == 'sponsor' %}active{% endif %}">
                 <a href="{% url "event.sponsor_edit" event.pk %}">{% trans "Sponsor" %}</a>
             </li>
-            <li role="presentation"  class="relative {% if label == 'speakers' %}active{% endif %}">
+            <li role="presentation"  class="dropdown {% if label == 'speakers' %}active{% endif %}">
                 <a href="{% url "event.speaker_edit" event.pk %}">{% trans "Speaker(s)" %}</a>
             </li>
-            <li role="presentation"  class="relative {% if label == 'regconf' %}active{% endif %}">
+            <li role="presentation"  class="dropdown {% if label == 'regconf' %}active{% endif %}">
                 <a href="{% url "event.regconf_edit" event.pk %}">{% trans "Registration" %}</a>
             </li>
-            <li role="presentation"  class="relative {% if label == 'pricing' %}active{% endif %}">
+            <li role="presentation"  class="dropdown {% if label == 'pricing' %}active{% endif %}">
                 <a href="{% url "event.pricing_edit" event.pk %}">{% trans "Pricing(s)" %}</a>
             </li>
         </ul>
     </div>
+
     <div class="event-wrap">
         <form id="event-form" class="form-horizontal"  action="." method="post" enctype="multipart/form-data">{% csrf_token %}
         <div class="forms">
             {{ multi_event_forms|styled_multi_forms }}
             {% if label != "pricing" %}
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" type="submit" value="{% trans 'Save and Continue Editing' %}" name="_continue"/>
+            <input class="btn btn-default" type="submit" value="{% trans 'Save and Continue Editing' %}" name="_continue"/>
             {% endif %}
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit" value="{% trans 'Save Changes' %}" name="_save"/>
+            <input class="btn btn-primary" type="submit" value="{% trans 'Save Changes' %}" name="_save"/>
         </div>
         </form>
+
         <div id="confirm-dialog" title="{% trans 'Apply changes to all events?' %}">
             <p>{% blocktrans %}
             These changes would be applied to every event part of this series, including past events. Are you sure?
@@ -58,6 +66,7 @@
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
      <link href="{% static 'tiny_mce/custom.css' %}" type="text/css" media="all" rel="stylesheet">
@@ -69,6 +78,7 @@
     <script type="text/javascript" src="{% static 'timepicker/timepicker.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/events_formset.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/slug.js' %}"></script>
+   
     <script type="text/javascript">
         var displayConfirmation = true;
         $('#confirm-dialog').dialog({
@@ -93,9 +103,11 @@
             }
         });
     </script>
+
     <script type="text/javascript">
         {% include 'events/include/event_place.js' %}
     </script>
+
     <script type="text/javascript">
      {% include 'events/include/event_form_custom_reg.js' %}
     </script>
@@ -109,16 +121,19 @@
             $('#id_start_dt_1').timepicker({'timeFormat': 'h:i A'});
             $('#id_end_dt_0').datepicker({ dateFormat: 'yy-mm-dd' });
             $('#id_end_dt_1').timepicker({'timeFormat': 'h:i A'});
+            
             weekend = $('#id_on_weekend').closest('.form-group');
             start_dt = $('input#id_start_dt_0');
             start_dt_val = start_dt.val();
             end_dt =  $('input#id_end_dt_0');
             end_dt_val = end_dt.val();
+
             if(start_dt_val != end_dt_val){
                 weekend.show();
             } else {
                 weekend.hide();
             }
+
             start_dt.on("change", function() {
                 if ($(this).val() == end_dt_val) {
                     weekend.hide();
@@ -126,6 +141,7 @@
                     weekend.show();
                 }
             });
+
             end_dt.on("change", function() {
                 if ($(this).val() == start_dt_val) {
                     weekend.hide();
@@ -133,6 +149,7 @@
                     weekend.show();
                 }
             });
+            
             allDay = $('#id_all_day');
             start_dt_field = $('input#id_start_dt_0').closest('.form-group');
             end_dt_field = $('input#id_end_dt_0').closest('.form-group');
@@ -162,6 +179,7 @@
                     end_event_dt_field.hide();
                 }
             });
+
             $('.regconfpricing_formset .section-description').addClass('well');
         });
     </script>

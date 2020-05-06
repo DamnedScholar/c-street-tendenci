@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+
+
 {% block title %}
     {% if SITE_GLOBAL_SITEPRIMARYKEYWORDS %}{% blocktrans with keys=SITE_GLOBAL_SITEPRIMARYKEYWORDS %}{{ keys }}{% endblocktrans %}: {% endif %}
     {% if MODULE_CONTACTS_LABEL_PLURAL %}
@@ -11,11 +13,14 @@
         {% endblocktrans %}
     {% endif %}
 {% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/contacts.css' %}">
 {% endblock %}
+
 {% block banner %}{% endblock %}
+
 {% block top_bar %}
     {% if request.user.is_authenticated %}
         {% include "contacts/top_nav.html" %}

@@ -1,7 +1,8 @@
 {% load pybb_tags %}
+
 <div class="poll">
   <h2>{% trans 'Poll' %}</h2>
-  <table class="w-full max-w-full mb-4 bg-transparent table-bordered poll">
+  <table class="table table-bordered poll">
     <thead>
     <tr class="poll-question">
       <th colspan="2">
@@ -9,6 +10,7 @@
       </th>
     </tr>
     </thead>
+
     <tbody class="poll-answers">
     {% if request.user.is_authenticated %}
       {% if user|pybb_may_vote_in_topic:topic and topic|pybb_topic_poll_not_voted:request.user %}

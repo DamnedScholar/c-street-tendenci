@@ -1,16 +1,23 @@
 {% extends "theme_editor/base_list.html" %}
+
 {% load theme_editor_tags %}
 {% load theme_editor_filters %}
+
 {% block title %}{{ block.super }}{% trans 'Theme Picker' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/theme-editor.css' %}" />
 {% endblock %}
+
 {% block content %}
-<h1 class="text-xl font-semibold">{% trans "Theme Picker" %}</h1>
+<h1>{% trans "Theme Picker" %}</h1>
+
+
 {% for theme in themes %}
     {% theme_detail theme current_theme%}
 {% endfor %}
+
 {% endblock %}
 {% block extra_body %}
 {{ block.super }}
@@ -21,8 +28,10 @@
             $(this).addClass('selected');
         }
     });
+
     $('.screenshot img').on("click", function(){
         var data = $(this).parents('.theme-info').attr('data');
+
         $('.lightbox').each(function(){
             if ( $(this).attr('data') == data ){
                 $(this).lightbox_me({
@@ -32,5 +41,6 @@
             }
         });
     });
+
 </script>
 {% endblock %}

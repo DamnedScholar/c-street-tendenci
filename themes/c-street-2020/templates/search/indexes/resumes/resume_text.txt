@@ -8,7 +8,9 @@
 {{ object.skills }}
 {{ object.experience }}
 {{ object.education }}
+
 is:{{ object.status_detail }}
+
 {% tags_for_object object as tags %}
 {% for tag in tags %}
 {{ tag }}

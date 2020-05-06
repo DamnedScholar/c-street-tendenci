@@ -3,9 +3,12 @@
 {% load project_tags %}
 {% load perm_tags %}
 {% load tagging_tags %}
+
 {% has_perm user projects.change_project project as can_edit %}
 {% has_perm user projects.delete_project project as can_delete %}
 {% tags_for_object project as tags %}
+
+
 <ul class="list-unstyled t-meta-data">
     {% if tags %}
         <li>
@@ -15,6 +18,7 @@
            {% endfor %}
         <li>
     {% endif %}
+
     {% if user.is_authenticated %}
            {% if project.creator %}
         <li><strong>{% trans "Created" %}</strong> {{ project.create_dt|date:"long" }} {% trans "by" %}
@@ -25,6 +29,7 @@
             {% endif %}</a>
          </li>
          {% endif %}
+
          {% if project.owner %}
          <li><strong>{% trans "Last updated" %}</strong> {{ project.update_dt|date:"long" }} {% trans "by" %}
             <a href="{{ project.owner.get_absolute_url }}">
@@ -34,30 +39,35 @@
             {% endif %}</a>
          </li>
          {% endif %}
+
          {% if project.project_status %}
             <li><strong>{% trans "Project Status:" %}</strong> <span>{{ project.project_status }}</span></li>
          {% endif %}
     {% endif %}
 </ul>
+
 {% if user.profile.is_superuser %}
-    <nav class="flex flex-wrap list-none p-0 pl-0 mb-0bar navbar-default t-meta-editor-bar">
-        <div class="container mx-auto mx-auto">
-            <div class="flex-growlapse flex flex-wrap list-none p-0 pl-0 mb-0bar-collapse">
-                <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 t-meta-perm-status">
+    <nav class="navbar navbar-default t-meta-editor-bar">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav t-meta-perm-status">
                     <li>{{ project.obj_perms }}</li>
                     <li>{{ project.obj_status }}</li>
                 </ul>
-                <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 navbar-right t-meta-options-links">
+
+                <ul class="nav navbar-nav navbar-right t-meta-options-links">
                     <li><a class="t-meta-eventlog-link" href="{% url 'event_log.search' %}?application=projects&object_id={{ project.pk }}">{% trans "Eventlogs" %}</a></li>
                     <li><a class="t-meta-edit-link" href="{% url 'admin:projects_project_change' project.pk %}">{% trans "Edit" %}</a></li>
-                    <li class="relative">
-                        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative" role="button" aria-expanded="false">{% spaceless %}
+                    <li class="dropup">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% spaceless %}
                             {% trans "Options" %} <span class="caret"></span>
                         {% endspaceless %}</a>
-                        <ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded" role="menu">
+
+                        <ul class="dropdown-menu" role="menu">
                             <li>
                                 <a class="t-meta-delete-link" href="{% url 'admin:projects_project_delete' project.pk %}">{% trans "Delete" %}</a>
                             </li>
+
                         </ul>
                     </li>
                 </ul>

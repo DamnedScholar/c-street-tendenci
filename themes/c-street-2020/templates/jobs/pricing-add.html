@@ -1,10 +1,13 @@
 {% extends "jobs/base-pricing.html" %}
 {% load styled_forms %}
+
 {% block title %}{% blocktrans %}Add a New Price: {% endblocktrans %}{% firstof MODULE_JOBS_LABEL trans 'Job' %} {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% blocktrans %}Add a New Price: {% endblocktrans %}{% firstof MODULE_JOBS_LABEL trans 'Job' %} </h1>
+    <h1>{% blocktrans %}Add a New Price: {% endblocktrans %}{% firstof MODULE_JOBS_LABEL trans 'Job' %} </h1>
     <p>{% trans "To add a new job price, complete the fields below and press Submit." %}</p>
+
     <div class="jobpricing">
         <div class="jobpricing-wrap">
             <form action="." method="post" class="form-horizontal">{% csrf_token %}
@@ -18,6 +21,7 @@
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'js/tax_fields.js' %}"></script>

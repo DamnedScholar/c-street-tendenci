@@ -1,15 +1,20 @@
 {% load base_filters %}
+
+
 <div class="inline-group" id="{{ inline_admin_formset.formset.prefix }}-group">
   <h2>{{ inline_admin_formset.opts.verbose_name_plural|title }}</h2>
 {{ inline_admin_formset.formset.management_form }}
 {{ inline_admin_formset.formset.non_form_errors }}
+
 <div class="toggle-all-button">
-        <div class="flex-growlapse-all-button">
+        <div class="collapse-all-button">
             <a href="javascript:;">{% trans "Collapse ALL" %}</a></div>
         <div class="expand-all-button" style="display:none;"><a href="javascript:;">{% trans "Expand ALL" %}</a></div>
 </div>
+
 {% for inline_admin_form in inline_admin_formset %}<div class="inline-related{% if forloop.last %} empty-form last-related{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
   <h3>
+
     {% if inline_admin_form.original.field_type == 'section_break' %}
         {% trans "Section" %}
     {% else %}
@@ -26,29 +31,36 @@
         #{{ forloop.counter }}
     {% endif %}
     </span>
+
     {% if inline_admin_form.show_url %}
         <a href="../../../r/{{ inline_admin_form.original_content_type_id }}/{{ inline_admin_form.original.id }}/">
             {% trans "View on site" %}</a>
     {% endif %}
+
     {% if inline_admin_formset.formset.can_delete and inline_admin_form.original and not inline_admin_form.original.vital %}
         <span class="delete">{{ inline_admin_form.deletion_field.field }} {{ inline_admin_form.deletion_field.label_tag }}</span>
     {% endif %}
+
   </h3>
+
   {% if inline_admin_form.form.non_field_errors %}{{ inline_admin_form.form.non_field_errors }}{% endif %}
   {% for fieldset in inline_admin_form %}
     {#{% include "admin/includes/fieldset.html" %}#}
+
     <fieldset class="module aligned {{ fieldset.classes }}">
         {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
         {% if fieldset.description %}
             <div class="description">{{ fieldset.description|safe }}</div>
         {% endif %}
         {% for line in fieldset %}
+
             {% if inline_admin_form.original.field_type in fields_to_check and forloop.counter in excluded_lines %}
                 {{ field.field }}
             {% else %}
-                <div class="flex flex-wrap -mr-1 -ml-1{% if line.errors %} errors{% endif %}{% for field in line %} {{ field.field.name }}{% endfor %}">
+                <div class="form-row{% if line.errors %} errors{% endif %}{% for field in line %} {{ field.field.name }}{% endfor %}">
                     {{ line.errors }}
                     {% for field in line %}
+
                         {% if inline_admin_form.original.field_type in fields_to_check and field.field.name in excluded_fields%}
                             {{ field.field }}
                         {% else %}
@@ -62,6 +74,7 @@
                                     {% if not field.field.is_hidden %}
                                         {{ field.label_tag }}
                                     {% endif %}
+
                                     {% if field.is_readonly %}
                                         <p>{{ field.contents }}</p>
                                     {% else %}
@@ -79,16 +92,20 @@
                     {% endfor %}
                 </div>
             {% endif %}
+
             {% if forloop.first %}
                 <div class="inline-fields-to-toggle">
             {% endif %}
             {% if forloop.last %}
                 </div>
             {% endif %}
+
         {% endfor %}
     </fieldset>
-    <div class="flex-growlapse-expand-button">
-        <div class="flex-growlapse-button">
+
+
+    <div class="collapse-expand-button">
+        <div class="collapse-button">
             <a href="javascript:;">{% trans "Collapse" %}</a></div>
         <div class="expand-button" style="display:none;"><a href="javascript:;">{% trans "Expand" %}</a></div>
     </div>
@@ -97,6 +114,7 @@
   {{ inline_admin_form.fk_field.field }}
 </div>{% endfor %}
 </div>
+
 <script type="text/javascript">
 (function($) {
     $(document).ready(function() {
@@ -153,6 +171,7 @@
                 updateInlineLabel(row);
             })
         });
+
         // collapse all fields as default
         $('div.inline-fields-to-toggle').each(function(){
                if ($(this).is(':visible')){
@@ -163,6 +182,7 @@
            });
            $('div.expand-all-button').show();
            $('div.collapse-all-button').hide();
+
         // collapse and expand buttons to toggle the fields
         $('.collapse-button').on("click", function(){
             $(this).closest('div.inline-related').find('div.inline-fields-to-toggle').hide('slideUp');
@@ -196,6 +216,8 @@
             $('div.collapse-all-button').show();
             $(this).hide();
         });
+
     });
+
 })(django.jQuery);
 </script>

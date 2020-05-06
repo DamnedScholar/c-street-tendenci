@@ -1,11 +1,12 @@
 {% extends "reports/base.html" %}
 {% load base_filters %}
+
 {% block content %}
 <div class="page-header">
-  <h1 class="text-xl font-semibold">{% trans "Top Spenders" %} ({{ SITE_GLOBAL_CURRENCY }})</h1>
+  <h1>{% trans "Top Spenders" %} ({{ SITE_GLOBAL_CURRENCY }})</h1>
 </div>
 <p>{% trans "Lists the top 10 users with the highest expenses." %}</p>
-<table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports">
+<table class="table table-tendenci-reports">
   <tr>
     <th>{% trans "#" %}</th>
     <th>{% trans "Username" %}</th>

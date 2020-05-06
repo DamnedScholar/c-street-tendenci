@@ -1,11 +1,14 @@
 {% extends "theme_editor/base.html" %}
+
 {% load humanize %}
 {% load styled_forms %}
 {% load base_filters %}
 {% load theme_editor_tags %}
 {% load theme_editor_filters %}
 {% load uploader %}
+
 {% block title %}{{ block.super }}Theme Editor{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
@@ -14,13 +17,14 @@
 <link rel="stylesheet" href="{% local_static 'codemirror2/lib/codemirror.css' %}" />
 {% uploader_head %}
 {% endblock %}
+
 {% block content %}
 <h1 id="to-editor" class="file-editor-header">{% trans "Theme Editor" %} : <a href="/">{{ SITE_GLOBAL_SITEURL }}</a></h1>
 {% spaceless %}{% include "base/messages.html" %}{% endspaceless %}
 {% if current_file %}
 <div class="file_attrs"><big><b>{% if theme_read_only %}{% trans 'Currently Viewing' %}{% else %}{% trans "Currently Editing" %}{% endif %}</b> <span class="highlight">{{ current_file_path }}</span></big></div>
 {% endif %}
-<table class="w-full max-w-full mb-4 bg-transparent" id="file-editor" width="100%">
+<table class="table" id="file-editor" width="100%">
     <tr>
         <td width="20%" valign="top">
             <div id="right_files_list">
@@ -52,33 +56,40 @@
                      <div class="well well-small">
                      <h4>{% trans 'Customize more templates' %}:</h4>
                      {% trans "Copy down one of Tendenci's built-in app templates and customize it." %}
-                     <a href="{% url "theme_editor.app_list" %}?theme_edit={{ current_theme }}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default py-1 px-2 text-sm leading-tight">{% trans "Customize more templates" %}</a>
+                     <a href="{% url "theme_editor.app_list" %}?theme_edit={{ current_theme }}" class="btn btn-default btn-sm">{% trans "Customize more templates" %}</a>
+
                      </div>
+
                      <div class="well well-small">
                        <h4>{% trans 'Create a new template' %}:</h4>
                          {% trans 'Click the button below to add a new template.' %}
-                         <div><button class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default py-1 px-2 text-sm leading-tight new-template-btn">{% trans 'New Template' %}</button></div>
+                         <div><button class="btn btn-default btn-sm new-template-btn">{% trans 'New Template' %}</button></div>
                      </div>
                      {% endif %}
+
            </div>
         </td>
+         
         <td width="80%" id="editor-td" >
             {% if is_file %}
+
             <form id="editorForm" class="uniForm" method="POST" name="edit" action="">{% csrf_token %}
               {% if file_form.content.errors and current_file %}<div>{{ file_form.content.errors }}</div>{% endif %}
               <div style="border: 1px solid #999; padding: 0px;">{{ file_form.content }}</div>
+
               <div id="fileupdatemessage"></div>
               <div class="form_block">
                 {% if not theme_read_only %}
                 <input type="hidden" name="action" value="edit" />
-                <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" style="float: right; margin-left: 10px;" type="submit" value="Save Changes" class="button"/>
-                <span id="save_message" class="alert-message relative px-3 py-3 mb-4 border rounded text-green-800 border-green-600 bg-green-200 opacity-0 in"></span>
+                <input class="btn btn-primary" style="float: right; margin-left: 10px;" type="submit" value="Save Changes" class="button"/>
+                <span id="save_message" class="alert-message alert alert-success fade in"></span>
                 {% endif %}
               </div>
             </form>
+
             {% if not theme_read_only %}
             {% if current_file not in non_deletable_files  %}
-            <a id="delete-btn" href="{% url "theme_editor.delete" %}?file={{ current_file_path }}&theme_edit={{ current_theme }}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-red-100 bg-red-500 hover:bg-red-400 pull-left" style="float:right;" class="delete">{% trans 'Delete this File' %}</a>
+            <a id="delete-btn" href="{% url "theme_editor.delete" %}?file={{ current_file_path }}&theme_edit={{ current_theme }}" class="btn btn-danger pull-left" style="float:right;" class="delete">{% trans 'Delete this File' %}</a>
             {% endif %}
             <div style="clear:both"></div>
             <div id="file_version_box">
@@ -96,12 +107,16 @@
                 {% endif %}
             </div>
             {% endif %}
+
             {% else %}
                 <p>{% trans "No file selected. Select a file or directory from the list on the right." %}</p>
             {% endif %}
         </td>
+        
     </tr>
 </table>
+
+
 <div id="theme-name-form" title="{% trans 'Theme' %}">
   <p class="validateTips">{% trans 'Please enter a new theme name.' %}</p>
   <form>
@@ -113,6 +128,8 @@
     </fieldset>
   </form>
 </div>
+
+
 <div id="create-tform" title="{% trans 'Create new template' %}">
   <p class="validateTips">{% trans 'Please enter template name.' %}</p>
   <form>
@@ -125,8 +142,12 @@
     </fieldset>
   </form>
 </div>
+
+
 {% endblock %}
+
 {% block extra_body %}
+
 {{ block.super }}
 <script src="{% static 'codemirror/js/codemirror.js' %}" type="text/javascript"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -160,12 +181,17 @@ window.onload = function() {
                       }
                     }
                 ],
+
+
+
         close: function() {
         }
     });
+
     $(".upload-link .upload_btn").on("click", function() {
         var file_dir = $(this).parent('.glyph').attr('path');
         new qq.FineUploader({
+
         element: document.getElementById('uploader'),
         template: 'qq-simple-thumbnails-template',
         thumbnails: {
@@ -174,12 +200,15 @@ window.onload = function() {
                 notAvailablePath: '{% static "uploader/not_available-generic.png" %}'
             }
         },
+
         debug: false,
+
         validation: {
             acceptFiles : "*.html,*.js,*.css,*.less,*.jpg,*.jpeg,*.gif,*.png,*.ico,*.txt,*.xml,*.kml,*.eot,*.ttf,*.woff,*.woff2,*.svg",
             allowedExtensions: ['html', 'js', 'css', 'less', 'jpg', 'jpeg', 'gif', 'png', 'ico', 'txt', 'xml', 'kml', 'eot', 'ttf', 'woff', 'woff2', 'svg'],
             sizeLimit: 20971520  // 20 MB
         },
+
         request: {
             endpoint: '{% url 'theme_editor.upload' %}?theme_edit={{ current_theme }}',
             params: {
@@ -189,7 +218,9 @@ window.onload = function() {
             }
         },
         retry: { enableAuto: false }
+
         });
+
         $('#uploader').dialog('open');
         $('#uploader').parent('div').find('.ui-dialog-buttonset .ui-state-default').first()
         .css({'background': 'green'})
@@ -198,11 +229,13 @@ window.onload = function() {
     });
 };
 </script>
+
 <script type="text/javascript">
 {% include 'theme_editor/include/theme_name.js' %}
 {% include 'theme_editor/include/new_template.js' %}
 {% include 'theme_editor/include/editor_submit.js' %}
 </script>
+
 <script type="text/javascript">
 var editor;
 $(document).ready(function(){
@@ -216,6 +249,7 @@ $(document).ready(function(){
     textWrapping: false
   });
 })
+
 function open_archive(id)
 {
   var classname = ".archived_file_" + id;
@@ -236,6 +270,7 @@ function open_archive(id)
            }
          });
   }
+
 }
 </script>
 <script type="text/javascript" src="{% static 'js/jquery.tipsy.js' %}"></script>
@@ -245,12 +280,14 @@ function open_archive(id)
     live: true,
   });
 </script>
+
 <script type="text/javascript">
     $('.tooltip').tipsy({
     gravity: 's',
     live: true,
   });
 </script>
+
 <script type="text/javascript">
     $(document).ready(function(){
         $('#delete-theme-btn').on("click", function(){
@@ -262,6 +299,7 @@ function open_archive(id)
         });
     });
 </script>
+
 <script type="text/javascript">
     $(document).ready(function(){
         //bind the modified one
@@ -286,6 +324,7 @@ function open_archive(id)
         };
         //$('#upload_form').ajaxForm(options);
     });
+
     function showResponse(response, status, xhr, $form)  {
         if (response.error) {
 //            if (response.error = "file already exists") {
@@ -312,22 +351,28 @@ function open_archive(id)
         current_file.parents().show();
         //current_file.parents().siblings().show();
         current_file.closest('ul').parent().siblings().show();
+
         current_file.parent().parent().children(":first").addClass('open');
         folder_text = current_file.parent().parent().children(":first").text();
         current_file.parent().parent().children(":first").text(folder_text.replace('+ ', '– '));
+
         current_file.parent().parent().parent().parent().children(":first").addClass('open');
         p_folder_text = current_file.parent().parent().parent().parent().children(":first").text();
         current_file.parent().parent().parent().parent().children(":first").text(p_folder_text.replace('+ ', '– '));
+
         current_file.parent().parent().parent().parent().parent().parent().children(":first").addClass('open');
+
         if(current_file.parent().parent().parent().parent().parent().is('#file-tree ul')) {
         p_p_folder_text = current_file.parent().parent().parent().parent().parent().parent().children(":first").text();
         current_file.parent().parent().parent().parent().parent().parent().children(":first").text(p_p_folder_text.replace('+ ', '– '));
         }
+
         if(current_file.parent().parent().parent().parent().parent().parent().parent().is('#file-tree ul')) {
         p_p_p_folder_text = current_file.parent().parent().parent().parent().parent().parent().parent().parent().children(":first").text();
         current_file.parent().parent().parent().parent().parent().parent().parent().parent().children(":first").text(p_p_p_folder_text.replace('+ ', '– '));
 }
     });
+
     $('#file-tree li a.folder').on("click", function() {
         if ($(this).hasClass('open')) {
             $(this).text($(this).text().replace('– ', '+ '));
@@ -340,6 +385,7 @@ function open_archive(id)
         }
     });
 </script>
+
 <script type="text/javascript">
 $(document).ready(function() {
 $('.links').hide();

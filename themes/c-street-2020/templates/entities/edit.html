@@ -1,16 +1,20 @@
 {% extends "entities/base.html" %}
 {% load entity_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }}{% trans 'Edit' %}{% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_ENTITIES_LABEL trans 'Entities' %} {% trans "Edit" %}</h1>
+    <h1>{% firstof MODULE_ENTITIES_LABEL trans 'Entities' %} {% trans "Edit" %}</h1>
+
     <div class="entities-wrap">
         <div class="options">
              <div class="quick-options">
                 {% entity_options request.user entity %}
              </div>
         </div>
+
         <form action="{% url "entity.edit" entity.pk %}" method="post">{% csrf_token %}
         <div class="forms">
             {{ form|styled_form }}
@@ -18,8 +22,10 @@
         </div>
         </form>
     </div>
+
 </div>
 {% endblock %}
+
 {% block extra_body %}
     <script type="text/javascript">
         $(document).ready(function(){

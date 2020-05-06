@@ -2,6 +2,7 @@
 {% load profile_filters %}
 {% load perm_tags %}
 {% load base_filters %}
+
 {% if profile.user_id %}
 <div class="panel panel-info clearfix">
     <div class="panel-heading">
@@ -14,19 +15,22 @@
         {% endif %}({{ profile.user.username }})
         </a>
         {% if profile.is_member %}
-        <span class="text-sm text-red-500">{% trans 'Member' %}</span> <!-- replace with Icon -->
+        <span class="small text-danger">{% trans 'Member' %}</span> <!-- replace with Icon -->
         {% endif %}
         </h3>
     </div>
+
     <div class="panel-body">
         <div class="profile-avatar-left pull-left">
             {% gravatar profile.user 56 %}
             {% if profile.is_member %}
                 {% if profile|allow_edit_by:user %}
-                    <div class="member-icon text-green-500">{% trans 'Member ID' %}:<br />{{ profile.member_number }}</div>
+                    <div class="member-icon text-success">{% trans 'Member ID' %}:<br />{{ profile.member_number }}</div>
                 {% endif %}
+
             {% endif %}
         </div>
+
         <div class="pull-left" style="margin-left: 2em;">
             {% if profile.user.email %}
             <b>{% trans "Email:" %}</b> {{ profile.user.email|obfuscate_email }}<br />

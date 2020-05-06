@@ -1,4 +1,5 @@
 {% extends "base-print.html" %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/memberships.css' %}">
@@ -6,9 +7,11 @@
 <link rel="stylesheet" href="{% static 'bootstrap3/bootstrap.min.css' %}">
 <link rel="stylesheet" href="{% static 'css/datepicker.css' %}">
 {% endblock %}
+
 {% block content %}
-<h1 class="text-xl font-semibold">{% trans "New and Renewing Members YTD" %} {{ year_selected }}</h1>
+<h1>{% trans "New and Renewing Members YTD" %} {{ year_selected }}</h1>
 <div class="mems-wrap stat-table">
+
 <table>
     <tr>
         <th>{% trans "Members" %}</th>
@@ -40,6 +43,7 @@
     </tr>
 </table>
 </div>
+
 <div id="chart_div">
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
@@ -64,9 +68,11 @@
         hAxis: {title: 'Month'},
         vAxis: {title: '# Members'}
       };
+
       var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
       chart.draw(data, options);
     }
   </script>
 </div>
+
 {% endblock content %}

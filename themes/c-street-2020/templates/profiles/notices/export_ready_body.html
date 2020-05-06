@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "https://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,6 +13,7 @@
         <br /><br />
         {% trans 'The details of the export' %}:<br />
         {% trans 'Export Type' %}: {% if export_fields == 'all_fields' %}{% trans 'All fields' %}{% else %}{% trans 'Main fields' %}{% endif %} <br /><br />
+
         {% trans 'To download the export file, go to' %}: <br />
         <a href="{{ site_url }}{{ download_url }}">{{ site_url }}{{ download_url }}</a>
         <br /><br />

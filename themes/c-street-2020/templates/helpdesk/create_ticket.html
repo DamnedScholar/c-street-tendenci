@@ -1,11 +1,15 @@
 {% extends "helpdesk/base.html" %}{% load bootstrap %}
+
 {% block helpdesk_title %}{% trans "Create Ticket" %}{% endblock %}
+
 {% block helpdesk_body %}
-<div class="sm:w-1/2 pr-4 pl-4">
+<div class="col-xs-6">
 <div class="panel panel-default">
+
 <div class="panel-body">
 <h2>{% trans "Submit a Ticket" %}</h2>
 <p>{% trans "Unless otherwise stated, all fields are required." %} {% trans "Please provide as descriptive a title and description as possible." %}</p>
+
 <form method='post' action='./' enctype='multipart/form-data'>
 <fieldset>
     {{ form|bootstrap }}
@@ -20,10 +24,12 @@
             {% endif %}
         {% endfor %}
         {% endcomment %}
-    <div class='buttons mb-4'>
-        <input type='submit' class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" value='{% trans "Submit Ticket" %}' />
+
+    <div class='buttons form-group'>
+        <input type='submit' class="btn btn-primary" value='{% trans "Submit Ticket" %}' />
     </div>
 </fieldset>
+
 {% csrf_token %}</form>
 </div>
 </div>

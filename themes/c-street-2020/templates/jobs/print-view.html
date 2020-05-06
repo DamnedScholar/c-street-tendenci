@@ -1,23 +1,29 @@
 {% extends "jobs/base-print.html" %}
 {% load base_filters %}
 {% load job_tags %}
+
 {% block title %}{{ jobs.get_title }}{% endblock %}
 {% block meta_description %}{{ jobs.get_description }}{% endblock %}
 {% block meta_keywords %}{{ jobs.get_keywords }}{% endblock %}
 {% block meta_canonical_url %}<link rel="canonical" href="{{ job.get_canonical_url }}" />{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link type="text/css" rel="stylesheet" href="{% static 'css/jobs.css' %}" />
 {% endblock %}
+
 {% block content %}
 <div class="t-print">
+
     <div class='hide-this'>
-        <h1 class="text-xl font-semibold">{% trans "Print View" %}</h1>
+        <h1>{% trans "Print View" %}</h1>
+
         <div class="guide">
             <div><a href="{{ job.get_absolute_url }}">&laquo; {% trans "Back to regular job view" %}</a></div>
             <div>{% trans "Your printed page will look <em>something</em> like this.</div>" %}
         </div>
     </div>
+
      <div class="job-wrap">
         <h2>{{ job.title }}</h2>
 {% if job.description %}
@@ -26,6 +32,7 @@
             <div class="value">{{ job.description|safe }}</div>
         </div>
 {% endif %}
+
 {% if job.period %}
         <div class="section-line">
             <div class="label">{% trans "Position Type" %}</div>
@@ -33,6 +40,7 @@
             <div class="clear"></div>
         </div>
 {% endif %}
+
 {% if job.position_reports_to %}
         <div class="section-line">
             {% blocktrans with job.position_reports_to as repto%}<div class="label">Position Reports To</div>
@@ -40,6 +48,7 @@
             <div class="clear"></div>
         </div>
 {% endif %}
+
 {% if job.location %}
         <div class="section-line">
             <div class="label">{% trans "Location" %}</div>
@@ -47,6 +56,7 @@
             <div class="clear"></div>
         </div>
 {% endif %}
+
 {% if job.start_dt %}
         <div class="section-line">
             {% blocktrans with job.start_dt as start_date %}<div class="label">Starts On</div>
@@ -54,6 +64,7 @@
             <div class="clear"></div>
         </div>
 {% endif %}
+
 {% if job.salary_from %}
         <div class="section-line">
             <div class="label">{% trans "Salary" %}</div>
@@ -61,6 +72,7 @@
             <div class="clear"></div>
         </div>
 {% endif %}
+
 {% if job.code %}
         <div class="section-line">
             <div class="label">{% trans "Code" %}</div>
@@ -68,6 +80,8 @@
             <div class="clear"></div>
         </div>
 {% endif %}
+
+
         <h2>{% trans "Job Requirements" %}</h2>
 {% if job.experience %}
         <div class="section-block">
@@ -75,12 +89,14 @@
             <div class="value">{{ job.experience|safe }}</div>
         </div>
 {% endif %}
+
 {% if job.skills %}
         <div class="section-block">
             <div class="label">{% trans "Skills" %}</div>
             <div class="value">{{ job.skills|safe }}</div>
         </div>
 {% endif %}
+
 {% if job.education %}
         <div class="section-line">
             <div class="label">{% trans "Education Required" %}</div>
@@ -88,6 +104,8 @@
             <div class="clear"></div>
         </div>
 {% endif %}
+
+
         <h2>{% trans "Company Information" %}</h2>
 {% if job.contact_company %}
         <div class="company-wrap">
@@ -97,6 +115,8 @@
             {{ job.contact_country }}
         </div>
 {% endif %}
+
+
         <h2>{% trans "Contact Information" %}</h2>
 {% if job.contact_name %}
         <div class="contact-wrap">
@@ -107,5 +127,6 @@
         </div>
 {% endif %}
      </div>
+
 </div>
 {% endblock %}

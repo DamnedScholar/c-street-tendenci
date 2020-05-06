@@ -2,6 +2,7 @@
 {% load styled_forms %}
 {% load committee_tags %}
 {% load base_filters %}
+
 {% if form.errors.values %}
 <div class="errors">
 There were some problems in the form. Please review. Thanks!
@@ -29,6 +30,7 @@ There were some problems in the form. Please review. Thanks!
 {% endif %}
 </div>
 {% endif %}
+
 {% if form.fieldsets.fieldsets %}
     {% for fieldset in form.fieldsets %}
       {% if fieldset.boundfields %}
@@ -47,9 +49,11 @@ There were some problems in the form. Please review. Thanks!
             {% if not fieldset.legend and field.auto_id == 'id_notes' and formset %}
                 {% committee_officer_formset formset %}
             {% endif %}
-            <div class="mb-4{% if field.errors %} has-error{% endif %}{% if field.field.css_classes %} {{ field.field.css_classes }}{% endif %}">
-             <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="control-label sm:w-1/4 pr-4 pl-4{% if field.field.required %} required{% endif %}">{{ field.label }}</label>
-             <div class="sm:w-3/4 pr-4 pl-4">
+
+            <div class="form-group{% if field.errors %} has-error{% endif %}{% if field.field.css_classes %} {{ field.field.css_classes }}{% endif %}">
+             <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="control-label col-sm-3{% if field.field.required %} required{% endif %}">{{ field.label }}</label>
+
+             <div class="col-sm-9">
                  {% if field|is_checkbox %}
                      <div class="checkbox">
                          <label>{{ field }}</label>
@@ -73,11 +77,13 @@ There were some problems in the form. Please review. Thanks!
                  {% else %}
                      {{ field }}
                  {% endif %}
+
                  {% if field.errors %}
                      {% for error in field.errors %}
                          <span class="help-block">{{ error }}</span>
                      {% endfor %}
                  {% endif %}
+
                  {% if field.help_text %}
                      <span class="help-block">{{ field.help_text|safe }}</span>
                  {% endif %}
@@ -93,9 +99,10 @@ There were some problems in the form. Please review. Thanks!
     {% if field.is_hidden %}
         {{ field }}
     {% else %}
-        <div class="mb-4{% if field.errors %} has-error{% endif %}{% if field.field.css_classes %} {{ field.field.css_classses }}{% endif %}">
-                <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="control-label sm:w-1/4 pr-4 pl-4{% if field.field.required %} required{% endif %}">{{ field.label }}</label>
-                <div class="sm:w-3/4 pr-4 pl-4">
+        <div class="form-group{% if field.errors %} has-error{% endif %}{% if field.field.css_classes %} {{ field.field.css_classses }}{% endif %}">
+                <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="control-label col-sm-3{% if field.field.required %} required{% endif %}">{{ field.label }}</label>
+
+                <div class="col-sm-9">
                     {% if field|is_checkbox %}
                         <div class="checkbox">
                             <label>{{ field }}</label>
@@ -119,11 +126,13 @@ There were some problems in the form. Please review. Thanks!
                     {% else %}
                         {{ field }}
                     {% endif %}
+
                     {% if field.errors %}
                         {% for error in field.errors %}
                             <span class="help-block">{{ error }}</span>
                         {% endfor %}
                     {% endif %}
+
                     {% if field.help_text %}
                         <span class="help-block">{{ field.help_text|safe }}</span>
                     {% endif %}

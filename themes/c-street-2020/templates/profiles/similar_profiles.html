@@ -1,23 +1,32 @@
 {% extends "profiles/base-wide.html" %}
 {% load profile_tags %}
+
 {% block title %}{% trans 'Similar Users'%}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/iconrow.css' %}">
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">
 <link rel="stylesheet" href="{% static 'css/profiles.css' %}">
+
 {% endblock %}
+
 {% block content %}
 <div class="t">
+
   <div class="page-header">
     <h1>Similar Users List</h1>
   </div>
-  <form class="flex items-center pull-right" style="margin-top:1.5px;" action="" method="get">
-    <input class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-800 border border-gray-500 rounded" type="text" name="q" value="{{ query }}" />
-    <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" type="submit" value="{% trans 'Search' %}" />
+
+  <form class="form-inline pull-right" style="margin-top:1.5px;" action="" method="get">
+    <input class="form-control" type="text" name="q" value="{{ query }}" />
+    <input class="btn btn-default" type="submit" value="{% trans 'Search' %}" />
   </form>
-  <p><a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="#name">By Name</a>
-    <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" href="#email">By Email</a></p>
+
+  <p><a class="btn btn-default" href="#name">By Name</a>
+    <a class="btn btn-primary" href="#email">By Email</a></p>
+
+
     {% if users_with_duplicate_name %}
   <a id="name"></a>
     <div class="similar_group">
@@ -27,6 +36,7 @@
     {% endfor %}
     </div>
     {% endif %}
+
     {% if users_with_duplicate_email %}
   <a id="email"></a>
     <div class="similar_group">
@@ -36,9 +46,11 @@
     {% endfor %}
     </div>
     {% endif %}
+
     {% if not users_with_duplicate_name and not users_with_duplicate_email %}
     <h3>{% trans "No similar users found" %}
     {% endif %}
+
     {% if num_pages > 1%}
     <div id="import-paginate">
         {% if prev %}
@@ -46,6 +58,7 @@
         {% else %}
         {% trans 'Prev' %}
          {% endif %}
+
         {% for page in page_range %}
             {% if page == '...' %}
                 {{ page }}
@@ -57,6 +70,7 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
+
         {% if curr_page >= num_pages  %}
         {% trans 'Next' %}
         {% else %}
@@ -64,5 +78,6 @@
          {% endif %}
     </div>
     {% endif %}
+
 </div>
 {% endblock %}

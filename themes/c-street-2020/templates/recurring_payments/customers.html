@@ -3,16 +3,21 @@
 {% load base_filters %}
 {% load perm_tags %}
 {% load recurring_payments_tags %}
+
 {% block title %}{% trans 'Recurring Payment Customers' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
+
 <link type="text/css" href="{% static 'tablesorter/sortthemes.css' %}" rel="Stylesheet" />
 <link type="text/css" href="{% static 'css/recurring_payments.css' %}" rel="Stylesheet" />
 {% endblock %}
+
 {% block content %}
 <div class="t">
 <div id="t-search">
-    <h1 class="text-xl font-semibold">{% trans 'Recurring Payment Customers' %}</h1>
+    <h1>{% trans 'Recurring Payment Customers' %}</h1>
+
     <div id="rp-totals">
         <table width="100%">
             <tr>
@@ -29,6 +34,7 @@
             </tr>
         </table>
     </div>
+
     {% if SITE_GLOBAL_SEARCHINDEX %}
     <div class="rp-search-box">
     <form class="search-form" action="" method="get">
@@ -40,9 +46,11 @@
     {% endif %}
     </div>
     {% endif %}
+
     <div style="clear: both"></div>
+
     {% if recurring_payments %}
-        <table width="100%" class="w-full max-w-full mb-4 bg-transparentsorter">
+        <table width="100%" class="tablesorter">
             <thead>
             <tr>
                 <th class="iheader" width="12%">{% trans 'Name' %}</th>
@@ -75,10 +83,12 @@
     {% else %}
         No customers available yet.
     {% endif %}
+
 </div>
 </div>
 <img name="loading_img" style="display:none;" src="{% static 'images/icons/loading.gif' %}"  />
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 {# dynamically load jquery #}
@@ -93,6 +103,7 @@
 <script type="text/javascript" src="{% static 'js/csrf_proc.js' %}"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+
     // extend the default setting to always include the zebra widget.
         $.tablesorter.defaults.widgets = ['zebra'];
         // extend the default setting to always sort on the first column
@@ -107,11 +118,14 @@ $(document).ready(function(){
                 }
             }
         });
+
 });
+
 function run_now(id){
     var loading_img_clone = $('img[name=loading_img]').clone().show();
     $('td#rp_'+id).html('');
     $('td#rp_'+id).append(loading_img_clone);
+
     $.ajax({
            type: "POST",
            url: "{% url "recurring_payment.run_now" %}",
@@ -123,7 +137,9 @@ function run_now(id){
                  $('td#rp_'+id).closest('tr').find('.total-paid').html(obj.total_paid);
                  $('td#rp_'+id).closest('tr').find('.balance').html(obj.balance);
                  $('#total-amount-received').html(obj.total_amount_received);
+
             }
+
            },
            error: function(){
                $('td#rp_'+id).html('error');
@@ -131,5 +147,8 @@ function run_now(id){
                }
     });
 }
+
+
 </script>
+
 {% endblock %}

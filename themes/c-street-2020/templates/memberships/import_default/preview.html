@@ -3,19 +3,26 @@
 {% load base_tags %}
 {% load base_filters %}
 {% load styled_forms %}
+
 {% block title %}{% trans 'Import Memberships from CSV file - Preview' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/membership-default-import.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
 <div id="import-wrap">
-    <h1 class="text-xl font-semibold">{% trans "Import Membership" %}</h1>
+
+    <h1>{% trans "Import Membership" %}</h1>
     <h3 class="import-step">{% trans "Step 2/3 - Preview" %}</h3>
+
+
 {% if mimport.status == 'preprocess_done' %}
 <p>{% trans "You're almost done!  Please review your settings.  To complete your import, click the button"%} <strong>Import Now</strong>. </p>
 {% endif %}
+
 <div class="dimport-settings">
         <div>{% trans "Update" %}:
             <strong>
@@ -32,8 +39,11 @@
          <strong>{% trans "Total Rows" %}:  {{ total_rows }}</strong>
         </div>
 </div> <!-- dimport settings -->
+
 {% if mimport.status == 'preprocess_done' %}
+
     <form class="import" method="post" action="{% url "memberships.default_import_process" mimport.id %}">{% csrf_token %}
+
     <div class="import-preview">
         <table>
             <tr>
@@ -53,6 +63,7 @@
                 {% endif %}
                 <th>{% trans 'Reason if to be skipped' %}</th>
             </tr>
+
             {% for u in users_list %}
             <tr class="row-{{ u.action }}">
                 <td>{{ u.row_num }}</td>
@@ -80,10 +91,14 @@
                     {{ u.error }}
                     {% endif %}
                 </td>
+
             </tr>
+
             {% endfor %}
         </table>
+
     </div>
+
     {% if num_pages > 1%}
     <div id="import-paginate">
         {% if prev %}
@@ -91,6 +106,7 @@
         {% else %}
         {% trans 'Prev' %}
          {% endif %}
+
         {% for page in page_range %}
             {% if page == '...' %}
                 {{ page }}
@@ -102,6 +118,7 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
+
         {% if curr_page >= num_pages  %}
         {% trans 'Next' %}
         {% else %}
@@ -109,26 +126,34 @@
          {% endif %}
     </div>
     {% endif %}
+
     <div style="margin-top: 1em;">
-    <input type="submit" class="submit-btn inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal " name="submit" value="{% trans 'Import Now' %}" >
+    <input type="submit" class="submit-btn btn" name="submit" value="{% trans 'Import Now' %}" >
     </div>
+
     </form>
+
 {% else %}
     <div style="margin: 5em;">
         <img src="{% static 'images/loadingicon.gif' %}" alt="loading">
         <div style="color: #0D4C83;"><small>{% trans "Please wait while we're processing..." %}</small></div>
     </div>
+
 {% endif %}
+
 </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 <script type="text/javascript">
 {% if mimport.status != 'preprocess_done' %}
+
   $(document).ready(function() {
      // https://jqueryui.com/progressbar/#animated
     var value;
     var status_check_intval;
+
     var status_check = function(){
         $.ajax({
            type: "POST",
@@ -144,11 +169,15 @@
              }
          });
      }
+
     status_check();
     status_check_intval = setInterval(function() {
         status_check();  // check every 5 seconds
     }, 5000);
+
   });
+
 {% endif %}
 </script>
+
 {% endblock %}

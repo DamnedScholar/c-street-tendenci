@@ -1,15 +1,20 @@
 {% extends "donations/base.html" %}
 {% load donation_tags %}
+
 {% block title %}{% trans 'Make a Donation' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/donations.css' %}">
 {% endblock %}
+
 {% block content %}
 <div id="add-donation">
+  
   <div class="page-header">
-    <h1 class="text-xl font-semibold">{% trans 'Make a Donation' %}</h1>
+    <h1>{% trans 'Make a Donation' %}</h1>
   </div>
+  
   {% blocktrans %}
   <p>Complete the form below to make a donation.
     The required fields are marked with <em class="body-copy-alert">*</em>. <br />Thank You!</p>
@@ -18,7 +23,7 @@
   {% if form.errors or captcha_form.captcha.errors %}
   <div class="errors">
     <p>{% trans 'Please review the fields below. Thank you.' %}</p>
-    <ul class="list-disc pl-4">
+    <ul>
       {% for field in form %}
       {% if field.errors %}
       <li><a href="javascript:;">{{ field.label_tag }}</a></li>
@@ -30,6 +35,7 @@
     </ul>
   </div>
   {% endif %}
+  
   <form method="post" action=".">{% csrf_token %}
     <div class="field-wrapper">
       {% if form.donation_amount.errors %}
@@ -40,6 +46,7 @@
       {{ form.donation_amount }}
     </div>
     <div class="clear-left"></div>
+    
     {% if form.allocation %}
     <div class="field-wrapper">
       {% if form.form.allocation.errors %}
@@ -50,7 +57,9 @@
       {{ form.allocation }}
     </div>
     <div class="clear-left"></div>
+    
     {% endif %}
+    
     <div class="field-wrapper">
       {% if form.payment_method.errors %}
       <div class="errs">{{ form.payment_method.errors }}</div>
@@ -60,9 +69,11 @@
       <div class="payment-method-list">{{ form.payment_method }}</div>
     </div>
     <div class="clear-left"></div>
+    
     <div class="section-header">
       {% trans 'Billing Information' %}
     </div>
+    
     <div class="field-wrapper">
       {% if form.first_name.errors %}
       <div class="errs">{{ form.first_name.errors }}</div>
@@ -72,6 +83,7 @@
       {{ form.first_name }}
     </div>
     <div class="clear-left"></div>
+    
     <div class="field-wrapper">
       {% if form.last_name.errors %}
       <div class="errs">{{ form.last_name.errors }}</div>
@@ -81,6 +93,7 @@
       {{ form.last_name }}
     </div>
     <div class="clear-left"></div>
+    
     <div class="field-wrapper">
       {% if form.company.errors %}
       <div class="errs">{{ form.company.errors }}</div>
@@ -89,6 +102,7 @@
       {{ form.company }}
     </div>
     <div class="clear-left"></div>
+    
     <div class="field-wrapper">
       {% if form.address.errors %}
       <div class="errs">{{ form.address.errors }}</div>
@@ -97,6 +111,7 @@
       {{ form.address }}
     </div>
     <div class="clear-left"></div>
+    
     <div class="field-wrapper">
       {% if form.address2.errors %}
       <div class="errs">{{ form.address2.errors }}</div>
@@ -105,6 +120,7 @@
       {{ form.address2 }}
     </div>
     <div class="clear-left"></div>
+    
     <div class="field-wrapper">
       {% if form.city.errors %}
       {{ form.city.errors }}
@@ -123,6 +139,7 @@
       {{ form.city }} / {{ form.state }} / {{ form.zip_code }}
     </div>
     <div class="clear-left"></div>
+    
     <div class="field-wrapper">
       {% if form.country.errors %}
       <div class="errs">{{ form.country.errors }}</div>
@@ -131,6 +148,7 @@
       {{ form.country }}
     </div>
     <div class="clear-left"></div>
+    
     <div class="field-wrapper">
       {% if form.phone.errors %}
       <div class="errs">{{ form.phone.errors }}</div>
@@ -140,6 +158,7 @@
       {{ form.phone }}
     </div>
     <div class="clear-left"></div>
+    
     <div class="field-wrapper">
       {% if form.email.errors %}
       <div class="errs">{{ form.email.errors }}</div>
@@ -149,6 +168,7 @@
       {{ form.email }}
     </div>
     <div class="clear-left"></div>
+    
     <div class="field-wrapper">
       {% if form.email_receipt.errors %}
       <div class="errs">{{ form.email_receipt.errors }}</div>
@@ -157,9 +177,11 @@
       {{ form.email_receipt }}
     </div>
     <div class="clear-left"></div>
+    
     <div class="section-header">
       {% trans 'Other Information' %}
     </div>
+    
     <div class="field-wrapper">
       {% if form.referral_source.errors %}
       <div class="errs">{{ form.referral_source.errors }}</div>
@@ -168,6 +190,7 @@
       {{ form.referral_source }}
     </div>
     <div class="clear-left"></div>
+    
     <div class="field-wrapper">
       {% if form.comments.errors %}
       <div class="errs">{{ form.comments.errors }}</div>
@@ -176,18 +199,24 @@
       {{ form.comments }}
     </div>
     <div class="clear-left"></div>
+    
     {% if use_captcha %}
-    <div class="mb-4">
+    <div class="form-group">
       {% if captcha_form.captcha.errors %}
       <div class="errs">{{ captcha_form.captcha.errors }}</div>
       {% endif %}
       <label for="id_captcha" class="field-label"></label>
       {{ captcha_form.captcha }}
     </div>
+    
     {% endif %}
-    <div class="mb-4">
-      <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" type="submit" name="submit" value="{% trans 'Submit' %}" />
+    
+    <div class="form-group">
+      <input class="btn btn-default" type="submit" name="submit" value="{% trans 'Submit' %}" />
     </div>
+    
   </form>
+  
+  
 </div>
 {% endblock %}

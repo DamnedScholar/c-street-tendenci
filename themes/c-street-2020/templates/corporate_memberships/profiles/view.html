@@ -1,7 +1,9 @@
 {% extends "corporate_memberships/base-wide.html" %}
 {% load base_filters %}
 {% load corporate_memberships_tags %}
+
 {% block title %}{{ block.super }}{% trans "Corporate Profile" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <style>
@@ -28,75 +30,81 @@
 	color: red;
 }
 </style>
+
 {% endblock %}
+
 {% block content %}
 <div id="t-corp-profile-view">
-<h1 class="text-xl font-semibold">{{ corp_profile.name }}</h1>
+<h1>{{ corp_profile.name }}</h1>
 {% if corp_profile.logo %}
   <div class="t-corp-membership-logo">
       <img class="img-responsive" src="{{ corp_profile.get_logo_url }}" alt="{{ corp_profile.name }}" title="{{ corp_profile.name }}">
   </div>
 {% endif %}
 <hr>
-<div class="flex flex-wrap corp-profile-detail">
-    <div class="md:w-2/5 pr-4 pl-4 profile-left">
+
+<div class="row corp-profile-detail">
+    <div class="col-md-5 profile-left">
         <h3>{% trans 'Company Details' %}</h3>
-        <div class="flex flex-wrap">
-            <div class="sm:w-1/3 pr-4 pl-4">
+        <div class="row">
+            <div class="col-xs-4">
                 {% trans 'Parent Entity' %}
             </div>
-            <div class="sm:w-1/2 pr-4 pl-4">
+            <div class="col-xs-6">
             {{ corp_profile.parent_entity }}
             </div>
         </div>
-        <div class="flex flex-wrap">
-            <div class="sm:w-1/3 pr-4 pl-4">
+        <div class="row">
+            <div class="col-xs-4">
                 {% trans 'Company Name' %}
             </div>
-            <div class="sm:w-1/2 pr-4 pl-4">
+            <div class="col-xs-6">
             {{ corp_profile.name }}
             </div>
         </div>
-        <div class="flex flex-wrap">
-            <div class="sm:w-1/3 pr-4 pl-4">
+        <div class="row">
+            <div class="col-xs-4">
                 {% trans 'Email' %}
             </div>
-            <div class="sm:w-1/2 pr-4 pl-4">
+            <div class="col-xs-6">
             {{ corp_profile.email }}
             </div>
         </div>
-        <div class="flex flex-wrap">
-            <div class="sm:w-1/3 pr-4 pl-4">
+        <div class="row">
+            <div class="col-xs-4">
                 {% trans 'Phone' %}
             </div>
-            <div class="sm:w-1/2 pr-4 pl-4">
+            <div class="col-xs-6">
             {{ corp_profile.phone }}
             </div>
         </div>
-        <div class="flex flex-wrap">
-            <div class="sm:w-1/3 pr-4 pl-4">
+        <div class="row">
+            <div class="col-xs-4">
                 {% trans 'Website' %}
             </div>
-            <div class="sm:w-1/2 pr-4 pl-4">
+            <div class="col-xs-6">
             {{ corp_profile.url }}
             </div>
         </div>
-        <div class="flex flex-wrap">
-            <div class="sm:w-1/3 pr-4 pl-4">
+        <div class="row">
+            <div class="col-xs-4">
                 {% trans 'Address' %}
             </div>
-            <div class="sm:w-1/2 pr-4 pl-4">
+            <div class="col-xs-6">
             {{ address_str }}
             </div>
         </div>
+
         <h3>{% trans 'Membership Level' %}</h3>
         <div>
             {% trans 'Membership Type:' %} {{ corp_membership.corporate_membership_type }}
             <br />
             <small><em>{{ corp_membership.join_dt|date:"M j, Y" }}
             {% if not corp_membership.is_pending %} - {% firstof corp_membership.expiration_dt|date:"M j, Y" "Forever" %} {% endif %}</em></small>
+           
             {% include "corporate_memberships/action_options.html" %}
         </div>
+
         <h3>{% trans 'Payment Method' %}</h3>
         <div>
             {% trans 'Payment Method:' %}
@@ -117,14 +125,14 @@
         </div>
         {% endif %}
     </div>
-    <div class="md:w-3/5 pr-4 pl-4">
+    <div class="col-md-7">
     <h3>{% trans 'Members' %}
     {% if corp_membership.real_time_status_detail == 'active' %}
     <a href="{% url 'membership_default.add_under_corp' corp_membership.id %}"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
     {% endif %}
     </h3>
     {% if members_first10 %}
-    <table class="w-full max-w-full mb-4 bg-transparent table-stripped">
+    <table class="table table-stripped">
         <thead>
             <tr>
                 <th>{% trans 'Name' %}</th>
@@ -140,15 +148,18 @@
         {% endfor %}
         </tbody>
     </table>
+
     {% if members_count > 10 %}
     <div><a href="{% url 'corpmembership.roster_search' %}?cm_id={{ corp_membership.id }}">{% trans 'View All Members' %}</a></div>
     {% endif %}
+
     {% else %}
     <div><em>{% trans "No members joined yet" %}</em></div>
     {% endif %}
+
     <h3>{% trans 'Representatives' %}</h3>
     {% if reps %}
-    <table class="w-full max-w-full mb-4 bg-transparent table-striped">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>{% trans "Name" %}</th>
@@ -156,6 +167,7 @@
                 <th>{% trans "Is Member Rep." %}</th>
             </tr>
         </thead>
+
         <tbody>
             {% for rep in reps %}
                 <tr>
@@ -166,14 +178,19 @@
             {% endfor %}
         </tbody>
     </table>
+
   {% else %}
       <div><em>{% trans "No representatives available" %}</em></div>
   {% endif %}
   {% if corp_membership.status_detail != "archive" %}
       <a href="{% url 'corpmembership.edit_corp_reps' corp_membership.id %}"><span class="glyphicon glyphicon-edit"></span> {% trans "Add/Edit Representatives" %}</a>
   {% endif %}
+
 {% include "corporate_memberships/timeline.html" %}
+
     </div>
+
 </div>
+
 </div>
 {% endblock %}

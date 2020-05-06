@@ -1,8 +1,10 @@
 {% extends "boxes/base.html" %}
 {% load base_filters %}
 {% load base_tags %}
+
+
 {% block content %}
-    <h1 class="text-xl font-semibold">
+    <h1>
         {% firstof trans SITE_GLOBAL_SITEPRIMARYKEYWORDS trans SITE_GLOBAL_SITEDISPLAYNAME %}
         {% if MODULE_BOXES_LABEL_PLURAL %}
             {% blocktrans with label_plural=MODULE_BOXES_LABEL_PLURAL %}{{ label_plural }} Export{% endblocktrans %}
@@ -10,7 +12,8 @@
             {% trans "Boxes Export" %}
         {% endif %}
     </h1>
-    <form id="t-boxes-export-form" class="flex items-center t-export-form" action="." method="POST" >{% csrf_token %}
-        <button type="submit" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400">{% trans "Download" %}</button>
+
+    <form id="t-boxes-export-form" class="form-inline t-export-form" action="." method="POST" >{% csrf_token %}
+        <button type="submit" class="btn btn-primary">{% trans "Download" %}</button>
     </form>
 {% endblock %}

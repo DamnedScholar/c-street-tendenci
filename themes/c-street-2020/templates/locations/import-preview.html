@@ -1,22 +1,31 @@
 {% extends "locations/base-wide.html" %}
 {% load base_tags %}
 {% load base_filters %}
+
 {% block title %}{% trans 'Import Locations from CSV file' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
     <link rel="stylesheet" href="{% local_static 'css/memberships.css' %}">
     <link rel="stylesheet" href="{% local_static 'css/locations-import-preview.css' %}">
+
 {% endblock %}
+
 {% block content %}
+
 <div id="import-wrap" class="preview">
-    <h1 class="text-xl font-semibold">{% trans "Locations Import Preview" %}</h1>
+
+    <h1>{% trans "Locations Import Preview" %}</h1>
+
     <p class="timestamp">{% trans "Step 3/4" %} &middot; {{ now }}</p>
+
     <p class="msg">
         <em>{{ stats.all }}</em> import{{ stats.all|pluralize }};
         <em>{{ stats.added }}</em> will be added,
         and <em>{{ stats.skipped }}</em> will be skipped.</p>
         <em><a title="Looks good!" href="{% url "membership_import_confirm" locport.id %}" id="import-confirm">Import Now &rarr;</a></em>
     </p>
+
     <div style="margin-top:10px; overflow:scroll;">
         <table>
             <tr class="header">
@@ -39,8 +48,9 @@
                 <td>{% trans "Headquarters" %}</td>
                 <td>{% trans "Skipped" %}</td>
             </tr>
+
             {% for location in locations %}
-                <tr class="{% cycle 'odd' 'even' as flex flex-wrapflex-growors %}">
+                <tr class="{% cycle 'odd' 'even' as rowcolors %}">
                     <td>{{ forloop.counter }}</td>
                     <td><div>{{ location.locationname }}</div></td>
                     <td><div>{{ location.description }}</div></td>
@@ -67,6 +77,7 @@
             {% endfor %}
         </table>
     </div>
+
     <div style="display: none;">
         <form id="mapping-form" action="{% url "locations_import_confirm" locport.id %}" method="post">{% csrf_token %}
             {{ form.as_p }}
@@ -75,6 +86,7 @@
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 <script type="text/javascript">
     $(document).ready(function(){

@@ -2,15 +2,19 @@
 {% load resume_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{% firstof MODULE_RESUMES_LABEL trans 'Resumes' %} Add{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="{% static 'timepicker/timepicker.css' %}" />
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_RESUMES_LABEL trans 'Resumes' %} {% trans "Add" %}</h1>
+    <h1>{% firstof MODULE_RESUMES_LABEL trans 'Resumes' %} {% trans "Add" %}</h1>
+
     <div class="resume-wrap">
         <div class="forms">
         <form enctype="multipart/form-data" class="form-horizontal" action="{% url "resume.add" %}" method="post">{% csrf_token %}
@@ -19,8 +23,10 @@
         </form>
         </div>
     </div>
+
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     {{ form.media }}

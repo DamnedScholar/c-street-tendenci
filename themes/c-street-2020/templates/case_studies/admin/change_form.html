@@ -1,21 +1,27 @@
 {% extends "admin/base_site.html" %}
 {% load admin_modify adminmedia %}
+
 {% block extrahead %}{{ block.super }}
 {% url "admin:jsi18n" as jsi18nurl %}
 <script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
 {{ media }}
 {% endblock %}
+
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/forms.css" />{% endblock %}
+
 {% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
+
 {% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+
 {% block breadcrumbs %}{% if not is_popup %}
-<div class="flex flex-wrap list-none p-0 pt-3 pb-3 py-4 px-4 mb-4 bg-grey-400 roundeds">
+<div class="breadcrumbs">
      <a href="../../../">{% trans "Home" %}</a> &rsaquo;
      <a href="../../">{{ app_label|capfirst|escape }}</a> &rsaquo;
      {% if has_change_permission %}<a href="../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} &rsaquo;
      {% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}
 </div>
 {% endif %}{% endblock %}
+
 {% block content %}<div id="content-main">
 {% block object-tools %}
 {% if change %}{% if not is_popup %}
@@ -34,17 +40,23 @@
     </p>
     {{ adminform.form.non_field_errors }}
 {% endif %}
+
 {% for fieldset in adminform %}
   {% include "admin/includes/fieldset.html" %}
 {% endfor %}
+
 {% block after_field_sets %}{% endblock %}
+
 {% for inline_admin_formset in inline_admin_formsets %}
     {% include inline_admin_formset.opts.template %}
 {% endfor %}
+
 <ul class="tools">
     <li><a class="add" href="javascript:;" onclick="add_inline_form('')">Add another</a></li>
 </ul>
+
 <script type="text/javascript">
+
     $(function(){
         $('.inline-group .inline-related .delete input').each(function(i,e){
             $(e).on('change', function(e){
@@ -57,6 +69,7 @@
             })
         })
     })
+
     function increment_form_ids(el, to, name) {
         var from = to-1
         $(':input', $(el)).each(function(i,e){
@@ -67,6 +80,7 @@
             $(e).val('')
         })
     }
+
     function add_inline_form(name) {
         var first = $('#id_'+name+'-0-id').parents('.inline-related')
         var last = $(first).parent().children('.last-related')
@@ -78,14 +92,21 @@
         increment_form_ids($(first).parents('.inline-group').children('.last-related'), count, name);
         return false;
     }
+
 </script>
+
+
 {% block after_related_objects %}{% endblock %}
+
 {% submit_row %}
+
 {% if adminform and add %}
    <script type="text/javascript">document.getElementById("{{ adminform.first_field.auto_id }}").trigger("focus");</script>
 {% endif %}
+
 {# JavaScript for prepopulated fields #}
 {% prepopulated_fields_js %}
+
 </div>
 </form></div>
 {% endblock %}

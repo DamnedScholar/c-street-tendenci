@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "https://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -19,18 +20,22 @@
         <br /><br />
         {% url "profile" membership.user.username as profile_url %}
         {% url "corpmembership.view" corp_membership.id as corp_mem_url %}
+
         {% url "profile" membership.user.username as profile_url %}
         {% url "corpmembership.view" corp_membership.id as corp_url %}
         {% blocktrans %}
         To view the profile of this member, go to <a href="{{ SITE_GLOBAL_SITEURL }}{{ profile_url }}">{{ SITE_GLOBAL_SITEURL }}{{ profile_url }}</a>.
         <br /> <br />
+
          To view and manage the corporate membership, go to <a href="{{ SITE_GLOBAL_SITEURL }}{{ corp_mem_url }}">{{ SITE_GLOBAL_SITEURL }}{{ corp_url }}</a>.
         <br /> <br />
+
         Thanks,<br />
         {{ SITE_GLOBAL_SITEDISPLAYNAME }}
         <br /><br />
         {% endblocktrans %}
     </p>
     <P>{% trans 'Time submitted' %}:  {% now "D d M Y P" %}</P>
+
 </body>
 </html>

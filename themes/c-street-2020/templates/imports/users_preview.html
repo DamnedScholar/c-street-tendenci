@@ -1,26 +1,35 @@
 {% extends "imports/base.html" %}
 {% load dashboard_tags %}
+
 {% block title %}{% trans 'Import Users' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/user_imports.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
 <div class="imports">
-<h1 class="text-xl font-semibold">{% trans "Preview Your Import" %}</h1>
+<h1>{% trans "Preview Your Import" %}</h1>
+
 <p>{% trans "You're almost done!  Please review your settings.  To complete your import click 'Import Now.'" %}</p>
+
 <div class="csv-icon">
 <img src="{% static 'images/icons/xls-icon.gif' %}" alt="{{ file_name }}" title="xls icon" />
 <p>{{ file_name }}<br /></p>
-<ul class="list-disc pl-4">
+
+<ul>
     <li class="first">{{ total }} {% trans "Total Users" %}</li>
     <li>{{ count_insert }} {% trans "Insert" %}</li>
     <li>{{ count_update }} {% trans "Update" %}</li>
     <li class="last highlight">{{ count_invalid}} {% trans "Invalid Users" %}</li>
 </ul>
+
 </div>
+
 <div style="clear: both; "></div>
+
 <div class="import-settings">
 <table>
 <tr>
@@ -40,8 +49,11 @@
     <td class="value">{{ str_update }}</td>
 </tr>
 </table>
+
 </div> <!-- import settings -->
+
     <form class="import" method="post" action="{% url "import.user_upload_process" id %}">{% csrf_token %}
+
     <div class="results">
     {% for u in users_list %}
         {%if not u.IS_VALID %}
@@ -57,6 +69,7 @@
             {% else %}
                 {% trans "UPDATE" %}
             {% endif %}
+
             <table width="100%" border="1" cellspacing="0" cellpadding="0" bordercolor="#CCCCCC">
               <tr>
                  <td>
@@ -74,6 +87,7 @@
                                     ({{ u.username }})
                                 {% endif %}
                             </font>
+
                         </td>
                        <td width="34%" class="body_copy"> &nbsp;</td>
                      </tr>
@@ -95,10 +109,13 @@
         {% endif %}
     {% endfor %}
     </div>
+
     <div align="right">
     <input type="submit" class="submit-btn" name="submit" value="{% trans 'Import Users' %}" >
     </div>
+
     </form>
+
 </div>
 </div>
 {% endblock %}

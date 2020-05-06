@@ -1,10 +1,13 @@
+
+
 {% if type_name == "events_upcoming"  %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ label|striptags|safe }}</h1>
         </div>
+
         {% if value %}
-            <table class="w-full max-w-full mb-4 bg-transparent">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>{% trans "Date" %}</th>
@@ -14,6 +17,7 @@
                         <th>{% trans "Paid" %} %</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     {% for date, name, url, reg, total, percentage in value %}
                         <tr>
@@ -33,14 +37,17 @@
         {% endif %}
     </div>
 {% endif %}
+
 {% if type_name == "memberships_30_count" %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ label|striptags|safe }}</h1>
         </div>
+
         <div class="panel-body">
             {% for active, expiring, new, pending, expired in value %}
                 <h2>{{ active }} {% trans "Active" %} | {{ expiring }} {% trans "Expire in 30 days" %}</h2>
+
                 <div id="t-dashboard-js-statistics-members-info" data-new="{{ new }}" data-pending="{{ pending }}" data-expired="{{ expired }}">
                     {% trans "Last 30 days" %}
                     <p>{% trans "New" %}: {{ new }}</p>
@@ -48,15 +55,18 @@
                     <p>{% trans "Expired" %}: {{ expired }}</p>
                 </div>
             {% endfor %}
+
             <div id="t-dashboard-js-statistics-members-graph"></div>
         </div>
     </div>
 {% endif %}
+
 {% if type_name == "memberships_30_new" %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ value.0 }} {{ label|striptags|safe }}</h1>
         </div>
+
         <div class="panel-body">
             {% if value|slice:"1:" %}
                 <ol>
@@ -74,11 +84,13 @@
         </div>
     </div>
 {% endif %}
+
 {% if type_name == "memberships_30_renew" %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ value.0 }} {{ label|striptags|safe }}</h1>
         </div>
+
         <div class="panel-body">
             {% if value|slice:"1:" %}
                 <ol>
@@ -96,11 +108,13 @@
         </div>
     </div>
 {% endif %}
+
 {% if type_name == "memberships_30_expired" %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ value.0 }} {{ label|striptags|safe }}</h1>
         </div>
+
         <div class="panel-body">
             {% if value|slice:"1:" %}
                 <ol>
@@ -118,11 +132,13 @@
         </div>
     </div>
 {% endif %}
+
 {% if type_name == "memberships_30_expiring" %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ value.0 }} {{ label|striptags|safe }}</h1>
         </div>
+
         <div class="panel-body">
             {% if value|slice:"1:" %}
                 <ol>
@@ -136,11 +152,13 @@
         </div>
     </div>
 {% endif %}
+
 {% if type_name == "corp_memberships_30_new" %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ label|striptags|safe }}</h1>
         </div>
+
         <div class="panel-body">
             <ol>
                 {% for name, url in value %}
@@ -150,11 +168,13 @@
         </div>
     </div>
 {% endif %}
+
 {% if type_name == "corp_memberships_30_renew" %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ label|striptags|safe }}</h1>
         </div>
+
         <div class="panel-body">
             <ol>
                 {% for name, url in value %}
@@ -164,11 +184,13 @@
         </div>
     </div>
 {% endif %}
+
 {% if type_name == "corp_memberships_30_expired" %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ label|striptags|safe }}</h1>
         </div>
+
         <div class="panel-body">
             <ol>
                 {% for name, url in value %}
@@ -178,11 +200,13 @@
         </div>
     </div>
 {% endif %}
+
 {% if type_name == "corp_memberships_30_expiring" %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ label|striptags|safe }}</h1>
         </div>
+
         <div class="panel-body">
             <ol>
                 {% for name, url in value %}
@@ -192,19 +216,22 @@
         </div>
     </div>
 {% endif %}
+
 {% if type_name == "forms_30_submissions" %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ label|striptags|safe }}</h1>
         </div>
+
         {% if value %}
-            <table class="w-full max-w-full mb-4 bg-transparent table-striped">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>{% trans "Name" %}</th>
                         <th>{% trans "30-Day Submissions" %}</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     {% for title, url, count, link in value %}
                         <tr>
@@ -221,19 +248,22 @@
         {% endif %}
     </div>
 {% endif %}
+
 {% if type_name == "pages_30_traffic" %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ label|striptags|safe }}</h1>
         </div>
+
         {% if value %}
-            <table class="w-full max-w-full mb-4 bg-transparent table-striped">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>{% trans "Pages" %}</th>
                         <th>{% trans "30-Day Traffic" %}</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     {% for title, url, count in value %}
                         <tr>
@@ -250,19 +280,22 @@
         {% endif %}
     </div>
 {% endif %}
+
 {% if type_name == "events_30_traffic" %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ label|striptags|safe }}</h1>
         </div>
+
         {% if value %}
-            <table class="w-full max-w-full mb-4 bg-transparent table-striped">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>{% trans "Events" %}</th>
                         <th>{% trans "30-Day Traffic" %}</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     {% for title, url, count in value %}
                         <tr>
@@ -279,13 +312,15 @@
         {% endif %}
     </div>
 {% endif %}
+
 {% if type_name == "corp_members_top" %}
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title">{{ label|striptags|safe }}</h1>
         </div>
+
         {% if value %}
-            <table class="w-full max-w-full mb-4 bg-transparent table-striped">
+            <table class="table table-striped">
                 {% for title, url, count in value %}
                     {% if forloop.first %}
                         <thead>
@@ -294,6 +329,7 @@
                                 <th>{{ count }}</th>
                             </tr>
                         </thead>
+
                         <tbodY>
                     {% else %}
                             <tr>
@@ -302,6 +338,7 @@
                             </tr>
                     {% endif %}
                 {% endfor %}
+
                         </tbody>
             </table>
         {% else %}

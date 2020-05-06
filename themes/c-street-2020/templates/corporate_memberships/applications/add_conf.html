@@ -1,10 +1,12 @@
 {% extends "corporate_memberships/base.html" %}
 {% load corporate_memberships_tags %}
 {% load perm_tags %}
+
 {% block title %}{% trans "Corporate Membership Add Confirmation" %}{% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Corporate Membership Add Confirmation" %}</h1>
+    <h1>{% trans "Corporate Membership Add Confirmation" %}</h1>
     <p>{% if app.confirmation_text %}
         {{ app.confirmation_text|safe }}
     {% else %}
@@ -16,6 +18,7 @@
     </p>
     {% has_perm request.user corporate_memberships.view_corpmembership as can_view %}
     {% has_perm request.user corporate_memberships.change_corpemembership as can_edit %}
+
     {% if can_view %}
     <p><a href="{% url "corpmembership.view" corporate_membership.id %}">{% trans "View this Corporate Membership" %}</a></p>
     {% endif %}

@@ -1,0 +1,102 @@
+{% extends "invoices/base.html" %}
+{% load invoice_tags %}
+{% load base_filters %}
+{% block title %}{{ block.super }}{% trans 'Invoice Adjustment'%}{% endblock %}
+{% block extra_head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/invoices.css' %}">
+{% endblock %}
+{% block content %}
+<div class="t">
+  <div class="page-header">
+    <h1 class="text-xl font-semibold">{{ SITE_GLOBAL_SITEDISPLAYNAME }} {% trans 'Void Invoice'%}</h1>
+  </div>
+  <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="{% url "invoice.view" invoice.pk %}" class="links">View Invoice #{{ invoice.pk }}</a>
+  <br /><br />
+  <div class="invoice-adjust">
+    <div class="field-wrapper required">
+      <label class="field-label">{% trans 'Billing Information:'%}</label>
+      <div style="float:left;">
+        {% if invoice.bill_to %}{{invoice.bill_to}}<br />{% endif %}
+        {% if invoice.bill_to_phone %}{{invoice.bill_to_phone}}<br />{% endif %}
+        {% if invoice.bill_to_email %}{{invoice.bill_to_email}}<br />{% endif %}
+        {% if invoice.bill_to_address %}{{invoice.bill_to_address}}{% endif %}
+        {% if invoice.bill_to_city %}{{invoice.bill_to_city}}{% endif %}
+        {% if invoice.bill_to_state %}{{invoice.bill_to_state}}{% endif %}
+        {% if invoice.bill_to_zip_code %}{{invoice.bill_to_zip_code}}{% endif %}
+        {% if invoice.bill_to_country %}{{invoice.bill_to_country}}{% endif %}<br />
+      </div>
+    </div>
+    <div class="clear-left"></div>
+    <div class="field-wrapper">
+      <label class="field-label">{% trans 'Current Invoice Totals:'%}</label>
+    </div>
+    <div class="clear-left"></div>
+    <div class="field-wrapper">
+      <label class="field-label">{% trans 'Sub Total:'%}</label>
+      <div>{{invoice.subtotal|format_currency }}</div>
+    </div>
+    <div class="clear-left"></div>
+    <div class="field-wrapper">
+      <label class="field-label">{% trans 'Total:'%}</label>
+      <div>{{invoice.total|format_currency }}</div>
+    </div>
+    <div class="clear-left"></div>
+    <div class="field-wrapper">
+      <label class="field-label">{% trans 'Payments/Credits:'%}</label>
+      <div>{{invoice.payments_credits|format_currency }}</div>
+    </div>
+    <div class="clear-left"></div>
+    <div class="field-wrapper">
+      <label class="field-label">{% trans 'Balance:'%}</label>
+      <div>{{invoice.balance|format_currency }}</div>
+    </div>
+    <div class="clear-left"></div>
+    <p>&nbsp;</p>
+    <form class="form-horizontal" method="post" action=".">{% csrf_token %}
+      <div class="mb-4">
+      {% if form.void_reason.errors %}
+        {{ form.void_reason.errors }}
+        {% endif %}
+	    <label for="void_reason" class="sm:w-1/4 pr-4 pl-4 control-label">{{ form.void_reason.label }}</label>
+	    <div class="sm:w-1/2 pr-4 pl-4">
+	     {{ form.void_reason }}
+	    </div>
+	  </div>
+	  {% if form.cancle_registration %}
+	  <div class="mb-4">
+	    <div class=":flex-growsm-offset-3 sm:w-3/4 pr-4 pl-4">
+	      <div class="checkbox">
+	        <label>
+	          {{ form.cancle_registration }} {{ form.cancle_registration.label }}
+	        </label>
+	      </div>
+	    </div>
+	  </div>
+     {% endif %}
+     {% if form.delete_membership %}
+	  <div class="mb-4">
+	    <div class=":flex-growsm-offset-3 sm:w-3/4 pr-4 pl-4">
+	      <div class="checkbox">
+	        <label>
+	          {{ form.delete_membership }} {{ form.delete_membership.label }}
+	        </label>
+	      </div>
+	    </div>
+	  </div>
+     {% endif %}
+     <div class="mb-4">
+	    <div class=":flex-growsm-offset-2 sm:w-1/6 pr-4 pl-40">
+	        <p class="text-red-500">
+	        {% trans 'Are you sure you want to void this invoice?' %} <br />
+	        {% trans 'This action can NOT be undone!' %}
+	        </p>
+	      <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="{% url "invoice.view" invoice.pk %}">{% trans 'No, take me back' %}</a>&nbsp;&nbsp;&nbsp;
+     	 <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit" name="submit" value="{% trans 'Yes, void this invoice' %}" />
+	    </div>
+	  </div>
+    </form>
+    <br /><br />
+  </div>
+</div>
+{% endblock %}

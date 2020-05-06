@@ -1,24 +1,31 @@
-<li class="relative">
-    <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative" role="button" aria-expanded="false">
+
+
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
         <img class="nav-icon" src="{% static 'famfamfam/icons/chart_bar.png' %}"/><span class="nav-label">{% trans "Reports" %}</span>
         <span class="caret"></span>
+
     </a>
-    <ul id="t-admin-megamenu-reports-dd" class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded apps-dropdown" role="menu">
+
+    <ul id="t-admin-megamenu-reports-dd" class="dropdown-menu apps-dropdown" role="menu">
         <li>
             <div class="yamm-content content-dropdown">
-                <div class="flex flex-wrap">
-                    <div class="sm:w-1/6 pr-4 pl-42 content-dropdown-col">
-                        <div id="megamenu-reports-accordion" class="panel-group" role="tablist" aria-multiselecw-full max-w-full mb-4 bg-transparent="true">
+                <div class="row">
+                    <div class="col-sm-12 content-dropdown-col">
+                        <div id="megamenu-reports-accordion" class="panel-group" role="tablist" aria-multiselectable="true">
+
+
                         <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="reports-heading-1">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-1">{% trans '1. Membership Overview' %}</a>
                                     </h4>
                                 </div>
-                                <div id="report-collapse-1" class="panel-collapse flex-growlapse in" role="tabpanel" aria-labelledby="reports-heading-1">
+
+                                <div id="report-collapse-1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="reports-heading-1">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
-                                            <ul class="list-unstyled sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                                        <div class="row">
+                                            <ul class="list-unstyled col-sm-12 col-xs-12">
                                                 <li class="content-item">
                                                     <a href="{% url 'reports-memberships_overview' %}"><span class="nav-label">{% trans "Overview" %}</span></a>
                                                 </li>
@@ -39,16 +46,18 @@
                                     </div>
                                  </div>
                             </div>
+
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="reports-heading-2">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-2">{% trans '2. Membership Data' %}</a>
                                     </h4>
                                 </div>
-                                <div id="report-collapse-2" class="panel-collapse flex-growlapse" role="tabpanel" aria-labelledby="reports-heading-2">
+
+                                <div id="report-collapse-2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reports-heading-2">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
-                                            <ul class="list-unstyled sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                                        <div class="row">
+                                            <ul class="list-unstyled col-sm-12 col-xs-12">
                                                 <li class="content-item">
                                                     <a href="{% url "reports-active-members" %}"><span class="nav-label">{% trans "Active Memberships" %}</span></a>
                                                 </li>
@@ -77,8 +86,8 @@
                                           </div>
                                           {% if MODULE_CORPORATE_MEMBERSHIPS_ENABLED %}
                                           <hr>
-                                          <div class="flex flex-wrap">
-                                            <ul class="list-unstyled sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                                          <div class="row">
+                                            <ul class="list-unstyled col-sm-12 col-xs-12">
                                                 <li class="content-item">
                                                     <a href="{% url "corp_membership.overview" %}"><span class="nav-label">{% trans "Corporate Memberships Overview" %}</span></a>
                                                 </li>
@@ -109,16 +118,18 @@
                                     </div>
                                  </div>
                             </div>
+
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="reports-heading-3">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-3">{% trans '3. Membership Trends' %}</a>
                                     </h4>
                                 </div>
-                                <div id="report-collapse-3" class="panel-collapse flex-growlapse" role="tabpanel" aria-labelledby="reports-heading-3">
+
+                                <div id="report-collapse-3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reports-heading-3">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
-                                            <ul class="list-unstyled sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                                        <div class="row">
+                                            <ul class="list-unstyled col-sm-12 col-xs-12">
                                                 <li class="content-item">
                                                     <a href="{% url "reports-members-over-time" %}"><span class="nav-label">{% trans "Memberships Over Time" %}</span></a>
                                                 </li>
@@ -136,16 +147,18 @@
                                     </div>
                                  </div>
                             </div>
+
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="reports-heading-4">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-4">{% trans '4. User Management' %}</a>
                                     </h4>
                                 </div>
-                                <div id="report-collapse-4" class="panel-collapse flex-growlapse" role="tabpanel" aria-labelledby="reports-heading-4">
+
+                                <div id="report-collapse-4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reports-heading-4">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
-                                            <ul class="list-unstyled sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                                        <div class="row">
+                                            <ul class="list-unstyled col-sm-12 col-xs-12">
                                                 <li class="content-item">
                                                     <a href="{% url "reports-user-access" %}"><span class="nav-label">{% trans "User Access" %}</span></a>
                                                 </li>
@@ -172,16 +185,18 @@
                                     </div>
                                  </div>
                             </div>
+
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="reports-heading-5">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-5">{% trans '5. Financial' %}</a>
                                     </h4>
                                 </div>
-                                <div id="report-collapse-5" class="panel-collapse flex-growlapse" role="tabpanel" aria-labelledby="reports-heading-5">
+
+                                <div id="report-collapse-5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reports-heading-5">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
-                                            <ul class="list-unstyled sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                                        <div class="row">
+                                            <ul class="list-unstyled col-sm-12 col-xs-12">
                                                 <li class="content-item">
                                                     <a href="{% url 'report_list' %}"><span class="nav-label">{% trans "Invoicing" %}</span></a>
                                                 </li>
@@ -196,16 +211,18 @@
                                     </div>
                                  </div>
                             </div>
+
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="reports-heading-6">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-6">{% trans '6. Site Activity' %}</a>
                                     </h4>
                                 </div>
-                                <div id="report-collapse-6" class="panel-collapse flex-growlapse" role="tabpanel" aria-labelledby="reports-heading-6">
+
+                                <div id="report-collapse-6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reports-heading-6">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
-                                            <ul class="list-unstyled sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                                        <div class="row">
+                                            <ul class="list-unstyled col-sm-12 col-xs-12">
                                                 <li class="content-item">
                                                     <a href="{% url 'reports-events-summary' %}"><span class="nav-label">{% trans "Event Log Summary" %}</span></a>
                                                 </li>
@@ -223,16 +240,18 @@
                                     </div>
                                  </div>
                             </div>
+
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="reports-heading-7">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-7">{% trans '7. Custom Reports' %}</a>
                                     </h4>
                                 </div>
-                                <div id="report-collapse-7" class="panel-collapse flex-growlapse" role="tabpanel" aria-labelledby="reports-heading-7">
+
+                                <div id="report-collapse-7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reports-heading-7">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
-                                            <ul class="list-unstyled sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                                        <div class="row">
+                                            <ul class="list-unstyled col-sm-12 col-xs-12">
                                                 <li class="content-item">
                                                     <a href="{% url 'explorer_extensions.export_page' %}"><span class="nav-label">{% trans "Data Exports" %}</span></a>
                                                 </li>
@@ -244,6 +263,7 @@
                                     </div>
                                  </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

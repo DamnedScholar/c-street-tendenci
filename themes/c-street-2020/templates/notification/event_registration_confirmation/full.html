@@ -1,12 +1,16 @@
 {% load email_filters %}
+
 <html><body>
+
 <h1 style="margin-bottom:0;">{% blocktrans with event.title as title and event.start_dt|date:"N j, Y \a\t f A" as start_dt %}{{ title }} on {{ start_dt }}{% endblocktrans %}</h1>
 <h3 style="margin:0;">{{ SITE_GLOBAL_SITEDISPLAYNAME }} {% trans "Event Registration Confirmation" %}</h3>
+
 {% if total_amount <= 0 %}
     <h3 style="margin-top:0;">{% trans "Price: Free!" %}</h3>
 {% else %}
     <h3 style="margin-top:0;">{% blocktrans with total_amount|floatformat:"2" as priceflo %}Total Amount: ${{ priceflo }}{% endblocktrans %} </h3>
 {% endif %}
+
 {% if is_paid %}  {# handles free & priced events #}
     <div style="background-color:#CFFFCE; padding:10px; font-size:1.2em;">
         {% if for_admin %}
@@ -44,6 +48,7 @@
         {% endif %}
     </div>
 {% else %}
+
     {% if event.registration_configuration.payment_required %}
         <div style="background-color:#FFC; padding:10px; font-size:1.2em;">
             {% if for_admin %}
@@ -87,6 +92,7 @@
                 {% trans "Registration Complete." %}
                             <div style="font-size:1.0em; margin-top:5px;">
                     {{ reg8n_number }} {% trans "Registrant" %}{{ reg8n_number|pluralize }}:<br />
+
                     {% for registrant in registrants %}
                             <div>
                             {% if registrant.name %}
@@ -128,20 +134,26 @@
                 {% endfor %}
                 </table>
                 {% endif %}
+
             {% else %}
                 {% trans "Registration Complete. Enjoy the Event!" %}
             {% endif %}
         </div>
     {% endif %}
+
 {% endif %}
+
 {% if event.description and event.registration_configuration.registration_email_type and event.registration_configuration.registration_email_type != 'custom' %}
 <div>{{ event.description|relative_to_absolute_urls|safe }}</div>
 {% endif %}
+
 {% if event.registration_configuration.registration_email_type and event.registration_configuration.registration_email_type != 'default' %}
     {% if event.registration_configuration.registration_email_text %}
     {{ event.registration_configuration.registration_email_text|relative_to_absolute_urls|safe }}
     {% endif %}
 {% endif %}
+
+
 {% if event.registration_configuration.registration_email_type != 'custom' or not event.registration_configuration.registration_email_text %}
 <h3 style="margin-bottom:3px;">{% trans "Helpful Links" %}</h3>
 <ol style="margin-top:0;">
@@ -173,7 +185,9 @@
             </a>
         </div>
     {% endif %}
+
     <div>{% trans "This email contains your registration details. Keep it in a safe place. Do not forward this email to an untrusted person." %}</div>
 {% endif %}
+
 {% endif %}
 </body></html>

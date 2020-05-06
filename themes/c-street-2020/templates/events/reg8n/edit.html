@@ -1,14 +1,18 @@
 {% extends "events/base.html" %}
 {% load event_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }}{% trans "Edit Registration Form" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_EVENTS_LABEL trans 'Event' %} {% trans "Registration Form Edit" %}</h1>
+    <h1>{% firstof MODULE_EVENTS_LABEL trans 'Event' %} {% trans "Registration Form Edit" %}</h1>
+
     <div class="event-wrap">
         <div class="options">
              <div class="quick-options">
@@ -18,16 +22,20 @@
         <form action="{% url "event.edit.registration" event.pk %}" method="post">{% csrf_token %}
         <div class="forms">
             {{ form|styled_form }}
+
             {# form.payment_periods #}
+
             {# for payment_period in form.payment_periods #}
                 <!-- payment_period.label -->
             {# endfor #}
+
             <input type="submit" value="{% trans "Save Changes" %}" />
         </div>
         </form>
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
     <script type="text/javascript">
         $(document).ready(function(){

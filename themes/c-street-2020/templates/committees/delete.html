@@ -1,14 +1,17 @@
 {% extends "committees/base.html" %}
 {% load committee_tags %}
+
 {% block title %}{% trans "Delete Committee" %} - {{ committee.get_title }}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/delete.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
     <div class="committee-wrap">
-        <h1 class="text-xl font-semibold">{% trans "Delete a Committee" %}</h1>
+        <h1>{% trans "Delete a Committee" %}</h1>
         <h2>{{ committee.title }} - <a href="{{ committee.get_absolute_url }}">{{ committee.get_absolute_url }}</a></h2>
         <div class="content">{{ committee.content|safe|truncatewords_html:"60" }}</div>
         <div class="delete-prompt">

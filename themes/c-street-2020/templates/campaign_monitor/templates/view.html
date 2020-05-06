@@ -2,17 +2,22 @@
 {% load base_tags %}
 {% load campaign_monitor_tags %}
 {% load perm_tags %}
+
+
 {% block title %}{{ template.name }}{% endblock %}
+
 {% block content %}
+
 <div class="t">
     {% template_nav request.user %}
     <div class="template-wrap">
+
         <div class="options options-search">
             <div class="quick-options">
                 {% template_options request.user template %}
             </div>
         </div>
-        <h1 class="text-xl font-semibold">{{ template.name }}</h1>
+        <h1>{{ template.name }}</h1>
         <div class="content">
             <div>
                 {% if template.cm_screenshot_url %}
@@ -57,5 +62,6 @@
             <div style="clear: both"></div>
         </div>
     </div>
+
 </div>
 {% endblock %}

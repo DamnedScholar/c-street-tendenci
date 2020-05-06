@@ -2,29 +2,38 @@
 {% load event_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
+
 {% block title %}{{ block.super }}{% trans 'Add' %}{% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{% static 'timepicker/timepicker.css' %}">
     <link rel="stylesheet" href="{% static 'css/events.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="page-header">
-  <button type="button" id="simple-form-button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400 pull-right" onclick="simple()" value="Simple Form">Simple Form</button>
-  <h1 class="text-xl font-semibold">{% firstof MODULE_EVENTS_LABEL 'Event' %} {% trans "Add" %}</h1>
+  <button type="button" id="simple-form-button" class="btn btn-primary pull-right" onclick="simple()" value="Simple Form">Simple Form</button>
+  
+  <h1>{% firstof MODULE_EVENTS_LABEL 'Event' %} {% trans "Add" %}</h1>
   {% if is_template %}
-  <p class="relative px-3 py-3 mb-4 border rounded text-teal-800 border-teal-600 bg-teal-200">{% trans "You're adding an event template." %}</p>
+  <p class="alert alert-info">{% trans "You're adding an event template." %}</p>
   {% endif %}
 </div>
-<p id="simple-form-alert" class="relative px-3 py-3 mb-4 border rounded text-green-800 border-green-600 bg-green-200" role="alert"> 
+
+<p id="simple-form-alert" class="alert alert-success" role="alert"> 
   This is the simple form, click again for the Extended form.
 </p>
+
     <form id="t-events-form" class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+        
       {{ multi_event_forms|styled_multi_forms }}
-        <div class="mb-4">
-            <div class=":flex-growsm-offset-3 sm:w-3/4 pr-4 pl-4">
-                <button type="submit" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400 capitalize">
+      
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-primary text-capitalize">
                     {% if MODULE_EVENTS_LABEL %}
                         {% blocktrans with module_events_label=MODULE_EVENTS_LABEL %}
                             Add {{ module_events_label }}
@@ -37,6 +46,7 @@
         </div>
     </form>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <link href="{% static 'tiny_mce/custom.css' %}" type="text/css" media="all" rel="stylesheet">
@@ -48,9 +58,13 @@
     <script type="text/javascript" src="{% static 'timepicker/timepicker.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/slug.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/events_formset.js' %}"></script>
+
+
 <script>
   $('#simple-form-alert').hide()
+  
   function simple() {  
+  
   var change = document.getElementById("simple-form-button");    
   if (change.innerHTML == "Simple Form"){
   change.innerHTML = "Extended Form";
@@ -58,6 +72,7 @@
   else {
   change.innerHTML = "Simple Form";
   }
+  
   $('.permissions').toggle();
   $('.admin-only').toggle();
   $('#t-formsbuilder-form-organizer').toggle();
@@ -67,9 +82,14 @@
   $('#simple-form-alert').toggle()
   }
 </script>
+
 <script>
+
 </script>
+
+
     <script type="text/javascript">
+
         //script for hiding and showing the 'On weekend' field
         //when nesessary.
         $(document).ready(function() {
@@ -81,16 +101,19 @@
             $('#id_start_dt_1').timepicker({'timeFormat': 'h:i A'});
             $('#id_end_dt_0').datepicker({ dateFormat: 'yy-mm-dd' });
             $('#id_end_dt_1').timepicker({'timeFormat': 'h:i A'});
+        	
             weekend = $('#id_on_weekend').closest('.form-group');
             start_dt = $('input#id_start_dt_0');
             start_dt_val = start_dt.val();
             end_dt =  $('input#id_end_dt_0');
             end_dt_val = end_dt.val();
+
             if(start_dt_val != end_dt_val){
                 weekend.show();
             } else {
                 weekend.hide();
             }
+
             start_dt.on("change", function() {
                 if ($(this).val() == end_dt_val) {
                     weekend.hide();
@@ -98,6 +121,7 @@
                     weekend.show();
                 }
             });
+
             end_dt.on("change", function() {
                 if ($(this).val() == start_dt_val) {
                     weekend.hide();
@@ -105,6 +129,7 @@
                     weekend.show();
                 }
             });
+
             allDay = $('#id_all_day');
             start_dt_field = $('input#id_start_dt_0').closest('.form-group');
             end_dt_field = $('input#id_end_dt_0').closest('.form-group');
@@ -134,35 +159,46 @@
                     end_event_dt_field.hide();
                 }
             });
+
             $('.regconfpricing_formset .section-description').addClass('well');
+
             var hide_forms_on_enabled_fn = function() {
                 var $elem = $('input#id_regconf-enabled')
                     $price = $('input[id$="-price"]'),
                     forms = [];
+
                 // display attendees
                 forms.push($('#t-formsbuilder-form-display-attendees'));
+
                 // pricing
                 forms.push($('#t-formsbuilder-form-pricings'));
+
                 // other registration fields
                 $('#t-formsbuilder-form-registration .form-group').each(function(k, v) {
                     if(!$(v).find($elem).length) forms.push($(v));
                 });
+
                 // set price value to 0 if blank
                 $.each($price, function(k, v) { if ($(v).val()=='') { $(v).val(0); } })
+
                 $.each(forms, function(index, form) { if($elem.prop('checked')) form.show(); else form.hide(); });
             }
             $('input#id_regconf-enabled').change(hide_forms_on_enabled_fn);
             hide_forms_on_enabled_fn();
         });
     </script>
+
     <script type="text/javascript">
         {% include 'events/include/event_dates.js' %}
     </script>
+
     <script type="text/javascript">
         {% include 'events/include/event_place.js' %}
     </script>
+
 <script type="text/javascript">
 {% include 'events/include/event_form_custom_reg.js' %}
 </script>
 {% include 'tags/autocomplete.html' %}
+
 {% endblock %}

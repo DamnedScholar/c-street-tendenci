@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+
+
 {% block title %}
     {% if SITE_GLOBAL_SITEPRIMARYKEYWORDS %}{% blocktrans with keys=SITE_GLOBAL_SITEPRIMARYKEYWORDS %}{{ keys }}{% endblocktrans %}: {% endif %}
     {% if MODULE_CAMPAIGN_MONITOR_LABEL %}
@@ -11,8 +13,10 @@
         {% endblocktrans %}
     {% endif %}
 {% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/campaign_monitor.css' %}">
 {% endblock %}
+
 {% block banner %}{% endblock %}

@@ -5,6 +5,7 @@
 {# load quote_tags #}
 {# load testimonial_tags #}
 {# load video_tags #}
+
 {# core apps #}
 {% load page_tags %}
 {% load article_tags %}
@@ -14,12 +15,17 @@
 {% load news_tags %}
 {% load photo_tags %}
 {% load story_tags %}
+
 {% load mobile_tags %}
+
+
 {# plugin apps #}
 {# list_staff as items #}
 {# list_quotes as items #}
 {# list_testimonials as items #}
 {# list_videos as items #}
+
+
 {# core apps #}
 {% list_pages as items %}
 {% list_articles as items template="listnode_template_text.html" %}
@@ -29,4 +35,5 @@
 {% list_news as items %}
 {% list_photos as items %}
 {% list_stories as items %}
+
 {% toggle_mobile_link 'tag_test' 'toggle' %}

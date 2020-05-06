@@ -1,7 +1,7 @@
 {% load base_tags %}
 {% load perm_tags %}
-<div class="t-iconflex flex-wrap">
-<ul class="list-disc pl-4">
+<div class="t-iconrow">
+<ul>
     {% has_perm request.user redirects.change_redirect opt_object as can_edit %}
     {% if opt_object.status == 0 %}
         <span class="copyright body-copy-alerts"><em>{% trans "INACTIVE" %}</em></span>

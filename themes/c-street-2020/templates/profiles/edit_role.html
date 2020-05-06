@@ -1,15 +1,18 @@
 {% extends "profiles/base.html" %}
 {% load profile_tags %}
 {% load styled_forms %}
+
 {% block title %}{% trans 'Edit Group Membership' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/iconrow.css' %}">
 <link rel="stylesheet" href="{% static 'css/profiles.css' %}">
 {% endblock %}
+
 {% block content %}
     <div class="t">
-        <h1 class="text-xl font-semibold">{% trans 'Edit Group Membership Role' %}</h1>
+        <h1>{% trans 'Edit Group Membership Role' %}</h1>
         <div class="profile-wrap">
             <h2>{% trans 'User' %}: <a href="{{ membership.member.get_absolute_url }}">
                 {{ membership.member.get_full_name }} ({{ membership.member.username}})</a>
@@ -26,6 +29,7 @@
         </div>
     </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
 {% endblock %}

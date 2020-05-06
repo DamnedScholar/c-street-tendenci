@@ -2,21 +2,28 @@
 {% load base_filters %}
 {% load invoice_tags %}
 {% load accounting_tags %}
+
+
 {% block title %}{{ block.super }}{% trans 'Invoice Accounting Entries View'%}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/invoices.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
   <div class="page-header">
-    <h1 class="text-xl font-semibold">{% blocktrans with invoice.id as invoice_id %}Accounting Entries View for Invoice {{ invoice_id }}{% endblocktrans %}</h1>
+    <h1>{% blocktrans with invoice.id as invoice_id %}Accounting Entries View for Invoice {{ invoice_id }}{% endblocktrans %}</h1>
   </div>
+
   <div class="invoice-detail">
-    <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="{% url "invoice.view" invoice.id %}">{% trans "View Invoice:" %} {{ invoice.id  }}</a>
+
+    <a class="btn btn-default" href="{% url "invoice.view" invoice.id %}">{% trans "View Invoice:" %} {{ invoice.id  }}</a>
     <br /><br />
+
     {% if acct_entries %}
-    <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports text-left">
+    <table class="table table-tendenci-reports text-left">
       <tr>
         <th><b>{% trans "Account" %}</b></th>
         <th><b>{% trans "Debit" %}</b></th>
@@ -29,6 +36,7 @@
       <div class="{% cycle 'entry1' 'entry2' as entry_class %}" style="display:none; text-align: left;"></div>
       {% acct_entry_item acct_entry entry_class %}
       {% endfor %}
+
       <tfoot>
         <tr>
           <td width="10%"><b>{% trans "Total:" %}</b></td>
@@ -37,11 +45,14 @@
           <td colspan="2">&nbsp;</td>
         </tr>
       </tfoot>
+
     </table>
+
     {% endif %}
+
     <div id="total-by-account">
       <h3>{% trans "Total by Account:" %}</h3>
-      <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports">
+      <table class="table table-tendenci-reports">
         <tr>
           <th width="20%"><b>{% trans "Account" %}</b></th>
           <th width="60%">&nbsp;</th>
@@ -54,11 +65,14 @@
           <td width="20%">{{ acctnum.total|format_currency }}</td>
         </tr>
         {% endfor %}
+
       </table>
     </div>
+
     <div style="margin-top: 1em; margin-bottom: 1em;">
-      <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="{% url "accounting.account_numbers" %}">{% trans "View All Account Numbers" %}</a>
+      <a class="btn btn-default" href="{% url "accounting.account_numbers" %}">{% trans "View All Account Numbers" %}</a>
     </div>
   </div>
+
 </div>
 {% endblock %}

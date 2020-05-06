@@ -1,0 +1,17 @@
+{% load base_filters %}
+{% load base_tags %}
+<ul class="list-unstyled t-meta-data">
+    <li>{% blocktrans with emailcr=email.create_dt|date:"long" email_creator=email.creator %}Created on {{ emailcr }} by {{ email_creator }}{% endblocktrans %}</li>
+</ul>
+{% if user.profile.is_superuser %}
+    <nav class="flex flex-wrap list-none p-0 pl-0 mb-0bar navbar-default t-meta-editor-bar">
+        <div class="container mx-auto mx-auto">
+            <div class="flex-growlapse flex flex-wrap list-none p-0 pl-0 mb-0bar-collapse">
+                <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 navbar-right t-meta-options-links">
+                    <li><a class="t-meta-edit-link" href="{% url 'email.edit' email.pk  %}">{% trans "Edit" %}</a></li>
+                    <li><a class="t-meta-delete-link" href="{% url 'email.delete' email.pk %}">{% trans "Delete" %}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endif %}

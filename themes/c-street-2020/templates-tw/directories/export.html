@@ -1,0 +1,24 @@
+{% extends "directories/base.html" %}
+{% load directory_tags %}
+{% load base_tags %}
+{% load base_filters %}
+{% block title %}{% trans "Export Directories" %}{% endblock %}
+{% block content %}
+<div class="t">
+    <h1 class="text-xl font-semibold">{% trans "Directories Export" %}</h1>
+    <div id="directory-export">
+        <div class="relative px-3 py-3 mb-4 border rounded">
+            {% blocktrans %}
+            <strong>Note</strong>: An email will be sent to you at <strong>{{ request.user.email }}</strong> once the export is ready.
+            {% endblocktrans %}
+        </div>
+        <form method="post" action="">{% csrf_token %}
+            {% for field in form %}
+                {{ field.errors }}
+                {{ field }}
+            {% endfor %}
+            <div><input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal " type='submit' value="{% trans 'Export Directories' %}"></div>
+        </form>
+    </div>
+</div>
+{% endblock %}

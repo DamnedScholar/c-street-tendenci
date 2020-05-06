@@ -3,7 +3,9 @@
 {% load page_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{% firstof MODULE_PAGE_LABEL trans 'Page' %} {% trans 'Add' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">
@@ -11,47 +13,58 @@
 <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link href="{% static 'css/jquery.tagit.css' %}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="{% static 'css/popover.css' %}">
+
 {% endblock %}
+
 {% block content %}
+
 <div id="page-add">
   <div class="page-header">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_PAGES_LABEL trans 'Page' %} {% trans "Add" %}</h1>
+    <h1>{% firstof MODULE_PAGES_LABEL trans 'Page' %} {% trans "Add" %}</h1>
   </div>
+  
   <div class="page-wrap">
     <form action="{% url "page.add" %}" class="form-horizontal" method="post" enctype="multipart/form-data">{% csrf_token %}
-      <div class="mb-4">
+      
+      <div class="form-group">
         {{ form|styled_form }}
-        <fieldset class="boxy-gray-500" >
+        <fieldset class="boxy-grey" >
           <legend id="category-title" style="cursor: pointer"><span>+</span> {% trans "Category" %}</legend>
           <div id="category-form">
             {{ categoryform|styled_form }}
           </div>
         </fieldset>
-        <fieldset class="boxy-gray-500">
+        <fieldset class="boxy-grey">
           <legend id="meta-title" style="cursor: pointer"><span>+</span> {% trans "SEO Meta" %}</legend>
           <div id="meta-form">
             {{ metaform|styled_form }}
           </div>
         </fieldset>
       </div>
-      <div class="mb-4">
-        <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" type="hidden" id="id_preview_for" name="preview_for"/>
-        <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit" value="{% trans 'Add' %} {% firstof MODULE_PAGES_LABEL trans 'Page' %}" />
-        <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default previewButton" type="button" value="Preview"/>
+      
+      <div class="form-group">
+        <input class="btn btn-default" type="hidden" id="id_preview_for" name="preview_for"/>
+        <input class="btn btn-primary" type="submit" value="{% trans 'Add' %} {% firstof MODULE_PAGES_LABEL trans 'Page' %}" />
+        <input class="btn btn-default previewButton" type="button" value="Preview"/>
       </div>
+      
     </form>
   </div>
+  
 </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 {   {{ form.media }}
 <script type="text/javascript" src="{% static 'js/global/tinymce.event_handlers.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/slug.js' %}"></script>
+
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="{% static 'js/tag-it.js' %}" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="{% static 'js/popover.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/gplus-helptexts.js' %}"></script>
+
 <script type="text/javascript">
   var slugit = new Slugify({
   input_element : 'input#id_title',
@@ -84,6 +97,7 @@
   availableTags: [{% all_tags_list %}],
   allowSpaces: true
   });
+  
   //Set preview button
   $('input.previewButton').on("click", function() {
   var form = $('div.page-wrap > form');
@@ -91,6 +105,7 @@
   form.attr('action', "{% url "page.preview" %}");
   form.attr('target', '_blank');
   form.submit();
+  
   form.attr('action', url);
   form.attr('target', '');
   });

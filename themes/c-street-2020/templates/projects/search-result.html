@@ -2,6 +2,7 @@
 {% load file_tags %}
 {% load project_tags %}
 {% load base_filters %}
+
 <div class="wrap-search-item">
    <div class="search-item projects-search-item">
            <h2><a href="{{ project.get_absolute_url }}">{{ project.project_name }}</a></h2>
@@ -12,9 +13,11 @@
                 </div>
             {% endfor %}
         </div>
+
         {% if project.end_dt %}
            <div>{% trans 'Year Completed:' %} {{ project.end_dt }}</div>
            {% endif %}
+
            {% if project.project_description %}
         <div class="project-description">{{ project.project_description|safe|truncatewords:18|safe }}</div>
         {% endif %}

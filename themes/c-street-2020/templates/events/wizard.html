@@ -1,7 +1,9 @@
 {% extends "events/base.html" %}
 {% load event_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }}{% trans 'Add' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -9,6 +11,7 @@
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 <script type="text/javascript" src="{{ TINYMCE_JS_URL }}"></script>
 {% endblock %}
+
 {% block content %}
     <p>{% blocktrans %}Step {{ step }} of {{ step_count }}{% endblocktrans %}</p>
     <form action="" method="post">{% csrf_token %}
@@ -22,6 +25,7 @@
         <input type="submit">
     </form>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript" src="{% url 'tinymce-filebrowser' %}"></script>

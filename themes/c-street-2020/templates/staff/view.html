@@ -4,6 +4,7 @@
 {% load perm_tags %}
 {% load staff_tags %}
 {% load tagging_tags %}
+
 {% block title %}
 {% nowhitespace %}
 {{ staff.name|safe }}
@@ -17,6 +18,7 @@
 {% endif %}
 {% endnowhitespace %}
 {% endblock %}
+
 {% block meta_keywords %}
 {% nowhitespace %}
 staff {{ staff.name }}
@@ -30,6 +32,7 @@ staff {{ staff.name }}
 {% endif %}
 {% endnowhitespace %}
 {% endblock %}
+
 {% block meta_description %}
 {% nowhitespace %}
 {{ staff.name }}
@@ -44,19 +47,23 @@ staff {{ staff.name }}
 {{ staff.biography|striptags|truncatewords:"50"|safe }}
 {% endnowhitespace %}
 {% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/staff-view.css' %}">
 {% endblock %}
+
 {% block content %}
 <div id="staff-member-view">
   <div class="page-header">
     {% spaceless %}
-    <h1 class="text-xl font-semibold">{{ staff.name|safe }}</h1>
+    <h1>{{ staff.name|safe }}</h1>
     {% endspaceless %}
   </div>
-  <div class="flex flex-wrap">
-    <div id="staff-top" class="md:w-1/4 pr-4 pl-4">
+  
+  <div class="row">
+    
+    <div id="staff-top" class="col-md-3">
       {% for img in staff.stafffile_set.all %}
       {% if img.photo_type == "featured" %}
       <div class="member-photo">
@@ -65,7 +72,8 @@ staff {{ staff.name }}
       {% endif %}
       {% endfor %}
     </div>
-    <div class="md:w-3/4 pr-4 pl-4">
+    
+    <div class="col-md-9">
       <h3>Position</h3>
       {% if staff.positions %}{% for position in staff.positions.all %}
       <p>{{ position }}{% endfor %}{% endif %}
@@ -76,10 +84,12 @@ staff {{ staff.name }}
         {% if staff.email %}<p><strong>{% trans 'Email' %}: </strong>{{ staff.email|obfuscate_email }}</p>{% endif %}
       </div>
       {% endif %}
+      
       <div id="main-staff-info" class="clearfix">
         {% if staff.personal_sites %}
         <strong>{% trans 'Websites' %}: </strong>{{ staff.personal_sites|urlize }}
         {% endif %}
+        
         {% if staff.biography %}
         <div id="staff-bio">
           <h3>Biography</h3>
@@ -89,11 +99,18 @@ staff {{ staff.name }}
             <a href="{{ staff.get_absolute_url }}cv/">View {{ staff.name|striptags }}'s CV</a>
           </p>
           {% endif %}
+          
         </div> <!-- /staff-bio -->
         {% endif %}
+        
       </div> <!-- /main-staff-info -->
     </div>
+    
   </div> <!-- end: row -->
+  
+  
+  
+  
   <div id="staff-photos" class="clearfix">
     {% for img in staff.stafffile_set.all %}
     {% if img.photo_type == "other" %}
@@ -101,19 +118,26 @@ staff {{ staff.name }}
     {% endif %}
     {% endfor %}
   </div>
+  
   <nav aria-label="back to staff search">  
     <ul class="pager">
       <li class="previous"><a href="{% url "staff.search" %}"><span aria-hidden="true">&larr;</span> {% trans "Search More " %} {% firstof MODULE_STAFF_LABEL 'Staff' %}</a></li>
     </ul>
   </nav>
+  
   {% include 'staff/meta.html' %}
+  
   <br />
 </div>
+
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
+
 <!--[if lt IE 7 ]>
 <script src="{% static 'js/libs/dd_belatedpng.js' %}"></script>
 <script> DD_belatedPNG.fix('img, .png_bg');</script>
 <![endif]-->
+
 {% endblock %}

@@ -15,6 +15,7 @@
             {% else %}
                 <p>{% trans 'Trans_ID not available' %}</p>
             {% endif %}
+
             <p>{% trans 'Description' %}: {{ payment.description }}</p>
         </div>
         <div class="payment-status">
@@ -34,6 +35,7 @@
                         {{ payment.status_detail }}
                     {% endif %}
                 {% endif %}]</p>
+
             <p>{{ payment.method }} {{ payment.amount|format_currency }}</p>
         </div>
     </div>

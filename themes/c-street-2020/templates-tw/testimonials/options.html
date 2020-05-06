@@ -1,0 +1,12 @@
+{% load base_tags %}
+{% load perm_tags %}
+{% has_perm user staff.change_staff opt_object as can_edit %}
+{% has_perm user staff.delete_staff opt_object as can_delete %}
+<div class="t-iconflex flex-wrap">
+    {% if can_edit %}
+        <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-teal-100 bg-teal-500 hover:bg-teal-400" href="{% url 'admin:testimonials_testimonial_change' opt_object.pk %}?next={{ request.path }}">Edit</a>
+    {% endif %}
+    {% if can_delete %}
+        <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-red-100 bg-red-500 hover:bg-red-400" href="{% url 'admin:testimonials_testimonial_delete' opt_object.pk %}">Delete</a>
+    {% endif %}
+</div>

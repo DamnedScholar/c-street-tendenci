@@ -1,5 +1,6 @@
 {% extends "helpdesk/public_base.html" %}
 {% block helpdesk_title %}{% trans "View a Ticket" %}{% endblock %}
+
 {% block helpdesk_body %}
 <h3>{% trans "Change the display language" %}</h3>
 <form action="/i18n/setlang/" method="post">
@@ -11,6 +12,7 @@
         <option value="{{ language.code }}"{% if LANGUAGE_CODE == language.code %} selected{% endif %}>{{ language.name_local }} ({{ language.code }})</option>
         {% endfor %}
     </select>
-    <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit" value="Go" />
+    <input class="btn btn-primary" type="submit" value="Go" />
 </form>
+
 {% endblock %}

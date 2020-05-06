@@ -1,20 +1,24 @@
 {% extends "newsletters/base.html" %}
 {% load base_filters %}
+
 {% block title %}
 {{ block.super }}{% trans 'Tendenci Newsletter Generator - Ready to Send!'%}
 {% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 {% endblock %}
+
 {% block content %}
 <div class="t">
   <div id="t-newsletters">
     <div class="page-header">
-      <h1 class="text-xl font-semibold">{% trans 'Ready to Send!' %}</h1>
+      <h1>{% trans 'Ready to Send!' %}</h1>
     </div>
+
     {% if form.non_field_errors %}
     <div class="body-copy-alerts">
-      <ul class="list-disc pl-4">
+      <ul>
         {% for error in form.non_field_errors %}
         <li>{{error}}</li>
         {% endfor %}
@@ -45,6 +49,7 @@
       <div class="step-content-item">
       <strong>{{ object.email.subject }}</strong>
     </div>
+
     </div>
     </div>
       <div class='step-section cf'>
@@ -84,6 +89,7 @@
     </div>
     </div> -->
       <div class='step-section cf'>
+
         <div class="step-contents">
           <div class="step-content-item">
             {% blocktrans %}
@@ -96,21 +102,29 @@
             <p>Once submitted the e-mail will be put into the queue for processing within 10 minutes.</p>
             {% endblocktrans %}
           </div>
-          <div class="mb-4">
+
+          <div class="form-group">
             {{ form.create_article }} &nbsp; <label>{{ form.create_article.label }}</label>
           </div>
-          <div class="mb-4">
-            <div class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-800 border border-gray-500 rounded">
+
+          <div class="form-group">
+            <div class="form-control">
               <input type="checkbox" name="send_status" value="queued" />&nbsp; &nbsp;<label> *Confirm Send (Check box to Continue) </label>
             </div>
           </div>
-          <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400 py-3 px-4 text-xl leading-tight pull-right" type="submit" value="{% trans 'Send Newsletter' %}" />
+
+
+          <input class="btn btn-primary btn-lg pull-right" type="submit" value="{% trans 'Send Newsletter' %}" />
+
+
         </div>
       </div>
     </form>
   </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
+
 {% endblock %}

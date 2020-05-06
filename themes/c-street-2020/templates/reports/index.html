@@ -1,7 +1,9 @@
 {% extends "reports/base.html" %}
+
 {% block content %}
-<h1 class="text-xl font-semibold">{% trans "Available reports" %}</h1>
-<ul class="list-disc pl-4">
+<h1>{% trans "Available reports" %}</h1>
+
+<ul>
     <li><a href="{% url "reports-events-summary" %}">{% trans "Marketing Events Summary" %}</li>
     <li><a href="{% url "reports-admin-users" %}">{% trans "Administrator Security Level" %}</li>
     <li><a href="{% url "reports-user-added" %}">{% trans "Site Users Added" %}</li>
@@ -16,4 +18,5 @@
     <li><a href="{% url "reports-corp-mems-over-time" %}">{% trans "Corporate Memberships Over Time" %}</a></li>
     <li><a href="{% url "reports-corp-mems-summary" %}">{% trans "Corporate Membership Report" %}</a></li>
 </ul>
+
 {% endblock content %}

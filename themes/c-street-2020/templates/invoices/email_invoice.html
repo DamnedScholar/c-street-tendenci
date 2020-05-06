@@ -3,18 +3,23 @@
 {% load perm_tags %}
 {% load base_filters %}
 {% load styled_forms %}
+
 {% block title %} {% trans 'Email Invoice' %}{% endblock %}
+
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/invoices.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-<h1 class="text-xl font-semibold">{% trans "Email Invoice" %}</h1>
+<h1>{% trans "Email Invoice" %}</h1>
+
 {% with invoice.get_object as object %}
-<div class="flex flex-wrap">
+<div class="row">
     <div style="margin: 20px auto; width: 500px;">
-      <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports" border="0" cellspacing="0" cellpadding="0">
+      <table class="table table-tendenci-reports" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td>{% trans 'Invoice #' %}</td>
           <td class="td-right"><a href="{% url 'invoice.view' invoice.id %}">{{ invoice.id }}</a></td>
@@ -61,16 +66,19 @@
    </div>
  </div>
   {% endwith %}
+
 <form action="." method="post" class="form-horizontal">{% csrf_token %}
 {{ form|styled_form }}
-<div class="mb-4">
-    <div class=":flex-growsm-offset-3 sm:w-3/4 pr-4 pl-4">
-      <button type="submit" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400">{% trans "Send Now" %}</button>
+
+<div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="submit" class="btn btn-primary">{% trans "Send Now" %}</button>
     </div>
   </div>
 </form>
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     {{ form.media }}

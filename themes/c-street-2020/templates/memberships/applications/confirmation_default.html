@@ -1,20 +1,26 @@
 {% extends "memberships/base-wide.html" %}
 {% load base_filters %}
+
 {% block title %}{% endblock %}
 {% block meta_description %}{% endblock %}
 {% block meta_keywords %}{% endblock %}
 {% block meta_canonical_url %}<link rel="canonical" href="" />{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/memberships.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
 <div class="application-entry-wrap">
-        <h1 class="text-xl font-semibold">{% trans "Membership Confirmation" %}</h1>
+
+        <h1>{% trans "Membership Confirmation" %}</h1>
+
         <div class="entry_dt">
             {% trans "Submitted" %} {{ membership.create_dt }}
         </div>
+
         {% if membership.application_approved %}
             <div class="approved_dt">
                 {% blocktrans with membership.application_approved_dt|date_short as decision_date %}
@@ -34,6 +40,7 @@
         {% else %}
             <div class="pending">{% trans "Pending" %}</div>
         {% endif %}
+
         {% with membership.user as member %}
             <div>{% trans 'First Name' %}: {{ member.first_name }}</div>
             <div>{% trans 'Last Name' %}: {{ member.last_name }}</div>
@@ -65,25 +72,32 @@
             <div>{% trans 'Hide Email' %}: {{ member.profile.hide_email|yesno:"Yes,No" }}</div>
             <div>{% trans 'Hide Phone' %}: {{ member.profile.hide_phone|yesno:"Yes,No" }}</div>
         {% endwith %}
+
         <hr />
+
         <div>{% trans 'Payment Method' %}: {{ membership.payment_method }}</div>
         <div>{% trans 'Membership Type' %}: {{ membership.membership_type }}</div>
         <div>{% trans 'Join Date' %}: {{ membership.join_dt }}</div>
         <div>{% trans 'Renew Date' %}: {{ membership.renew_dt }}</div>
         <div>{% trans 'Expire Date' %}: {{ membership.expire_dt }}</div>
+
         <hr />
+
         <div>{% trans 'Member Number' %}: {{ membership.member_number }}</div>
         <div>{% trans 'Renewal' %}: {{ membership.renewal }}</div>
         <div>{% trans 'Certifications' %}: {{ membership.certifications }}</div>
         <div>{% trans 'Work Experience' %}: {{ membership.work_experience }}</div>
+
         <div>{% trans 'Referral Source' %}: {{ membership.referral_source }}</div>
         <div>{% trans 'Referral Source Other' %}: {{ membership.referral_source_other }}</div>
         <div>{% trans 'Referral Source Member Name' %}: {{ membership.referral_source_member_name }}</div>
         <div>{% trans 'Referral Source Member Number' %}: {{ membership.referral_source_member_number }}</div>
+
         <div>{% trans 'Affilliation Member Number' %}: {{ membership.affiliation_member_number }}</div>
         <div>{% trans 'Primary Practice' %}: {{ membership.primary_practice }}</div>
         <div>{% trans 'How long in practice' %}: {{ membership.how_long_in_practice }}</div>
         <div>{% trans 'Notes' %}: {{ membership.notes }}</div>
+
         <div>{% trans 'Areas of Expertise' %}: {{ membership.areas_of_expertise }}</div>
         <div>{% trans 'Corporate Membership ID' %}: {{ membership.corporate_membership_id }}</div>
         <div>{% trans 'Home State' %}: {{ membership.home_state }}</div>
@@ -98,6 +112,7 @@
         <div>{% trans 'Industry' %}: {{ membership.industry }}</div>
         <div>{% trans 'Company Size' %}: {{ membership.company_size }}</div>
         <div>{% trans 'Promotion Code' %}: {{ membership.promotion_code }}</div>
+
 </div>
 </div>
 {% endblock %}

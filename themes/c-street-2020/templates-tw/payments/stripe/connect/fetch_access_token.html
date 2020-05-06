@@ -1,0 +1,13 @@
+{% extends "payments/stripe/connect/base.html" %}
+{% block content %}
+<h1 class="text-xl font-semibold">{% trans 'Stripe Connect Confirmation' %}</h1>
+{% if sa %}
+<p class="text-green-500">{{ msg_string }}</p>
+<p>{% blocktrans with account_name=sa.account_name %}Account <strong>{{ account_name }}</strong> is connected.{% endblocktrans %}</p>
+{% url "stripe_connect.deauthorize" sa.pk as deauthorize_url %}
+<p>{% blocktrans %}Click <a href="{{ deauthorize_url }}">here</a> to disconnect the account.{% endblocktrans %}</p>
+{% else %}
+<h3 class="text-yellow-500">Connection Faliled</h3>
+<p>{{ msg_string }}</p>
+{% endif %}
+{% endblock %}

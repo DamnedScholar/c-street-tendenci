@@ -55,6 +55,7 @@
     {% endif %}
 {% endfor %}
 </table>
+
 {% if form.custom_payment or form.recurring_payment %}
     <h2>{% trans 'Payment Details' %}</h2>
     <p>
@@ -64,6 +65,7 @@
     <strong>{% trans 'Price' %}:</strong> {% if entry.pricing.price %}{{ entry.pricing.price|format_currency }}{% else %}{{ custom_price|format_currency }}{% endif %}<br />
     </p>
 {% endif %}
+
 {% if form.send_email %}
 <br />
     {% if form.email_text %}

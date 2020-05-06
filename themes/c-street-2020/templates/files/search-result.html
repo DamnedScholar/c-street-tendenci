@@ -1,21 +1,28 @@
 {% load file_tags %}
 {% load tagging_tags %}
+
 {% tags_for_object file as tags %}
+
 <div class="file-wrap {{ layout }}-wrap">
     <div class="options">
         <div class="quick-options">
             {% file_options request.user file %}
         </div>
     </div>
+
     {% file_thumbnail layout file %}
+
     <h2><a href="{% url 'file' file.pk %}">{{ file.get_name|truncatechars:50 }}</a></h2>
+
     <div class="download">
         <a title="Download {{ file.ext }}" href="{% url 'file' file.pk 'download' %}">{% trans "Download" %} this {{ file.type }}</a>
     </div>
+
     <div>
     <div>Secure link: <input type="text" value="{% url 'file' file.pk %}" /> </div>
     <div>Full link (no security): <input type="text" value="{{ file.get_full_url }}" /></div>
     </div>
+
     <div class="meta">
         {% with file.category_set as file_cat %}
         {% if file_cat %}
@@ -27,6 +34,7 @@
         </div>
         {% endif %}
         {% endwith %}
+
         {% if tags %}
         <div class="tags">
             <strong>Tags: </strong>
@@ -35,6 +43,7 @@
         {% endfor %}
         </div>
         {% endif %}
+
         {% if file.get_content %}
         <div class="related-content">
             <strong>{% trans "Uploaded via" %}</strong>
@@ -45,6 +54,7 @@
             {% endif %}
         </div>
         {% endif %}
+
         <div class="submitted">
             {% if layout == "list" %}<span>{% trans "Created" %} {{ file.create_dt|date:"D d M Y P" }} {% trans "by" %} {{ file.creator }}</span><br />{% endif %}
             <a href="{% url "event_log.search" %}?source=files&object_id={{ file.pk }}">
@@ -58,6 +68,7 @@
             </a>
         </div>
     </div>
+
     <!-- delete-file form -->
     <form name="file-delete" method="POST" action="{% url "file.delete" file.pk %}">{% csrf_token %}
         <input type="hidden" name="action" value="delete">

@@ -1,8 +1,10 @@
 {% load pybb_tags %}
+
 {% pybb_get_profile user=post.user as post_user_profile %}
 {% pybb_get_profile user=user as user_profile %}
+
 <a name="post-{{ post.id }}"></a> {# may be remove this string? #}
-<table class="w-full max-w-full mb-4 bg-transparent table-bordered post {% if post.on_moderation %}on-moderation{% endif %}" id="post-{{ post.id }}">
+<table class="table table-bordered post {% if post.on_moderation %}on-moderation{% endif %}" id="post-{{ post.id }}">
     <thead class="post-header">
     <tr>
     <th colspan="2">
@@ -15,6 +17,7 @@
     <tr class="post-row">
         <td class="post-info">
             {% include "pybb/avatar.html" with user=post.user %}
+
             <div class="post-author">
                 <a href="{{ post_user_profile.get_absolute_url }}">
                     <span class="post-username">{{ post_user_profile.get_display_name }}</span>
@@ -32,6 +35,7 @@
             {% if user.is_superuser %}
                 <div class="post-extra-info">{{ post.user_ip }}</div>
             {% endif %}
+
             <div class="post-controls">
                 {% if user.is_moderator or post|pybb_posted_by:user %}
                     <a href="{% url 'pybb:edit_post' pk=post.id %}">{% trans "Edit" %}</a>
@@ -44,13 +48,16 @@
                         <a href="{% url 'pybb:moderate_post' pk=post.id %}">{% trans "Approve post" %}</a>
                     {% endif %}
                 {% endif %}
+
                 {% if perms.pybb.change_post and user.is_staff %}
                     <a href="{% url 'admin:forums_post_change' post.id %}">{% trans 'Admin' %}</a>
                 {% endif %}
+
             </div>
         </td>
         <td class="post-content">
             {{ post.body_html|safe }}
+
             {% if not user.is_authenticated or user_profile.show_signatures %}
                 {% if post_user_profile.signature %}
                     <div class="post-signature">
@@ -61,6 +68,7 @@
             {% if post.updated %}
                 <div class="updated-message">{% trans "Edited" %} {% pybb_time post.updated %}</div>
             {% endif %}
+
             {% comment %}
                     {% if post.attachment_cache %}
                     {% for attach in post.attachment_cache %}

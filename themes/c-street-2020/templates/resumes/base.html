@@ -1,10 +1,13 @@
 {% extends "site_base.html" %}
+
+
 {% block title %}{% spaceless %}
     {% if SITE_GLOBAL_SITEPRIMARYKEYWORDS %}{{ SITE_GLOBAL_SITEPRIMARYKEYWORDS }}: {% endif %}
     {% if MODULE_RESUMES_LABEL %}{% blocktrans with label=MODULE_RESUMES_LABEL display_name=SITE_GLOBAL_SITEDISPLAYNAME %}{{ label }} Listings for {{ display_name }} - Employment Opportunities and {{ label }} Openings{% endblocktrans %}
     {% else %}{% blocktrans with display_name=SITE_GLOBAL_SITEDISPLAYNAME %}Resume Listings for {{ display_name }} - Employment Opportunities and Resume Openings{% endblocktrans %}
     {% endif %}
 {% endspaceless %}{% endblock %}
+
 {% block meta_description %}{% spaceless %}
     {% if MODULE_RESUMES_LABEL %}
         {% blocktrans with label=MODULE_RESUMES_LABEL label_lower=MODULE_RESUMES_LABEL|lower display_name=SITE_GLOBAL_SITEDISPLAYNAME location=SITE_GLOBAL_SITEGEOGRAPHICLOCATION %}
@@ -16,6 +19,7 @@
         {% endblocktrans %}
     {% endif %}
 {% endspaceless %}{% endblock %}
+
 {% block meta_keywords %}{% spaceless %}
     {% trans "Employment Search" %},
     {% if MODULE_RESUMES_LABEL %}{% blocktrans with label=MODULE_RESUMES_LABEL %} {{ label }} Search, {% endblocktrans %}
@@ -24,11 +28,14 @@
     {% else %}{% blocktrans with location=SITE_GLOBAL_SITEGEOGRAPHICLOCATION %}{{ location }} resumes,{% endblocktrans %}
     {% endif %} {% trans "employment opportunities, employment, hiring, staffing, agencies" %}
 {% endspaceless %}{% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/resumes.css' %}">
 {% endblock %}
+
 {% block banner %}{% endblock %}
+
 {% block top_bar %}
     {% if request.user.is_authenticated %}
         {% include "resumes/top_nav.html" %}

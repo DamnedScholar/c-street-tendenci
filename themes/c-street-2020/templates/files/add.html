@@ -1,15 +1,19 @@
 {% extends "files/base.html" %}
 {% load file_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }}{% trans 'Add' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/files.css' %}">
 <script type="text/javascript" src="{{ TINYMCE_JS_URL }}"></script>
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Add File" %}</h1>
+    <h1>{% trans "Add File" %}</h1>
+
     <div class="file-wrap">
     <form action="{% url "file.add" %}" class="form-horizontal" method="post" enctype="multipart/form-data">{% csrf_token %}
         <div class="forms">
@@ -17,12 +21,16 @@
             <input type="submit" value="{% trans 'Add File' %}" />
         </div>
     </form>
+
     </div>
+
     <div class="loading-message">
         <img src="{% static 'images/loadingicon.gif' %}" alt="{% trans 'loading' %}" title="{% trans 'loading' %}" />
     </div>
+
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript" src="{% static 'js/jquery-blockUI.js' %}"></script>

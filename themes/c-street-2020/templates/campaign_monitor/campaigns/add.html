@@ -2,10 +2,14 @@
 {% load campaign_monitor_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
+
 {% block title %}{% trans 'Campaign Add' %}{% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans 'Campaign Add' %}</h1>
+    <h1>{% trans 'Campaign Add' %}</h1>
+
     <div class="template-wrap">
         <form action="{% url "campaign_monitor.campaign_generate" %}" method="post">{% csrf_token %}
         <div class="forms">
@@ -106,5 +110,6 @@
         </div>
         </form>
     </div>
+
 </div>
 {% endblock %}

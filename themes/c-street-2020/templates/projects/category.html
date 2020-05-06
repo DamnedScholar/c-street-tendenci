@@ -2,14 +2,17 @@
 {% load search_tags %}
 {% load pagination_tags %}
 {% load project_tags %}
+
+
 {% block extra_head %}
     {{ block.super }}
     <link rel="alternate" type="application/rss+xml" title="{% trans 'Projects' %}" href="{% url 'projects.feed' %}" />
 {% endblock %}
+
 {% block content %}
 {% autopaginate projects 10 %}
 <div class="t">
-<h1 class="text-xl font-semibold">{% trans 'Project Categories' %}</h1>
+<h1>{% trans 'Project Categories' %}</h1>
 <div class="category-wrap clearfix">
 {% for category in categories %}
 {% include "projects/category-result.html" %}

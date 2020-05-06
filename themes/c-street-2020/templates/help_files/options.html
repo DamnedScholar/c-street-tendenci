@@ -1,7 +1,8 @@
 {% load base_tags %}
 {% load perm_tags %}
-<div class="t-iconflex flex-wrap">
-<ul class="list-disc pl-4">
+
+<div class="t-iconrow">
+<ul>
     {% has_perm request.user help_files.change_helpfile opt_object as can_edit %}
     {% if opt_object.status_detail == 'draft' %}
         <span class="copyright body-copy-alerts"><em>{% trans "DRAFT" %}</em></span>

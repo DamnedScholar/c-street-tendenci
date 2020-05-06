@@ -1,14 +1,16 @@
 {% extends "reports/base.html" %}
 {% load base_filters %}
 {% load bootstrap_pagination_tags %}
+
 {% block content %}
 <div class="page-header">
-  <h1 class="text-xl font-semibold">{% trans "404 URL Report" %}</h1>
+  <h1>{% trans "404 URL Report" %}</h1>
 </div>
+
 {% if entry_list|length < 1 %}
 <p>{% trans "There is nothing to report" %}</p>
 {% else %}
-<table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports">
+<table class="table table-tendenci-reports">
   <tr>
     <th>{% trans "Count" %}</th>
     <th>{% trans "URL" %}</th>

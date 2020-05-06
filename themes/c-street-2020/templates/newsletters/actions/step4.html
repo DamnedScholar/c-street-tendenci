@@ -1,22 +1,26 @@
 {% extends "newsletters/base.html" %}
 {% load base_filters %}
+
 {% block title %}
 {{ block.super }}{% trans 'Tendenci Newsletter Generator - Edit Your Newsletter'%}
 {% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 {% endblock %}
+
 {% block content %}
 <div class="t">
   <div id="t-newsletters">
     <div class="page-header">
-      <h1 class="text-xl font-semibold">{% trans 'Edit Your Newsletter' %}</h1>
+      <h1>{% trans 'Edit Your Newsletter' %}</h1>
     </div>
+
     <form action='' method="POST">{% csrf_token %}
       <div class='step-section cf'>
         <div class="step-contents">
           <div class="step-content-item">
-            <div class="mb-4">
+            <div class="form-group">
               <label>{% trans 'Include Secondary Email:' %}</label> &nbsp;{{ form.send_to_email2 }}
             </div>
           </div>
@@ -25,22 +29,26 @@
       <div class='step-section cf'>
         <div class="step-contents">
           <div class="step-content-item">
+
             <p><strong>{% trans 'Newsletter Subject' %}:</strong> {{ form.subject }}</p>
             <p><strong>{% trans 'Current Sender E-mail' %}:</strong> {{ object.email.sender }} </p>
             <p>
-              <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" href="{% url 'email.viewbody' object.email.pk %}">
+              <a class="btn btn-primary" href="{% url 'email.viewbody' object.email.pk %}">
                 {% trans 'View Newsletter' %}
               </a>
-              <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-yellow-100 bg-yellow-500 hover:bg-yellow-400" href="{% url 'email.edit' object.email.pk %}?next={{ request.path }}">
+              <a class="btn btn-warning" href="{% url 'email.edit' object.email.pk %}?next={{ request.path }}">
                 {% trans 'Edit Newsletter Contents' %}
               </a>
             </p>
           </div>
+
         </div>
       </div>
       <div class='step-section cf'>
         <div class="step-contents">
-          <div class="mb-4">
+
+
+          <div class="form-group">
             <p class="capitalize">
               <label>
                 {% if object.member_only %}
@@ -49,6 +57,7 @@
                 {% trans 'Newsletter Recipients: ' %}
                 {% endif %}
               </label>
+
              <!-- {% if object.member_only %}
               {% trans 'Members Only' %}
               <a href="{% url 'groups' %}">{% trans 'Specify User Group' %}</a>
@@ -56,6 +65,7 @@
               {{ object.group }}&nbsp;&nbsp;&nbsp;&nbsp;
               <a href="{% url 'groups' %}">{% trans 'Edit User Group' %}</a>
               {% endif %} -->
+
               <!-- test user group add -->
               <div class='step-section cf'>
                 <div class="step-contents">
@@ -71,15 +81,19 @@
                   <div class="step-content-item">
                     {% trans "Usergroup" %} {{ form.group }}
                   </div>
+
                 </div>
               </div>
               <!-- end test -->
+
             </p>
           </div>
+
         </div>
       </div>
       <div class='step-section cf'>
         <div class="step-contents">
+
           <h3>{% trans 'Confirm acceptance of site policies and common sense.' %}</h3>
           <hr />
           <div class="step-content-item body-copy-alerts">
@@ -105,12 +119,12 @@
             {{ form.sla.errors }}
           </div>
           {% endif %}
-          <div class="mb-4">
+          <div class="form-group">
             <input type="checkbox" name="sla">&nbsp;&nbsp;
             <label>{% trans 'I Agree and Accept Software License Agreement' %}</label>
           </div>
           <div class="step-content-item">
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400 py-3 px-4 text-xl leading-tight pull-right" type="submit" value="{% trans 'Continue' %} &nbsp; &rarr;" />
+            <input class="btn btn-primary btn-lg pull-right" type="submit" value="{% trans 'Continue' %} &nbsp; &rarr;" />
           </div>
           <br /><br />
         </div>
@@ -119,6 +133,8 @@
   </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
+
 {% endblock %}

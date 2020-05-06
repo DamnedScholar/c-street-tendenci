@@ -6,7 +6,7 @@
 {% endif %}
 {% trans 'Seats available' %} {{ spots_status.1 }} 
 {% if spots_status.1 <= 0 %}
-	<span class="text-red-500">{% trans '(Sold out)' %}</span>
+	<span class="text-danger">{% trans '(Sold out)' %}</span>
 {% endif %}
 </span>
 {% endwith %}

@@ -1,6 +1,6 @@
 <div class="group">
   <form method="POST" action="">{% csrf_token %}
-    <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports">
+    <table class="table table-tendenci-reports">
       <tr>
         <th>{% trans "ID" %}</th>
         <th>{% trans "Username" %}</th>
@@ -26,7 +26,7 @@
       {% endfor %}
     </table>
     {% if request.user.is_superuser %}
-    <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-green-100 bg-green-500 hover:bg-green-400 py-1 px-2 text-sm leading-tight" type="submit" value="{% trans 'Merge these users' %}" />
+    <input class="btn btn-success btn-sm" type="submit" value="{% trans 'Merge these users' %}" />
     {% endif %}
   </form>
 </div>

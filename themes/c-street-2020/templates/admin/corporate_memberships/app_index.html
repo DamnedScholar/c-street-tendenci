@@ -1,12 +1,14 @@
 {% extends "django_admin_bootstrapped:admin/app_index.html" %}
 {% load bootstrapped_goodies_tags %}
+
+
 {% block sidebar %}
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class='panel-title'>{% trans "Reporting Options" %}</h3>
   </div>
   <div class"panel-body">
-    <div class="container mx-auto">
+    <div class="container">
       <h4>{% trans "Imports" %}</h4>
       <ol>
         <li><a href="{% url 'corpmembership.import' %}">{% trans "Import" %}</a></li>

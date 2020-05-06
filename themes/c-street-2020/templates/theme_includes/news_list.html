@@ -3,6 +3,7 @@
 {% list_news as featured_news limit=TEMPLATE_NEWS_LIST_LIMIT %}
 <section id="news-list-featured">
     <h3>{% firstof TEMPLATE_NEWS_LIST_TITLE trans 'News' %}</h3>
+
     {% if featured_news %}
     {% for news_item in featured_news|slice:":1" %}
         <h4><a href="{{ news_item.get_absolute_url }}">{{ news_item.headline }}</a></h4>

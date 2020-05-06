@@ -1,7 +1,9 @@
 {% extends "default.html" %}
+
 {% block title %}{{ block.super }}{% trans 'Error' %}{% endblock%}
+
 {% block content %}
-    <h1 class="text-xl font-semibold">{% if user.is_authenticated %}{% blocktrans with user.username as use %}Oops {{ use }}, we caused a problem{% endblocktrans %}
+    <h1>{% if user.is_authenticated %}{% blocktrans with user.username as use %}Oops {{ use }}, we caused a problem{% endblocktrans %}
     {% else %}{% trans 'Oops, we caused a problem' %}
     {% endif %}
       </h1>

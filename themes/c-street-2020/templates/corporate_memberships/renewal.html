@@ -1,7 +1,9 @@
 {% extends "corporate_memberships/base-wide.html" %}
 {% load corporate_memberships_tags %}
 {% load styled_forms %}
+
 {% block title %}{% trans "Corporate Membership Renewal" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <style>
@@ -28,6 +30,7 @@ div.id_payment_method ul{
     -moz-border-radius: 8px;
     width: 500px;
 }
+
 #summary-price, #summary-total-price{
     width: 98%;
 }
@@ -60,6 +63,7 @@ div.id_payment_method ul{
 .right{
     text-align: right;
 }
+
 #summary-content{
    padding: 10px;
 }
@@ -83,10 +87,13 @@ div.forms{
 }
 </style>
 {% endblock %}
+
 {% block content %}
 <div class="t">
-     <h1 class="text-xl font-semibold">{% trans "Corporate Membership Renewal" %}</h1>
+     <h1>{% trans "Corporate Membership Renewal" %}</h1>
+
 <form action="" method="post">{% csrf_token %}
+
 <div id="main-forms">
 <div class="forms" id="renewal_form">
     <p>
@@ -98,6 +105,7 @@ div.forms{
             {% endif %}
             <br />
         {% endif %}
+
         {% if corp_profile.city or corp_profile.state or corp_profile.zip %}
         {% if corp_profile.city %}
             {{ corp_profile.city }}
@@ -127,13 +135,17 @@ div.forms{
         {% endif %}
         <br />
      </p>
+
    <div style="height:1px;border-bottom:1px dashed #ccc;margin-bottom:1em;">&nbsp;</div>
+
   {% if form.errors %}<p>{% trans "There were some problems in the form. Please review. Thanks!" %}</p>{% endif %}
+
     {% if form.errors.values %}
-        <div class="relative px-3 py-3 mb-4 border rounded text-red-800 border-red-600 bg-red-200" role="alert">
+        <div class="alert alert-danger" role="alert">
             {% for error in form.non_field_errors %}
-            <p><a href="#" class="font-bold ">{{ error }}</a></p>
+            <p><a href="#" class="alert-link">{{ error }}</a></p>
             {% endfor %}
+
             {% for field in form %}
                 {% if field.errors %}
                       {% for error in field.errors %}
@@ -145,13 +157,14 @@ div.forms{
             {% endfor %}
         </div>
     {% endif %}
+
     <div class="form-field">
         <div class="{{ form.corporate_membership_type.auto_id }}{{ form.corporate_membership_type.field.css_classes }}">
             <div class="field-label{% if form.corporate_membership_type.field.required %} required{% endif %}">
                   {{ form.corporate_membership_type.label_tag }}
               </div>
               {% if form.corporate_membership_type.errors %}
-              <div class="relative px-3 py-3 mb-4 border rounded text-red-800 border-red-600 bg-red-200" role="alert">
+              <div class="alert alert-danger" role="alert">
                   {% for error in form.corporate_membership_type.errors %}
                   <p>{{ error }}</p>
                   {% endfor %}
@@ -165,20 +178,22 @@ div.forms{
               {% endif %}
            </div>
         </div>
+
+
      <div class="form-field">
         <div class="{{ form.members.auto_id }}{{ form.members.field.css_classes }}">
             <div class="field-label{% if form.members.field.required %} required{% endif %}">
                   {{ form.members.label_tag }}
               </div>
               {% if form.members.errors %}
-              <div class="relative px-3 py-3 mb-4 border rounded text-red-800 border-red-600 bg-red-200" role="alert">
+              <div class="alert alert-danger" role="alert">
                   {% for error in form.members.errors %}
                   <p>{{ error }}</p>
                   {% endfor %}
               </div>
               {% endif %}
               <div class="field_members_all">
-                <ul class="list-disc pl-4">
+                <ul>
                 <li>
                 <label for="id_select_all_members">
                 {{ form.select_all_members }}
@@ -196,13 +211,14 @@ div.forms{
            </div>
         <div style="clear: both"></div>
      </div>
+
      <div class="form-field">
         <div class="{{ form.payment_method.auto_id }}{{ form.payment_method.field.css_classes }}">
           <div class="field-label{% if form.payment_method.field.required %} required{% endif %}">
               {{ form.payment_method.label_tag }}
           </div>
           {% if form.payment_method.errors %}
-          <div class="relative px-3 py-3 mb-4 border rounded text-red-800 border-red-600 bg-red-200" role="alert">{{ error }}</div>
+          <div class="alert alert-danger" role="alert">{{ error }}</div>
           {% endif %}
           <div class="field">
               {{ form.payment_method }}
@@ -213,6 +229,8 @@ div.forms{
        </div>
     </div>
    </div>
+
+
    <div id="summary-form-wrap" class="clearfix">
     <div id="summary-form-box" class="pull-right">
         <div id="summary-content">
@@ -265,39 +283,55 @@ div.forms{
                     </td>
                 </tr>
             </table>
-            <div class="text-red-500" id="cap-error-msg"></div>
+            <div class="text-danger" id="cap-error-msg"></div>
             <noscript>
                 <div>
                     <input title="Update Summary" type="submit" id="update_summary" name="update_summary" value="{% trans 'Update Summary' %}" />
                 </div>
             </noscript>
+
+
         </div>
     </div>
 </div>
+
+
     <div class="submit-btn-wrap pull-right">
-        <input type="submit" value="{% trans 'Renew Now' %}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" />
+        <input type="submit" value="{% trans 'Renew Now' %}" class="btn btn-primary" />
     </div>
+
     </div>
+
 <div style="clear:both;"></div>
+
 </form>
+
 </div>
+
+
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript">
+
     function IndUpdateSummary(memb){
         var corp_type = $("input[name=corporate_membership_type]:checked");
         var cap_obj = $(corp_type).closest('li').find('.type-cap').data('cap');
         var total_individual_count = parseInt($("#ind-qty").data('total_individual_count'));
+
         var ind_qty = parseInt($("#ind-qty").html());
         var ind_price = parseFloat($("#ind-price").html());
         var ind_sub_total = parseFloat($("#ind-sub-total").html());
         var total_amount = parseFloat($("#total-amount").html());
+
         var above_cap_ind_qty = parseInt($("#above-cap-ind-qty").html());
         var above_cap_ind_price = parseFloat($("#above-cap-ind-price").html());
         var above_cap_ind_sub_total = parseFloat($("#above-cap-ind-sub-total").html());
         $("#cap-error-msg").html("");
+
+
         if (cap_obj && cap_obj.apply_cap === "True"){
             if(memb.checked){
                 total_individual_count = total_individual_count + 1;
@@ -320,6 +354,7 @@ div.forms{
                         }
                     }
                 }
+
             }else{
                 total_individual_count = total_individual_count - 1;
                 if (!isNaN(above_cap_ind_qty) && above_cap_ind_qty > 0){
@@ -335,8 +370,11 @@ div.forms{
                         total_amount = parseFloat(total_amount) - parseFloat(ind_price);
                     }
                 }
+
             }
+
         }else{
+
             if(memb.checked){
                 total_individual_count = total_individual_count + 1;
                 ind_qty = total_individual_count;
@@ -352,15 +390,20 @@ div.forms{
                     total_amount = total_amount - ind_price;
                 }
             }
+
         }
+
         $("#ind-qty").html(ind_qty);
         $("#ind-sub-total").html(ind_sub_total.toFixed(2));
         $("#total-amount").html(total_amount.toFixed(2));
         $("#above-cap-ind-qty")
         $("#above-cap-ind-qty").html(above_cap_ind_qty);
         $("#above-cap-ind-sub-total").html(above_cap_ind_sub_total.toFixed(2));
+
         $("#ind-qty").data('total_individual_count', total_individual_count);
     }
+
+
     function TypeUpdateSummary(corp_type){
         var corp_price = $("#corp-price").html();
         var ind_qty = $("#ind-qty").html();
@@ -371,34 +414,43 @@ div.forms{
         //var total_amount = $("#total-amount").html();
         var above_cap_ind_sub_total = 0;
         var total_amount = 0;
+
         var cap_obj = $(corp_type).closest('li').find('.type-cap').data('cap');
+
         if (cap_obj.apply_cap === "True"){
             var above_cap_ind_qty;
         }
+
         //console.log(cap_obj);
         //console.log(cap_obj.apply_cap);
         //console.log(cap_obj.membership_cap);
         //console.log(cap_obj.allow_above_cap);
         //console.log(cap_obj.above_cap_price);
+
         var new_corp_price = $(corp_type).parent().find(".type-corp-price").html();
         var new_ind_price = $(corp_type).parent().find(".type-ind-price").html();
+
         new_corp_price = parseFloat(new_corp_price);
         if (isNaN(new_corp_price) == true){
             new_corp_price = 0
         }
         new_corp_price = new_corp_price.toFixed(2);
+
         new_ind_price = parseFloat(new_ind_price);
         if (isNaN(new_ind_price) == true){
             new_ind_price = 0
         }
         new_ind_price = new_ind_price.toFixed(2);
+
         var update_total = false;
+
         // update corp. price and total
         if (parseFloat(new_corp_price) != parseFloat(corp_price)){
             $("#corp-price").html(new_corp_price);
             $("#corp-sub-total").html(new_corp_price);
             update_total = true;
         }
+
         // update individual price and total
             $("#above-cap-ind-qty").html(0);
             $("#above-cap-ind-price").html("0.00");
@@ -434,12 +486,15 @@ div.forms{
             $("#ind-price").html(new_ind_price);
             $("#ind-sub-total").html(ind_sub_total);
             update_total = true;
+
         // update total amount
         if (update_total){
             total_amount = (above_cap_ind_sub_total + parseFloat(new_corp_price) + parseFloat(ind_sub_total)).toFixed(2);
             $("#total-amount").html(total_amount);
         }
+
     }
+
     $(document).ready(function()
     {
         if ($("input#id_select_all_members:checked").length > 0){
@@ -451,6 +506,7 @@ div.forms{
         //    {
         //        IndUpdateSummary(this);
         //});
+
         $("#id_select_all_members").on("click", function()
         {
             var checked_status = this.checked;
@@ -462,25 +518,36 @@ div.forms{
                     IndUpdateSummary(this);
                 }
             });
+
             if(checked_status){
                 $("#id_members").hide();
             }else{
                 $("#id_members").show();
             }
         });
+
         $("input[name=members]").on("change", function()
         {
             IndUpdateSummary(this);
         });
+
         $("input[name=corporate_membership_type]").on("change", function()
         {
             TypeUpdateSummary(this);
         });
+
         {% if summary_data.apply_cap and summary_data.allow_above_cap %}
         $("#above-cap-ind").show();
         {% else %}
         $("#above-cap-ind").hide();
         {% endif %}
+
+
     });
+
+
     </script>
+
+
+
 {% endblock %}

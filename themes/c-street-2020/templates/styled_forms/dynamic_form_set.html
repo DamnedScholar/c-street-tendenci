@@ -1,11 +1,13 @@
 {% load styled_forms %}
+
 {% if form_set.errors %}
 <div class="errors">
 {% trans 'There were some problems in the formset. Please review. Thanks!' %}
 </div>
 {% endif %}
+
 {% for form in form_set.forms %}
-    <div class="mb-4ing{% cycle ' alt' '' %}">
+    <div class="form-grouping{% cycle ' alt' '' %}">
     {% if form.non_field_errors %}
         <div class ="errors">
             {% for error in form.non_field_errors %}
@@ -63,4 +65,5 @@
     {% endfor %}
     </div>
 {% endfor %}
+
 <input type="button" value="{% trans 'Add More' %}" id="add_more">

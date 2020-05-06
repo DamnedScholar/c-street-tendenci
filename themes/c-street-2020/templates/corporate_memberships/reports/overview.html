@@ -1,5 +1,7 @@
 {% extends "corporate_memberships/base-wide.html" %}
 {% load corporate_memberships_tags %}
+
+
 {% block extra_head %}
 {{ block.super }}
 <style>
@@ -9,20 +11,24 @@
 }
 </style>
 {% endblock %}
+
 {% block content %}
-<h1 class="text-xl font-semibold">{% trans "Corporate Memberships Overview" %}</h1>
-<div class="flex flex-wrap corp-mems-wrap">
-    <div class="md:w-1/2 pr-4 pl-4">
+<h1>{% trans "Corporate Memberships Overview" %}</h1>
+<div class="row corp-mems-wrap">
+    <div class="col-md-6">
     <div id="chart_bystatus_div" style="width: 450px; height: 350px;"></div>
     </div>
-    <div class="md:w-1/2 pr-4 pl-4">
+
+    <div class="col-md-6">
      <div id="chart_bytype_div" style="width: 450px; height: 350px;"></div>
     </div>
 </div>
+
 <p>&nbsp;</p>
 <div id="chart_summary_div"></div>
+
 <div class="corp-mems-wrap corp-stat-table">
-    <table class="w-full max-w-full mb-4 bg-transparent">
+    <table class="table">
         <thead>
             <tr>
                 <th>{% trans 'Type' %}</th>
@@ -52,26 +58,33 @@
         </tbody>
     </table>
 </div>
+
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
+
      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
+
       function drawChart() {
             var options = {
                       title: 'By Status',
                       colors: ['#1c91c0', '#e49307', '#DC3912']
                     };
+
             var status_data = google.visualization.arrayToDataTable([
               ['{% trans 'Status' %}', '{% trans 'Count' %}'],
               ['{% trans 'Active' %}',  {{ total.total_active  }}],
               ['{% trans 'Pending' %}',  {{ total.total_pending }}],
               ['{% trans 'Expired' %}',  {{ total.total_expired}}]
             ]);
+
             var chart = new google.visualization.PieChart(document.getElementById('chart_bystatus_div'));
             chart.draw(status_data, options);
+
             options = {
                       title: 'By Corporate Membership Type'
                     };
@@ -81,8 +94,11 @@
                  ['{{ type.type.name }}',  {{ type.total }}],
               {% endfor %}
                ]);
+
                var chart = new google.visualization.PieChart(document.getElementById('chart_bytype_div'));
                chart.draw(type_data, options);
+
+
           var data = google.visualization.arrayToDataTable([
            ['{% trans 'Corp. Membership Type' %}',
            '{% trans 'Active' %}', '{% trans 'Pending' %}',
@@ -94,6 +110,7 @@
            ['', 0, 0, 0],
            {% endfor %}
          ]);
+
          options = {
            title: 'Summary By Corporate Membership Type and Status',
            legend: { position: 'top', maxLines: 3 },
@@ -103,8 +120,12 @@
            colors: ['#1c91c0', '#e49307', '#DC3912'],
            hAxis: {title: '{% trans 'Corp. Membership Type' %}', titleTextStyle: {color: 'black'}}
          };
+
         chart = new google.visualization.ColumnChart(document.getElementById('chart_summary_div'));
         chart.draw(data, options);
+
       }
+
   </script>
+
 {% endblock extra_body %}

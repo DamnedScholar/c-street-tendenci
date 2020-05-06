@@ -1,6 +1,8 @@
 {% extends "corporate_memberships/base.html" %}
 {% load corporate_memberships_tags %}
+
 {% block title %}{% trans "Corporate Membership Approve / Disapprove" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/corporate_memberships-approve.css' %}">
@@ -11,9 +13,11 @@
     }
 </style>
 {% endblock %}
+
 {% block content %}
 <div class="t">
-     <h1 class="text-xl font-semibold">{% trans "Corporate Membership Submission" %}</h1>
+     <h1>{% trans "Corporate Membership Submission" %}</h1>
+
      <div>
          <div class="field-label block-inline">
              {{ field_labels.name }}:
@@ -21,7 +25,7 @@
          <div class="block-inline">
              <strong><a href="{% url "corpmembership.view" corporate_membership.id %}" target="_blank">{{ corporate_membership.corp_profile.name }}</a></strong>
              {% if corporate_membership.is_pending %}
-             <span class="text-red-500">({% trans 'Pending' %})</span>
+             <span class="text-danger">({% trans 'Pending' %})</span>
              {% endif %}
          </div>
      </div>
@@ -48,6 +52,7 @@
                 {% endif %}
          </div>
      </div>
+
      {% if corporate_membership.corp_profile.phone %}
      <div>
          <div class="field-label block-inline">
@@ -58,6 +63,7 @@
          </div>
      </div>
      {% endif %}
+
      {% if corporate_membership.corp_profile.email %}
      <div>
          <div class="field-label block-inline">
@@ -77,6 +83,7 @@
             <strong>{{ corporate_membership.join_dt }}</strong>
          </div>
      </div>
+
      <div>
          <div class="field-label block-inline">
              <strong>{% trans "Expiration Date"%}</strong>:
@@ -92,6 +99,8 @@
             {% endif %}
          </div>
      </div>
+
+
    {% if corporate_membership.renewal %}
        <div style="height:1px;width:80%;border-bottom:1px dashed #ccc;margin-bottom:1em;">&nbsp;</div>
        <div>
@@ -100,9 +109,11 @@
         <a href="{% url "invoice.view" corporate_membership.invoice.id %}">{% trans "View Invoice" %}</a>
         <br />
         {% trans "New expiration date upon approval: " %}<b>{{ new_expiration_dt }}</b>
+
         <br /><br />
         {% trans "The number of individual memberships renewed in this transaction: " %}<b>{{ indiv_renew_entries.count }}</b>
         {% if indiv_renew_entries.count > 0 %}
+
            <small>(<span id="toggle-indiv-entries"><a href="javascript:;">{% trans "Show Details" %}</a></span>)</small>
            <div id="indiv-entries">
                <table width="70%">
@@ -116,6 +127,7 @@
                 </table>
            </div>
         {% endif %}
+
        </div>
    {% else %}
       {% if corporate_membership.anonymous_creator  %}
@@ -129,18 +141,25 @@
       </dl>
       {% endif %}
    {% endif %}
+
 <div class="corp-approv-form">
 <form action="" method="post">{% csrf_token %}
     {{ approve_form.as_p }}
-<input type="submit" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" name="approve" value="Approve" />&nbsp;&nbsp; or &nbsp;&nbsp;
-<input type="submit" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" name="disapprove" value="Disapprove" />
+<input type="submit" class="btn btn-primary" name="approve" value="Approve" />&nbsp;&nbsp; or &nbsp;&nbsp;
+<input type="submit" class="btn btn-default" name="disapprove" value="Disapprove" />
 </form>
 </div>
+
 </div>
+
+
+
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript">
+
     $(document).ready(function()
     {
         $("#toggle-indiv-entries").on("click", function()
@@ -152,6 +171,14 @@
             }
             $("#indiv-entries").toggle();
         });
+
+
     });
+
+
+
     </script>
+
+
+
 {% endblock %}

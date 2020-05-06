@@ -1,0 +1,38 @@
+{% extends "memberships/base-wide.html" %}
+{% load base_tags %}
+{% load base_filters %}
+{% block title %}{% trans "Export Memberships" %}{% endblock %}
+{% block extra_head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'bootstrap3/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/memberships.css' %}">
+<style>#membership-export ul li {list-style: none;}</style>
+{% endblock %}
+{% block content %}
+<div id="membership-export-wrap">
+  <div class="page-header">
+    {% if corp_profile %}
+    <h1 class="text-xl font-semibold">{% trans "Roster Export for Corp. Membership: " %}{{ corp_profile.name }}</h1>
+    {% else %}
+    <h1 class="text-xl font-semibold">{% trans "Membership Export" %}</h1>
+    {% endif %}
+  </div>
+  <div class="relative px-3 py-3 mb-4 border rounded">
+    {% blocktrans %}
+    <strong>Note</strong>: An email will be sent to you at <strong>{{ request.user.email }}</strong> once the export is ready.
+    {% endblocktrans %}
+  </div>
+  <div id="membership-export">
+    <form method="post" action="">
+      {% csrf_token %}
+      {% for field in form %}
+      {{ field.errors }}
+      {{ field }}
+      {% endfor %}
+      <div>
+        <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type='submit' value='{% trans "Export Memberships" %}'>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

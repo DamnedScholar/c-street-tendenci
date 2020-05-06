@@ -1,6 +1,8 @@
 {% extends 'pybb/base.html' %}
 {% load pybb_tags %}
+
 {% block title %}{{ topic }}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 {{ form.media.css }}
@@ -10,25 +12,32 @@
 {{ form.media.js }}
 <script type="text/javascript" src="{% static 'pybb/js/jquery.formset.min.js' %}"></script>
 {% endblock %}
+
 {% block content %}
 {% block breadcrumb %}
 {% with object=topic %}
 {% include "pybb/breadcrumb.html" %}
 {% endwith %}
 {% endblock %}
+
 <div class="topic">
+  
   <div class="page-header">
-    <h1 class="text-xl font-semibold">{{ topic.name }}</h1>
+    <h1>{{ topic.name }}</h1>
   </div>
+  
   {% with _('Posts') as label %}
   {% include "pybb/pagination.html" %}
   {% endwith %}
+  
   {% if topic.poll_type %}
   {% include 'pybb/poll.html' %}
   {% endif %}
+  
   {% if not user.is_authenticated %}
   {% include 'pybb/_need_to_login_message.html' %}
   {% endif %}
+  
   <div class="posts">
     {% if first_post %}{% ifnotequal first_post post_list.0 %}
     {% with first_post as post %}
@@ -44,6 +53,7 @@
   {% with _('Posts') as label %}
   {% include "pybb/pagination.html" %}
   {% endwith %}
+  
   {% if user.is_authenticated %}
   {% if user.is_moderator or user.is_subscribed or user|pybb_may_subscribe_topic:topic %}
   <div class="controls">
@@ -53,6 +63,7 @@
     {% else %}
     <a href="{% url 'pybb:stick_topic' topic.id %}">{% trans "Stick topic" %}</a> /
     {% endif %}
+    
     {% if topic.closed %}
     <a href="{% url 'pybb:open_topic' topic.id %}">{% trans "Open topic" %}</a> /
     {% else %}
@@ -73,11 +84,13 @@
   </div>
   {% endif %}
   {% endif %}
+  
   {% if user|pybb_may_create_post:topic %}
   {% include "pybb/post_form.html" %}
   {% endif %}
+  
   {% if user.is_staff %}
-  <div class="subscriber-list sm:w-3/4 pr-4 pl-4">
+  <div class="subscriber-list col-sm-9">
     {% trans "Subscribers" %}:
     {% for subscriber in topic.subscribers.all %}
     {% pybb_get_profile user=subscriber as subscriber_profile %}

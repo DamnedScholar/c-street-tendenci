@@ -1,16 +1,22 @@
 {% load base_tags %}
 {% load perm_tags %}
+
+
 {% has_perm user contacts.delete_contact opt_object as can_delete %}
-<nav class="flex flex-wrap list-none p-0 pl-0 mb-0bar navbar-default t-meta-editor-bar t-meta-editor-more-options-bar">
-    <div class="container mx-auto mx-auto">
-        <div class="flex-growlapse flex flex-wrap list-none p-0 pl-0 mb-0bar-collapse">
-            <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 navbar-right t-meta-options-links t-meta-quick-links">
-                <li class="relative">
-                    <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative" role="button" aria-expanded="false">{% spaceless %}
+
+
+<nav class="navbar navbar-default t-meta-editor-bar t-meta-editor-more-options-bar">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right t-meta-options-links t-meta-quick-links">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% spaceless %}
                         {% trans "More Options" %} <span class="caret"></span>
                     {% endspaceless %}</a>
-                    <ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded" role="menu">
+
+                    <ul class="dropdown-menu" role="menu">
                         <li><a href="{% url 'contact.print_view' opt_object.pk %}">{% trans "Print" %}</a></li>
+
                         {% if can_delete %}
                             <li>
                                 <a class="t-meta-delete-link" href="{% url 'contact.delete' opt_object.pk %}">{% trans "Delete" %}</a>

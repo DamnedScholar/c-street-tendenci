@@ -1,5 +1,5 @@
 {% load humanize %}
-<table class="w-full max-w-full mb-4 bg-transparent table-hover table-bordered table-striped">{% if ticket_list_caption %}
+<table class="table table-hover table-bordered table-striped">{% if ticket_list_caption %}
 <caption>{{ ticket_list_caption }}</caption>{% endif %}
 <thead>
 <tr><th>#</th><th>{% trans "Pr" %}</th><th>{% trans "Title" %}</th><th>{% trans "Queue" %}</th><th>{% trans "Status" %}</th><th>{% trans "Last Update" %}</th></tr>

@@ -5,6 +5,7 @@
 {% list_articles as featured_articles limit=TEMPLATE_NEWS_ARTICLES_FEATURED_LIMIT %}
 <section id="news-featured">
     <h3>{% firstof TEMPLATE_NEWS_ARTICLES_FEATURED_NEWSTITLE "News" %}</h3>
+
     {% if featured_news %}
     {% for news_item in featured_news %}
         <p>{{ news_item.body|striptags|truncatewords:30|safe }}</p> <a class="readmore" href="{{ news_item.get_absolute_url }}">{% trans 'Read more' %}</a>

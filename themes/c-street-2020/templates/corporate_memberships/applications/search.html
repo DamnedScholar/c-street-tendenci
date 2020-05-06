@@ -3,6 +3,8 @@
 {% load bootstrap_pagination_tags %}
 {% load corporate_memberships_tags %}
 {% load perm_tags %}
+
+
 {% block title %}
     {% if MODULE_CORPORATEMEMBERSHIPS_LABEL_PLURAL %}
         {% blocktrans %}{{ MODULE_CORPORATEMEMBERSHIPS_LABEL_PLURAL }} Search{% endblocktrans %}
@@ -10,8 +12,10 @@
         {% trans "Corporate Memberships Search" %}
     {% endif %} - {{ block.super }}
 {% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
+
     <style>
         #id_search_criteria, #id_search_text{
             width: 150px;
@@ -25,9 +29,11 @@
         }
     </style>
 {% endblock %}
+
 {% block content_classes %}{{ block.super }} t-search-view{% endblock %}
+
 {% block content %}
-    <h1 class="text-xl font-semibold">
+    <h1>
         {% firstof trans SITE_GLOBAL_SITEPRIMARYKEYWORDS trans SITE_GLOBAL_SITEDISPLAYNAME %}
         {% if pending_only %}
             {% if MODULE_CORPORATEMEMBERSHIPS_LABEL_PLURAL %}
@@ -43,8 +49,11 @@
             {% endif %}
         {% endif %}
     </h1>
+
     {% include "corporate_memberships/applications/search_form.html" %}
+
     {% autopaginate corp_members 10 %}
+
     <h4 class="capitalize">
     	<em>
         	{% with obj_count=paginator.count  %}
@@ -60,6 +69,7 @@
         	{% endwith %}
         </em> 
     </h4>
+
     <section>
         {% for corp_memb in corp_members %}
             {% with corp_memb|get_object as corporate_membership %}
@@ -67,10 +77,13 @@
             {% endwith %}
         {% endfor %}
     </section>
+
     {% paginate %}
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
+
     <script type="text/javascript">
         $(document).ready(function() {
             // delete confirmation
@@ -81,8 +94,10 @@
             });
         });
     </script>
+
     <script>
         var filename = "{% static 'js/global/dropdown.js' %}";
+
         if (typeof dropdown == "undefined") {
             var fileref=document.createElement('script');
             fileref.setAttribute("type", "text/javascript");
@@ -91,6 +106,7 @@
             head.appendChild(fileref);
         }
     </script>
+
     <script type="text/javascript">
         var iconrow = new dropdown({
             container:  'more-options-wrap',

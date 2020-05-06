@@ -1,7 +1,9 @@
 {% extends "memberships/base.html" %}
 {% load base_tags %}
 {% load base_filters %}
+
 {% block title %}{% trans "Export Memberships - Status" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/memberships.css' %}">
@@ -11,39 +13,45 @@
   }
 </style>
 {% endblock %}
+
 {% block content %}
 <div class="page-header">
   {% if corp_profile %}
-  <h1 class="text-xl font-semibold">{% trans "Roster Export for Corp. Membership: " %}{{ corp_profile.name }} {% trans " - Status" %}</h1>
+  <h1>{% trans "Roster Export for Corp. Membership: " %}{{ corp_profile.name }} {% trans " - Status" %}</h1>
   {% else %}
-  <h1 class="text-xl font-semibold">{% trans "Membership CSV Export - Status" %}</h1>
+  <h1>{% trans "Membership CSV Export - Status" %}</h1>
   {% endif %}
 </div>
+
 <div id="membership-export">
   <div id="display-content"{% if not download_ready %} class="display-hide"{% endif %}>
     <p>{% trans 'The export file is ready, click the download link below to download.' %}</p>
     <div>
-      <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" href="{% url "memberships.default_export_download" identifier %}{% if corp_profile %}?cp_id={{ corp_profile.id }}{% endif %}">{% trans 'Download Now' %}</a>
+      <a class="btn btn-primary" href="{% url "memberships.default_export_download" identifier %}{% if corp_profile %}?cp_id={{ corp_profile.id }}{% endif %}">{% trans 'Download Now' %}</a>
     </div>
     <div>&nbsp;</div>
     <div>&nbsp;</div>
     {% if corp_profile %}
     <div>
       {% if request.user.profile.is_superuser %}
-      <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="{% url "corpmembership.search" %}">{% trans "Back to Corp. Memberships" %} &raquo;</a>
+      <a class="btn btn-default" href="{% url "corpmembership.search" %}">{% trans "Back to Corp. Memberships" %} &raquo;</a>
       {% else %}
-      <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="{% url "corpmembership.mycorps" %}">{% trans "Back to Corp. Memberships" %} &raquo;</a>
+      <a class="btn btn-default" href="{% url "corpmembership.mycorps" %}">{% trans "Back to Corp. Memberships" %} &raquo;</a>
       {% endif %}
     </div>
     {% endif %}
   </div>
+
 </div>
+
 {% if not download_ready %}
 {% blocktrans %}
 <p>
   Your request is being processed. Please check later by <strong>refreshing this page</strong>. <br /><br />
   In the meantime, we'll notify you via email once the export is ready. Thank you for your patience!
+
 </p>
 {% endblocktrans %}
 {% endif %}
+
 {% endblock %}

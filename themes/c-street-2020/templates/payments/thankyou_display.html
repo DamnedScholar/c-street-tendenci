@@ -1,8 +1,10 @@
+
 {% if obj_header %}
     {{ obj_header }}
 {% else %}
-    <h1 class="text-xl font-semibold">{% trans 'Payment Status' %}</h1>
+    <h1>{% trans 'Payment Status' %}</h1>
 {% endif %}
+
 <p>&nbsp;</p>
     <p>
     {% if not payment.is_approved %}
@@ -24,6 +26,7 @@
     <b>
     {{ payment.response_reason_text }}
     </b>
+
     <p>&nbsp;</p>
     {% if not payment.is_approved %}
         <p>
@@ -34,7 +37,11 @@
         <a href="{{ SITE_GLOBAL_SITEURL }}{% url "invoice.print_view" payment.invoice.id payment.invoice.guid %}">{% trans "Print Friendly Invoice." %}</a>
         </p>
         <p><a href="{{ SITE_GLOBAL_SITEURL }}{% url "invoice.view" payment.invoice.id payment.invoice.guid %}">{% trans "View my Invoice" %}</a></p>
+
    {% endif %}
+
+
+
     {% if obj_display %}
         {{ obj_display }}
     {% endif %}

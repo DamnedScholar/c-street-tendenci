@@ -3,10 +3,13 @@
 {% load base_tags %}
 {% load base_filters %}
 {% url "directory.export_download" identifier  as dl_url %}
+
 {% block title %}{% trans "Export Directories - Status" %}{% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Directories Export - Status" %}</h1>
+    <h1>{% trans "Directories Export - Status" %}</h1>
+
     <div id="directory-export">
         <div{% if not download_ready %} class="display-hide"{% endif %}>
             <p>{% trans "The export file is ready, click the download link below to download." %}</p>
@@ -14,7 +17,9 @@
                 <a href="{% url 'directory.export_download' identifier %}">{% trans "Download Now" %}</a>
             </div>
         </div>
+
     </div>
+
     {% if not download_ready %}
     {% blocktrans %}
     <p>Your request is being processed. Please check later by <strong>refreshing this page</strong>.</p>

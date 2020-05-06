@@ -3,13 +3,17 @@
 {% load page_tags %}
 {% load base_tags %}
 {% load perm_tags %}
+
 {% block title %}{% firstof MODULE_PAGES_LABEL trans 'Pages' %} {% trans 'Inactive' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_PAGES_LABEL trans 'Pages' %} {% trans "Archive" %}</h1>
+    <h1>{% firstof MODULE_PAGES_LABEL trans 'Pages' %} {% trans "Archive" %}</h1>
+
     {% autopaginate pages 10 %}
     <div class="pages-wrap">
     {% for page in pages %}
@@ -23,6 +27,7 @@
     {% empty %}
     {% endfor %}
     </div>
+
     {% paginate %}
 </div>
 {% endblock %}

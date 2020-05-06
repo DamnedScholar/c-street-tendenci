@@ -12,16 +12,19 @@ function callParentFunction(str) {
     // If you get an error with this line, it might be because the domains are not an exact match (including www).
   }
 }
+
 function receiveMessage(event) {
   if (event && event.data) {
     callParentFunction(event.data);
   }
 }
+
 if (window.addEventListener) {
   window.addEventListener("message", receiveMessage, false);
 } else if (window.attachEvent) {
   window.attachEvent("onmessage", receiveMessage);
 }
+
 if (window.location.hash && window.location.hash.length > 1) {
   callParentFunction(window.location.hash.substring(1));
 }

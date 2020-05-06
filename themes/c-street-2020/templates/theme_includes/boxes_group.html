@@ -1,6 +1,7 @@
 {% load box_tags %}
 {% load theme_tags %}
 {% list_boxes as sidebar_boxes tags=TEMPLATE_BOXES_GROUP_TAGNAME limit=TEMPLATE_BOXES_GROUP_LIMIT %}
+
 <div id="boxes-group">
     {% if sidebar_boxes %}
         {% for box in sidebar_boxes %}

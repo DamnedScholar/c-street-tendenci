@@ -2,7 +2,9 @@
 by {{ object.creator }}
 by {{ object.object.creator.profile.display_name }}
 {{ object.description }}
+
 is:{{ object.status_detail }}
+
 {{ object.description }}
 {{ object.contact }}
 {{ object.address }}

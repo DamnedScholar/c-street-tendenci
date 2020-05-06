@@ -1,28 +1,37 @@
 {% load base_filters %}
 {% load base_tags %}
+
 <br />
  <ul class="list-unstyled t-meta-data">
+   
    {% if show_source|default:False and article.source %}
    <li><strong>{% trans "Source:" %}</strong> <span>{{ article.source|urlize }}</span></li>
    {% endif %}
+   
    <li><strong>{% trans "Released:" %}</strong> <span>{{ article.release_dt|date:"long" }}</span></li>
+   
    {% if article.first_name or article.last_name or article.phone or article.fax or article.email or article.website %}
    {% if article.first_name or article.last_name %}
    <li><strong>{% trans "Author:" %}</strong> <span>{{ article.first_name }} {{ article.last_name }}</span></li>
    {% endif %}
+   
    {% if article.phone %}
    <li><strong>{% trans "Phone:" %}</strong> <span>{{ article.phone|phonenumber }}</span></li>
    {% endif %}
+   
    {% if article.fax %}
    <li><strong>{% trans "Fax:" %}</strong> <span>{{ article.fax }}</span></li>
    {% endif %}
+   
    {% if article.email %}
    <li><strong>{% trans "Email:" %}</strong> <span>{{ article.email|obfuscate_email }}</span></li>
    {% endif %}
+   
    {% if article.website %}
    <li><strong>{% trans "Website:" %}</strong> <span>{{ article.website|urlize }}</span></li>
    {% endif %}
    {% endif %}
+   
    {% with article.category_set as article_cat %}
    {% if article_cat.category %}
    <li>
@@ -35,6 +44,7 @@
    </li>
    {% endif %}
    {% endwith %}
+   
    {% if article.tags %}
    <li>
      <strong>{% trans "Tag(s):" %}</strong>
@@ -44,6 +54,7 @@
      {% endfor %}
    </li>
    {% endif %}
+   
    {% if user.is_authenticated %}
    {% if not user.profile.is_superuser %}
    {% if user == article.creator or user == article.owner %}
@@ -55,21 +66,23 @@
    {% endif %}
    {% endif %}
  </ul>
+    
  {% if user.profile.is_superuser %}
-  <nav class="flex flex-wrap list-none p-0 pl-0 mb-0bar navbar-default t-meta-editor-bar">
-  <div class="container mx-auto mx-auto">
-  <div class="flex-growlapse flex flex-wrap list-none p-0 pl-0 mb-0bar-collapse">
-    <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 t-meta-options-links">
+  <nav class="navbar navbar-default t-meta-editor-bar">
+  <div class="container-fluid">
+  <div class="collapse navbar-collapse">
+    <ul class="nav navbar-nav t-meta-options-links">
       <li>{{ article.obj_perms }}</li>
       <li>{{ article.obj_status }}</li>
     </ul>
-    <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 navbar-right t-meta-options-links">
+    
+    <ul class="nav navbar-nav navbar-right t-meta-options-links">
       <!-- start dropdown -->
-      <li class="relative">
-        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative" role="button" aria-expanded="false">{% spaceless %}
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% spaceless %}
           {% trans "Options" %} <span class="caret"></span>
           {% endspaceless %}</a>
-        <ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded" role="menu">
+        <ul class="dropdown-menu" role="menu">
           <li><a class="t-meta-edit-link" href="{% url 'article.edit' article.pk %}">{% trans "Edit" %}</a></li>
           <li><a class="t-meta-versions-link" href="{% url 'versions' article.content_type_id article.pk %}">{% trans "Versions" %}</a></li>
           <li><a href="{% url 'article.edit.meta' article.pk %}">{% trans "Edit Meta" %}</a></li>

@@ -1,5 +1,6 @@
 {% load theme_tags %}
 {% load event_tags %}
+
 <section id="events-list">
     <h3>{% firstof TEMPLATE_EVENTS_LIST_TITLE_DATE_TIME_TITLE "Upcoming Events" %}</h3>
     {% list_events as events_list limit=TEMPLATE_EVENTS_LIST_TITLE_DATE_TIME_LIMIT %}

@@ -1,20 +1,24 @@
 {% extends "search/base.html" %}
+
 {% load base_filters %}
 {% load base_tags %}
 {% load search_tags %}
 {% load bootstrap_pagination_tags %}
 {% load smart_if %}
+
 {% block head_title %}{% blocktrans %}Search{% endblocktrans %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/search.css' %}" />
 <link rel="stylesheet" href="{% static 'css/uni-form.css' %}" />
 <link rel="stylesheet" href="{% static 'css/uni-form-generic.css' %}" />
 {% endblock %}
+
 {% block content %}
       {# /*  NEEDED FOR PAGINATION  */ #}
       {% reset ppage as page_obj %}
-      <h1 class="text-xl font-semibold">{% trans 'Search' %}</h1>
+      <h1>{% trans 'Search' %}</h1>
       <form name="search" method="get" action=".">
         <table class="search-table" border="0" cellpadding="0" cellspacing="0">
             <tr>
@@ -22,6 +26,7 @@
                 <td><input class="search-table-submit" type="submit" value="{% trans 'Search' %}"></td>
             </tr>
         </table>
+
         <div class="search-adv"><a href="#adv_search">{% trans "Advanced Search" %}</a></div>
         <div class="search-adv-models">
             <p class="search-adv-header">{% trans "Search in:" %}</p>
@@ -33,8 +38,10 @@
             {{ form.sort_by }}
         </div>
      </form>
+
     {# /* UPPER PAGINATION */ #}
     {% paginate %}
+
     {# /*  SEARCH RESULTS  */ #}
     <div class="search-results">
         {% if ppage.object_list %}
@@ -55,18 +62,23 @@
             <p>{% trans "No results found. Please check your spelling or try a different search term." %}</p>
         {% endif %}
     </div>
+
     {# /*  LOWER PAGINATION  */ #}
     {% paginate %}
+
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript">
         function toggle_adv_models() {
             $('div.search-adv-models').toggle();
         }
+
         if (document.location.hash == "#adv_search") {
             $('div.search-adv-models').css('display','block');
         }
+
         $('div.search-adv a').on("click", function() {
             toggle_adv_models();
         });

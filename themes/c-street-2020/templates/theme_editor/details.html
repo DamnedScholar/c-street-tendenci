@@ -1,5 +1,6 @@
 <div class="theme-info" data="{{ theme.orig_name }}">
 <table><tr>
+
     <td class="screenshot">
         {% if theme.screenshot %}
             <img src="{% firstof theme.screenshot_thumbnail theme.screenshot %}" />
@@ -10,6 +11,7 @@
             <div class="screenshot-placeholder"></div>
         {% endif %}
     </td>
+
     <td class="info">
         <h2>{{ theme.name }}</h2>
         <div class="description">
@@ -19,6 +21,7 @@
                 {% trans "No information available." %}
             {% endif %}
         </div>
+
         <div class="author-info">
             {% if theme.author %}
             <div class="author">{% trans "Author: " %}{{ theme.author }}</div>
@@ -27,26 +30,30 @@
             {% endif %}
             {% endif %}
         </div>
+
         {% if current_theme == theme.orig_name %}
-        <div class="text-blue-500">{% trans  "Current Active Theme " %}</div>
+        <div class="text-primary">{% trans  "Current Active Theme " %}</div>
         {% else %}
         <form class="theme_picker_form" method="post" action="">{% csrf_token %}
             <input type="hidden" id="id_theme_choices" name="theme" value="{{theme.orig_name}}">
             <input class="theme_picker_submit" type="submit" value="{% trans 'Make this my active theme' %}"/>
         </form>
         {% endif %}
+
         <div class="extra-info">
             {% if theme.tags %}
             <div class="tags">
                 {% trans "Tags: " %}{{ theme.tags }}
             </div>
             {% endif %}
+
             {% if theme.version %}
             <div class="version">
                 {% trans "Version: " %}{{ theme.version }}
             </div>
             {% endif %}
         </div>
+
     </td>
 </tr></table>
 </div>

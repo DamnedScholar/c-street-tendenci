@@ -1,20 +1,27 @@
 {% extends "studygroups/base.html" %}
 {% load studygroup_tags %}
+
 {% block content %}
 <div id="study-group-detail">
   <div class="studygroup-wrap">
+    
     <div class="page-header">
-      <h1 class="text-xl font-semibold">{{ study_group.title }}</h1>
+      <h1>{{ study_group.title }}</h1>
     </div>
+    
     <div class="studygroup-mission">
       <p>{{ study_group.mission|safe }}</p>
     </div>
+    
     <div class="studygroup-content">
       <p>{{ study_group.content|safe }}</p>
     </div>
+    
     <div class="studygroup-officers">
+      
       <h2>{% trans 'OFFICERS' %}</h2>
-      <table class="w-full max-w-full mb-4 bg-transparent" id="officer-table">
+      
+      <table class="table" id="officer-table">
         <thead>
           <tr>
             <th class="officer-position">{% trans 'Position' %}</th>
@@ -22,10 +29,12 @@
             <th class="officer-phone">{% trans 'Phone' %}</th>
           </tr>
         </thead>
+        
         <tbody>
           {% for officer in officers %}
           <tr>
             <td class="officer-position">{{ officer.position }}</td>
+            
             <td class="officer-name">
               <a href="{% url 'profile' officer.user.username %}">
                 {% if officer.user.get_full_name %}
@@ -35,24 +44,30 @@
                 {% endif %}
               </a>
             </td>
+            
             <td class="officer-phone">{{ officer.phone }}</td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
+    
     <div class="studygroup-sponsors">
       <p>{{ study_group.sponsors|safe }}</p>
     </div>
+    
     {% if admin %}
     <div class="studygroup-notes">
       {{ study_group.notes|safe }}
     </div>
     {% endif %}
+    
     <div class="studygroup-files">
       <h2>{% trans 'Files' %} {% if admin %}</h2>
-      <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="{% url 'file.add' %}">{% trans 'Add a File' %}</a>
+      
+      <a class="btn btn-default" href="{% url 'file.add' %}">{% trans 'Add a File' %}</a>
       {% endif %}
+      
       <ul class="file-list">
         {% for file in files %}
         <li class="file-list">
@@ -61,6 +76,7 @@
         {% endfor %}
       </ul>
     </div>
+    
     {% include "studygroups/meta.html" %}
   </div>
 </div>

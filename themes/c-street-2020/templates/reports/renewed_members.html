@@ -1,8 +1,9 @@
 {% extends "reports/base.html" %}
 {% load reports_tags %}
+
 {% block content %}
 <div class="page-header">
-  <h1 class="text-xl font-semibold">{% trans "Renewed Members" %}</h1>
+  <h1>{% trans "Renewed Members" %}</h1>
 </div>
 <div>
   <p>
@@ -14,10 +15,10 @@
     {% endblocktrans %}
     {% endif %}
   </p>
-  <form class="search-form flex items-center pull-right" action="{% url "reports-renewed-members" %}" method="get">
-    <div class="mb-4">
+  <form class="search-form form-inline pull-right" action="{% url "reports-renewed-members" %}" method="get">
+    <div class="form-group">
       <label for="id_days" class="control-label">{% trans "Filter by renew date" %}: &nbsp;</label>
-      <select class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-800 border border-gray-500 rounded" name="days" id="id_days" onchange="this.form.submit();">
+      <select class="form-control" name="days" id="id_days" onchange="this.form.submit();">
         <option value="" selected="selected">-----------</option>
         <option value="30">{% trans 'Last 30 days' %}</option>
         <option value="60">{% trans 'Last 60 days' %}</option>
@@ -28,12 +29,15 @@
       </select>
     </div>
   </form>
+
   {% if members %}
   <p>
-    <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="{% url "reports-renewed-members" %}?output=csv&days={{ days }}">
+
+    <a class="btn btn-default" href="{% url "reports-renewed-members" %}?output=csv&days={{ days }}">
       {% trans 'Download CSV File' %}</a>
+
   </p>
-  <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports">
+  <table class="table table-tendenci-reports">
     <tr>
       <th>{% trans 'ID' %}</th>
       <th>{% trans 'Member Number' %}</th>

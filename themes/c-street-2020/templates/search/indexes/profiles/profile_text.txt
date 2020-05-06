@@ -8,6 +8,7 @@
 {{ object.state }}
 {{ object.country }}
 {{ object.display_name }}
+
 {% if object.user.demographics %}
 {{ object.user.demographics.ud1 }}
 {{ object.user.demographics.ud2 }}
@@ -40,8 +41,12 @@
 {{ object.user.demographics.ud29 }}
 {{ object.user.demographics.ud30 }}
 {% endif %}
+
+
 is:{{ object.status_detail }}
+
 {% for role in object.roles %}
 is:{{ role }}
 {% endfor %}
+
 highestrole:{{ object.highest_role }}

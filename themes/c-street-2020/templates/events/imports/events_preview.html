@@ -3,28 +3,36 @@
 {% load base_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{% firstof MODULE_EVENTS_LABEL_PLURAL 'Events' %} {% trans "Import" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
 <div class="imports">
-    <h1 class="text-xl font-semibold">{% trans "Preview Your Import" %}</h1>
+    <h1>{% trans "Preview Your Import" %}</h1>
+
     <p>{% trans "You're almost done! To complete your import click 'Import Now.'" %}</p>
+
     <div class="csv-icon">
         <img src="{% static 'images/icons/xls-icon.gif' %}" alt="{{ import_i.file.name|truncatechars:123 }}" title="{{ import_i.file.name|truncatechars:123 }}" />
         <p>{{ import_i.file.name }}<br /></p>
     </div>
+
     <div class="summary">
-    <ul class="list-disc pl-4">
+    <ul>
         <li>{{ total }} {% trans "Total Events" %}</li>
         <li>{{ import_i.total_created }} {% trans "Valid Events" %}</li>
         <li class="last highlight">{{ import_i.total_invalid}} {% trans "Invalid Events" %}</li>
     </ul>
     </div>
+
     <div style="clear: both; "></div>
+
     <div class="results">
     {% for event in event_list %}
         <div class="result">
@@ -47,11 +55,13 @@
         </div>
     {% endfor %}
     </div>
+
     <div align="right">
     <form class="import" method="post" action="{% url "event.import_process" import_i.pk %}">{% csrf_token %}
     <input type="submit" class="submit-btn" name="submit" value="{% trans "Import Now" %}" >
     </form>
     </div>
+
 </div>
 </div>
 {% endblock %}

@@ -1,5 +1,7 @@
 {% extends "default.html" %}
+
 {% block title %}{{ block.super }} {% trans '403 Forbidden' %}{% endblock%}
+
 {% block content %}
 {% if MODULE_USERS_USERSSECURITYMESSAGE %}
   {{ MODULE_USERS_USERSSECURITYMESSAGE }}

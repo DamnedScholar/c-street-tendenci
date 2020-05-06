@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "https://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -10,6 +11,7 @@
         {% trans 'Hello' %} {{ user.first_name }},<br /><br />
         {% blocktrans with g=group.name %}Your group members export for "{{ g }}" is ready.{% endblocktrans %}
         <br /><br />
+
         {% trans 'To download the export file, go to' %}: <br />
         <a href="{{ site_url }}{{ download_url }}">{{ site_url }}{{ download_url }}</a>
         <br /><br />
@@ -20,5 +22,6 @@
         <br /><br />
     </p>
     <P>{% trans 'Time submitted' %}:  {% now "D d M Y P" %}</P>
+
 </body>
 </html>

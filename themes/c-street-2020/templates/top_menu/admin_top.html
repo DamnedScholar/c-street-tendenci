@@ -1,32 +1,40 @@
 {% load page_tags %}
+
 {% if request.user.is_authenticated %}
-<div id="t-admin-megamenu" class="flex flex-wrap list-none p-0 pl-0 mb-0 bar-inverse navbar-fixed-top yamm t-megamenu" role="navigation">
-    <div class="container mx-auto mx-auto">
-        <div class="flex flex-wrap list-none p-0 pl-0 mb-0 bar-header">
-            <button id="t-admin-megamenu-toggle" class="flex flex-wrap list-none p-0 pl-0 mb-0 bar-toggle flex-growlapsed t-megamenu-toggle" type="button" data-toggle="collapse" data-target="#flex-grow items-center">
+<div id="t-admin-megamenu" class="navbar-inverse navbar-fixed-top navbar-expand-lg navbar-expand-md yamm t-megamenu" role="navigation">
+    <div class="container-fluid d-flex">
+        <div class="navbar-header">
+            <button id="t-admin-megamenu-toggle" class="navbar-toggle t-megamenu-toggle" type="button" data-toggle="collapse" data-target="#t-admin-megamenu-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{% url 'dashboard' %}" class="flex flex-wrap list-none p-0 pl-0 mb-0 bar-brand">{% spaceless %}
+
+            <a href="{% url 'dashboard' %}" class="navbar-brand">{% spaceless %}
                 <img src="{% static 'images/tendenci_white_small_100x51.gif' %}" class="nav-logo" height="24">
            {% endspaceless %}</a>
         </div>
-        <div id="navbar-collapse" class="flex flex-wrap list-none p-0 pl-0 mb-0 bar-collapse flex-growlapse">
+
+        <div id="t-admin-megamenu-collapse" class="navbar-collapse">
             {# <div class="clearfix visible-sm-block"></div> #}
-            <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 inner-top-nav">
+            <ul class="navbar-nav inner-top-nav">
                 {% include 'top_menu/_profile_dropdown.html' %}
+
                 {% include 'top_menu/_community_dropdown.html' %}
+
                 {% include 'top_menu/_apps_dropdown.html' %}
+
                 {% if USER_IS_SUPERUSER %}
                 {% include 'top_menu/_reports_dropdown.html' %}
                 {% endif %}
-                <li class="relative">
-                    <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative" role="button" aria-expanded="false">{% spaceless %}
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% spaceless %}
                         <img class="nav-icon" src="{% block nav_icon_url %}{% static 'famfamfam/icons/page_white_stack.png' %}{% endblock %}">
                         <span class="nav-label">{% block nav_label %}{% trans "Pages" %}{% endblock %}</span>
                         <span class="caret"></span>
                     {% endspaceless %}</a>
+
                     {# Block containing the navigation for the current app #}
                     {% block current_app %}
                         {# This block should be overridden by top_nav.html for inner apps #}
@@ -39,7 +47,8 @@
                     {% endblock %}
               </li>
             </ul>
-            <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 navbar-right inner-top-nav">
+
+            <ul class="navbar-nav navbar-right inner-top-nav">
                 {% if USER_IS_SUPERUSER %}
                 {% include 'top_menu/_support_dropdown.html' %}
                 {% endif %}

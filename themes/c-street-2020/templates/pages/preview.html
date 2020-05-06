@@ -1,4 +1,5 @@
 {% extends page.template %}
+
 {% block title %}{{ page.get_title }}{% endblock %}
 {% block meta_description %}{{ page.get_description }}{% endblock %}
 {% block meta_keywords %}{{ page.get_keywords }}{% endblock %}
@@ -6,16 +7,20 @@
 {% block extra_head %}
 {{ block.super }}
 {% endblock %}
+
 {% block content %}
 <div class="t">
     <div class="page-wrap">
         {% if page.header_image %}<div class="page-header">
             <img src="{{ page.get_header_image_url }}" alt="page header" title="page header" />
         </div>{% endif %}
+
         {% if page.title %}
-        <h1 class="text-xl font-semibold">{{ page.title }}</h1>
+        <h1>{{ page.title }}</h1>
         {% endif %}
+
         <div class="content">{{ page.content|safe }}</div>
+
         <form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
             <div style="display:none;">
                 {{ form.as_p }}
@@ -23,9 +28,9 @@
                 {{ categoryform.as_p }}
             </div>
             {% if edit_button %}
-                <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" type="submit" value="{% trans 'Save Page Changes' %}" />
+                <input class="btn btn-default" type="submit" value="{% trans 'Save Page Changes' %}" />
             {% else %}
-                <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" type="submit" value="{% trans 'Add' %} {% firstof MODULE_PAGES_LABEL trans 'Page' %}" />
+                <input class="btn btn-default" type="submit" value="{% trans 'Add' %} {% firstof MODULE_PAGES_LABEL trans 'Page' %}" />
             {% endif %}
         </form>
         <div id="preview-close"><a href="JavaScript:window.close()">{% trans "Close and Return to Edit" %}</a></div>

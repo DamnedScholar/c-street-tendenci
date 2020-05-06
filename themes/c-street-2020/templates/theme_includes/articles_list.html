@@ -1,8 +1,10 @@
 {% load theme_tags %}
 {% load article_tags %}
+
 {% list_articles as featured_articles limit=TEMPLATE_ARTICLES_LIST_LIMIT %}
 <section id="articles-list-featured">
     <h3>{% firstof TEMPLATE_ARTICLES_LIST_TITLE trans 'Articles' %}</h3>
+
     {% if featured_articles %}
     {% for article in featured_articles|slice:":1" %}
         <h4><a href="{{ article.get_absolute_url }}">{{ article.headline }}</a></h4>

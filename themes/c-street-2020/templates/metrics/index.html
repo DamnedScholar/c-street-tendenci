@@ -1,4 +1,5 @@
 {% extends "metrics/base.html" %}
+
 {% block extra_head %}
 {{ block.super }}
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -7,6 +8,7 @@
       google.setOnLoadCallback(drawTrafficChart);
       google.setOnLoadCallback(drawUsersChart);
       google.setOnLoadCallback(drawMembersChart);
+
       function drawTrafficChart() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Date');
@@ -19,6 +21,7 @@
         var chart = new google.visualization.LineChart(document.getElementById('traffic-chart'));
         chart.draw(data, {lineWidth: 3,pointSize: 5, width: 300, height: 150, legend: 'none', colors: ['#6d8'], vAxes: [{format:'#,###'}]});
       }
+
       function drawUsersChart() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Date');
@@ -31,6 +34,7 @@
         var chart = new google.visualization.LineChart(document.getElementById('users-chart'));
         chart.draw(data, {lineWidth: 3,pointSize: 5, width: 300, height: 150, legend: 'none', colors: ['#58d'], vAxes: [{format:'#,###'}]});
       }
+
       function drawMembersChart() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Date');
@@ -43,10 +47,13 @@
         var chart = new google.visualization.LineChart(document.getElementById('members-chart'));
         chart.draw(data, {lineWidth: 3,pointSize: 5, width: 300, height: 150, legend: 'none', colors: ['#d76'], vAxes: [{format:'#,###'}]});
       }
+
     </script>
 {% endblock extra_head %}
+
 {% block content %}
-<h1 class="text-xl font-semibold">{% trans "Tendenci stats" %}</h1>
+<h1>{% trans "Tendenci stats" %}</h1>
+
 <table>
     <tr>
         <th>{% trans 'Date' %}</th>
@@ -82,14 +89,19 @@
 {% endif %}
 {% endfor %}
 </table>
+
+
 <div id="users-wrap">
     <p>{% trans'Users over the last 7 days' %}</p>
     <div id="users-chart"></div>
 </div>
+
 <div id="members-wrap">
     <p>{% trans 'Members over the last 7 days' %}</p>
     <div id="members-chart"></div>
+
 </div>
+
 <div id="traffic-wrap">
     <p>{% trans 'Web traffic for the last 7 days' %}</p>
     <div id="traffic-chart"></div>

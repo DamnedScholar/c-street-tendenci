@@ -4,7 +4,9 @@
 {% load perm_tags %}
 {% load corporate_memberships_tags %}
 {% load styled_forms %}
+
 {% block title %}{% trans "Corporate Membership Edit Free Passes" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <style>
@@ -13,10 +15,11 @@
     }
 </style>
 {% endblock %}
+
 {% block content %}
 <div class="t">
 <div class="corp-reps">
-     <h1 class="text-xl font-semibold">{% trans "Corporate Membership Edit Free Passes" %}</h1>
+     <h1>{% trans "Corporate Membership Edit Free Passes" %}</h1>
      <div><a href="{% url "corpmembership.view" corp_membership.id %}">{{ corp_membership.corp_profile.name }}</a></div>
     <p>
     <form action="" method="post">{% csrf_token %}
@@ -24,6 +27,7 @@
         {{ form|styled_form }}
         <input type="submit" name="submit" value="{% trans 'Save' %}" />
     </div>
+
     </form>
     </p>
 </div>

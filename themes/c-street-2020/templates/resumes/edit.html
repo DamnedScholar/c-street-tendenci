@@ -2,23 +2,29 @@
 {% load resume_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{% firstof MODULE_RESUMES_LABEL trans 'Resume' %} {% trans 'Edit' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="{% static 'timepicker/timepicker.css' %}" />
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_RESUMES_LABEL trans 'Resume' %} {% trans "Edit" %}</h1>
+    <h1>{% firstof MODULE_RESUMES_LABEL trans 'Resume' %} {% trans "Edit" %}</h1>
+
         <div class="forms">
         <form enctype="multipart/form-data" action="{% url "resume.edit" resume.id %}" method="post">{% csrf_token %}
             {{ form|styled_form }}
             <input type="submit" value="{% trans 'Save changes' %}" />
         </form>
         </div>
+    
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     {{ form.media }}

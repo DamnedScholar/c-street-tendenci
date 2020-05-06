@@ -1,8 +1,11 @@
 {% extends "directories/base.html" %}
 {% load directory_tags %}
+
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Approve" %} {% firstof MODULE_DIRECTORIES_LABEL trans 'Directory' %}</h1>
+    <h1>{% trans "Approve" %} {% firstof MODULE_DIRECTORIES_LABEL trans 'Directory' %}</h1>
+
     <div class="directory-wrap">
     <p><a href="{{ directory.get_absolute_url }}" title="{{ directory.headline }}">
     {{ directory.headline }}

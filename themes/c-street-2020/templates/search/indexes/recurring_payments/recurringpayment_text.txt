@@ -3,4 +3,5 @@
 {{ object.user.username }}
 {{ object.user.email }}
 {{ object.payment_amount }}
+
 is:{{ object.status_detail }}

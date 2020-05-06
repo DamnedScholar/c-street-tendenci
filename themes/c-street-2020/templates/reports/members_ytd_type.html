@@ -1,16 +1,19 @@
 {% extends "reports/base.html" %}
+
 {% block extra_head %}
 {{ block.super }}
 {% endblock %}
+
 {% block content %}
 <div class="page-header">
-  <h1 class="text-xl font-semibold">{% trans "Members YTD by type" %}</h1>
+  <h1>{% trans "Members YTD by type" %}</h1>
 </div>
 <div>
-  <form class="search-form flex items-center pull-right" action="{% url "reports-members-ytd-type" %}" method="get">
-    <div class="mb-4">
+
+  <form class="search-form form-inline pull-right" action="{% url "reports-members-ytd-type" %}" method="get">
+    <div class="form-group">
       <label class="control-label" for="id_year">{% trans "Year" %}:</label>
-      <select class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-800 border border-gray-500 rounded" name="year" id="id_year" onchange="this.form.submit();">
+      <select class="form-control" name="year" id="id_year" onchange="this.form.submit();">
         <option value="" selected="selected">-----------</option>
         {% for year in years %}
         <option value="{{ year }}">{{ year }}</option>
@@ -18,17 +21,20 @@
       </select>
     </div>
   </form>
+
   {% blocktrans with year=year %}
   <p>Currently showing data for {{ year }}.</p>
   {% endblocktrans %}
+
   <h2>{% trans "New Members" %}</h2>
-  <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports">
+  <table class="table table-tendenci-reports">
     <tr>
       <th>{% trans "Type" %}</th>
       {% for month in months %}
       <th>{{ month }}</th>
       {% endfor %}
     </tr>
+
     {% for k, v in types_new.items %}
     <tr>
       <td>{{ k }}</td>
@@ -37,6 +43,7 @@
       {% endfor %}
     </tr>
     {% endfor %}
+
     <tfoot>
       <tr>
         <td><strong>{% trans "Total" %}</strong></td>
@@ -45,15 +52,18 @@
         {% endfor %}
       </tr>
     </tfoot>
+
   </table>
+
   <h2>{% trans "Renewed Members" %}</h2>
-  <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports">
+  <table class="table table-tendenci-reports">
     <tr>
       <th>{% trans "Type" %}</th>
       {% for month in months %}
       <th>{{ month }}</th>
       {% endfor %}
     </tr>
+
     {% for k, v in types_renew.items %}
     <tr>
       <td>{{ k }}</td>
@@ -62,6 +72,7 @@
       {% endfor %}
     </tr>
     {% endfor %}
+
     <tfoot>
       <tr>
         <td><strong>{% trans "Total" %}</strong></td>
@@ -70,15 +81,19 @@
         {% endfor %}
       </tr>
     </tfoot>
+
   </table>
+
   <h2>{% trans "Expired Members" %}</h2>
-  <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports">
+  <table class="table table-tendenci-reports">
     <tr>
       <th>{% trans "Type" %}</th>
       {% for month in months %}
       <th>{{ month }}</th>
       {% endfor %}
     </tr>
+
+
     {% for k, v in types_expired.items %}
     <tr>
       <td>{{ k }}</td>
@@ -87,6 +102,7 @@
       {% endfor %}
     </tr>
     {% endfor %}
+
     <tfoot>
       <tr>
         <td><strong>{% trans "Total" %}</strong></td>
@@ -95,7 +111,10 @@
         {% endfor %}
       </tr>
     </tfoot>
+
   </table>
   <br />
+
 </div>
+
 {% endblock content %}

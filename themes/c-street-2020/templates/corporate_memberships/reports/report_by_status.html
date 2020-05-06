@@ -1,5 +1,6 @@
 {% extends "reports/base.html" %}
 {% load bootstrap_pagination_tags %}
+
 {% block extra_head %}
 {{ block.super }}
 <style>
@@ -8,54 +9,61 @@
     }
 </style>
 {% endblock %}
+
 {% block content %}
+
 <div class="page-header">
-  <h1 class="text-xl font-semibold">{% trans "Corporate Memberships by Status Report" %}</h1>
+  <h1>{% trans "Corporate Memberships by Status Report" %}</h1>
 </div>
-<form class="search-form flex items-center pull-right" action="" method="get">
-<div class="flex flex-wrap"><label class="control-label">{% trans 'Filter by:' %}</label>
-  <div class="mb-4">
+
+<form class="search-form form-inline pull-right" action="" method="get">
+<div class="row"><label class="control-label">{% trans 'Filter by:' %}</label>
+  <div class="form-group">
     <label for="id_days" class="control-label">{{ form.days.label }}</label>
     {{ form.days }}
   </div>
-  <div class="mb-4">
+  <div class="form-group">
     <label for="id_days" class="control-label">{{ form.status_detail.label }}</label>
     {{ form.status_detail }}
   </div>
 </div>
 </form>
+
 <p><em>{{ corp_mems|length }} {% trans "Corporate Memberships listed" %}</em></p>
 {% autopaginate corp_mems 50 %}
-<p><a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="{% url "reports-corp-mems-by-status" %}?output=csv{% if request.GET.days %}&days={{ request.GET.days }}{% endif %}{% if request.GET.status_detail %}&status_detail={{ request.GET.status_detail }}{% endif %}">
+
+
+<p><a class="btn btn-default" href="{% url "reports-corp-mems-by-status" %}?output=csv{% if request.GET.days %}&days={{ request.GET.days }}{% endif %}{% if request.GET.status_detail %}&status_detail={{ request.GET.status_detail }}{% endif %}">
   {% trans 'Download CSV File' %}</a></p>
+
 <div>
-  <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports">
+  <table class="table table-tendenci-reports">
     <tr>
       <th></th>
       <th>
         {% trans "Company Name" %}&nbsp;
-        <span class="sort-arflex flex-wraps">
+        <span class="sort-arrows">
         <a href="?sort=corp_profile" ><i class="fa fa-arrow-up"></i></a>&nbsp;
         <a href="?sort=-corp_profile" ><i class="fa fa-arrow-down"></i></a>
         </span>
       </th>
       <th>
         {% trans "Status" %}&nbsp;
-        <span class="sort-arflex flex-wraps">
+        <span class="sort-arrows">
         <a href="?sort=status_detail" ><i class="fa fa-arrow-up"></i></a>&nbsp;
         <a href="?sort=-status_detail" ><i class="fa fa-arrow-down"></i></a>
         </span>
       </th>
       <th>
         {% trans "Join" %}&nbsp;
-        <span class="sort-arflex flex-wraps">
+        <span class="sort-arrows">
         <a href="?sort=join_dt" ><i class="fa fa-arrow-up"></i></a>&nbsp;
         <a href="?sort=-join_dt" ><i class="fa fa-arrow-down"></i></a>
         </span>
       </th>
       <th>
         {% trans "Expiration" %}&nbsp;
-        <span class="sort-arflex flex-wraps">
+        <span class="sort-arrows">
         <a href="?sort=expiration_dt" ><i class="fa fa-arrow-up"></i></a>&nbsp;
         <a href="?sort=-expiration_dt" ><i class="fa fa-arrow-down"></i></a>
         </span>
@@ -93,6 +101,8 @@
     {% endfor %}
    </table>
 </div>
+
 {% paginate %}
 <br /><br />
+
 {% endblock content %}

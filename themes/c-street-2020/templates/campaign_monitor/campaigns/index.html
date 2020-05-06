@@ -3,11 +3,15 @@
 {% load bootstrap_pagination_tags %}
 {% load campaign_monitor_tags %}
 {% load perm_tags %}
+
+
 {% block title %}{% trans "Index" %} - {{ block.super }}{% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Campaign Monitor Campaigns" %}</h1>
+    <h1>{% trans "Campaign Monitor Campaigns" %}</h1>
     {% autopaginate campaigns 5 %}
+
     <div class="templates-wrap">
     {% for campaign in campaigns %}
         <div class="template-wrap">
@@ -24,6 +28,7 @@
         <div>{% trans "0 Campaigns Found" %}</div>
     {% endfor %}
     </div>
+
     {% paginate %}
 </div>
 {% endblock %}

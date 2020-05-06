@@ -1,19 +1,23 @@
 {% extends "theme_editor/base_list.html" %}
+
 {% load humanize %}
 {% load base_filters %}
+
 {% block title %}{{ block.super }}{% trans 'Theme Editor' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/theme-editor.css' %}" />
 <link rel="stylesheet" href="{% static 'css/tipsy.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
     <div class="editor-nav" style="float:right">
         <a href="{% url "theme_editor.app_list" %}?theme_edit={{ current_theme }}" >{% trans "Back to App List" %}</a>&nbsp;&nbsp;
         <a href="{% url "theme_editor.editor" %}?theme_edit={{ current_theme }}" >{% trans "Back to Theme-Editor" %}</a>
     </div>
-    <h1 class="text-xl font-semibold">{{ app }} templates</h1>
+    <h1>{{ app }} templates</h1>
     <strong>{% trans "Choose a folder or file:" %}</strong>
     <div id="right_files_list">
         {% if prev_dir %}
@@ -47,6 +51,7 @@
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 <script type="text/javascript">

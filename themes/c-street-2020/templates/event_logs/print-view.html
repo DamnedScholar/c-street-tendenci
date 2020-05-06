@@ -1,20 +1,27 @@
 {% extends "event_logs/base.html" %}
 {% load event_log_tags %}
 {% load base_filters %}
+
 {% block title %}{{ block.super }}{% trans 'Print' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/event-logs.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{{ MODULE_EVENT_LOGS_LABEL }} {% trans 'Print' %}</h1>
+    <h1>{{ MODULE_EVENT_LOGS_LABEL }} {% trans 'Print' %}</h1>
+
     <div class="event-log-wrap">
+
         <div class="options">
             <div class="quick-options">
                 {% event_log_options request.user event_log %}
             </div>
         </div>
+
+
         <h2>{{ event_log.event_data }}</h2>
         <div class="content">
             <p>{% trans "Event id :" %} {{ event_log.event_id  }}</p>
@@ -42,5 +49,6 @@
             <div class="submitted">{% blocktrans with event_log.create_dt|date:"long" as create_date %}Logged on {{ create_date }}{% endblocktrans %}</div>
         </div>
     </div>
+
 </div>
 {% endblock %}

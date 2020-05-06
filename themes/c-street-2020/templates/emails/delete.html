@@ -2,9 +2,11 @@
 {% load perm_tags %}
 {% load email_tags %}
 {% load base_filters %}
+
+
 {% block content %}
 <div class="t">
-<h1 class="text-xl font-semibold">{% trans "Delete an Email Record" %}</h1>
+<h1>{% trans "Delete an Email Record" %}</h1>
 <h3>{% blocktrans with email.subject as subject %}Subject: {{ subject }}{% endblocktrans %}</h3>
 <div>{% blocktrans with email.create_dt|date:'long' as dat %} Created on: <b>{{ dat }}{% endblocktrans %}</b></div>
 {% if email.creator %}

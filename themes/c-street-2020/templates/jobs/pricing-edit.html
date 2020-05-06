@@ -2,11 +2,15 @@
 {% load job_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{% blocktrans %}Edit Price:{% endblocktrans %}{% firstof MODULE_JOBS_LABEL trans 'Job' %} {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans 'Job Pricing' %} - {% trans "Edit" %}</h1>
+    <h1>{% trans 'Job Pricing' %} - {% trans "Edit" %}</h1>
+
     <p>{% trans "To edit the job price, complete the fields below and press Submit." %}</p>
+
     <div class="jobpricing">
         <div class="jobpricing-wrap">
             <form action="." method="post" class="form-horizontal">{% csrf_token %}
@@ -19,6 +23,7 @@
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'js/tax_fields.js' %}"></script>

@@ -1,48 +1,57 @@
-<li class="relative">
-    <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative" role="button" aria-expanded="false">
+
+
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
         <img class="nav-icon" src="{% static 'famfamfam/icons/application_view_tile.png' %}"/><span class="nav-label">{% trans "Apps" %}</span>
         <span class="caret"></span>
     </a>
-    <ul id="t-admin-megamenu-apps-dd" class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded apps-dropdown" role="menu">
+
+    <ul id="t-admin-megamenu-apps-dd" class="dropdown-menu apps-dropdown" role="menu">
         <li>
             <div class="yamm-content content-dropdown">
-                <div class="flex flex-wrap">
-                    <div class="sm:w-1/6 pr-4 pl-42 content-dropdown-col">
-                        <div id="accordion" class="panel-group" role="tablist" aria-multiselecw-full max-w-full mb-4 bg-transparent="true">
+                <div class="row">
+                    <div class="col-sm-12 content-dropdown-col">
+                        <div id="accordion" class="panel-group" role="tablist" aria-multiselectable="true">
+
                            <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingZero">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseZero">{% trans '1. Admin' %}</a>
                                     </h4>
                                 </div>
-                                <div id="collapseZero" class="panel-collapse flex-growlapse" role="tabpanel" aria-labelledby="headingZero">
+
+                                <div id="collapseZero" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingZero">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
-                                            <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+                                        <div class="row">
+                                            <ul class="list-unstyled col-sm-6 col-xs-12">
                                                 {% if USER_IS_SUPERUSER %}
                                                     <li class="content-item">
                                                         <a href="{% url 'admin:index'%}">
                                                             <img class="nav-icon" src="{% static 'famfamfam/icons/house.png' %}"/><span class="nav-label">{% trans 'Admin Backend' %}</span>
                                                         </a>
                                                     </li>
+
                                                     <li class="content-item">
                                                         <a href="{% url 'reports-memberships_overview' %}"
                                                             ><img class="nav-icon" src="{% static 'famfamfam/icons/report.png' %}"/><span class="nav-label">{% trans 'Reports' %}</span>
                                                         </a>
                                                     </li>
+
                                                     <li class="content-item">
                                                         <a href="{% url 'apps.list' %}"
                                                             ><img class="nav-icon" src="{% static 'famfamfam/icons/application_view_list.png' %}"/><span class="nav-label">{% trans 'App List' %}</span>
                                                         </a>
                                                     </li>
                                                 {% endif %}
+
                                                 <li class="content-item">
                                                      <a href="{% url 'dashboard' %}"
                                                          ><img class="nav-icon" src="{% static 'famfamfam/icons/controller.png' %}"/><span class="nav-label">{% trans 'Dashboard' %}</span>
                                                      </a>
                                                  </li>
                                             </ul>
-                                            <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+
+                                            <ul class="list-unstyled col-sm-6 col-xs-12">
                                             {% if USER_IS_SUPERUSER %}
                                                 <li class="content-item">
                                                     <a href="{% url 'settings.index' 'site' 'global' %}">
@@ -54,9 +63,11 @@
                                                         <img class="nav-icon" src="{% static 'famfamfam/icons/wrench.png' %}"/><span class="nav-label">{% trans 'Full Settings' %}</span>
                                                     </a>
                                                     </li>
+
                                                     <li class="content-item">
                                                         <a href="/explorer/"><img class="nav-icon" src="{% static 'famfamfam/icons/application.png' %}"/><span class="nav-label">{% trans 'Database Export' %}</span></a>
                                                     </li>
+
                                                     <li class="content-item">
                                                         <a href="{% url 'theme_editor.editor' %}"
                                                             ><img class="nav-icon" src="{% static 'famfamfam/icons/layout_edit.png' %}"/><span class="nav-label">{% trans 'Theme Editor' %}</span>
@@ -68,16 +79,18 @@
                                     </div>
                                  </div>
                             </div>
+
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingOne">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">{% trans '2. Content' %}</a>
                                     </h4>
                                 </div>
-                                <div id="collapseOne" class="panel-collapse flex-growlapse in" role="tabpanel" aria-labelledby="headingOne">
+
+                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
-                                            <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+                                        <div class="row">
+                                            <ul class="list-unstyled col-sm-6 col-xs-12">
                                             {% if MODULE_PAGES_ENABLED %}
                                                 <li class="content-item">
                                                     <a href="{% url 'pages' %}"
@@ -85,6 +98,7 @@
                                                     </a>
                                                 </li>
                                             {% endif %}
+
                                             {% if MODULE_STORIES_ENABLED %}
                                                 <li class="content-item">
                                                     <a href="{% url 'stories' %}"
@@ -92,6 +106,7 @@
                                                     </a>
                                                 </li>
                                             {% endif %}
+
                                                 {% if MODULE_NEWS_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'news' %}"
@@ -99,6 +114,7 @@
                                                         </a>
                                                     </li>
                                                 {% endif %}
+
                                                 {% if MODULE_ARTICLES_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'articles' %}"
@@ -106,6 +122,7 @@
                                                         </a>
                                                     </li>
                                                 {% endif %}
+
                                                 {% if MODULE_FORMS_ENABLED and USER_IS_SUPERUSER %}
                                                     <li class="content-item">
                                                         <a href="{% url 'forms' %}"
@@ -113,6 +130,7 @@
                                                         </a>
                                                     </li>
                                                 {% endif %}
+
                                                 {% if MODULE_FILES_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'files' %}"
@@ -120,8 +138,10 @@
                                                         </a>
                                                     </li>
                                                 {% endif %}
+
                                             </ul>
-                                            <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+
+                                            <ul class="list-unstyled col-sm-6 col-xs-12">
                                                 {% if MODULE_DIRECTORIES_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'directories' %}"
@@ -129,6 +149,7 @@
                                                         </a>
                                                     </li>
                                                 {% endif %}
+
                                                 {% if MODULE_JOBS_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'jobs' %}"
@@ -136,6 +157,7 @@
                                                         </a>
                                                     </li>
                                                 {% endif %}
+
                                                 {% if MODULE_RESUMES_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'resumes' %}"
@@ -143,6 +165,8 @@
                                                         </a>
                                                     </li>
                                                 {% endif %}
+
+
                                                 {% if MODULE_HELP_FILES_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'help_files' %}"
@@ -150,6 +174,7 @@
                                                         </a>
                                                     </li>
                                                 {% endif %}
+
                                                 {% if MODULE_TESTIMONIALS_ENABLED and USER_IS_SUPERUSER %}
                                                 <li class="content-item">
                                                     <a href="{% url 'testimonials' %}"
@@ -157,34 +182,40 @@
                                                     </a>
                                                 </li>
                                                 {% endif %}
+
                                             </ul>
                                         </div>
                                     </div>
                                  </div>
                             </div>
+
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingTwo">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">{% trans '3. Events' %}</a>
                                     </h4>
                                 </div>
-                                <div id="collapseTwo" class="panel-collapse flex-growlapse" role="tabpanel" aria-labelledby="headingTwo">
+
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
+                                        <div class="row">
                                             {% if MODULE_EVENTS_ENABLED %}
-                                              <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+                                              <ul class="list-unstyled col-sm-6 col-xs-12">
                                                     <li class="content-item">
                                                         <a href="{% url 'event.month' %}"
                                                             ><img class="nav-icon" src="{% static 'famfamfam/icons/calendar.png' %}"/><span class="nav-label">{% trans 'Calendar' %}</span>
                                                         </a>
                                                     </li>
+
                                                     <li class="content-item">
                                                         <a href="{% url 'event.search' %}"
                                                             ><img class="nav-icon" src="{% static 'famfamfam/icons/date.png' %}"/><span class="nav-label">{% trans 'Events List' %}</span>
                                                         </a>
                                                     </li>
+
                                                 </ul>
-                                                <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+
+                                                <ul class="list-unstyled col-sm-6 col-xs-12">
                                                     {% if USER_IS_SUPERUSER %}
                                                     <li class="content-item">
                                                         <a href="{% url 'event.reports.financial' %}"
@@ -192,6 +223,7 @@
                                                         </a>
                                                     </li>
                                                     {% endif %}
+
                                                     {% if MODULE_SPEAKERS_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'speakers' %}"
@@ -201,20 +233,26 @@
                                                     {% endif %}
                                                 </ul>
                                             {% endif %}
+
+
                                         </div>
                                     </div>
                                  </div>
                             </div>
+
+
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingThree">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">{% trans '4. Member Engagement' %}</a>
                                     </h4>
                                 </div>
-                                <div id="collapseThree" class="panel-collapse flex-growlapse" role="tabpanel" aria-labelledby="headingThree">
+
+                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
-                                                <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+                                        <div class="row">
+
+                                                <ul class="list-unstyled col-sm-6 col-xs-12">
                                                  {% if MODULE_PHOTOS_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'photoset_latest' %}"
@@ -222,6 +260,7 @@
                                                         </a>
                                                     </li>
                                                     {% endif %}
+
                                                     {% if MODULE_VIDEOS_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'video' %}"
@@ -229,6 +268,7 @@
                                                         </a>
                                                     </li>
                                                     {% endif %}
+
                                                     {% if MODULE_NEWSLETTERS_ENABLED and USER_IS_SUPERUSER %}
                                                     <li class="content-item">
                                                         <a href="{% url 'newsletter.list' %}"
@@ -237,7 +277,8 @@
                                                     </li>
                                                     {% endif %}
                                                 </ul>
-                                                <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+
+                                                <ul class="list-unstyled col-sm-6 col-xs-12">
                                                     {% if USER_IS_SUPERUSER %}
                                                         <li class="content-item">
                                                             <a href="{% url 'admin:app_list' 'announcements'%}">
@@ -257,16 +298,18 @@
                                     </div>
                                  </div>
                             </div>
+
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingFour">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">{% trans '5. Organization' %}</a>
                                     </h4>
                                 </div>
-                                <div id="collapseFour" class="panel-collapse flex-growlapse" role="tabpanel" aria-labelledby="headingFour">
+
+                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
-                                            <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+                                        <div class="row">
+                                            <ul class="list-unstyled col-sm-6 col-xs-12">
                                                {% if MODULE_STAFF_ENABLED and USER_IS_SUPERUSER %}
                                                     <li class="content-item">
                                                         <a href="{% url 'staff' %}"
@@ -279,8 +322,10 @@
                                                         ><img class="nav-icon" src="{% static 'famfamfam/icons/group_go.png' %}"/><span class="nav-label">{% trans 'Study Groups' %}</span>
                                                     </a>
                                                 </li>
+
                                             </ul>
-                                            <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+
+                                            <ul class="list-unstyled col-sm-6 col-xs-12">
                                             {% if USER_IS_SUPERUSER %}
                                                 <li class="content-item">
                                                     <a href="{% url 'admin:app_list' 'entities' %}"
@@ -300,6 +345,7 @@
                                     </div>
                                  </div>
                             </div>
+
                             {% if USER_IS_SUPERUSER %}
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingFive">
@@ -307,10 +353,11 @@
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">{% trans '6. Financial' %}</a>
                                     </h4>
                                 </div>
-                                <div id="collapseFive" class="panel-collapse flex-growlapse" role="tabpanel" aria-labelledby="headingFive">
+
+                                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
-                                            <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+                                        <div class="row">
+                                            <ul class="list-unstyled col-sm-6 col-xs-12">
                                                 {% if MODULE_INVOICES_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'invoices' %}"
@@ -323,6 +370,7 @@
                                                         ><img class="nav-icon" src="{% static 'famfamfam/icons/report.png' %}"/><span class="nav-label">{% trans 'Invoicing Reports' %}</span>
                                                     </a>
                                                 </li>
+
                                                 {% if MODULE_MAKE_PAYMENT_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'make_payment.add' %}"
@@ -331,7 +379,7 @@
                                                     </li>
                                                 {% endif %}
                                             </ul>
-                                            <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+                                            <ul class="list-unstyled col-sm-6 col-xs-12">
                                                 {% if MODULE_DISCOUNTS_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'discounts' %}"
@@ -339,6 +387,7 @@
                                                         </a>
                                                     </li>
                                                 {% endif %}
+
                                                 {% if MODULE_DONATIONS_ENABLED %}
                                                     <li class="content-item">
                                                         <a href="{% url 'donation.search' %}"
@@ -352,6 +401,7 @@
                                  </div>
                             </div>
                             {% endif %}
+
                             {% if USER_IS_SUPERUSER %}
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingSix">
@@ -359,10 +409,11 @@
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">{% trans '7. Layout' %}</a>
                                     </h4>
                                 </div>
-                                <div id="collapseSix" class="panel-collapse flex-growlapse" role="tabpanel" aria-labelledby="headingSix">
+
+                                <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
                                     <div class="panel-body">
-                                        <div class="flex flex-wrap">
-                                            <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+                                        <div class="row">
+                                            <ul class="list-unstyled col-sm-6 col-xs-12">
                                                     <li class="content-item">
                                                         <a href="{% url 'theme_editor.editor' %}"
                                                             ><img class="nav-icon" src="{% static 'famfamfam/icons/layout_edit.png' %}"/><span class="nav-label">{% trans 'Theme Editor' %}</span>
@@ -370,16 +421,18 @@
                                                     </li>
                                                     <li class="content-item">
                                                         <a href="{% url 'admin:navs_nav_changelist' %}"
-                                                            ><img class="nav-icon" src="{% static 'famfamfam/icons/folder_explore.png' %}"/><span class="nav-label">{% trans 'flex flex-wrap list-reset pl-0 mb-0igation' %}</span>
+                                                            ><img class="nav-icon" src="{% static 'famfamfam/icons/folder_explore.png' %}"/><span class="nav-label">{% trans 'Navigation' %}</span>
                                                         </a>
                                                     </li>
                                             </ul>
-                                            <ul class="list-unstyled sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+
+                                            <ul class="list-unstyled col-sm-6 col-xs-12">
                                                     <li class="content-item">
                                                         <a href="{% url 'admin:boxes_box_changelist' %}"
                                                             ><img class="nav-icon" src="{% static 'famfamfam/icons/box.png' %}"/><span class="nav-label">{% trans 'Boxes' %}</span>
                                                         </a>
                                                     </li>
+
                                                     <li class="content-item">
                                                         <a href="{% url 'redirects' %}"
                                                             ><img class="nav-icon" src="{% static 'famfamfam/icons/arrow_turn_right.png' %}"/><span class="nav-label">{% trans 'Redirects' %}</span>
@@ -391,6 +444,7 @@
                                  </div>
                             </div>
                             {% endif %}
+
                         </div>
                     </div>
                 </div>

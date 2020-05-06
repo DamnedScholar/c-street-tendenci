@@ -1,14 +1,20 @@
 {% load tagging_tags %}
 {% load category_tags %}
+
 {% tags_for_object object as tags %}
 {% for tag in tags %}
     tag:{{ tag }}
 {% endfor %}
+
 {{ object.pk }}
 {{ object.title }}
+
 {{ object.mission|striptags }}
+
 {{ object.content|striptags }}
+
 {{ object.notes|striptags }}
+
 {% get_category_for_object object as category %}
 {% if category %}
 category:{{ category }}

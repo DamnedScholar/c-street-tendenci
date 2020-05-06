@@ -1,11 +1,12 @@
+
 <div id="theme-bar">
-    <div class="alert-message block-message opacity-0 in info" data-alert="relative px-3 py-3 mb-4 border rounded">
-        <a class="absolute top-0 bottom-0 right-0 px-4 py-3" href="#">×</a>
+    <div class="alert-message block-message fade in info" data-alert="alert">
+        <a class="close" href="#">×</a>
         <strong>{% trans 'Admin Theme Preview' %}:</strong>
         {% blocktrans with theme=request.session.theme %}You are previewing the &quot;{{ theme }}&quot; theme{% endblocktrans %}<br />
         {% trans 'Current Page Template' %}: {{ TEMPLATE_NAME }} ({% if TEMPLATE_THEME %}{% blocktrans %}From the &quot;{{ TEMPLATE_THEME }}&quot; theme{% endblocktrans %}{% else %}{% trans 'Original version' %}{% endif %})
         <div class="alert-actions">
-            <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal " href="{{ request.path }}?theme=">{% trans 'Stop previewing' %}</a> <a class="btn" href="{% url "theme_editor.editor" %}?theme_edit={{ request.session.theme }}">{% trans 'Edit this theme' %}</a>
+            <a class="btn" href="{{ request.path }}?theme=">{% trans 'Stop previewing' %}</a> <a class="btn" href="{% url "theme_editor.editor" %}?theme_edit={{ request.session.theme }}">{% trans 'Edit this theme' %}</a>
         </div>
     </div>
 </div>

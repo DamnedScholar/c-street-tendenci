@@ -1,4 +1,5 @@
 {% load styled_forms %}
+
 {{ addon_formset.management_form }}
 {% for form in addon_formset.forms %}
     <div class="addon-form" id="addon_{{ forloop.counter0 }}">

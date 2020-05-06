@@ -1,0 +1,54 @@
+{% extends "accounts/base.html" %}
+{% block title %}{% trans "Login" %}{% endblock %}
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
+{% block content %}
+    <h2>{% trans "Log In to the Site" %}</h2>
+    {% if user.is_authenticated %}
+        <p>
+           {% blocktrans %} You are already logged in as {{ user }}. {% endblocktrans %}
+            <a href="{% url 'auth_logout' %}">{% trans "Logout?" %}</a>
+        </p>
+    {% else %}
+        <form class="form-horizontal" id="t-accounts-login-form" method="post" action="">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="relative px-3 py-3 mb-4 border rounded text-red-800 border-red-600 bg-red-200" role="alert">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% for f in form %}
+                {% if f.is_hidden %}
+                    {{ f }}
+                {% else %}
+                    <div class="mb-4 {% if f.errors %}has-error{% endif %}">
+                        <label for="{{ f.id_for_label }}" class="sm:w-1/5 pr-4 pl-4 control-label">{{ f.label }}</label>
+                        <div class="sm:w-1/2 pr-4 pl-4">
+                            {{ f }}
+                            {% if f.errors %}
+                                {% for field_error in f.errors %}
+                                    <span id="{{ f.id_for_label }}-help-block" class="help-block">{{ field_error }}</span>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <div class="mb-4">
+                <div class=":flex-growsm-offset-2 sm:w-1/2 pr-4 pl-4">
+                    <button type="submit" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400">{% trans "Log in" %}</button>
+                </div>
+            </div>
+        </form>
+        <h3>{% trans "Forgot your password?" %}</h3>
+        <p><a href="{% url 'auth_password_reset' %}">{% trans "Click here to reset your password." %}</a></p>
+        {% if MODULE_USERS_SELFREGISTRATION %}
+            <h3>{% trans "Don't have an account?" %}</h3>
+            <p><a href="{% url 'registration_register' %}">{% trans "Register Now" %}</a></p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

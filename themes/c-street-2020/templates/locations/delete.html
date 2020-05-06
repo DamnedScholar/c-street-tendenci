@@ -1,14 +1,17 @@
 {% extends "locations/base.html" %}
 {% load locations_tags %}
+
 {% block title %}{% trans "Delete" %} - {{ location.location_name }}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/delete.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
     <div class="location-wrap">
-        <h1 class="text-xl font-semibold">{% firstof MODULE_LOCATIONS_LABEL trans 'Location' %} {% trans "Delete Page" %}</h1>
+        <h1>{% firstof MODULE_LOCATIONS_LABEL trans 'Location' %} {% trans "Delete Page" %}</h1>
         <h2>{{ location.location_name }} - <a href="{{ location.get_absolute_url }}">{{ location.get_absolute_url }}</a></h2>
         <div class="content">{{ location.description|safe|truncatewords_html:"60" }}</div>
         <div class="delete-prompt">

@@ -1,15 +1,19 @@
 {% extends "user_groups/base.html" %}
 {% load user_group_tags %}
 {% load styled_forms %}
+
 {% block title %}{% trans 'Groups' %}{% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/iconrow.css' %}">
     <link rel="stylesheet" href="{% static 'css/usergroups.css' %}">
 {% endblock %}
+
 {% block content %}
     <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Import Results for" %} {{ group.name }}</h1>
+    <h1>{% trans "Import Results for" %} {{ group.name }}</h1>
+
     <div class="import-result">
     {% for sub in subs %}
         <div class="subscriber">
@@ -26,8 +30,10 @@
         <p>{% trans 'No valid subscriber was found in the import file.' %}</p>
     {% endfor %}
     </div>
+
     </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 {% endblock %}

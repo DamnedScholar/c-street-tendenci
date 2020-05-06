@@ -3,19 +3,25 @@
 {% load base_tags %}
 {% load profile_tags %}
 {% load styled_forms %}
+
+
 {% block title %}{% trans 'Import Users from CSV file - Preview' %}{% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/user-import.css' %}">
 {% endblock %}
+
 {% block content %}
     <div class="t">
         <div id="import-wrap">
-            <h1 class="text-xl font-semibold">{% trans "Import Users" %}</h1>
+            <h1>{% trans "Import Users" %}</h1>
             <h3 class="import-step">{% trans "Step 2/3 - Preview" %}</h3>
+
             {% if uimport.status == 'preprocess_done' %}
                 <p>{% trans "You're almost done!  Please review your settings. To complete your import, click the button" %} <strong>{% trans 'Import Now' %}</strong>. </p>
             {% endif %}
+
             <div class="dimport-settings">
                 <div>
                     {% trans "Update" %}:
@@ -27,11 +33,14 @@
                         {% endif %}
                     </strong>
                 </div>
+
                 <div>{% trans "Identify Duplicates by" %}: <strong>{{ uimport.key }}</strong></div>
+
                 {% if uimport.group_id and uimport.group %}
                     <div>
                         {% trans "Add users to the group" %}:
                         <strong>{{ uimport.group }}</strong>
+
                         {% if uimport.clear_group_membership %}
                             <div>
                                 {% trans "Delete members in group before importing" %}:
@@ -40,11 +49,14 @@
                         {% endif %}
                     </div>
                 {% endif %}
+
                 <div>&nbsp;</div>
+
                 <div>
                     <strong>{% trans "Total Rows" %}:  {{ total_rows }}</strong>
                 </div>
             </div> <!-- dimport settings -->
+
             {% if uimport.status == 'preprocess_done' %}
                 <form class="import" method="post" action="{% url 'profiles.user_import_process' uimport.id %}">{% csrf_token %}
                     <div class="import-preview">
@@ -52,24 +64,31 @@
                             <tr>
                                 <th>{% trans 'Row #' %}</th>
                                 <th>{% trans 'Action' %}</th>
+
                                 {% if 'first_name' in fieldnames or 'last_name' in fieldnames %}
                                     <th>{% trans 'Name' %}</th>
                                 {% endif %}
+
                                 {% if 'email' in fieldnames %}
                                     <th>{% trans 'Email' %}</th>
                                 {% endif %}
+
                                 {% if 'username' in fieldnames %}
                                     <th>{% trans 'Username' %}</th>
                                 {% endif %}
+
                                 {% if 'member_number' in fieldnames %}
                                     <th>{% trans 'Member Number' %}</th>
                                 {% endif %}
+
                                 <th>{% trans 'Reason if to be skipped' %}</th>
                             </tr>
+
                             {% for u in users_list %}
                                 <tr class="row-{{ u.action }}">
                                     <td>{{ u.row_num }}</td>
                                     <td class="action-{{ u.action }}">{{ u.action }}</td>
+
                                     {% if 'first_name' in fieldnames or 'last_name' in fieldnames %}
                                         <td>
                                             {% if u.user and u.user.username %}
@@ -79,20 +98,25 @@
                                             {% endif %}
                                         </td>
                                     {% endif %}
+
                                     {% if 'email' in fieldnames %}
                                         <td>{{ u.email }}</td>
                                     {% endif %}
+
                                     {% if 'username' in fieldnames %}
                                         <td>{{ u.username }}</td>
                                     {% endif %}
+
                                     {% if 'member_number' in fieldnames %}
                                         <td>{{ u.member_number }}</td>
                                     {% endif %}
+
                                     <td>{% if u.error %}{{ u.error }}{% endif %}</td>
                                 </tr>
                             {% endfor %}
                         </table>
                     </div>
+
                     {% if num_pages > 1 %}
                         <div id="import-paginate">
                             {% if prev %}
@@ -100,6 +124,7 @@
                             {% else %}
                                 {% trans 'Prev' %}}
                             {% endif %}
+
                             {% for page in page_range %}
                                 {% if page == '...' %}
                                     {{ page }}
@@ -111,6 +136,7 @@
                                     {% endif %}
                                 {% endif %}
                             {% endfor %}
+
                             {% if curr_page >= num_pages  %}
                                 {% trans 'Next' %}
                             {% else %}
@@ -118,8 +144,9 @@
                             {% endif %}
                         </div>
                     {% endif %}
+
                     <div style="margin-top: 1em;">
-                        <input type="submit" class="submit-btn inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal " name="submit" value="{% trans 'Import Now' %}" >
+                        <input type="submit" class="submit-btn btn" name="submit" value="{% trans 'Import Now' %}" >
                     </div>
                 </form>
             {% else %}
@@ -131,6 +158,7 @@
         </div>
     </div>
 {% endblock %}
+
 {% block extra_body %}
     <script type="text/javascript">
         {% if uimport.status != 'preprocess_done' %}
@@ -138,6 +166,7 @@
                  // https://jqueryui.com/progressbar/#animated
                 var value;
                 var status_check_intval;
+
                 var status_check = function(){
                     $.ajax({
                         type: "POST",
@@ -153,6 +182,7 @@
                         }
                     });
                  }
+
                 status_check();
                 status_check_intval = setInterval(function() {
                     status_check();  // check every 5 seconds

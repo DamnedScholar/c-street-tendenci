@@ -1,0 +1,9 @@
+{% extends "helpdesk/base.html" %}
+{% block helpdesk_title %}{% trans "Delete Ticket CC" %}{% endblock %}
+{% block helpdesk_body %}{% blocktrans with cc.email_address as email_address %}
+<h2>Delete Ticket CC</h2>
+<p>Are you sure you wish to delete this email address (<em>{{ email_address }}</em>) from the CC list for this ticket? They will stop receiving updates.</p>
+{% endblocktrans %}
+<p><a href='../../'>{% trans "Don't Delete" %}</a></p>
+<form method='post' action='./'><input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type='submit' value='{% trans "Yes, Delete" %}' />{% csrf_token %}</form>
+{% endblock %}

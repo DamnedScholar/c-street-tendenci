@@ -5,6 +5,8 @@
 {% load entity_tags %}
 {% load perm_tags %}
 {% load search_tags %}
+
+
 {% block title %}
     {% if MODULE_ENTITIES_LABEL_PLURAL %}
         {% blocktrans %}{{ MODULE_ENTITIES_LABEL_PLURAL }} List{% endblocktrans %}
@@ -12,9 +14,11 @@
         {% trans "Entities List" %}
     {% endif %} - {{ block.super }}
 {% endblock %}
+
 {% block content_classes %}{{ block.super }} t-search-view{% endblock %}
+
 {% block content %}
-    <h1 class="text-xl font-semibold">
+    <h1>
         {% firstof trans SITE_GLOBAL_SITEPRIMARYKEYWORDS trans SITE_GLOBAL_SITEDISPLAYNAME %}
         {% if MODULE_ENTITIES_LABEL_PLURAL %}
             {% blocktrans %}{{ MODULE_ENTITIES_LABEL_PLURAL }} List{% endblocktrans %}
@@ -22,8 +26,10 @@
             {% trans "Entities List" %}
         {% endif %}
     </h1>
+
     {% autopaginate entities 10 %}
     {% entity_search %}
+
     <h4 class="capitalize">
         <em>
             {% if MODULE_ENTITIES_LABEL_PLURAL and MODULE_ENTITIES_LABEL %}
@@ -41,17 +47,21 @@
             {% endif %}
         </em>
     </h4>
+
     <section>
         {% for entity in entities %}
             {% search_result entity %}
         {% endfor %}
     </section>
+
     {% paginate %}
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript">
         $(document).ready(function(){
+
             // delete confirmation
             $('.delete').on("click", function(){
                 var delete_entity = confirm('{% trans "Permenantly delete" %} {{ MODULE_ENTITIES_LABEL }} ?');    // confirm

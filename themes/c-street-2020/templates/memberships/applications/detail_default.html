@@ -1,33 +1,42 @@
 {% extends "memberships/base-wide.html" %}
 {% load styled_forms %}
 {% load base_filters %}
+
 {% block title %}{% endblock %}
 {% block meta_description %}{% endblock %}
 {% block meta_keywords %}{% endblock %}
 {% block meta_canonical_url %}<link rel="canonical" href="" />{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="{% static 'timepicker/timepicker.css' %}" />
 <link rel="stylesheet" href="{% static 'css/memberships.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
     <h2>{{ app.name }}</h2>
     <p>{{ app.description|safe|urlize }}</p>
+
     <div>{{ form.non_field_errors }}</div>
+
     {% for field in form %}
       {% if field.errors %}
       <div>{{ field.label_tag }} {{ field.errors }}</div>
       {% endif %}
     {% endfor %}
+
     <div class="form-builder-wrap">
         <form action="" method="post">
         <div class="forms">
+
             {% csrf_token %}
+
             <input type="hidden" name="user_addres_id" value="">
             <input type="hidden" name="user_id" value="">
-            <table border="0" width="100%"><tr><td colspan="4"><h1 class="text-xl font-semibold">{% trans 'All Fields' %}</h1></td></tr><table border=0><tr><td colspan="4">&nbsp;</td></tr><tr bgcolor="#f2f2f2"><td colspan="4"><span class="subtitles">{% trans 'Section 1: User Information' %}</span></td></tr><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">Salutation</div></td><td align="left">
+            <table border="0" width="100%"><tr><td colspan="4"><h1>{% trans 'All Fields' %}</h1></td></tr><table border=0><tr><td colspan="4">&nbsp;</td></tr><tr bgcolor="#f2f2f2"><td colspan="4"><span class="subtitles">{% trans 'Section 1: User Information' %}</span></td></tr><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">Salutation</div></td><td align="left">
+
             <select size="1"  name="salutation" class="body_copy">
             <option value="{{ form.salutation.value }}" SELECTED>{% trans 'SELECT ONE' %}</option>
             <option value="Mr.">{% trans 'Mr.' %}</option>
@@ -38,6 +47,7 @@
             <option value="Prof.">{% trans 'Prof.' %}</option>
             <option value="Hon.">{% trans 'Hon.' %}</option>
             </select>
+
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'First Name' %}<span class="body_copy_alerts">*</span></div></td><td align="left"><input type="text" name="{{ form.first_name.html_name }}" value="{{ form.first_name.value }}" size="28">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Initials' %}</div></td><td align="left"><input type="text" name="initials" value="{{ form.initial.value }}" size="12">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Last Name' %}<span class="body_copy_alerts">*</span></div></td><td align="left"><input type="text" name="last_name" value="{{ form.last_name.value }}" size="28">
@@ -45,10 +55,12 @@
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Company' %}</div></td><td align="left"><input type="text" name="company" value="{{ form.company.value }}" size="36">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Title' %}</div></td><td align="left"><input type="text" name="positional_title" value="{{ form.positional_title.value }}" size="28">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Functional Title' %}</div></td><td align="left">
+
             <select size="1" NAME="functional_title"  class="body_copy" >
             <option value="0" SELECTED>{% trans 'SELECT ONE' %}</option>
             <option value="1">{% trans 'Mister' %} </option>
             </select>
+
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Department' %}</div></td><td align="left"><input type="text" name="department" value="{{ form.department.value }}" size="20">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Address' %}</div></td><td align="left"><input type="text" name="address" value="{{ form.address.value }}" size="28">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Address 2' %}</div></td><td align="left"><input type="text" name="address2" value="{{ form.address2.value }}" size="28">
@@ -57,11 +69,13 @@
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Zip Code' %}</div></td><td align="left"><input type="text" name="zipcode" value="{{ form.zipcode.value }}" size="12">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Country' %}</div></td><td align="left"><input type="text" name="country" value="country" size="14">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Address Type' %}</div></td><td align="left">
+
             <select size="1"  name="address_type" class="body_copy">
             <option value="{{ form.address_type.value }}" SELECTED>{% trans 'SELECT ONE' %}</option>
             <option value="Home">{% trans 'Home' %}</option>
             <option value="Work">{% trans 'Work' %}</option>
             </select>
+
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Phone' %}</div></td><td align="left"><input type="text" name="phone" value="{{ form.phone.value }}" size="22">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Phone 2' %}</div></td><td align="left"><input type="text" name="phone2"value="" size="22">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Work Phone' %}</div></td><td align="left"><input type="text" name="work_phone" value="{{ form.work_phone.value }}" size="22">
@@ -82,16 +96,22 @@
             <br></td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Hide Phone' %}</div></td><td align="left"><input name="hide_phone" type="radio" value="1">{% trans 'Yes' %}&nbsp;&nbsp;&nbsp;
             <input name="hide_phone" type="radio" value="0" checked>{% trans 'No' %}
             <br></td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'DOB' %}</div></td><td align="left">
+
             {{ form.dob }}
+
             </td><td>&nbsp;</td></tr></table>
+
             <table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Gender' %}</div></td><td align="left"><input type="text" name="gender" value="{{ form.gender.value }}" size="20">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Spouse' %}</div></td><td align="left"><input type="text" name="spouse" value="{{ form.spouse.value }}" size="28">
             </td><td>&nbsp;</td></tr></table>
+
             <table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'User Name' %}</div></td><td align="left"><input type="text" name="username" value="{{ form.username.value}}" size="20">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Password' %}</div></td><td align="left"><input type="password" name="password"value="">
             <br><input type="password" name="confirm_password"value=""> <span class="body_copy_alerts">{% trans 'confirm password' %}</span>
             </td><td>&nbsp;</td></tr></table>
-            <table border=0><tr><td colspan="4">&nbsp;</td></tr><tr bgcolor="#f2f2f2"><td colspan="4"><span class="subtitles">{% trans 'Section 2: Membership Information' %}</span></td></tr><tr><td align="left"  valign="top" flex-growspan="2" ><div style="margin-left: 2em;">{% trans 'Corporate Membership ID' %}&nbsp;&nbsp;&nbsp;
+
+            <table border=0><tr><td colspan="4">&nbsp;</td></tr><tr bgcolor="#f2f2f2"><td colspan="4"><span class="subtitles">{% trans 'Section 2: Membership Information' %}</span></td></tr><tr><td align="left"  valign="top" colspan="2" ><div style="margin-left: 2em;">{% trans 'Corporate Membership ID' %}&nbsp;&nbsp;&nbsp;
+
             <select size="1" NAME="corporate_membership_id"  class="body_copy" >
             <option value="0" SELECTED>{% trans 'SELECT ONE' %}</option>
             <option value="17">{% trans '2 Free Passes Coxx' %} </option>
@@ -102,6 +122,7 @@
             <option value="7">{% trans 'Of the Rose House of Design' %} </option>
             <option value="13">{% trans 'Tea Company' %} </option>
             </select>
+
             </div></td><td>&nbsp;</td></tr></table><table border=0><tr><td colspan="3"><div style="margin-left: 2em;">{% trans 'Certifications' %}</div></td></tr><tr><td colspan="3"><div style="margin-left: 2em;">
             </div></td></tr><tr><td colpspan="4">&nbsp;</td></tr></table><table border=0><tr><td colspan="3"><div style="margin-left: 2em;">{% trans 'Work Experience' %}</div></td></tr><tr><td colspan="3"><div style="margin-left: 2em;">
             </div></td></tr><tr><td colpspan="4">{{ form.work_experience }}</td></tr></table><table border=0><tr><td colspan="3"><div style="margin-left: 2em;">{% trans 'Areas of Expertise' %} {{ form.areas_of_expertise }}</div></td></tr><tr><td colspan="3"><div style="margin-left: 2em;">
@@ -111,13 +132,17 @@
             </div></td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'License Number' %}</div></td><td align="left"><input type="text" name="license_number" value="{{ form.license_number.value }}" size="15">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Licensed in State' %}</div></td><td align="left"><input type="text" name="license_state" value="{{ form.license_state.value }}" size="10">
             </td><td>&nbsp;</td></tr></table>
+
             <table border=0><tr><td align="left"  valign="top" colspan="2" ><div style="margin-left: 2em;">{% trans 'Chapter' %}&nbsp;&nbsp;&nbsp;
+
             {{ form.chapter }}
+
             </div></td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left"  valign="top" colspan="2" ><div style="margin-left: 2em;">{% trans 'Application Complete?' %}&nbsp;&nbsp;&nbsp;<input name="application_complete" type="radio" value="1">{% trans 'Yes' %}&nbsp;&nbsp;&nbsp;
             <input name="application_complete" type="radio" value="0" checked>{% trans 'No' %}
             <br></div></td><td>&nbsp;</td></tr></table><table border=0><tr><td colspan="3"><div style="margin-left: 2em;">{% trans 'Notes' %}</div></td></tr><tr><td colspan="3"><div style="margin-left: 2em;">
             </div></td></tr><tr><td colpspan="4">&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Home State' %}</div></td><td align="left"><input type="text" name="home_state" value="{{ form.home_state.value }}" size="10">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left"  valign="top" colspan="2" ><div style="margin-left: 2em;">{% trans 'Year Left Native Country' %}&nbsp;&nbsp;&nbsp;
+
             <select size="1"  name="year_left_native_country" class="body_copy">
             <option value="" SELECTED>?</option>
             <option value="1900">1900</option>
@@ -278,9 +303,13 @@
             <input name="government_worker" type="radio" value="0" checked>{% trans 'No' %}
             <br></td><td>&nbsp;</td></tr></table><table border=0><tr><td colspan="3"><div style="margin-left: 2em;">{% trans 'Government Agency' %}</div></td></tr><tr><td colspan="3"><div style="margin-left: 2em;"><input type="text" name="government_agency" value="{{ form.government_agency.value }}" size="50">
             </div></td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Industry' %}</div></td><td align="left">
+
             {{ form.industry }}
+
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Region' %}</div></td><td align="left">
+
             {{ form.region }}
+
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td colspan="3"><div style="margin-left: 2em;">{% trans 'Size of Company' %}</div></td></tr><tr><td colspan="3"><div style="margin-left: 2em;"><input type="text" name="company_size"value="" size="50">
             </div></td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Referral Source' %}</div></td><td align="left"><input type="text" name="referral_source"value="" size="28">
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left"  valign="top" colspan="2" ><div style="margin-left: 2em;">{% trans 'Referral Source Other' %}&nbsp;&nbsp;&nbsp;<input type="text" name="referral_source_other"value="" size="28">
@@ -291,10 +320,14 @@
             <div class="memberships_list_items"><div id="membershiptype_block">
             {{ form.membership_type }}
             </div><div id="membershiptype_block_d" style="display:none;"></div></div></div></td><td>&nbsp;</td></tr></table><table border=0><tr><td colspan="4">&nbsp;</td></tr><tr bgcolor="#f2f2f2"><td colspan="4"><span class="subtitles">{% trans 'Section 4: Payment' %}</span></td></tr><tr><td align="left" valign="top"><div style="margin-left: 2em;">{% trans 'Payment Method %}<span class="body_copy_alerts">*</span><br>
+
             {{ form.payment_method }}
+
             </div></td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Promotion Code' %}</div></td><td align="left"><input type="text" name="promotion_code" value="{{ form.promotion_code.value }}" size="20">
             </td><td>&nbsp;</td></tr></table>
-            <table border=0><tr><td colspan="4">&nbsp;</td></tr><tr bgcolor="#f2f2f2"><td colspan="4"><span class="subtitles">{% trans 'Section 5: Education History' %}</span></td></tr><tr><td flex-growspan="3"><div style="margin-left: 2em;">{% trans 'Enter your Education History' %}</div></td></tr><tr><td colspan="3"><div style="margin-left: 2em;">
+
+            <table border=0><tr><td colspan="4">&nbsp;</td></tr><tr bgcolor="#f2f2f2"><td colspan="4"><span class="subtitles">{% trans 'Section 5: Education History' %}</span></td></tr><tr><td colspan="3"><div style="margin-left: 2em;">{% trans 'Enter your Education History' %}</div></td></tr><tr><td colspan="3"><div style="margin-left: 2em;">
+
             <table width="100%"  border="0" cellpadding="1" cellspacing="0" >
             <input type="hidden" name="lookupkey_education_new0" value="new0">
             <tr>
@@ -313,7 +346,9 @@
             </td>
             <td nowrap>{% trans 'Graduation Date' %}:</td>
             <td nowrap>
+
             <input type="text" name="{{ form.education_grad_dt.html_name }}" class="datepicker" id="education_grad_dt_1" />
+
             </td>
             </tr>
             <tr>
@@ -339,7 +374,9 @@
             </td>
             <td nowrap>{% trans 'Year Graduated' %}:</td>
             <td nowrap>
+
             <input type="text" name="{{ form.education_grad_dt.html_name }}" class="datepicker" id="education_grad_dt_2" />
+
             </td>
             </tr>
             <tr>
@@ -365,7 +402,9 @@
             </td>
             <td nowrap>{% trans 'Year Graduated' %}:</td>
             <td nowrap>
+
             <input type="text" name="{{ form.education_grad_dt.html_name }}" class="datepicker" id="education_grad_dt_3" />
+
             </td>
             </tr>
             <tr>
@@ -391,7 +430,9 @@
             </td>
             <td nowrap>{% trans 'Year Graduated' %}:</td>
             <td nowrap>
+
             <input type="text" name="{{ form.education_grad_dt.html_name }}" class="datepicker" id="education_grad_dt_4" />
+
             </td>
             </tr>
             <tr>
@@ -400,7 +441,7 @@
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             </tr>
-            </table></div></td></tr></table><table border=0><tr><td colspan="4">&nbsp;</td></tr><tr bgcolor="#f2f2f2"><td colspan="4"><span class="subtitles">{% trans 'Section 6: Career History' %}</span></td></tr><tr><td flex-growspan="3"><div style="margin-left: 2em;">{% trans 'Enter your Career History' %}</div></td></tr><tr><td colspan="3"><div style="margin-left: 2em;"><w-full max-w-full mb-4 bg-transparent width="100%"  border="0" cellpadding="1" cellspacing="0" >
+            </table></div></td></tr></table><table border=0><tr><td colspan="4">&nbsp;</td></tr><tr bgcolor="#f2f2f2"><td colspan="4"><span class="subtitles">{% trans 'Section 6: Career History' %}</span></td></tr><tr><td colspan="3"><div style="margin-left: 2em;">{% trans 'Enter your Career History' %}</div></td></tr><tr><td colspan="3"><div style="margin-left: 2em;"><table width="100%"  border="0" cellpadding="1" cellspacing="0" >
             <input type="hidden" name="lookupkey_career_new0" value="new0">
             <tr>
             <td colspan="4"><hr></td>
@@ -448,11 +489,15 @@
             <tr>
             <td>{% trans 'Start Date' %}:</td>
             <td>
+
             <input type="text" name="{{ form.career_start_dt.html_name }}" class="datepicker" id="{{ form.career_start_dt.html_name }}_1">
+
             </td>
             <td>{% trans 'End Date' %}: </td>
             <td>
+
             <input type="text" name="{{ form.career_end_dt.html_name }}" class="datepicker" id="{{ form.career_end_dt.html_name }}_1">
+
             </td>
             </tr>
             <input type="hidden" name="lookupkey_career_new1" value="new1">
@@ -502,28 +547,37 @@
             <tr>
             <td>{% trans 'Start Date' %}:</td>
             <td>
+
             <input type="text" name="{{ form.career_start_dt.html_name }}" class="datepicker" id="{{ form.career_start_dt.html_name }}_2">
+
             </td>
             <td>{% trans 'End Date' %}: </td>
             <td>
+
             <input type="text" name="{{ form.career_end_dt.html_name }}" class="datepicker" id="{{ form.career_end_dt.html_name }}_2">
+
             </td>
             </tr>
             <tr>
             <td colspan="4"><hr></td>
             </tr>
             </table></div></td></tr></table>
+
             {% if request.user.profile.is_superuser %}
-            <table border=0><tr><td colspan="4">&nbsp;</td></tr><tr bgcolor="#f2f2f2"><td colspan="4"><span class="subtitles">{% trans 'Section 7: Superuser Only' %}</span></td></tr><tr><td align="left"  valign="top" flex-growspan="2" ><div style="margin-left: 2em;">{% trans 'Application Approved' %}&nbsp;&nbsp;&nbsp;<input name="application_approved" type="radio" value="1">{% trans 'Yes' %}&nbsp;&nbsp;&nbsp;
+            <table border=0><tr><td colspan="4">&nbsp;</td></tr><tr bgcolor="#f2f2f2"><td colspan="4"><span class="subtitles">{% trans 'Section 7: Superuser Only' %}</span></td></tr><tr><td align="left"  valign="top" colspan="2" ><div style="margin-left: 2em;">{% trans 'Application Approved' %}&nbsp;&nbsp;&nbsp;<input name="application_approved" type="radio" value="1">{% trans 'Yes' %}&nbsp;&nbsp;&nbsp;
             <input name="application_approved" type="radio" value="0" checked>{% trans 'No' %}
             <br></div></td><td>&nbsp;</td></tr></table>
+
             <table border=0><tr><td colspan="3"><div style="margin-left: 2em;">{% trans 'Admin Notes' %}</div></td></tr><tr><td colspan="3">{{ form.admin_notes }}</td></tr><tr><td colpspan="4">&nbsp;</td></tr></table>
+
             <table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Status' %}<span class="body_copy_alerts">*</span></div></td><td align="left">
+
             <select size="1"  name="status" class="body_copy">
             <option value="1" SELECTED>{% trans 'Active' %}</option>
             <option value="0">{% trans 'Inactive' %}</option>
             </select>
             </td><td>&nbsp;</td></tr></table><table border=0><tr><td align="left" nowrap valign="top" width="125"><div style="margin-left: 2em;">{% trans 'Status Detail' %}<span class="body_copy_alerts">*</span></div></td><td align="left">
+
             <select size="1"  name="status_detail" class="body_copy">
             <option value="active">{% trans 'Active' %}</option>
             <option value="pending">{% trans 'Pending' %}</option>
@@ -535,12 +589,17 @@
             </select>
             </td><td>&nbsp;</td></tr></table>
             {% endif %}
+
+
             <table border=0><tr><td colspan="4">&nbsp;</td></tr><tr><td colspan="4"></td></tr><tr><td colspan="4">&nbsp;</td></tr><tr><td colspan="4" align="center"><input type="submit"  value="{% trans 'Submit Membership Application' %}"></td></tr><tr><td colspan="4">&nbsp;</td></tr><tr><td colspan="4">&nbsp;</td></tr></table>
+
+
         </div>
         </form>
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
       <script type="text/javascript"

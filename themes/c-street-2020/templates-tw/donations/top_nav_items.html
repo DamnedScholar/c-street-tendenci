@@ -1,0 +1,57 @@
+{% load base_tags %}
+{% load perm_tags %}
+{% has_perm user site_settings.change_setting as can_edit_setting %}
+{% if app_object %}
+    {% has_perm user donations.view_donation app_object as can_view_donation %}
+{% else %}
+    {% has_perm user donations.view_donation as can_view_donation %}
+    {% has_perm user donations.change_donation as can_edit_donation %}
+{% endif %}
+<ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+    <li>
+        <div class="yamm-content custom-yamm-content content-dropdown">
+            <div class="flex flex-wrap">
+                <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                    {% if app_object %}
+                        <li>
+                            <span class="content-head text-content-head">{% trans 'All Donations' %}</span>
+                        </li>
+                    {% endif %}
+                    {% if can_edit_setting %}
+                        <li class="content-item">
+                            <span class="app-name">
+                                <a href="{% url 'settings.index' 'module' 'donations' %}">{% trans "Settings" %}</a>
+                            </span>
+                        </li>
+                    {% endif %}
+                    <li class="content-item">
+                        <span class="app-name">
+                            <a href="{% url 'donation.search' %}">{% trans 'Search' %}</a>
+                        </span>
+                    </li>
+                    <li class="content-item">
+                        <span class="app-name">
+                            <a href="{% url 'donation.add' %}">{% trans "Add donation" %}</a>
+                        </span>
+                    </li>
+                </ul>
+                {% if app_object %}
+                    {% if can_view_donation or can_edit_donation %}
+                        <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                            <li>
+                                <span class="content-head text-content-head">{% trans "This donation" %}</span>
+                            </li>
+                            {% if can_view_donation %}
+                                <li class="content-item">
+                                    <span class="app-name">
+                                        <a href="{% url 'donation.view' app_object.id %}">{% trans 'View' %}</a>
+                                    </span>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </li>
+</ul>

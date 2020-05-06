@@ -3,13 +3,19 @@
 {% load base_filters %}
 {% load perm_tags %}
 {% load recurring_payments_tags %}
+
 {% block title %}{% trans 'Recurring Payment View' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
+
 <link type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 <link type="text/css" href="{% static 'tablesorter/sortthemes.css' %}" rel="Stylesheet" />
 <link type="text/css" href="{% static 'css/recurring_payments.css' %}" rel="Stylesheet" />
+
+
 <link rel="stylesheet" href="{% static 'authnet_cim/paymentShipping.css' %}">
+
  <style>
      .bs-callout-warning{
          background-color: #FEFBED;
@@ -21,16 +27,22 @@
      .rp-warning-wrap{
          margin: 1em 0;
      }
+
  </style>
+
 {% endblock %}
+
 {% block content %}
+
 <div class="t">
 <div id="t-rp">
 <div id="t-view">
         {% if not is_active %}
         <div class="not-active-alert">{% trans 'This account is' %} {{ rp.status_detail }}</div>
         {% endif %}
-        <h1 class="text-xl font-semibold">{% trans 'Recurring Payment Account' %} <small> - {{ rp.description }}</small> </h1>
+
+        <h1>{% trans 'Recurring Payment Account' %} <small> - {{ rp.description }}</small> </h1>
+
         {% if is_active %}
         {% if rp.platform == 'stripe' %}
             <div class="pull-right">
@@ -55,61 +67,73 @@
                 </form>
                 {% with rp.get_source_data as source_data %}
                 {% if source_data %}
-                <small class="text-gray-500">{% trans "Current relative flex flex-col min-w-0 rounded break-words border bg-white border-1 border-grey-light: " %} ····{{ source_data.last4 }} &nbsp;&nbsp;&nbsp; {{ source_data.exp_month }}/{{ source_data.exp_year }}</small>
+                <small class="text-muted">{% trans "Current card: " %} ····{{ source_data.last4 }} &nbsp;&nbsp;&nbsp; {{ source_data.exp_month }}/{{ source_data.exp_year }}</small>
                 {% endif %}
                 {% endwith %}
             </div>
         {% else %}
             <div id="btn-pm-wrap">
             <form method="GET" action="{% url 'recurring_payment.authnet.update_payment_info' rp.id %}">
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit" value="{% if payment_profile %}{% trans 'Update Payment Info' %}{% else %}{% trans 'Add Payment Method' %}{% endif %}">
+            <input class="btn btn-primary" type="submit" value="{% if payment_profile %}{% trans 'Update Payment Info' %}{% else %}{% trans 'Add Payment Method' %}{% endif %}">
             </form>
             {% if payment_profile %}
             <div class="last-updated">{% trans 'Last updated by' %} {{ payment_profile.owner }} on {{ payment_profile.update_dt|date:'N j Y' }}</div>
             {% endif %}
             </div>
+
             {% if not payment_profile %}
             <div class="rp-warning-wrap"><span class="bs-callout-warning">{% trans 'NOT complete yet!' %} <br />{% trans 'Please click the button at right to add a payment method.' %}</span></div>
             {% endif %}
         {% endif %}
         {% endif %}
+
         <div class="rp-dname">{% trans 'Name' %}: <a href="{% url "profile" rp.user.username %}">{{ rp.user.get_full_name }} ({{ rp.user.email }})</a></div>
         {% if rp.url %}
         <div class="rp-dname">{% trans 'URL' %}: {{ rp.url|urlize }}</div>
         {% endif %}
-        <div class="rp-dname">{% trans 'Description' %}: <span style="flex-growor:#669900;">{{ rp.description }}</span></div>
+        <div class="rp-dname">{% trans 'Description' %}: <span style="color:#669900;">{{ rp.description }}</span></div>
+
         <div style="clear: right;"></div>
+
         {% if num_accounts > 1 %}
         <div class="text-right"><a href="{% url "recurring_payment.my_accounts" rp.user.username %}">{% if is_owner %}{% trans 'View All My RP Accounts' %}{% else %}{% blocktrans with name=rp.user.first_name %}View All {{ name }}'s RP Accounts{% endblocktrans %}{% endif %}</a></div>
           {% endif %}
+
       <div> <!-- Nav tabs -->
-          <ul class="flex flex-wrap list-none p-0 pl-0 mb-0 border border-t-0 border-r-0 border-l-0 border-b-1 border-grey-400" role="tablist">
+
+          <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#rpview-overview" aria-controls="rpview-overview" role="tab" data-toggle="tab">{% trans "Overview" %}</a></li>
             <li role="presentation"><a href="#rpview-invoices" aria-controls="rpview-invoices" role="tab" data-toggle="tab">{% trans "Invoices" %}</a></li>
             <li role="presentation"><a href="#rpview-transactions" aria-controls="rpview-transactions" role="tab" data-toggle="tab">{% trans "Transaction History" %}</a></li>
           </ul>
+
     <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="rpview-overview">
           <div class="basic-info" style="margin-top: 1em;">
           {% trans 'Current account balance' %}: <span class="body-bold">{{ rp.get_outstanding_balance|format_currency }}</span>
           <br />
           <br />
+
           {% if last_paid_payment_transaction %}
                   {% trans 'The last payment' %} (<span class="body-bold">{{ last_paid_payment_transaction.amount|format_currency }}</span>)
                   {% trans 'received date' %}:  {{ last_paid_payment_transaction.create_dt  }}.
                   <br />
                   <br />
           {% endif %}
+
+
           {% if last_failed_payment_transaction %}
                   {% trans 'The last payment' %} ({{ last_paid_payment_transaction.amount|format_currency }})
                   {% trans 'was failed on' %} {{ last_failed_payment_transaction.create_dt|date  }}.
+
                   <br />
                   <br />
           {% endif %}
          </div>
+
     {% if memberships %}
         <div>
-        <table class="w-full max-w-full mb-4 bg-transparent">
+        <table class="table">
             <tr>
                 <th>{% trans "Membership type" %}</th>
                 <th>{% trans "Member Number" %}</th>
@@ -126,25 +150,35 @@
             {% endfor %}
         </table>
         </div>
+
     {% else %}
         <div>
           {% trans 'The number of billing cycle completed' %}: <span class="body-bold">{{ rp.num_billing_cycle_completed }}</span>
           <br />
           <br />
           {% trans 'The number of billing cycle failed' %}: {{ rp.num_billing_cycle_failed }}
+
           </div>
+
           <div class="l0"></div>
+
           <div class="section-header">{% trans 'Recurring Billing Settings' %}</div>
+
           <div class="rp-body">
         <div >{% trans 'Payment Amount' %}: <span class="body-bold">{{ rp.payment_amount|format_currency }}</span></div>
         {% if rp.tax_rate %}
         <div >{% trans 'Tax Rate' %}: <span class="body-bold">{{ rp.tax_rate_percentage }}</span></div>
         {% endif %}
+
         <div>{% trans 'Initial Billing Cycle Start Date' %}: <span class="body-bold">{{ rp.billing_start_dt }}</span></div>
+
         <div>{% trans 'Billing Frequency' %}: <span class="body-bold">{% trans 'Once every' %} {{ rp.billing_frequency }}
         {{ rp.billing_period }}{{ rp.billing_frequency|pluralize }}</span></div>
+
         <div>{% trans 'Billing Date' %}: <span class="body-bold">{{ rp.num_days }} day{{ rp.num_days|pluralize }}  {% trans 'after each billing cycle' %} {{ rp.due_sore }} date</span></div>
+
           </div>
+
           {% if rp.has_trial_period %}
               <div class="l0"></div>
               <div class="section-header">{% trans 'Trial Period' %}</div>
@@ -152,12 +186,17 @@
                   <div>{% trans 'Amount' %}: <span class="body-bold">{{ rp.trial_amount|format_currency }}</span></div>
                   <div>{% trans 'From' %} {{ rp.trial_period_start_dt|date }} {% trans 'to' %} {{ rp.trial_period_end_dt|date }}</div>
               </div>
+
           {% endif %}
     {% endif %}
     </div>
+
+
+
+
     <div role="tabpanel" class="tab-pane" id="rpview-invoices">
     {% if rp_invoices %}
-        <table width="90%" class="w-full max-w-full mb-4 bg-transparentsorter" id="rpinvoicetable">
+        <table width="90%" class="tablesorter" id="rpinvoicetable">
             <thead>
             <tr>
                 <th class="iheader">{% trans 'Billing Cycle' %}</th>
@@ -185,9 +224,11 @@
         {% trans 'No invoices available yet.' %}
     {% endif %}
     </div>
+
     <div role="tabpanel" class="tab-pane" id="rpview-transactions">
+
     {% if payment_transactions %}
-        <table width="90%" class="w-full max-w-full mb-4 bg-transparentsorter" id="rptranstable">
+        <table width="90%" class="tablesorter" id="rptranstable">
             <thead>
             <tr>
                 <th class="iheader">{% trans 'Date' %}</th>
@@ -216,13 +257,18 @@
     {% else %}
         {% trans 'No payment transactions available yet.' %}
     {% endif %}
+
     </div>
+
    </div>  <!-- End of tab-content -->
+
    </div> <!-- End of nav tabs -->
+
 </div>
 </div>
 </div>
 <p>&nbsp;</p>
+
  {% if is_active %}
  {% if rp.platform == 'authorizenet' %}
 <form method="post" action="" id="formAuthorizeNetPopup" name="formAuthorizeNetPopup" target="iframeAuthorizeNet" style="display:none;">
@@ -230,6 +276,7 @@
   <input type="hidden" name="PaymentProfileId" value="{% if payment_profile %}{{ payment_profile.payment_profile_id }}{% endif %}" />
   <input type="hidden" name="ShippingAddressId" value="" />
 </form>
+
     <div id="divAuthorizeNetPopup" style="display:none;" class="AuthorizeNetPopupSimpleTheme">
       <div class="AuthorizeNetPopupOuter">
         <iframe name="iframeAuthorizeNet" id="iframeAuthorizeNet" src="/recurring_payments/authnet/empty/" frameborder="0"
@@ -244,10 +291,12 @@
       <div class="AuthorizeNetShadow AuthorizeNetShadowBL"></div>
       <div class="AuthorizeNetShadow AuthorizeNetShadowTL"></div>
     </div>
+
     <div id="divAuthorizeNetPopupScreen" style="display:none;"></div>
 {% endif %}
 {% endif %}
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 {# dynamically load jquery #}
@@ -260,18 +309,24 @@
 </script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="{% static 'tablesorter/jquery.tablesorter.min.js' %}"></script>
+
+
 {% if is_active %}
 {% if rp.platform == 'authorizenet' %}
 <script type="text/javascript" src="{% static 'authnet_cim/popup.js' %}"></script>
+
 <script type="text/javascript">
   //<![CDATA[
   // Uncomment this line if eCheck is enabled. This does not affect functionality, only the initial sizing of the popup page for add payment.
   AuthorizeNetPopup.options.eCheckEnabled = false;
+
   // Uncomment this line if you do not have absolutely positioned elements on your page that can obstruct the view of the popup.
   // This can speed up the processing of the page slightly.
  // AuthorizeNetPopup.options.skipZIndexCheck = true;
+
   AuthorizeNetPopup.options.useTestEnvironment = {{ test_mode }};
   //]]>
+
   (function($) {
       AuthorizeNetPopup.options.onPopupClosed = function(action_result) {
       if(action_result=="successfulSave"){
@@ -289,17 +344,22 @@
       }
       };
   }(jQuery));
+
 </script>
 {% endif %}
 {% endif %}
+
+
 <script type="text/javascript">
 $(document).ready(function(){
     if(document.location.hash != ""){window.scrollTo(0,0);}
     //var $tabs = $("#rpview-tabs").tabs();
+
     // extend the default setting to always include the zebra widget.
         $.tablesorter.defaults.widgets = ['zebra'];
         // extend the default setting to always sort on the first column
         $.tablesorter.defaults.sortList = [[0,1]];
+
         $.tablesorter.addParser({
                 // set a unique id
                 id: 'billing-cycle',
@@ -310,14 +370,20 @@ $(document).ready(function(){
                 format: function(s) {
                         // format your data for normalization
                         var bc_dates = s.split(' - ');
+
                         if(bc_dates.length !== 2)
                                 return 0;
+
                         var bc_start_dt = (bc_dates[0]).split('/');
+
                         return new Date(bc_start_dt[2], bc_start_dt[0], bc_start_dt[1]);
+
                 },
                 // set type, either numeric or text
                 type: 'numeric'
         });
+
+
         // call the tablesorter plugin
         $("#rpinvoicetable").tablesorter({
              headers: {
@@ -328,6 +394,7 @@ $(document).ready(function(){
                 }
             }
         });
+
         $("#rptranstable").tablesorter({
              headers: {
             // assign the first column (we start counting zero)
@@ -337,6 +404,7 @@ $(document).ready(function(){
                 }
             }
         });
+
      /* $("#btn-pm").on("click", function(){
          $.ajax({
            type: "POST",
@@ -355,8 +423,14 @@ $(document).ready(function(){
            }
          });
      }); */
+
+
+
 });
+
+
 </script>
+
 <script type="text/javascript">
     // disable confirmation
     $('.disable').on("click", function(){
@@ -365,4 +439,5 @@ $(document).ready(function(){
         return false;    // cancel
     });
 </script>
+
 {% endblock %}

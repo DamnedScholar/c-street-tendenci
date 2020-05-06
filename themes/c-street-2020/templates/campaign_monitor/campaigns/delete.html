@@ -2,14 +2,18 @@
 {% load campaign_monitor_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
+
 {% block title %}{% trans "Delete Campaign" %} - {{ campaign.name }}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/delete.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-        <h1 class="text-xl font-semibold">{% trans "Delete a Campaign" %}</h1>
+        <h1>{% trans "Delete a Campaign" %}</h1>
         <h2><a href="{{ campaign.get_absolute_url }}">{{ campaign.name }}</a></h2>
         <div class="content">
             {% if campaign.status == 'S' %}

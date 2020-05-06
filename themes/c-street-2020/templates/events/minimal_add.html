@@ -2,7 +2,9 @@
 {% load event_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }}{% trans "Minimal Add" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -10,10 +12,12 @@
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 <script type="text/javascript" src="{{ TINYMCE_JS_URL }}"></script>
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_EVENTS_LABEL trans 'Event' %} {% trans "Minimal Add" %}</h1>
+    <h1>{% firstof MODULE_EVENTS_LABEL trans 'Event' %} {% trans "Minimal Add" %}</h1>
     <p>{% trans 'Adding events are subject to the approval of the Administrators.' %}</p>
+
     <div class="event-wrap">
         <form class="form-horizontal" action="{% url "event.minimal_add" %}" method="post" enctype="multipart/form-data">{% csrf_token %}
             {{ form|styled_form }}
@@ -21,8 +25,11 @@
             <input type="submit" value="Add {% firstof MODULE_EVENTS_LABEL trans 'Event' %}" />
         </form>
     </div>
+
 </div>
+
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript" src="{% url 'tinymce-filebrowser' %}"></script>
@@ -40,6 +47,7 @@
             help: false,
             limit : 150
         });
+
         function find_field(name) {
             //finds a field given a label
             //don't use if multiple fields share the same label
@@ -53,6 +61,7 @@
             field = $('.'+$.trim(label.parentNode.parentNode.attributes[0].value));
             return field;
         };
+
         //script for hiding and showing the 'On weekend' field
         //when nesessary.
         $(document).ready(function() {
@@ -61,11 +70,13 @@
             start_dt_val = start_dt.val();
             end_dt = $(find_field("End Date/Time").find('input')[0]);
             end_dt_val = end_dt.val();
+
             if(start_dt_val != end_dt_val){
                 weekend.show();
             } else {
                 weekend.hide();
             }
+
             start_dt.on("change", function() {
                 val = end_dt.val()
                 if ($(this).val() == val) {
@@ -74,6 +85,7 @@
                     weekend.show();
                 }
             });
+
             end_dt.on("change", function() {
                 val = start_dt.val()
                 if ($(this).val() == val) {

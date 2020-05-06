@@ -1,13 +1,17 @@
 {% load l10n %}
 {% load styled_forms %}
+
+
 {% if form_set.errors %}
-    <div class="relative px-3 py-3 mb-4 border rounded text-red-800 border-red-600 bg-red-200" role="alert">
+    <div class="alert alert-danger" role="alert">
         <p>{% trans "There were some problems in the formset. Please review. Thanks!" %}</p>
+
         {% for error in form_set.non_form_errors %}
             <p>{{ error }}</p>
         {% endfor %}
     </div>
 {% endif %}
+
 {% for form in form_set.forms %}
     <fieldset>
         {% if form.non_field_errors %}
@@ -17,6 +21,7 @@
                 {% endfor %}
             </div>
         {% endif %}
+
         {% for field in form %}
             {% if field.is_hidden %}
                 {{ field }}
@@ -25,9 +30,10 @@
             {% elif field|is_description %}
                 <p>{{ filed.label }}</p>
             {% else %}
-                <div class="mb-4{% if field.errors %} has-error{% endif %}{% if field.field.css_classes %} {{ field.field.css_classses }}{% endif %}">
-                    <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="control-label sm:w-1/4 pr-4 pl-4{% if field.field.required %} required{% endif %}">{{ field.label }}</label>
-                    <div class="sm:w-3/4 pr-4 pl-4">
+                <div class="form-group{% if field.errors %} has-error{% endif %}{% if field.field.css_classes %} {{ field.field.css_classses }}{% endif %}">
+                    <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="control-label col-sm-3{% if field.field.required %} required{% endif %}">{{ field.label }}</label>
+
+                    <div class="col-sm-9">
                         {% if field|is_checkbox %}
                             <div class="checkbox">
                                 <label>{{ field }}</label>
@@ -51,11 +57,13 @@
                         {% else %}
                             {{ field }}
                         {% endif %}
+
                         {% if field.errors %}
                             {% for error in field.errors %}
                                 <span class="help-block">{{ error }}</span>
                             {% endfor %}
                         {% endif %}
+
                         {% if field.help_text %}
                             <span class="help-block">{{ field.help_text|safe }}</span>
                         {% endif %}

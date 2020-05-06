@@ -1,10 +1,14 @@
 {% extends "contacts/base.html" %}
 {% load contact_tags %}
 {% load styled_forms %}
+
+
 {% block title %}{{ block.super }}Add{% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Add:" %} {% firstof MODULE_CONTACTS_LABEL trans 'Contacts' %}</h1>
+    <h1>{% trans "Add:" %} {% firstof MODULE_CONTACTS_LABEL trans 'Contacts' %}</h1>
+
     <div class="contact-wrap">
         <form action="{% url "contact.add" %}" method="post">{% csrf_token %}
         <div class="forms">
@@ -13,6 +17,7 @@
         </div>
         </form>
     </div>
+
 </div>
 {% endblock %}
 {% block extra_body %}

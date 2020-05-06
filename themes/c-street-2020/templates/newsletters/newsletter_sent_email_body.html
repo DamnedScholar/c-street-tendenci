@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "https://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,6 +9,7 @@
 <body bgcolor="#ffffff" text="#000000">
     <p>
         {% trans 'Hello' %} {{ first_name }},<br /><br />
+
         {% blocktrans with s=subject c=count %}
         The newsletter with subject {{ s }} is already sent to {{ c }} recipient(s).
         {% endblocktrans %}
@@ -15,5 +17,6 @@
         <br />
         {% trans "Click this link to view the details" %}: <a href="{{ detail_url }}">{{ detail_url }}</a>
     </p>
+
 </body>
 </html>

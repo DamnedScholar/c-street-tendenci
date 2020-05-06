@@ -1,10 +1,13 @@
 {% load base_filters %}
+
 <tr>
     <td>
         {% if obj %}
             {{ obj.corporate_membership_type.name|truncatewords:30 }}
             #<a href="{% url "corpmembership.view" obj.id %}" title="Corporate Membership">{{ obj.id }}</a>
+
             &nbsp;{{ obj|truncatewords:5 }}
+
         {% else %}
             {% trans "Corporate Membership information not available" %}
         {% endif%}
@@ -13,6 +16,7 @@
         {{ invoice.total|format_currency }}
     </td>
 </tr>
+
 {% if obj.renewal %}
     {% for renew_entry in obj.indivmembershiprenewentry_set.all %}
         <tr>

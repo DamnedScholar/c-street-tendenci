@@ -1,6 +1,7 @@
 {% load pybb_tags %}
+
 {% if forum_list %}
-    <table class="w-full max-w-full mb-4 bg-transparent table-hover {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
+    <table class="table table-hover {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
         <thead>
             <tr class="forum-row head-row">
                 <th class="forum-name">

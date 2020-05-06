@@ -1,8 +1,11 @@
 {% extends "resumes/base.html" %}
 {% load resume_tags %}
+
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Pending Resumes" %}</h1>
+    <h1>{% trans "Pending Resumes" %}</h1>
+
     <div class="resume-wrap">
     <ul class="pending-resumes">
     {% for resume in resumes %}

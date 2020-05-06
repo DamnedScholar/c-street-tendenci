@@ -1,26 +1,31 @@
 {% extends "profiles/base.html" %}
 {% load profile_tags %}
 {% load perm_tags %}
+
 {% block title %}{% trans 'Profile Export'%}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/profiles.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
   <div class="page-header">
-    <h1 class="text-xl font-semibold">{% trans "Profile Export" %}</h1>
+    <h1>{% trans "Profile Export" %}</h1>
   </div>
+
   <div id="profile-export">
-    <div class="relative px-3 py-3 mb-4 border rounded">
+    <div class="alert">
       <strong>{% trans 'Note' %}</strong>: {% blocktrans %}An email will be sent to you at <strong>{{ request.user.email }}</strong> once the export is ready.{% endblocktrans %}
     </div>
+
     <form method="post" action="">{% csrf_token %}
       {% for field in form %}
       {{ field.errors }}
       {{ field }}
       {% endfor %}
-      <div><input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type='submit' value="{% trans 'Export Profiles' %}"></div>
+      <div><input class="btn btn-primary" type='submit' value="{% trans 'Export Profiles' %}"></div>
     </form>
   </div>
 </div>

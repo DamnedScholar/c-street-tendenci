@@ -1,4 +1,5 @@
 {% load styled_forms %}
+
 {% if file_formset.total_form_count > 0 %}
     <input type="submit" value="{% trans 'Update Files' %}" />
     <h2>{% trans 'Files' %}</h2>
@@ -12,9 +13,11 @@
         {{ file_form.id }}
         <div class="icon"><img src="{{ file_form.instance.icon }}" alt="icon" title="icon" /></div>
         <div class="file"><a href="{{ file_form.instance.file.url }}">{{ file_form.instance.basename }}</a></div>
+
         {% for error in file_form.errors %}
             <li><strong>{{ error|escape }}</strong></li>
         {% endfor %}
+
         {{ file_form|styled_form }}
     </div>
 {% endfor %}

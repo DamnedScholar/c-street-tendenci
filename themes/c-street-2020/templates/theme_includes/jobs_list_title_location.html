@@ -1,5 +1,6 @@
 {% load theme_tags %}
 {% load job_tags %}
+
 <section id="events-list">
     <h3>{% firstof TEMPLATE_JOBS_LIST_TITLE_LOCATION_TITLE "Jobs" %}</h3>
     {% list_jobs as jobs_list limit=TEMPLATE_JOBS_LIST_TITLE_LOCATION_LIMIT %}

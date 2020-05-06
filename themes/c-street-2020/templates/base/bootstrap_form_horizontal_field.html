@@ -1,10 +1,12 @@
 {% if field %}
-    <div class="mb-4 {% if field.errors %}has-error{% endif %}">
-        <label for="{{ field.id_for_label }}" class="{{ label_grid_class|'sm:w-1/4 pr-4 pl-4' }} control-label">{% spaceless %}
+    <div class="form-group {% if field.errors %}has-error{% endif %}">
+        <label for="{{ field.id_for_label }}" class="{{ label_grid_class|default:'col-sm-3' }} control-label">{% spaceless %}
             {{ field_label }}
         {% endspaceless %}</label>
-        <div class="{{ form_control_grid_class|'sm:w-3/4 pr-4 pl-4' }}">
+
+        <div class="{{ form_control_grid_class|default:'col-sm-9' }}">
             {{ field }}
+
             {% if inline_errors|default:True %}
                 {% if field.errors %}
                     <p id="{{ field.id_for_label }}-help-block" class="help-block">

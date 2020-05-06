@@ -1,6 +1,7 @@
 {% load styled_forms %}
 {% load studygroup_tags %}
 {% load base_filters %}
+
 {% if form.errors.values %}
 <div class="errors">
 There were some problems in the form. Please review. Thanks!
@@ -28,6 +29,7 @@ There were some problems in the form. Please review. Thanks!
 {% endif %}
 </div>
 {% endif %}
+
 {% if form.fieldsets.fieldsets %}
     {% for fieldset in form.fieldsets %}
       {% if fieldset.boundfields %}
@@ -46,6 +48,7 @@ There were some problems in the form. Please review. Thanks!
             {% if not fieldset.legend and field.auto_id == 'id_notes' and formset %}
                 {% studygroup_officer_formset formset %}
             {% endif %}
+
             <div class="form-field">
                 <div class="{{ field.auto_id }}">
                     {% if field|is_checkbox %}

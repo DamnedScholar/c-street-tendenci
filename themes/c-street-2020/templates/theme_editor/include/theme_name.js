@@ -4,6 +4,7 @@ $(function() {
     tips = $( ".validateTips" ),
     url = null;
     $('#theme-name-form').css({'display': 'none'});
+
     function update_tips( t ) {
         tips
         .text( t )
@@ -21,6 +22,7 @@ $(function() {
                 update_tips( "Length of " + n + " must be between " +
             min + " and " + max + "." );
             }
+
             return false;
         } else {
             return true;
@@ -35,6 +37,7 @@ $(function() {
             return true;
         }
     }
+
     $('#theme-name-form').dialog({
         autoOpen: false,
         height: 300,
@@ -75,6 +78,7 @@ $(function() {
             allFields.val( "" ).removeClass( "ui-state-error" );
         }
     });
+
     $('.copy-theme-btn').on("click", function(){
         url = '{% url "theme_editor.theme_copy" %}?theme_edit={{ current_theme }}';
         $('#theme-name-form').dialog({title: 'Copy to new theme'});
@@ -93,4 +97,5 @@ $(function() {
                 .css({'background-color': '#A84524'})
                 .css({'color': '#ffffff'});
     });
+
 });

@@ -1,14 +1,18 @@
 {% extends "locations/base.html" %}
 {% load locations_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }}{% trans 'Add' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/locations.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_LOCATIONS_LABEL trans 'Location' %} {% trans "Add" %}</h1>
+    <h1>{% firstof MODULE_LOCATIONS_LABEL trans 'Location' %} {% trans "Add" %}</h1>
+
     <div class="location-wrap">
         <form action="{% url "location.add" %}" class="form-horizontal" method="post" enctype="multipart/form-data">{% csrf_token %}
         <div class="forms">
@@ -17,6 +21,7 @@
         </div>
         </form>
     </div>
+
 </div>
 {% endblock %}
 {% block extra_body %}

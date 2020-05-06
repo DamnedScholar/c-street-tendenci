@@ -3,14 +3,17 @@
 {% load base_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{% firstof MODULE_EVENTS_LABEL_PLURAL 'Events' %} {% trans "Import" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-<h1 class="text-xl font-semibold">{% trans "Import Events Process" %}</h1>
+<h1>{% trans "Import Events Process" %}</h1>
 <div class="imports">
 {% trans "We're not done yet! This page will be updated as your events are imported." %}
     <p><strong>{% trans "Import ID" %}:</strong> {{ import_i.id }}</p>
@@ -26,6 +29,7 @@
 </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 {% if import_i.status != "completed" %}

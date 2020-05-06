@@ -12,6 +12,7 @@
   {% if request.user.is_superuser %}{% blocktrans with request.user.get_full_name as requser %}The following directory on your site <strong>{{ SITE_GLOBAL_SITEDISPLAYNAME }}</strong> was
   renewed by {{ requser }}{% endblocktrans %} (superuser).{% else %} {% blocktrans with request.user.get_full_name as requser %}The following directory on your site <strong>{{ SITE_GLOBAL_SITEDISPLAYNAME }}</strong> was
   renewed by {{ requser }}.{% endblocktrans %}{% endif %}</p>
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="2%">&nbsp;</td>
@@ -37,5 +38,6 @@
     {% endif %}
 </p>
 <P>{% trans "Time submitted:" %}  {% now "D d M Y P" %}</P>
+
 </body>
 </html>

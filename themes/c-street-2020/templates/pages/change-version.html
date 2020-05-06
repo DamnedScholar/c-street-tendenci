@@ -2,13 +2,17 @@
 {% load page_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{% firstof MODULE_PAGES_LABEL trans 'Page' %} {% trans 'Change version' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_PAGES_LABEL trans 'Page' %} {% trans "Change version" %}</h1>
+    <h1>{% firstof MODULE_PAGES_LABEL trans 'Page' %} {% trans "Change version" %}</h1>
+
     <div class="page-wrap">
         <form action="{% url "page.change_version" page.pk %}" method="post" enctype="multipart/form-data">{% csrf_token %}
         <div class="forms">
@@ -17,5 +21,6 @@
         </div>
         </form>
     </div>
+
 </div>
 {% endblock %}

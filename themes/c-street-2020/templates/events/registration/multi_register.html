@@ -3,16 +3,19 @@
 {% load site_setting_tags %}
 {% load styled_forms %}
 {% load base_filters %}
+
 {% block title %}{{ block.super }}{% blocktrans with title=event.title dt=event.start_dt|date:"M j, Y" %}Registration {{ title }} {{ dt }}{% endblocktrans %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}" />
 <link rel="stylesheet" href="{% static 'css/event-anon-registration.css' %}" />
 <link rel="stylesheet" href="{% static 'css/event-addons.css' %}" />
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Registration" %}</h1>
+    <h1>{% trans "Registration" %}</h1>
     <div class="event-info">
         <div class="event-title"><a href="{% url "event" event.id %}">{{  }}</a></div>
         <div class="event-price">{{ event_price|format_currency }}</div>
@@ -31,10 +34,11 @@
             {% endblocktrans %}
         </div>
     </div>
+
     {% if reg_form.errors or registrant.errors or registrant.non_form_errors %}
         <div class="errors-box">
             {% trans "There were some problems in the forms. Please review. Thanks!" %}
-            <ul class="list-disc pl-4">
+            <ul>
                 {% for error in reg_form.non_field_errors %}
                     <li>{{ error }}</li>
                 {% endfor %}
@@ -61,18 +65,22 @@
             </ul>
         </div>
     {% endif %}
+
     <div class="form-wrap">
         <form action="" method="post">{% csrf_token %}
         <div class="forms">
+
             <div id="reg-form-wrap">
                 <div class="float-anchor"><!-- ie7 fix --></div>
                 <div class="float-window">
+
                 <div id="reg-form-box">
                     <div id="original-price" style="display:none;">0.00</div>
                     <div class="summary-total">
                         {{ SITE_GLOBAL_CURRENCYSYMBOL }}
                         <span class="summary-total-amount" id="summary-total-amount">{{ total_price|floatformat:2 }}</span>
                     </div>
+
                     <div class="summary-payment">
                         <noscript>
                         <div>
@@ -86,6 +94,7 @@
                                 <div class="field">{{ reg_form.amount_for_admin }}</div>
                             </div>
                         {% endif %}
+
                         {% if reg_form.discount %}
                             <div class="form-field">
                                 <div id="discount-message" class="error">{{ reg_form.discount.errors }}</div>
@@ -94,7 +103,10 @@
                                 <button type="button" id="discount_check">Check Discount</button>
                             </div>
                         {% endif %}
+
+
                     </div>
+
                     {# price list #}
                     <table id="summary-price">
                         {% for form in registrant.forms %}
@@ -142,6 +154,7 @@
                </div>
                </div>  {# float-widow#}
             </div>
+
             <div id="registrant-forms">
                 {{ registrant.management_form }}
                 {% for set in sets %}
@@ -150,9 +163,10 @@
                 {% for form in set %}
                     <div id="registrant_{{ form.form_index }}" class="registrant-form">
                         <div class="registrant-header">
-                            <span class="opacity-100 blockhide"></span>{% trans "Registrant" %} #<span class="item-counter">{{ form.get_form_label }}</span>:
+                            <span class="showhide"></span>{% trans "Registrant" %} #<span class="item-counter">{{ form.get_form_label }}</span>:
                         </div>
                         <div class="{% cycle 'odd-registrant' 'even-registrant'%}">
+
                             {% if custom_reg_form %}
                             {% for field in form %}
                             {% if field.label != 'Delete' %}
@@ -166,7 +180,9 @@
                                 </div>
                             {% endif %}
                             {% endfor %}
+
                             {% else %}
+
                             {% if form.first_name %}
                             <div class="form-field">
                                 <div class="error">{{ form.first_name.errors }}</div>
@@ -214,6 +230,8 @@
                                 <div class="field">{{ form.pricing }}</div>
                             </div>
                             {% endif %}
+
+
                            {% endif %}
                         </div>
                     </div>
@@ -226,6 +244,7 @@
                 </div>
                 {% endfor %}
             </div>
+
             {% if addons %}
                 <div class="addon-forms">
                     {% include 'events/addons/formset.html' %}
@@ -233,6 +252,7 @@
             {% else %}
                 {{ addon_formset.management_form }}
             {% endif %}
+
             <div class="add-registrants-box">
                 <h3>{% blocktrans %}Choose a pricing to add another set of registrants{% endblocktrans %}:</h3>
                 <div id="pricing-choices">
@@ -264,6 +284,7 @@
                 <br/>
                 <input id="pricing-check" type="button" value="{% trans 'Get More' %}">
             </div>
+
             <div class="clear"></div>
             {% if reg_form.free_event %}
                 {{ reg_form.payment_method }}
@@ -282,8 +303,10 @@
                 </div>
             {% endif %}
             <input type="submit" name="submit" class="register-submit registration-green-button" id="register-button" value="{% trans 'Register &amp; Pay' %}" />
+
             <div class="clear"></div>
         </div>
+
         </form>
         <div style="display:none">
             {% include 'events/registration/base_forms.html' %}
@@ -291,6 +314,7 @@
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 <script type="text/javascript" >
     {% include 'events/include/events-registration-summary.js' %}

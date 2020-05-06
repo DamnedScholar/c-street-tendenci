@@ -2,15 +2,21 @@
 {% load bootstrap_pagination_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
+
 {% block title %}{% trans "Newsletters" %}{% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 {% endblock %}
+
 {% block content %}
     <div class="t">
-        <h1 class="text-xl font-semibold">{% trans "Newsletters" %}</h1>
+        <h1>{% trans "Newsletters" %}</h1>
+
 <p><a href="/newsletters/newsletter_orig_generator/">Add a Newsletter</a></p>
+
         <div class="newsletter-wrap">
             {% if object_list %}
                 {% for newsletter in object_list %}
@@ -23,6 +29,7 @@
         </div>
     </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
     {% if user.profile.is_superuser %}

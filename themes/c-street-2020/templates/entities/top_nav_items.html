@@ -1,7 +1,10 @@
 {% load base_tags %}
 {% load perm_tags %}
+
+
 {% has_perm user site_settings.change_setting as can_edit_setting %}
 {% has_perm user entities.add_entity as can_add_entity %}
+
 {% if app_object %}
     {% has_perm user entities.view_entity app_object as can_view_entity %}
     {% has_perm user entities.change_entity app_object as can_edit_entity %}
@@ -9,16 +12,19 @@
     {% has_perm user entities.view_entity as can_view_entity %}
     {% has_perm user entities.change_entity as can_edit_entity %}
 {% endif %}
-<ul id="t-admin-megamenu-entities-dd" class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded" role="menu">
+
+
+<ul id="t-admin-megamenu-entities-dd" class="dropdown-menu" role="menu">
     <li>
         <div class="yamm-content content-dropdown">
-            <div class="flex flex-wrap">
-                <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+            <div class="row">
+                <ul class="list-unstyled content-dropdown-col col-sm-12 col-xs-12">
                     <li class="content-item">
                         <span class="app-name">
                             <a href="{% url 'entities' %}">{% firstof MODULE_ENTITIES_LABEL trans 'Entities' %}</a>
                         </span>
                     </li>
+
                     {% if app_object %}
                         {% if can_view_entity %}
                             <li class="content-item">
@@ -27,6 +33,7 @@
                                 </span>
                             </li>
                         {% endif %}
+
                         {% if can_edit_entity %}
                             <li class="content-item">
                                 <span class="app-name">
@@ -35,11 +42,13 @@
                             </li>
                         {% endif %}
                     {% endif %}
+
                     <li class="content-item">
                         <span class="app-name">
                             <a href="{% url 'entity.search' %}">{% trans "Search" %}</a>
                         </span>
                     </li>
+
                     {% if can_add_entity %}
                         <li class="content-item">
                             <span class="app-name">
@@ -47,6 +56,7 @@
                             </span>
                         </li>
                     {% endif %}
+
                     {% if user.is_authenticated %}
                         <li class="content-item">
                             <span class="app-name">

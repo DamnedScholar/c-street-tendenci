@@ -2,7 +2,9 @@
 {% load news_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{% firstof MODULE_NEWS_LABEL trans 'News' %} {% trans 'Add' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -10,19 +12,22 @@
 <link rel="stylesheet" href="{% static 'css/news.css' %}">
 <link rel="stylesheet" href="{% static 'css/popover.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_NEWS_LABEL 'News' %} {% trans "Add" %}</h1>
+    <h1>{% firstof MODULE_NEWS_LABEL 'News' %} {% trans "Add" %}</h1>
+
     <div class="news-wrap">
         <form action="{% url "news.add" %}" class="form-horizontal" method="post" enctype="multipart/form-data">{% csrf_token %}
         <div class="forms">
             {{ form|styled_form }}
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" type="submit" value="{% trans 'Add' %} {% firstof MODULE_NEWS_LABEL trans 'News' %}" />
+            <input class="btn btn-default" type="submit" value="{% trans 'Add' %} {% firstof MODULE_NEWS_LABEL trans 'News' %}" />
         </div>
         </form>
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     {{ form.media }}

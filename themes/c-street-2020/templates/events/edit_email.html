@@ -2,7 +2,9 @@
 {% load event_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }}{% trans "Edit Email for Registration Confirmation and Reminders" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
@@ -24,22 +26,28 @@
     }
 </style>
 {% endblock %}
+
 {% block content %}
+
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Edit Email to Event Registrants" %}</h1>
+    <h1>{% trans "Edit Email to Event Registrants" %}</h1>
+
     <div class="well">
         {% blocktrans %}
         This Email is used for:
-        <ul class="list-disc pl-4">
+        <ul>
         <li>The event reminders to the registrants </li>
         </ul>
         {% endblocktrans %}
     </div>
+
     <h3>{% trans "Event: " %}<a href="{% url "event" event.id %}">{{ event.title }}</a></h3>
+
     <div class="forms">
+
     {% if form.errors.values %}
         <div class="errors">
-            <ul class="list-disc pl-4">
+            <ul>
                 {{ form.non_field_errors }}
                 {% for field in form %}
                     {% if field.errors %}
@@ -51,6 +59,7 @@
             </ul>
         </div>
     {% endif %}
+
         <form action="." method="post" name="form1">{% csrf_token %}
             <div class="form-field">
                 <div class="label">{% trans 'To' %}:
@@ -58,6 +67,7 @@
                 <a href="{% url "event.registrant.roster" event.id %}">{% trans "View all registrant(s)" %}</a>
                 </div>
             </div>
+
             {% for field in form %}
             <div class="form-field">
                 <div class="error">{{ field.errors }}</div>
@@ -66,19 +76,27 @@
                 <div class="help-text">{{ field.help_text|safe }}</div>
             </div>
             {% endfor %}
+
             <div style="float:right;">
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-grey-100 bg-gray-500 hover:bg-grey-400" type="submit" name="submit" value="{% trans 'Save &amp; Test' %}" title="{% trans 'Save and receive a test email' %}" />
+            <input class="btn btn-secondary" type="submit" name="submit" value="{% trans 'Save &amp; Test' %}" title="{% trans 'Save and receive a test email' %}" />
             </div>
+
             <div>
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400 btn-large" name="submit" type="submit" value="{% trans 'Save' %}" />
+            <input class="btn btn-primary btn-large" name="submit" type="submit" value="{% trans 'Save' %}" />
             </div>
             <div style="clear: right;"></div>
+
         </form>
+
   </div>
+
 </div>
+
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     {{ form.media }}
     <script type="text/javascript" src="{% static 'js/global/tinymce.event_handlers.js' %}"></script>
+
  {% endblock %}

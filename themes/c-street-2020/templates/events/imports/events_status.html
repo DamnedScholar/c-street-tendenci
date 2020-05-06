@@ -3,11 +3,14 @@
 {% load base_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{% firstof MODULE_EVENTS_LABEL_PLURAL trans 'Events' %} {% trans "Import" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
 <div class="imports">
@@ -31,6 +34,7 @@
 </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 {% endblock %}

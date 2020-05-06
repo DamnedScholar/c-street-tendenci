@@ -1,5 +1,7 @@
-<h1 class="text-xl font-semibold">{% firstof MODULE_EVENTS_LABEL 'Events' %} {% trans "Index Page" %}</h1>
-<ul class="list-disc pl-4">
+
+<h1>{% firstof MODULE_EVENTS_LABEL 'Events' %} {% trans "Index Page" %}</h1>
+
+<ul>
     <li><a href="{% url "event.search" %}">{% trans "Search" %}</a></li>
     <li><a href="{% url "event.view" %}">{% trans "View" %}</a></li>
     <li><a href="{% url "event.print_view" %}">{% trans "Print View" %}</a></li>

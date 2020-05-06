@@ -1,0 +1,57 @@
+<form class="search-form form-horizontal" action="{% if past %}{% url "event.past_search" %}{% else %}{% url "event.search" %}{% endif %}" method="get">
+<div id="events-search-fields" class="flex-growlapse in">
+<div class="flex flex-wrap">
+    <div class="sm:w-1/2 pr-4 pl-4 mb-4">
+    <label for="id_start_dt" class="sm:w-1/3 pr-4 pl-4 control-label">{{ form.start_dt.label }}</label>
+      <div class="sm:w-2/3 pr-4 pl-4">
+         {{ form.start_dt }}
+         </div>
+    </div>
+  <div class="sm:w-1/2 pr-4 pl-4 mb-4">
+    <label for="id_end_dt" class="sm:w-1/3 pr-4 pl-4 control-label">{{ form.end_dt.label }}</label>
+      <div class="sm:w-2/3 pr-4 pl-4">
+         {{ form.end_dt }}
+         </div>
+    </div>
+</div>
+<div class="flex flex-wrap">
+    <div class="sm:w-1/2 pr-4 pl-4 mb-4">
+     <label for="id_event_group" class="sm:w-1/3 pr-4 pl-4 control-label">{{ form.event_group.label }}</label>
+       <div class="sm:w-2/3 pr-4 pl-4">
+       {{ form.event_group }}
+       </div>
+    </div>
+     <div class="sm:w-1/2 pr-4 pl-4 mb-4">
+    <label for="id_event_type" class="sm:w-1/3 pr-4 pl-4 control-label">{{ form.event_type.label }}</label>
+      <div class="sm:w-2/3 pr-4 pl-4">
+        {{ form.event_type }}
+        </div>
+    </div>
+</div>
+<div class="flex flex-wrap">
+     <div class="md:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42 mb-4">
+	  <label for="id_search_category" class="sm:w-1/5 pr-4 pl-4 control-label">{% trans 'Search By'%}</label>
+	  <div class="sm:w-1/6 pr-4 pl-40">
+	      <div>{{ form.q.errors }}</div>
+	          {{ form.search_category }} &nbsp;
+	          {{ form.q }} &nbsp;
+	          <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit" name="search" value="{% trans 'Search' %}" />
+	    </div>
+	  </div>
+  </div>
+{% if form.registration %}  
+<div class="flex flex-wrap">
+  <div class="sm:w-1/6 pr-4 pl-42 mb-4">
+        <div class="checkbox">
+          <label>
+            {{ form.registration }} {{ form.registration.label }}
+          </label>
+       </div>
+    </div>
+</div>
+{% endif %} 
+</div>
+<div class="pull-right">
+<a href="#events-search-fields" data-toggle="collapse"><span class="active hide-show-search">Hide</span> Search Form</a>
+</div>
+</form>

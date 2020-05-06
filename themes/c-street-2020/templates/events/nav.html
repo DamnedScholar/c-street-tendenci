@@ -1,10 +1,12 @@
 {% load base_tags %}
 {% load perm_tags %}
 {% load site_setting_tags %}
+
 {% has_perm user site_settings.change_setting as can_edit_setting %}
 {% has_perm user events.add_event as can_add_event %}
 {% has_perm user events.view_registrant as can_view_registrant %}
 {% get_setting module events minimaladdform as can_request_event %}
+
 {% if nav_object %}
     {% has_perm user events.view_event nav_object as can_view_event %}
     {% has_perm user events.change_event nav_object as can_edit_event %}
@@ -14,27 +16,28 @@
     {% has_perm user events.change_event as can_edit_event %}
     {% has_perm user events.delete_event as can_delete_event %}
 {% endif %}
+
 {% if not SITE_GLOBAL_HIDEALLTABS %}
 <ul id="module-tabs" class="tabs">
     {% if user.is_authenticated and not SITE_GLOBAL_HIDETENDENCITABS %}
-    <li class="relative" data-dropdown="dropdown">
-        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative">{% trans "Tendenci" %}</a>
-        <ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+    <li class="dropdown" data-dropdown="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Tendenci" %}</a>
+        <ul class="dropdown-menu">
             <a href="{% url "dashboard" %}" title="Tendenci Home Page">{% trans "Dashboard" %}</a>
             <li><a href="{% url "profile.index" %}">{% trans "My Profile" %}</a></li>
             <li><a href="{% url "auth_logout" %}">{% trans "Log Off" %}</a></li>
         </ul>
     </li>
     {% endif %}
-    <li class="relative active" data-dropdown="dropdown">
-        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative">{% firstof MODULE_EVENTS_LABEL trans 'Events' %}</a>
-        <div class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+    <li class="dropdown active" data-dropdown="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% firstof MODULE_EVENTS_LABEL trans 'Events' %}</a>
+        <div class="dropdown-menu">
         {% if nav_object %}
         <ul class="first">
             <li class="heading">{% trans "All Events" %}</li>
             <li class="divider"></li>
         {% else %}
-        <ul class="list-disc pl-4">
+        <ul>
         {% endif %}
             {% if can_edit_setting %}
                 <li><a href="{% url "settings.index" "module" "events" %}">{% trans "Settings" %}</a></li>
@@ -72,7 +75,7 @@
             {% endif %}
         </ul>
         {% if nav_object %}
-            <ul class="list-disc pl-4">
+            <ul>
                 <li class="heading">{% trans "This Event" %}</li>
                 <li class="divider"></li>
                     <li><a href="{{ nav_object.get_absolute_url }}">{% trans "View Event" %}</a></li>
@@ -141,6 +144,7 @@
     {% endif %}
 </ul>
 {% endif %}
+
 <div id="event_export_dialog" title="Export Events" style="display:none;">
 <p>{% blocktrans %}You can export all the upcoming events
  to any calendar application such as MS Outlook, Google calendar, Apple iCal with the following link.{% endblocktrans %}</p>

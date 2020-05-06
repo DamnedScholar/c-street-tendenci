@@ -1,5 +1,7 @@
-<h1 class="text-xl font-semibold">{% trans "Pages Index Page" %}</h1>
-<ul class="list-disc pl-4">
+
+<h1>{% trans "Pages Index Page" %}</h1>
+
+<ul>
     <li><a href="{% url "page.search" %}">{% trans "Search" %}</a></li>
     <li><a href="{% url "page.view" %}">{% trans "View" %}</a></li>
     <li><a href="{% url "page.print_view" %}">{% trans "Print View" %}</a></li>

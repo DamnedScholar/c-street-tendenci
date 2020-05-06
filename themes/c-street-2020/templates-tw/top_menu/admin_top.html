@@ -1,20 +1,20 @@
 {% load page_tags %}
 {% if request.user.is_authenticated %}
-<div id="t-admin-megamenu" class="flex flex-wrap list-none p-0 pl-0 mb-0bar-inverse navbar-fixed-top navbar-expand-lg navbar-expand-md yamm t-megamenu" role="navigation">
-    <div class="container mx-auto mx-auto flex">
-        <div class="flex flex-wrap list-none p-0 pl-0 mb-0bar-header">
-            <button id="t-admin-megamenu-toggle" class="flex flex-wrap list-none p-0 pl-0 mb-0bar-toggle t-megamenu-toggle" type="button" data-toggle="flex-growlapse" data-target="#t-admin-megamenu-collapse">
+<div id="t-admin-megamenu" class="flex flex-wrap list-none p-0 pl-0 mb-0 bar-inverse navbar-fixed-top yamm t-megamenu" role="navigation">
+    <div class="container mx-auto mx-auto">
+        <div class="flex flex-wrap list-none p-0 pl-0 mb-0 bar-header">
+            <button id="t-admin-megamenu-toggle" class="flex flex-wrap list-none p-0 pl-0 mb-0 bar-toggle flex-growlapsed t-megamenu-toggle" type="button" data-toggle="collapse" data-target="#flex-grow items-center">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{% url 'dashboard' %}" class="flex flex-wrap list-none p-0 pl-0 mb-0bar-brand">{% spaceless %}
+            <a href="{% url 'dashboard' %}" class="flex flex-wrap list-none p-0 pl-0 mb-0 bar-brand">{% spaceless %}
                 <img src="{% static 'images/tendenci_white_small_100x51.gif' %}" class="nav-logo" height="24">
            {% endspaceless %}</a>
         </div>
-        <div id="t-admin-megamenu-collapse" class="flex flex-wrap list-none p-0 pl-0 mb-0bar-collapse">
+        <div id="navbar-collapse" class="flex flex-wrap list-none p-0 pl-0 mb-0 bar-collapse flex-growlapse">
             {# <div class="clearfix visible-sm-block"></div> #}
-            <ul class="flex flex-wrap list-none p-0 pl-0 mb-0bar-nav inner-top-nav">
+            <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 inner-top-nav">
                 {% include 'top_menu/_profile_dropdown.html' %}
                 {% include 'top_menu/_community_dropdown.html' %}
                 {% include 'top_menu/_apps_dropdown.html' %}
@@ -39,7 +39,7 @@
                     {% endblock %}
               </li>
             </ul>
-            <ul class="flex flex-wrap list-none p-0 pl-0 mb-0bar-nav navbar-right inner-top-nav">
+            <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 navbar-right inner-top-nav">
                 {% if USER_IS_SUPERUSER %}
                 {% include 'top_menu/_support_dropdown.html' %}
                 {% endif %}

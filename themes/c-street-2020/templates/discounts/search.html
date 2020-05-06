@@ -5,15 +5,19 @@
 {% load discount_tags %}
 {% load perm_tags %}
 {% load search_tags %}
+
+
 {% block title %}
     {% if MODULE_DISCOUNTS_LABEL_PLURAL %}
         {% blocktrans %}{{ MODULE_DISCOUNTS_LABEL_PLURAL }} List{% endblocktrans %} {% else %}
         {% trans "Discounts List" %}
     {% endif %} - {{ block.super }}
 {% endblock %}
+
 {% block content_classes %}{{ block.super }} t-search-view{% endblock %}
+
 {% block content %}
-    <h1 class="text-xl font-semibold">
+    <h1>
         {% firstof trans SITE_GLOBAL_SITEPRIMARYKEYWORDS trans SITE_GLOBAL_SITEDISPLAYNAME %}
         {% if MODULE_DISCOUNTS_LABEL_PLURAL %}
             {% blocktrans %}{{ MODULE_DISCOUNTS_LABEL_PLURAL }} List{% endblocktrans %}
@@ -21,8 +25,10 @@
             {% trans "Discounts List" %}
         {% endif %}
     </h1>
+
     {% autopaginate discounts 50 %}
     {% discount_search %}
+
     <h4 class="capitalize">
         {% if MODULE_DISCOUNTS_LABEL_PLURAL %}
             <em>{% blocktrans with count=paginator.count %}
@@ -34,7 +40,8 @@
             {% endblocktrans %}</em>
         {% endif %}
     </h4>
-    <table class="w-full max-w-full mb-4 bg-transparent table-striped">
+
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>{% trans "Code" %}</th>
@@ -45,6 +52,7 @@
                 <th>{% trans "Edit" %}</th>
             </tr>
         </thead>
+
         <tbody>
             {% for discount in discounts %}
                 <tr class="t-discounts-search-result t-search-result">
@@ -58,5 +66,6 @@
             {% endfor %}
         </tbody>
     </table>
+
     {% paginate %}
 {% endblock %}

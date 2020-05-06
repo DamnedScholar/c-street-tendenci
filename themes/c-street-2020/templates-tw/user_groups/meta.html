@@ -1,0 +1,65 @@
+{% load base_filters %}
+{% load base_tags %}
+{% load perm_tags %}
+{% has_perm user user_groups.change_group group as can_edit %}
+{% has_perm user user_groups.delete_group group as can_delete %}
+{% has_perm user user_groups.add_groupmembership as can_add_member %}
+<ul class="list-unstyled t-meta-data">
+    {% if user.is_authenticated %}
+        <li>{% blocktrans with group.create_dt|date:"long" as create_date %}Created on {{ create_date }}
+        by:{% endblocktrans %} <a href="{{ group.creator.get_absolute_url }}">
+        {% if group.creator.first_name %}{{ group.creator.first_name }} {{ group.creator.last_name }}
+        {% else %}
+        {{ group.creator }}
+        {% endif %}</a>
+        </li>
+        <li>{% blocktrans with group.update_dt|date:"long" as update_date %}Last updated {{ update_date }}
+        by:{% endblocktrans %} <a href="{{ group.owner.get_absolute_url }}">
+        {% if group.owner.first_name %}{{ group.owner.first_name }} {{ group.owner.last_name }}
+        {% else %}
+        {{ group.owner }}
+        {% endif %}</a>
+        </li>
+    {% endif %}
+</ul>
+{% if can_edit %}
+<nav class="flex flex-wrap list-none p-0 pl-0 mb-0bar navbar-default t-meta-editor-bar">
+        <div class="container mx-auto mx-auto">
+            <div class="flex-growlapse flex flex-wrap list-none p-0 pl-0 mb-0bar-collapse">
+                <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 t-meta-options-links">
+                    <li>{{ group.obj_perms }}</li>
+                    <li>{{ group.obj_status }}</li>
+                </ul>
+                <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 navbar-right t-meta-options-links">
+                    <li><a class="t-meta-eventlog-link" href="{% url 'event_log.search' %}?object_id={{ group.pk }}&source={{ group.opt_app_label }}">{% trans "Eventlogs" %}</a></li>
+                    <li><a class="edit-link" href="{% url "group.edit" group.slug %}">{% trans "Edit" %}</a></li>
+                    <li class="relative">
+                        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative" role="button" aria-expanded="false">{% spaceless %}
+                            {% trans "Options" %} <span class="caret"></span>
+                        {% endspaceless %}</a>
+                        <ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded" role="menu">
+                             {% if can_delete and group.type != 'system_generated' %}
+                            <li>
+                                <a class="t-meta-delete-link" href="{% url "group.delete" group.pk %}">{% trans "Delete" %}</a>
+                            </li>
+                            {% endif %}
+                            <li><a href="{% url "group.edit_perms" group.id %}" class="option-link permissions" title="Edit Permissions">{% trans "Permissions" %}</a></li>
+                            {% if can_add_member %}
+                                <li><a href="{% url "group.adduser" group.slug %}" class="option-link addmember" title="Add new member">{% trans "Add Member" %}</a></li>
+                            {% endif %}
+                            {% if user|in_group:group.id %}
+                                {% if group.allow_self_remove and user.is_authenticated or can_add_member %}
+                                    <li><a href="{% url "group.selfremove" group.slug user.id %}" title="Remove myself from group">{% trans "Remove myself from group" %}</a></li>
+                                {% endif %}
+                                {% else %}
+                                    {% if group.allow_self_add and user.is_authenticated or can_add_member %}
+                                        <li><a href="{% url "group.selfadd" group.slug user.id %}" class="option-link addmember" title="Add myself to group">{% trans "Add Myself to Group" %}</a></li>
+                                    {% endif %}
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</nav>
+{% endif %}

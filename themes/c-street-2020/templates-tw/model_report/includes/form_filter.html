@@ -1,0 +1,12 @@
+{% if form_filter %}
+    <div class="sm:w-1/6 pr-4 pl-42 md:w-1/3 pr-4 pl-4">
+    {% with form_filter as form %}
+        <fieldset>
+            {% if not form.filter_report_is_all %}
+            <legend>{% trans "Filter results" %}</legend>
+            {% endif %}
+            {% include "model_report/includes/form_fields.html" %}
+        </fieldset>
+    {% endwith %}
+    </div>
+{% endif %}

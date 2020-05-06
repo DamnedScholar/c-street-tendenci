@@ -1,14 +1,19 @@
 {% extends "newsletters/base.html" %}
 {% load perm_tags %}
 {% load styled_forms %}
+
+
 {% block title %}{% trans "Delete Newsletter" %}{% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 {% endblock %}
+
 {% block content %}
     <div class="t">
-        <h1 class="text-xl font-semibold">{%  trans "Delete Newsletter" %} - {{ object }}</h1>
+        <h1>{%  trans "Delete Newsletter" %} - {{ object }}</h1>
+
         <div class="newsletter-wrap">
             <form action="" method="POST">{% csrf_token %}
                 <div class="forms">
@@ -19,6 +24,7 @@
         </div>
     </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
 {% endblock %}

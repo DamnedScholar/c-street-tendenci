@@ -1,8 +1,10 @@
 {% load base_tags %}
 {% load perm_tags %}
-<div class="t-iconflex flex-wrap">
+
+<div class="t-iconrow">
 {% get_or_create_profile_for user_this as "user_this_profile" %}
 {% assign can_edit_user user_this_profile|args:request.user|call:'allow_edit_by' %}
+
     {% if user_this.id %}
         {% if can_edit_user %}
             {% if user_this.profile.is_superuser %}
@@ -19,18 +21,22 @@
                     {% endif %}
                 {% endif %}
             {% endif %}
+
+
                 {% if not user_this.is_active %}
                     <img class="non-interactive" src="{% static 'images/icons/answer_incorrect.gif' %}"
                     alt="{% trans 'Non-Interactive' %}" title="{% trans 'Non-Interactive' %}">
                 {% endif %}
+
                 <a href="{% url "profile.edit" user_this.id %}" class="option-link edit">{% trans "Edit" %}</a>
         {% endif %}
     {% endif %}
+
  {% if can_edit_user %}
       <div class="more-options-wrap">
         <a href="javascript:;" class="more-options-trigger">{% trans "More options" %} <small>&#9660;</small></a>
         <div class="more-options-target">
-            <ul class="list-disc pl-4">
+            <ul>
                 <li class="divider">
                  <a href="{% url "profile.edit_groups" user_this.username %}" class="usergroups" title="{% trans 'Edit Groups' %}">{% trans "Edit Groups" %}</a>
                 </li>
@@ -48,8 +54,10 @@
                  <a href="{% url "profile.delete" user_this.id %}" class="delete" title="{% trans 'Delete User' %}">{% trans "Delete" %}</a>
                 </li>
                 {% endif %}
+
              </ul>
             </div>
       </div>
   {% endif %}
+
 </div>

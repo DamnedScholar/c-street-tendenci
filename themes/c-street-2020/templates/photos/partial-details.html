@@ -3,6 +3,7 @@
 {% load photo_tags %}
 {% load bootstrap_pagination_tags %}
 {% load smart_if %}
+
 <div class="photo-instance">
     <div class="photo-title-wrap">
         <h2>{% firstof photo.title "Untitled" %}</h2>
@@ -11,7 +12,7 @@
         <div class="photo-back"><a href="{% url "photoset_details" set_id %}">&laquo; {% trans "Back to photo set" %}</a></div>
     </div>
     <div class="photo-traverse">
-        <ul class="list-disc pl-4">
+        <ul>
             {% if photo_prev_url %}<li><a id="photo-prev" href="{{ photo_prev_url }}">&laquo; {% trans "Prev" %}</a></li>{% endif %}
             {% if photo_next_url %}<li><a id="photo-next" href="{{ photo_next_url }}">{% trans "Next" %} &raquo;</a></li>{% endif %}
         </ul>

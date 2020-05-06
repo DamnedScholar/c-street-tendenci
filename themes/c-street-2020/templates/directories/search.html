@@ -3,6 +3,8 @@
 {% load bootstrap_pagination_tags %}
 {% load directory_tags %}
 {% load search_tags %}
+
+
 {% block title %}
     {% if MODULE_DIRECTORIES_LABEL_PLURAL %}
         {% blocktrans %}{{ MODULE_DIRECTORIES_LABEL_PLURAL }} List{% endblocktrans %}
@@ -10,13 +12,16 @@
         {% trans "Directories List" %}
     {% endif %} - {{ block.super }}
 {% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
     <link rel="alternate" type="application/rss+xml" title="{% trans 'Latest' %}  {% firstof MODULE_DIRECTORIES_LABEL_PLURAL trans 'Directories' %}" href="{% url 'directory.feed' %}" />
 {% endblock %}
+
 {% block content_classes %}{{ block.super }} t-search-view{% endblock %}
+
 {% block content %}
-    <h1 class="text-xl font-semibold">
+    <h1>
         {% firstof trans SITE_GLOBAL_SITEPRIMARYKEYWORDS trans SITE_GLOBAL_SITEDISPLAYNAME %}
         {% if MODULE_DIRECTORIES_LABEL_PLURAL %}
             {% blocktrans %}{{ MODULE_DIRECTORIES_LABEL_PLURAL }} List{% endblocktrans %}
@@ -24,14 +29,17 @@
             {% trans "Directories List" %}
         {% endif %}
     </h1>
+
     {% autopaginate directories 10 %}
     {% directory_search %}
+
     <p id="a-to-z">
         {% trans "Directory Starts With:" %}
         {% for letter in a_to_z %}
         <a href="{% url 'directories' %}?search_category=headline&search_method=starts_with&q={{letter }}">{{ letter|upper }}</a>
         {% endfor %}
     </p>
+
     <h4 class="capitalize">
     	<em>
         	{% with obj_count=paginator.count  %}
@@ -47,6 +55,7 @@
         	{% endwith %}
         </em>
     </h4>
+
     <section>
         {% for directory in directories %}
             {% search_result directory %}
@@ -64,14 +73,17 @@
             {% endif %}
         {% endfor %}
     </section>
+
     {% paginate %}
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript">
         $(document).ready(function () {
             var $catAndSubcatSelect = $('#id_cat, #id_sub_cat'),
                 $directoriesSearchForm = $('#t-directories-search-form');
+
             $catAndSubcatSelect.on('change', function (e) {
                 $directoriesSearchForm.submit();
             });

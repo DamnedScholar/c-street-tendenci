@@ -1,4 +1,5 @@
 {% load base_filters %}
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "https://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -6,9 +7,11 @@
 <title>{% trans "User Add Notice" %}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
+
 <body bgcolor="#ffffff" text="#000000">
 <p>{% blocktrans %}The following user was
   added to the {{ SITE_GLOBAL_SITEDISPLAYNAME }}:{% endblocktrans %}</p>
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="2%">&nbsp;</td>
@@ -35,6 +38,8 @@
 </table>
 <p>{% blocktrans %}To view the details of this
   user, go to:{% endblocktrans %} <b><a href="{{ SITE_GLOBAL_SITEURL }}{% url 'profile' object.user.username %}">{{ SITE_GLOBAL_SITEURL }}{% url 'profile' object.user.username %}</b><br>
+
   <P>{% trans "Time submitted:" %} {% now "D d M Y P" %}</P>
+
 </body>
 </html>

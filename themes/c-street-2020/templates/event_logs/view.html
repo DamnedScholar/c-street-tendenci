@@ -1,14 +1,18 @@
 {% extends "event_logs/base.html" %}
 {% load event_log_tags %}
 {% load base_filters %}
+
 {% block title %}{{ block.super }}{{ event_log.event_data }}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/event-logs.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
     <div class="event-log-wrap">
+
         <div class="options">
             <div class="quick-options">
                {% event_log_options request.user event_log %}
@@ -41,5 +45,6 @@
             <div class="submitted">{% blocktrans with event_log.create_dt|date:"long" as evlog %}Logged on {{ evlog }}{% endblocktrans %}</div>
         </div>
     </div>
+
 </div>
 {% endblock %}

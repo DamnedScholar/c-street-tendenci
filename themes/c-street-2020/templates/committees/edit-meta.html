@@ -1,20 +1,26 @@
 {% extends "committees/base.html" %}
 {% load committee_tags %}
 {% load styled_forms %}
+
 {% block title %}{% firstof MODULE_COMMITTEE_LABEL 'Committee' %} Edit Meta Information{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
+
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_COMMITTEES_LABEL 'COMMITTEE' %} {% trans "Meta Information for" %}<br />
+    <h1>{% firstof MODULE_COMMITTEES_LABEL 'COMMITTEE' %} {% trans "Meta Information for" %}<br />
     {{ committee.title }}</h1>
+
     <div class="committee-wrap">
         <div class="options">
             <div class="quick-options">
                 {% committee_options request.user committee %}
             </div>
         </div>
+
         <form action="{% url "committees.edit.meta" committee.pk %}" method="post">{% csrf_token %}
         <div class="forms">
             {{ form|styled_form }}
@@ -25,10 +31,12 @@
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript">
         $(document).ready(function(){
+
             // delete confirmation
             $('.delete').on("click", function(){
                 var delete_committee = confirm("Permenantly delete {% firstof MODULE_COMMITTEES_LABEL 'Committee' %}?");   // confirm

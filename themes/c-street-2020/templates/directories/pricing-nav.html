@@ -1,6 +1,8 @@
 {% load base_tags %}
 {% load perm_tags %}
+
 {% has_perm user directories.add_directorypricing as can_add_directory_pricing %}
+
 {% if nav_object %}
     {% has_perm user directories.view_directorypricing nav_object as can_view_directory_pricing %}
     {% has_perm user directories.change_directorypricing nav_object as can_edit_directory_pricing %}
@@ -10,12 +12,13 @@
     {% has_perm user directories.change_directorypricing as can_edit_directory_pricing %}
     {% has_perm user directories.delete_directorypricing as can_delete_directory_pricing %}
 {% endif %}
+
 {% if not SITE_GLOBAL_HIDEALLTABS %}
 <ul id="module-tabs" class="tabs">
     {% if user.is_authenticated  and not SITE_GLOBAL_HIDETENDENCITABS %}
-    <li class="relative" data-dropdown="dropdown">
-        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1">{% trans "Tendenci" %}</a>
-        <ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+    <li class="dropdown" data-dropdown="dropdown">
+        <a href="#" class="dropdown-toggle">{% trans "Tendenci" %}</a>
+        <ul class="dropdown-menu">
             <a href="{% url "dashboard" %}" title="Tendenci Home Page">{% trans "Dashboard" %}</a>
             <li><a href="{% url "profile.index" %}">{% trans "My Profile" %}</a></li>
             <li><a href="{% url "auth_logout" %}">{% trans "Log Off" %}</a></li>
@@ -23,16 +26,16 @@
     </li>
     {% endif %}
     <li><a href="{% url "directory.search" %}">{% firstof MODULE_DIRECTORIES_LABEL_PLURAL trans 'Directories' %}</a></li>
-    <li class="relative active" data-dropdown="dropdown">
-        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1">{% trans "Pricing" %}</a>
+    <li class="dropdown active" data-dropdown="dropdown">
+        <a href="#" class="dropdown-toggle">{% trans "Pricing" %}</a>
         {% if nav_object %}
-        <div class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+        <div class="dropdown-menu">
         <ul class="first">
             <li class="heading">{% trans "All Pricings" %}</li>
             <li class="divider"></li>
         {% else %}
             <div>
-            <ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+            <ul class="dropdown-menu">
         {% endif %}
             <li><a href="{% url "directory_pricing.search" %}">{% trans "All" %} {% firstof MODULE_DIRECTORIES_LABEL trans 'Directory' %} {% trans "Pricings" %}</a></li>
             {% if can_add_directory_pricing %}
@@ -41,7 +44,7 @@
         </ul>
         {% if nav_object %}
             {% if can_view_directory_pricing or can_edit_directory_pricing %}
-            <ul class="list-disc pl-4">
+            <ul>
                 <li class="heading">{% trans "This Price" %}</li>
                 <li class="divider"></li>
                 {% if can_view_directory_pricing %}

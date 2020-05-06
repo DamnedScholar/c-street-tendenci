@@ -1,10 +1,14 @@
 {% extends "forms/base.html" %}
 {% load styled_forms %}
 {% load forms_tags %}
+
 {% block title %}{% firstof MODULE_FORMS_LABEL trans 'Forms' %} {% trans 'Edit' %}{% endblock %}
+
 {% block content %}
+
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_FORMS_LABEL trans 'Forms' %} {% trans 'Edit' %}</h1>
+    <h1>{% firstof MODULE_FORMS_LABEL trans 'Forms' %} {% trans 'Edit' %}</h1>
+
     <div class="form-builder-wrap">
         <form action="{% url 'form_edit' form_instance.pk %}" method="post">{% csrf_token %}
         <div class="forms">
@@ -18,10 +22,14 @@
         </div>
         </form>
     </div>
+
 </div>
 {% endblock %}
+
 {% block extra_body %}
+
 {{ block.super }}
+
 <script type="text/javascript" src="{% static 'js/slug.js' %}"></script>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -43,6 +51,7 @@
                 $('.id_recurring_payment').hide();
             }
         });
+
         $('#id_recurring_payment').on("change", function(){
             recurring_payment = $(this).attr('checked');
             if(recurring_payment=='checked') {

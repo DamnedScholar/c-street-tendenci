@@ -2,6 +2,7 @@ var validate_guest = false;
 {% if custom_reg_form.validate_guest %}
     validate_guest = true;
 {% endif %}
+
 //delete registrant js
 function deleteRegistrant(ele, prefix) {
     var registrant_form = $(ele);
@@ -15,6 +16,8 @@ function deleteRegistrant(ele, prefix) {
     var reg_id = attr_id.split('_')[1];
     removeSummaryEntry(prefix, reg_id);
 }
+
+
 //formset index update
 function updateIndex(e, prefix, idx){
     var id_regex = new RegExp('(registrant-\\d+)');
@@ -24,12 +27,14 @@ function updateIndex(e, prefix, idx){
     if (e.id) {e.id = e.id.replace(id_regex, replacement);}
     if (e.name){e.name = e.name.replace(id_regex, replacement);}
 }
+
 // update the serial number on the form. ex: Registrant #3, Reg #3
 function updateFormHeader(this_form, prefix, idx, hide_form){
     // change the serial number on the form
     var id_regex = new RegExp('(registrant_\\d+)');
     var replacement = prefix + '_' + idx
     if (this_form.id) {this_form.id = this_form.id.replace(id_regex, replacement);}
+
     var reg_header = $(this_form).find('.registrant-header');
     if (reg_header) {
         if(hide_form==1){
@@ -43,21 +48,26 @@ function updateFormHeader(this_form, prefix, idx, hide_form){
             $(ic).html(idx+1);
         }
     };
+
 }
+
 function addRegistrant(prefix, pricing, initial_data, set_container, hide_form){
     var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
     var row = $('#registrant-hidden').clone(true).get(0);
     // place proper class
     $(row).addClass('registrant-form');
+
     if(formCount > 0){
         if (validate_guest == false){
             // remove required att
             $(row).find('div.label').removeClass("required");
        }
     };
+
     // update id attr
     var replacement = prefix + '_' + formCount
     $(row).attr('id',replacement);
+
     $(row).find(".form-field").children().children().each(function() {
         updateIndex(this, prefix, formCount);
         if($(this).attr("name")==(prefix+"-"+formCount+"-pricing")){
@@ -83,20 +93,28 @@ function addRegistrant(prefix, pricing, initial_data, set_container, hide_form){
             }
         }
     });
+
     // insert as last element into form list
     $(set_container).append(row);
+
     updateFormHeader(row, prefix, formCount, hide_form);
+
     updateSummaryEntry(prefix, formCount, pricing['price']);
+
     $('#id_' + prefix + '-TOTAL_FORMS').val(formCount + 1);
+
     // attempt to get the user status for this form
     if(hide_form==-1){
         $(row).find('.registrant-email').attr('class', 'registrant-email first-registrant-email')
         $(row).find('.registrant-memberid').attr('class', 'registrant-memberid first-registrant-memberid')
         getUserStatus(row);
     }else{
+
     }
+
     return false;
 }
+
 function addRegistrantSet(prefix, pricing_data, initial_data){
     var pricing = $.extend(pricing_data);
     extra_count = pricing['quantity'];
@@ -118,6 +136,7 @@ function addRegistrantSet(prefix, pricing_data, initial_data){
     $('#registrant-forms').append(container);
     return false;
 }
+
 $(document).ready(function(){
     // REGISTRANT CONTROLS
     default_pricings = $('#pricing-choices').html();
@@ -161,6 +180,7 @@ $(document).ready(function(){
             alert("Please select a pricing first.");
         }
     });
+
     // show delete-button-wrap
     $(".delete-button-wrap").show();
     // delete registrant set button
@@ -174,6 +194,7 @@ $(document).ready(function(){
                 deleteRegistrant(forms[i], 'registrant');
             }
             set.remove();
+
             // update form index
             forms = $('.registrant-form');
             var this_form;
@@ -189,14 +210,17 @@ $(document).ready(function(){
         }
         return false;   // cancel
     });
+
     $('.first-registrant-email').on("blur", function(){
         form = $(this).parent().parent().parent()
         getUserStatus(form);
     });
+
     $('.first-registrant-memberid').on("blur", function(){
         form = $(this).parent().parent().parent()
         getUserStatus(form);
     });
+
     $('.registrant-header').on("click", function() {
         $(this).parent().children('div:last').toggle();
         if ($(this).children('span.showhide').text() == "+ ") {

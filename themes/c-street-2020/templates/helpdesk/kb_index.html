@@ -1,8 +1,11 @@
 {% extends "helpdesk/public_base.html" %}
+
 {% block helpdesk_body %}
 <h2>{% trans "Knowledgebase" %}</h2>
+
 <p>{% trans "We have listed a number of knowledgebase articles for your perusal in the following categories. Please check to see if any of these articles address your problem prior to opening a support ticket." %}</p>
-<table class="w-full max-w-full mb-4 bg-transparent table-hover table-bordered table-striped">
+
+<table class="table table-hover table-bordered table-striped">
 <caption>{% trans "Knowledgebase Categories" %}</caption>
 <thead>
 <tr><th>{% trans "Category" %}</th></tr>
@@ -14,4 +17,5 @@
 {% endfor %}
 </tbody>
 </table>
+
 {% endblock %}

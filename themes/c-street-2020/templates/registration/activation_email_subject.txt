@@ -1,1 +1,2 @@
+
 {% blocktrans %}Account Activation - {{ site_url }}{% endblocktrans %}

@@ -1,38 +1,39 @@
 {% extends "explorer/base.html" %}
+
 {% block sql_explorer_content %}
-<div class="flex flex-wrap">
+<div class="row">
     {% if messages %}
         {% for message in messages %}
             {% if message.tags %}
                 {% if 'info' in message.tags %}
-                    <div class="relative px-3 py-3 mb-4 border rounded text-green-800 border-green-600 bg-green-200" role="alert">{{ message }}</div>
+                    <div class="alert alert-success" role="alert">{{ message }}</div>
                 {% elif 'error' in message.tags %}
-                    <div class="relative px-3 py-3 mb-4 border rounded text-red-800 border-red-600 bg-red-200" role="alert">{{ message }}</div>
+                    <div class="alert alert-danger" role="alert">{{ message }}</div>
                 {% else %}
-                    <div class="relative px-3 py-3 mb-4 border rounded text-teal-800 border-teal-600 bg-teal-200" role="alert">{{ message }}</div>
+                    <div class="alert alert-info" role="alert">{{ message }}</div>
                 {% endif %}
             {% else %}
-                <div class="relative px-3 py-3 mb-4 border rounded text-teal-800 border-teal-600 bg-teal-200" role="alert">{{ message }}</div>
+                <div class="alert alert-info" role="alert">{{ message }}</div>
             {% endif %}
         {% endfor %}
     {% endif %}
     {% if enable_form %}
-    <form class="flex items-center" method="post" action="{% url 'explorer_extensions.export_page' %}">{% csrf_token %}
+    <form class="form-inline" method="post" action="{% url 'explorer_extensions.export_page' %}">{% csrf_token %}
         {% for field in form %}
             {% if field.errors %}
-                <div class="mb-4 error">
+                <div class="form-group error">
                     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                     {{ field }}
                 </div>
             {% else %}
-                <div class="mb-4">
+                <div class="form-group">
                     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                     {{ field }}
                 </div>
             {% endif %}
         {% endfor %}
-        <div class="mb-4">
-            <button type="submit" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" >Generate</button>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" >Generate</button>
         </div>
     </form>
     {% endif %}
@@ -43,7 +44,7 @@
         <div class="panel-heading">
             Current Exports
         </div>
-        <table class="w-full max-w-full mb-4 bg-transparent">
+        <table class="table">
             <thead>
                 <tr>
                     <td>Creation Date</td>

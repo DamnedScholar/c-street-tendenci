@@ -1,8 +1,11 @@
 {% extends "jobs/base.html" %}
 {% load job_tags %}
+
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Pending Jobs" %}</h1>
+    <h1>{% trans "Pending Jobs" %}</h1>
+
     <div class="job-wrap">
     <ul class="pending-jobs">
     {% for job in jobs %}

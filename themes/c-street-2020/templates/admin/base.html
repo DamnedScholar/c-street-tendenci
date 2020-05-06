@@ -1,10 +1,13 @@
 {% load bootstrapped_goodies_tags %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="https://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
     <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     {% block extrastyle %}{% endblock %}
+
     <!-- Le styles, placed after extrastyle to correctly override default styling -->
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet"/>
     <style type="text/css">
@@ -15,6 +18,7 @@
     </style>
     <link href="{% static 'bootstrap3/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/admin_overrides.css" %}" />
+
     <!-- <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" /> -->
     <script type="text/javascript">
     //<![CDATA[
@@ -25,7 +29,9 @@
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
     <script type="text/javascript" src="{% static 'bootstrap3/js/bootstrap.min.js' %}"></script>
+
     {% block extrahead %}{% endblock %}
+
     {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
     <script type="text/javascript">
     //<![CDATA[
@@ -38,28 +44,30 @@
     //]]>
     </script>
 </head>
+
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+
 <!-- Container -->
-<div class="container mx-auto">
+<div class="container">
     {% if not is_popup %}
     <!-- Header -->
-    <div class="flex flex-wrap list-none p-0 pl-0 mb-0bar navbar-inverse navbar-fixed-top">
-        <div class="flex flex-wrap list-none p-0 pl-0 mb-0bar-inner">
-            <div class="container mx-auto">
-                <div class="flex flex-wrap list-none p-0 pl-0 mb-0bar-header">
-                    <button type="button" class="flex flex-wrap list-none p-0 pl-0 mb-0bar-toggle" data-toggle="flex-growlapse" data-target="#header-navbar-collapse">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
                     {% block branding %}{% endblock %}
                 </div>
-                <div id="header-navbar-collapse" class="flex flex-wrap list-none p-0 pl-0 mb-0bar-collapse flex-growlapse navbar-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %}">
-                    <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0">
+                <div id="header-navbar-collapse" class="navbar-collapse collapse navbar-{% if LANGUAGE_BIDI %}left{% else %}right{% endif %}">
+                    <ul class="nav navbar-nav">
                         {% if user.is_active and user.is_staff %}
-                        <li class="relative">
-                            <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative">{% trans 'Welcome,' %} <strong>{% filter force_escape %}{% firstof user.get_short_name user.get_username user.first_name user.username %}{% endfilter %}</strong> <span class="caret"></span></a>
-                            <ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans 'Welcome,' %} <strong>{% filter force_escape %}{% firstof user.get_short_name user.get_username user.first_name user.username %}{% endfilter %}</strong> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
                                 {% if user.has_usable_password %}
                                 <li><a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a></li>
                                 {% endif %}
@@ -70,6 +78,7 @@
                         <li class="divider-vertical"></li>
                         {% language_selector %}
                         {% endblock languages %}
+
                         {% block userlinks %}
                         {% url 'django-admindocs-docroot' as docsroot %}
                         {% if docsroot %}
@@ -85,23 +94,24 @@
         </div>
     </div>
     <!-- END Header -->
-    <div class="flex flex-wrap">
-        <div class="sm:w-1/6 pr-4 pl-42">
+    <div class="row">
+        <div class="col-sm-12">
             {% block breadcrumbs %}
             {% endblock %}
         </div>
     </div>
     {% endif %}
+
     <!-- Content -->
-    <div id="content" class="{% block flex-growtype %}colM{% endblock %}">
+    <div id="content" class="{% block coltype %}colM{% endblock %}">
         {% block navbar %}
-        <div class="flex flex-wrap list-none p-0 pl-0 mb-0bar navbar-default">
-            <div class="flex flex-wrap list-none p-0 pl-0 mb-0bar-inner">
+        <div class="navbar navbar-default">
+            <div class="navbar-inner">
                 {% block pretitle %}{% endblock %}
-                    <div class="flex flex-wrap list-none p-0 pl-0 mb-0bar-header">
+                    <div class="navbar-header">
                         {% block content-navbar-collapse %}
-                        <button type="button" class="flex flex-wrap list-none p-0 pl-0 mb-0bar-toggle flex-growlapsed" data-toggle="collapse" data-target="#content-navbar-collapse" aria-expanded="false" aria-controls="relative flex flex-wrap items-center content-between py-2 px-4">
-                            <span class="">Toggle navigation</span>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#content-navbar-collapse" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -109,7 +119,7 @@
                         {% endblock %}
                     {% block content_title %}
                     {% if title %}
-                        <a class="flex flex-wrap list-none p-0 pl-0 mb-0bar-brand">{% render_with_template_if_exist title|lower|add:"/admin_app_name.html" title %}</a>
+                        <a class="navbar-brand">{% render_with_template_if_exist title|lower|add:"/admin_app_name.html" title %}</a>
                     {% endif %}
                     {% endblock %}
                     </div>
@@ -117,12 +127,13 @@
             </div>
         </div>
         {% endblock navbar %}
+
         {% block messages %}
         {% if messages %}
-        <div class="flex flex-wrap">
-            <div class="sm:w-1/6 pr-4 pl-42">
+        <div class="row">
+            <div class="col-sm-12">
                 {% for message in messages %}
-                <div class="relative px-3 py-3 mb-4 border rounded {{ message.tags|"text-teal-darker border-teal-dark bg-teal-lighter" }}">
+                <div class="alert {{ message.tags|default:"alert-info" }}">
                     {{ message }}
                 </div>
                 {% endfor %}
@@ -130,12 +141,15 @@
         </div>
         {% endif %}
         {% endblock messages %}
+
         {% block content %}{{ content }}{% endblock %}
         {% block sidebar %}{% endblock %}
     </div>
     <!-- END Content -->
+
     {% block footer %}<footer id="footer"></footer>{% endblock %}
 </div>
 <!-- END Container -->
+
 </body>
 </html>

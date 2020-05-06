@@ -1,4 +1,6 @@
 {% extends "site_base.html" %}
+
+
 {% block title %}
     {% if SITE_GLOBAL_SITEPRIMARYKEYWORDS %}{% blocktrans %}{{ SITE_GLOBAL_SITEPRIMARYKEYWORDS }}{% endblocktrans %}: {% endif %}
     {% if MODULE_CORPORATEMEMBERSHIPS_LABEL_PLURAL %}
@@ -11,11 +13,15 @@
         {% endblocktrans %}
     {% endif %}
 {% endblock %}
+
 {% block extra_head %}
     {{ block.super }}
+
     <script type="text/javascript" src="{% static 'js/global/dropdown.js' %}"></script>
 {% endblock %}
+
 {% block banner %}{% endblock %}
+
 {% block top_bar %}
     {% if request.user.is_authenticated %}
         {% include "corporate_memberships/top_nav.html" %}

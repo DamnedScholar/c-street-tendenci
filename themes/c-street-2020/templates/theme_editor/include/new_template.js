@@ -3,6 +3,7 @@ $(function() {
     allFields = $( [] ).add( tname ),
     tips = $( ".validateTips" );
     $('#create-tform').css({'display': 'none'});
+
     function update_tips( t ) {
         tips
         .text( t )
@@ -20,6 +21,7 @@ $(function() {
                 update_tips( "Length of " + n + " must be between " +
             min + " and " + max + "." );
             }
+
             return false;
         } else {
             return true;
@@ -34,6 +36,7 @@ $(function() {
             return true;
         }
     }
+
     $('#create-tform').dialog({
         autoOpen: false,
         height: 300,
@@ -64,6 +67,7 @@ $(function() {
                             } else {
                                 update_tips(json["err"]);
                             }
+
                         });
                 }
             },
@@ -75,6 +79,7 @@ $(function() {
             allFields.val( "" ).removeClass( "ui-state-error" );
         }
     });
+
     $('.new-template-btn').on("click", function(){
         $('#create-tform').dialog('open');
         $('.ui-dialog-buttonset .ui-state-default').first()
@@ -82,4 +87,5 @@ $(function() {
                 .css({'background-color': '#A84524'})
                 .css({'color': '#ffffff'});
     });
+
 });

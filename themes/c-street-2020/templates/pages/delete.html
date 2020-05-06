@@ -1,14 +1,17 @@
 {% extends "pages/base.html" %}
 {% load page_tags %}
+
 {% block title %}{% blocktrans with t=page.get_title %}Delete Page - {{ t }}{% endblocktrans %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/delete.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
     <div class="page-wrap">
-        <h1 class="text-xl font-semibold">{% trans "Delete a Page" %}</h1>
+        <h1>{% trans "Delete a Page" %}</h1>
         <h2>{{ page.title }} - <a href="{{ page.get_absolute_url }}">{{ page.get_absolute_url }}</a></h2>
         <div class="content">{{ page.content|safe|truncatewords_html:"60" }}</div>
         <div class="delete-prompt">
@@ -17,7 +20,7 @@
         <div class="delete-form">
             <form name="page-delete" method="POST" action="{% url "page.delete" page.pk %}">{% csrf_token %}
                 <input type="hidden" name="action" value="delete">
-                <input class='inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default' type="submit" name="submit" value="{% trans "Confirm Delete" %}">
+                <input class='btn btn-default' type="submit" name="submit" value="{% trans "Confirm Delete" %}">
             </form>
         </div>
         <div class="back-item"><a href="{{ page.get_absolute_url }}">&laquo; {% trans "Back to page" %} {{ page.title }}</a></div>

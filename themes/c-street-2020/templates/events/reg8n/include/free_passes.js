@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $('button.fp_chk_btn').on("click", function(){
         var $this = $(this);
         var registrant_form = $this.closest('.registrant-form');
@@ -12,6 +13,7 @@ $(document).ready(function () {
             alert("Please fill out the email field then try again!");
             return false;
         }else{
+
             $.post(
                 '{% url "event.check_free_pass_eligibility" %}',
                 {
@@ -42,14 +44,18 @@ $(document).ready(function () {
                         msg = msg.concat('*** Note that - free passes are based on "first come, first served" policy.<br />');
                         msg = msg.concat('Thus, they may not be available upon submission.');
                         $(fp_message).html(msg);
+
                     }
                 });
+
             return false;
         }
     });
+
     $('.fp-field input[type=checkbox]').each(function() {
         var $this = $(this);
         var fp_field = $(this).closest('.fp-field');
+
             update_fp_item($this);
             if ($this.is(':checked')){
                    $(fp_field).show();
@@ -57,9 +63,11 @@ $(document).ready(function () {
                 $(fp_field).hide();
             }
          });
+
         $('.fp-field input[type=checkbox]').on("click", function(){
          update_fp_item($(this));
     });
+
     function update_fp_item(fp_item){
          var $this = $(fp_item);
          var registrant_form = $this.closest('.registrant-form');

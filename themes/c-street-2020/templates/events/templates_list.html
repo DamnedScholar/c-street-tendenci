@@ -3,16 +3,21 @@
 {% load base_tags %}
 ]
 {% block title %}{{ block.super }}{% trans 'List Templates' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 <link type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 <link rel="stylesheet" href="{% static 'css/events-search.css' %}">
 {% endblock %}
+
 {% block content %}
+
 <div class="t search-view">
-    <h1 class="text-xl font-semibold">{% trans "Event Templates" %}</h1>
+    <h1>{% trans "Event Templates" %}</h1>
+
     {% autopaginate events 10 %}
+
     <div class="events-wrap">
     {% for event in events %}
     <div class="panel panel-default">
@@ -34,9 +39,13 @@
     <div>No event templates. <a href="{% url 'event.add_template' %}">{% trans "Add an event template" %}</a></div>
     {% endfor %}
     </div>
+
     {% paginate %}
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
+
+
 {% endblock %}

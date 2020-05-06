@@ -2,13 +2,16 @@
 {% load event_tags %}
 {% load styled_forms %}
 {% load base_filters %}
+
 {% block title %}{{ block.super }}{% trans "Registration Pre" %} {{ event.title }} {{ event.start_dt|date:"M j, Y" }}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}" />
 <link rel="stylesheet" href="{% static 'css/event-registration.css' %}" />
 <link rel="stylesheet" href="{% static 'css/events-register_pre2.css' %}" />
 {% endblock %}
+
 {% block content %}
 <div class="t">
     <div>
@@ -22,8 +25,10 @@
         </div>
          {% include "events/include/spots_status.html" %}
     </div>
+
     <div class="pricing-info-wrap">
         <h2>Pricing Information</h2>
+
     {% if individual_pricings %}
         {% if table_pricings %}
         <div style="font-weight: bold; font-size: 1.2em;">{% trans "For Individuals" %}:</div>
@@ -43,7 +48,7 @@
                     {% endwith %}
                 </div>
                 {% if pricing.registration_cap and pricing.spots_available <= 0 %}
-                	<span class="text-red-500">{% trans 'Sold out' %}</span>
+                	<span class="text-danger">{% trans 'Sold out' %}</span>
                 {% else %}
                 <form action="{% url "event.register_individual" event.id pricing.id %}" method="get">
                     <input title="{{ SITE_GLOBAL_CURRENCYSYMBOL }}{{ pricing.price }} {{ pricing.title }}" class="register-green-button2" type="submit" name="submit" value="{% trans 'Register Now' %}" />
@@ -53,6 +58,7 @@
             {% endfor %}
         </div>
     {% endif %}
+
     {% if table_pricings %}
         {% if individual_pricings %}
         <div style="font-weight: bold; font-size: 1.2em;">{% trans "For Table/Team" %}:</div>
@@ -75,6 +81,7 @@
             {% endfor %}
         </div>
     {% endif %}
+
     </div>
 </div>
 {% endblock %}

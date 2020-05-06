@@ -1,9 +1,11 @@
 {% extends "reports/base.html" %}
 {% load bootstrap_pagination_tags %}
+
 {% block content %}
+
 {% if active %}
 <div class="page-header">
-  <h1 class="text-xl font-semibold">{% trans "Active Memberships Report" %}</h1>
+  <h1>{% trans "Active Memberships Report" %}</h1>
 </div>
 {% if days == 0 %}
 <p>{% trans "Lists all memberships that are still active." %}</p>
@@ -16,10 +18,11 @@
 {% endblocktrans %}
 {% endif %}
 {% endif %}
-<form class="search-form flex items-center pull-right" action="{% url "reports-active-members" %}" method="get">
-  <div class="mb-4">
+
+<form class="search-form form-inline pull-right" action="{% url "reports-active-members" %}" method="get">
+  <div class="form-group">
     <label for="id_days" class="control-label">{% trans "Filter by join date" %}:</label>
-    <select class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-800 border border-gray-500 rounded" name="days" id="id_days" onchange="this.form.submit();">
+    <select class="form-control" name="days" id="id_days" onchange="this.form.submit();">
       <option value="" selected="selected">-----------</option>
       <option value="30">{% trans 'Last 30 days' %}</option>
       <option value="60">{% trans 'Last 60 days' %}</option>
@@ -30,9 +33,10 @@
     </select>
   </div>
 </form>
+
 {% else %}
 <div class="page-header">
-  <h1 class="text-xl font-semibold">{% trans "Expired Memberships Report" %}</h1>
+  <h1>{% trans "Expired Memberships Report" %}</h1>
 </div>
 {% if days == 0 %}
 {% trans "Lists all memberships that have expired.  Grace periods are not included." %}
@@ -45,9 +49,9 @@ Currently showing members who expired in the last {{ days }} days.
 {% endblocktrans %}
 {% endif %}
 {% endif %}
-<form class="search-form flex items-center pull-right" action="{% url "reports-expired-members" %}" method="get">
+<form class="search-form form-inline pull-right" action="{% url "reports-expired-members" %}" method="get">
   <label class="control-label" for="id_days">{% trans "Filter by expire date" %}:</label>
-  <select class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-800 border border-gray-500 rounded" name="days" id="id_days" onchange="this.form.submit();">
+  <select class="form-control" name="days" id="id_days" onchange="this.form.submit();">
     <option value="" selected="selected">-----------</option>
     <option value="30">{% trans 'Last 30 days' %}</option>
     <option value="60">{% trans 'Last 60 days' %}</option>
@@ -58,17 +62,22 @@ Currently showing members who expired in the last {{ days }} days.
   </select>
 </form>
 {% endif %}
+
+
+
 <p><em>{{ mems|length }} {% trans "Members listed" %}</em></p>
 {% autopaginate mems 50 %}
+
 {% if active %}
-<p><a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="{% url "reports-active-members" %}?output=csv{% if request.GET.days %}&days={{ request.GET.days }}{% endif %}">
+<p><a class="btn btn-default" href="{% url "reports-active-members" %}?output=csv{% if request.GET.days %}&days={{ request.GET.days }}{% endif %}">
   {% trans 'Download CSV File' %}</a></p>
 {% else %}
-<p><a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" href="{% url "reports-expired-members" %}?output=csv{% if request.GET.days %}&days={{ request.GET.days }}{% endif %}">
+<p><a class="btn btn-default" href="{% url "reports-expired-members" %}?output=csv{% if request.GET.days %}&days={{ request.GET.days }}{% endif %}">
   {% trans 'Download CSV File' %}</a></p>
 {% endif %}
+
 <div>
-  <table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports">
+  <table class="table table-tendenci-reports">
     <tr>
       {% if active %}
       <th></th>
@@ -107,6 +116,7 @@ Currently showing members who expired in the last {{ days }} days.
         <a href="{% url "reports-active-members" %}?sort=invoice" ><i class="fa fa-arrow-up"></i></a>&nbsp;
         <a href="{% url "reports-active-members" %}?sort=-invoice" ><i class="fa fa-arrow-down"></i></a>
       </th>
+
       {% else %}
       <!-- EXPIRED REPORT -->
       <th></th>
@@ -166,6 +176,7 @@ Currently showing members who expired in the last {{ days }} days.
         {% endfor %}
         </table>
         </div>
+
         {% paginate %}
         <br /><br />
         {% endblock content %}

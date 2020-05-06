@@ -1,5 +1,6 @@
 {% load base_filters %}
-<div class="flex flex-wrap invoice-resultset">
+
+<div class="row invoice-resultset">
     <div class="span6">
         <h2>{% trans 'Totals' %}</h2>
         <table>
@@ -37,10 +38,12 @@
         </ol>
     </div>
 </div>
+
 {% for item in results %}
-<div class="flex flex-wrap invoice-resultset{% if forloop.last %} last{% endif %}">
+<div class="row invoice-resultset{% if forloop.last %} last{% endif %}">
     <div class="span12">
         <h3 id="app-{{ forloop.counter }}">{{ forloop.counter }}. {{ item.object_type }} <a class="back-to-top no-print" href="#top">{% trans 'Back to Top' %}</a></h3>
+
         <table class="">
             <tr>
                 <th>{% trans 'Count' %}</th>
@@ -55,7 +58,9 @@
                 <th>{{ item.balance__sum|format_currency }}</th>
             </tr>
         </table>
+
         <p>{% blocktrans with t=item.object_type %}Invoices for {{ t }} sorted by Date{% endblocktrans %}</p>
+
         <table class="invoice-list">
             <tr>
                 <th>{% trans 'ID' %}</th>
@@ -69,9 +74,11 @@
                 <th>{% trans 'Member Type' %}</th>
                 <th>{% trans 'Title' %}</th>
                 <th>{% trans 'Payment Type' %}</th>
+
                 {% elif item.is_donation %}
                 <th>{% trans 'Title' %}</th>
                 <th>{% trans 'Allocated To' %}</th>
+
                 {% else %}<th>{% trans 'Title' %}</th>{% endif %}
                 <th>{% trans 'Total' %}</th>
                 <th>{% trans 'Payments' %}</th>
@@ -89,15 +96,19 @@
                 {% with invoice.get_object as invoice_object %}
                     {% if invoice_object.event.pk %}
                     <td><a href="{% url 'event' invoice_object.event.pk %}">{{ invoice_object.event.pk }}</a> - {{ invoice_object.event.title|truncatewords:"3" }}</td>
+
                     {% elif item.is_membership %}
                     <td>{{ invoice_object.membership_type }}</td>
                     <td>{{ invoice.title }}</td>
                     <td>{{ invoice_object.payment_method }}</td>
+
                     {% elif item.is_donation %}
                     <td>{{ invoice.title }}</td>
                     <td>{{ invoice_object.allocation }}</td>
+
                     {% elif invoice.title %}
                     <td>{{ invoice.title }}</td>
+
                     {% else %}<td></td>{% endif %}
                 {% endwith %}
                 <td class="inv-total">{{ invoice.total|format_currency }}</td>
@@ -110,8 +121,10 @@
                 <td style="text-align:center" colspan="
                 {% if item.is_membership %}
                 13
+
                 {% elif item.is_donation %}
                 12
+
                 {% else %}11{% endif %}
                 ">{% trans 'No invoices found' %}</td>
             </tr>
@@ -128,9 +141,11 @@
                 <th>{% trans 'Member Type' %}</th>
                 <th>{% trans 'Title' %}</th>
                 <th>{% trans 'Payment Type' %}</th>
+
                 {% elif item.is_donation %}
                 <th>{% trans 'Title' %}</th>
                 <th>{% trans 'Allocated To' %}</th>
+
                 {% else %}<th>{% trans 'Title' %}</th>{% endif %}
                 <th>{% trans 'Total' %}</th>
                 <th>{% trans 'Payments' %}</th>
@@ -140,8 +155,10 @@
                 <th colspan="
                 {% if item.is_membership %}
                 10
+
                 {% elif item.is_donation %}
                 9
+
                 {% else %}8{% endif %}
                 ">{% blocktrans with c=item.count t=item.object_type %}Summary of {{ c }} invoices for {{ t }}{% endblocktrans %}</th>
                 <th>{{ item.total__sum|format_currency }}</th>
@@ -151,4 +168,6 @@
         </table>
     </div> <!-- /.span12 -->
 </div>
+
+
 {% endfor %}

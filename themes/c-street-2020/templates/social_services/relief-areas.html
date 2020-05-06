@@ -1,17 +1,22 @@
 {% extends "social_services/base-wide.html" %}
 {% load pagination_tags %}
+
 {% block title %}{{ block.super }}{% trans 'Relief Areas' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/social_services.css' %}" />
 <link rel="stylesheet" href="{% static 'css/jquery.jqplot.min.css' %}" />
 {% endblock %}
+
 {% block content %}
 <div class="social-services-wrap">
     <h1 class="capitalize">{% trans "relief assessment areas" %}</h1>
+
     <div class="clearfix">
     <div id="relief-chart" style="height:400px;width:100%; "></div>
     </div>
+
     {% if lon and lat %}
     <form action='' method='get'>
         <p>Showing relief areas within
@@ -29,7 +34,9 @@
     {% else %}
         <p>Showing all relief areas</p>
     {% endif %}
+
     {% autopaginate relief_areas 20 %}
+
     <div class="social-services-list-wrap">
     {% for area in relief_areas %}
         <div class="relief-area">
@@ -39,9 +46,11 @@
         </div>
     {% endfor %}
     </div>
+
     {% paginate %}
 </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'js/jquery.jqplot.min.js' %}"></script>

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     // for custom registration form options
     var reg_enabled_checkbox = $('input#id_regconf-enabled'),
         discount_eligible_box = $('.id_regconf-discount_eligible'),
@@ -8,14 +9,18 @@ $(document).ready(function() {
         one_or_separate_form_block = $('#one-or-separate-form'),
         one_or_saparate_input_radio_labels = $('#one-or-separate-form label'),
         one_or_separate_input_radios = $('#one-or-separate-form input[type="radio"]');
+
+
     {% if not MODULE_EVENTS_CUSTOMREGFORMENABLED  %}
         user_custom_reg_block.hide();
         pricing_reg_forms.hide();
     {% else %}
+
     var disable_separate_forms = function(){
         //one_or_separate_input_radios[1].disabled=true;
        // $(one_or_saparate_input_radio_labels[1]).css({'color': '#aaa'});
     }
+
     {# disable the separate custom reg form option per pricing if not already selected #}
     {# We are going to permanently remove this option, but for now just disable it. #}
     {# 0 - separate form, 1 - one form #}
@@ -23,6 +28,7 @@ $(document).ready(function() {
           use_custom_reg_checkbox.is(':checked') &&
           one_or_separate_input_radios.filter(':checked').val() == '0')
     {
+
         {% if MODULE_EVENTS_ANONYMOUSMEMBERPRICING %}
         disable_separate_forms();
         {% endif %}
@@ -31,6 +37,7 @@ $(document).ready(function() {
         disable_separate_forms();
         pricing_reg_forms.hide();
     }
+
     var toggle_pricing_reg_form = function(){
         {# separate form for each pricing #}
         if (one_or_separate_input_radios.filter(':checked').val() == '1'){
@@ -39,6 +46,7 @@ $(document).ready(function() {
             pricing_reg_forms.show();
         }
     }
+
     var toggle_use_custom_reg_options = function(){
         if (use_custom_reg_checkbox.is(':checked')){
             one_or_separate_form_block.show();
@@ -48,6 +56,7 @@ $(document).ready(function() {
             pricing_reg_forms.hide();
         }
     }
+
     var toggle_custom_reg_form = function(){
         if (reg_enabled_checkbox.is(':checked')){
             discount_eligible_box.show();
@@ -66,17 +75,24 @@ $(document).ready(function() {
             discount_eligible_box.hide();
         }
     }
+
     toggle_custom_reg_form();
+
+
     reg_enabled_checkbox.on("click", function () {
           toggle_custom_reg_form();
     });
+
     use_custom_reg_checkbox.on("click", function () {
           toggle_use_custom_reg_options();
     });
+
     one_or_separate_input_radios.on("click", function () {
           toggle_pricing_reg_form();
     });
+
  {% endif %}
+
     var toggle_email_reminder = function(item){
         if (item.is(':checked')){
             $(item).closest('div.form-field').next().show();
@@ -84,12 +100,14 @@ $(document).ready(function() {
             $(item).closest('div.form-field').next().hide();
         }
     }
+
     var email_reminder = $('input[id=id_regconf-send_reminder]');
     toggle_email_reminder(email_reminder);
     email_reminder.on("click", function(){
         var $this = $(this);
         toggle_email_reminder($this);
     });
+
     if ($("#id_display_event_registrants").is(':checked')) {
         //$('fieldset.attendees .form-field:not(fieldset.attendees .form-field:first)').show();
         $('div.id_display_registrants_to').parent().show();
@@ -106,6 +124,7 @@ $(document).ready(function() {
             $('div.id_display_registrants_to').parent().slideUp('fast');
         }
     });
+
     var recurringCheck = $('#id_is_recurring_event');
     //var repeatFreq = $('.form-field .id_frequency');
     var repeatFreq = $('#id_frequency').closest('.form-group');
@@ -117,6 +136,7 @@ $(document).ready(function() {
     var endRecurring = $('#id_end_recurring').closest('.form-group');
     //var repeatValue = repeatType.find('select#id_repeat_type');
     var repeatValue = $('select#id_repeat_type');
+
     if (recurringCheck.is(':checked')) {
         repeatFreq.show();
         repeatType.show();
@@ -126,12 +146,14 @@ $(document).ready(function() {
         repeatType.hide();
         endRecurring.hide();
     }
+
     // Hide Recurs On field when 'Daily' or 'Weekly' types are selected
     if ((repeatValue.val() == 3) || (repeatValue.val() == 4)) {
         recurOn.show();
     }else {
         recurOn.hide();
     }
+
     recurringCheck.on("click", function(){
         if(recurringCheck.is(':checked')){
             repeatFreq.slideDown('fast');

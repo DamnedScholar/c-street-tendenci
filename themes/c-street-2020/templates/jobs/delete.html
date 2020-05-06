@@ -1,13 +1,17 @@
 {% extends "jobs/base.html" %}
 {% load job_tags %}
+
 {% block title %}{% trans "Delete Job" %} - {{ job.title }}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/delete.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_JOBS_LABEL trans 'Job' %} {% trans "Delete Page" %}</h1>
+    <h1>{% firstof MODULE_JOBS_LABEL trans 'Job' %} {% trans "Delete Page" %}</h1>
+
     <div class="info" style="margin: 10px 0px 10px 0px;">
         <h2><a href="{{ job.get_absolute_url }}">{% firstof job.title trans "Untitled" %}</a></h2>
         <div style="margin: 10px 0px 10px 0px;">

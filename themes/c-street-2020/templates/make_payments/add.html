@@ -1,13 +1,18 @@
 {% extends "make_payments/base.html" %}
 {% load styled_forms %}
+
 {% block title %}{% trans 'Make a Payment' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/make_payments.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-<h1 class="text-xl font-semibold">{% trans "Make a Payment" %}</h1>
+
+<h1>{% trans "Make a Payment" %}</h1>
+
 <form id="t-make-payments-form" class="form-horizontal"  method="post" action="{% url "make_payment.add" %}">{% csrf_token %}
     <div class="forms">
     {{ form|styled_form }}
@@ -16,6 +21,7 @@
     </div>
     </div>
 </form>
+
 </div>
 {% endblock %}
 {% block extra_body %}

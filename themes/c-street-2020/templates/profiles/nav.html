@@ -1,7 +1,9 @@
 {% load base_tags %}
 {% load perm_tags %}
+
 {% has_perm user site_settings.change_setting as can_edit_setting %}
 {% has_perm user profiles.add_profile as can_add_profile %}
+
 {% if nav_object %}
     {% has_perm user profiles.view_profile nav_object as can_view_profile %}
     {% has_perm user profiles.change_profile nav_object as can_edit_profile %}
@@ -10,27 +12,28 @@
     {% has_perm user profiles.view_profile as can_view_profile %}
     {% has_perm user user.change_user as can_edit_profile %}
 {% endif %}
+
 {% if not SITE_GLOBAL_HIDEALLTABS %}
 <ul id="module-tabs" class="tabs">
     {% if user.is_authenticated and not SITE_GLOBAL_HIDETENDENCITABS %}
-    <li class="relative" data-dropdown="dropdown">
-        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative">{% trans "Tendenci" %}</a>
-        <ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+    <li class="dropdown" data-dropdown="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Tendenci" %}</a>
+        <ul class="dropdown-menu">
             <a href="{% url "dashboard" %}" title="{% trans 'Tendenci Home Page' %}">{% trans "Dashboard" %}</a>
             <li><a href="{% url "profile.index" %}">{% trans "My Profile" %}</a></li>
             <li><a href="{% url "auth_logout" %}">{% trans "Log Off" %}</a></li>
         </ul>
     </li>
     {% endif %}
-    <li class="relative active" data-dropdown="dropdown">
-        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative">{% firstof MODULE_USERS_LABEL 'People' %}</a>
-        <div class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+    <li class="dropdown active" data-dropdown="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% firstof MODULE_USERS_LABEL 'People' %}</a>
+        <div class="dropdown-menu">
         {% if nav_object %}
         <ul class="first">
             <li class="heading">{% trans "All Users" %}</li>
             <li class="divider"></li>
         {% else %}
-        <ul class="list-disc pl-4">
+        <ul>
         {% endif %}
             {% if can_edit_setting %}
                 <li><a href="{% url "settings.index" "module" "users" %}">{% trans "Settings" %}</a></li>
@@ -39,9 +42,11 @@
             {% if can_add_profile %}
                 <li><a href="{% url "profile.add" %}">{% trans "Add a User" %}</a></li>
             {% endif %}
+
             {% if user.profile.is_superuser %}
             <li><a href="{% url "profile.similar" %}">{% trans "Similar Users List" %}</a></li>
             {% endif %}
+
             {% if user.profile.is_staff %}
                 <li><a href="{% url "reports-memberships" %}">{% trans "Membership Reports" %}</a></li>
                 <li><a href="{% url "profile.admins" %}">{% trans "Admin List" %}</a></li>
@@ -53,7 +58,7 @@
         {% if nav_object %}
             {# Edit links need to point to the user_this instead of nav_object since the views for profile pull from auth.user #}
             {% if can_view_profile or can_edit %}
-            <ul class="list-disc pl-4">
+            <ul>
                 <li class="heading">{% trans "This User" %}</li>
                 <li class="divider"></li>
                 {% if can_view_profile %}

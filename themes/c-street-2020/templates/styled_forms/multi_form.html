@@ -1,18 +1,22 @@
 {% load l10n %}
 {% load styled_forms %}
 {% load base_filters %}
+
+
 {% comment %}
-<div class="relative px-3 py-3 mb-4 border rounded text-red-800 border-red-600 bg-red-200" role="alert">
+<div class="alert alert-danger" role="alert">
     <p>{% trans "There were some problems in the form. Please review. Thanks!" %}</p>
+
     {% for error in form.non_field_errors %}
-        <p><a href="#" class="font-bold ">{{ error }}</a></p>
+        <p><a href="#" class="alert-link">{{ error }}</a></p>
     {% endfor %}
+
     {% if form.fieldsets.fieldsets %}
         {% for fieldset in form.fieldsets %}
             {% for field in fieldset %}
                 {% if field.errors %}
                 {% for error in field.errors %}
-                    <p><a href="{{ request.get_full_path }}#{{ field.auto_id }}" class="font-bold ">{% blocktrans with l=field.label e=error %}{{ l }} - {{ e }}{% endblocktrans %}</a></p>
+                    <p><a href="{{ request.get_full_path }}#{{ field.auto_id }}" class="alert-link">{% blocktrans with l=field.label e=error %}{{ l }} - {{ e }}{% endblocktrans %}</a></p>
                 {% endfor %}
                 {% endif %}
             {% endfor %}
@@ -21,13 +25,14 @@
         {% for field in form %}
             {% if field.errors %}
                   {% for error in field.errors %}
-                      <p><a href="{{ request.get_full_path }}#{{ field.auto_id }}" class="font-bold ">{% blocktrans with l=field.label e=error %}{{ l }} - {{ e }}{% endblocktrans %}</a></p>
+                      <p><a href="{{ request.get_full_path }}#{{ field.auto_id }}" class="alert-link">{% blocktrans with l=field.label e=error %}{{ l }} - {{ e }}{% endblocktrans %}</a></p>
                   {% endfor %}
             {% endif %}
         {% endfor %}
     {% endif %}
 </div>
 {% endcomment %}
+
 {# Form Errors #}
 {% for form in forms %}
     {% if form.forms %}
@@ -68,6 +73,7 @@
             {% endif %}
         {% endfor %}
     {% endif %}
+
     {% if form.errors.values %}
         <div class="errors">
         {% for error in form.errors.values %}
@@ -76,6 +82,8 @@
         </div>
     {% endif %}
 {% endfor %}
+
+
 {# Form #}
 {% for form in forms %}
     <fieldset id="t-formsbuilder-form-{{ form.label|slugify|default:forloop.counter }}">
@@ -83,7 +91,9 @@
             {% if form.label %}
                 <legend>{{ form.label }}</legend>
             {% endif %}
+
             {{ form.management_form }}
+
             {% for form_set in form.forms %}
                 <div class="{{ form_set.auto_id }}">
                 <input type="hidden" name="form-number" value="{{ forloop.counter0 }}" />
@@ -107,9 +117,10 @@
                     {% if field.is_hidden %}
                         {{ field }}
                     {% else %}
-                        <div class="mb-4{% if field.errors %} has-error{% endif %}{% if field.field.css_classes %} {{ field.field.css_classes }}{% endif %}">
-                            <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="control-label sm:w-1/4 pr-4 pl-4{% if field.field.required %} required{% endif %}">{{ field.label }}</label>
-                            <div class="sm:w-3/4 pr-4 pl-4">
+                        <div class="form-group{% if field.errors %} has-error{% endif %}{% if field.field.css_classes %} {{ field.field.css_classes }}{% endif %}">
+                            <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="control-label col-sm-3{% if field.field.required %} required{% endif %}">{{ field.label }}</label>
+
+                            <div class="col-sm-9">
                                 {% if field|is_checkbox %}
                                     <div class="checkbox">
                                         <label>{{ field }}</label>
@@ -133,11 +144,13 @@
                                 {% else %}
                                     {{ field }}
                                 {% endif %}
+
                                 {% if field.errors %}
                                     {% for error in field.errors %}
                                         <span class="help-block">{{ error }}</span>
                                     {% endfor %}
                                 {% endif %}
+
                                 {% if field.help_text %}
                                     <span class="help-block">{{ field.help_text|safe }}</span>
                                 {% endif %}
@@ -212,6 +225,7 @@
             {% if form.label %}
                 <legend>{{ form.label }}</legend>
             {% endif %}
+
             {% if form.fieldsets.fieldsets %}
                 {% for fieldset in form.fieldsets %}
                     {% if fieldset.boundfields %}
@@ -219,16 +233,19 @@
                             {% if fieldset.legend %}
                                 <legend>{{ fieldset.legend }}</legend>
                             {% endif %}
+
                             {% if fieldset.description %}
                                 <p class="section-description">{{ fieldset.description }}</p>
                             {% endif %}
+
                             {% for field in fieldset %}
                                 {% if field.is_hidden %}
                                     {{ field }}
                                 {% else %}
-                                    <div class="mb-4{% if field.errors %} has-error{% endif %}{% if field.field.css_classes %} {{ field.field.css_classes }}{% endif %}">
-                                        <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="control-label sm:w-1/4 pr-4 pl-4{% if field.field.required %} required{% endif %}">{{ field.label }}</label>
-                                        <div class="sm:w-3/4 pr-4 pl-4">
+                                    <div class="form-group{% if field.errors %} has-error{% endif %}{% if field.field.css_classes %} {{ field.field.css_classes }}{% endif %}">
+                                        <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="control-label col-sm-3{% if field.field.required %} required{% endif %}">{{ field.label }}</label>
+
+                                        <div class="col-sm-9">
                                             {% if field|is_checkbox %}
                                                 <div class="checkbox">
                                                     <label>{{ field }}</label>
@@ -252,11 +269,13 @@
                                             {% else %}
                                                 {{ field }}
                                             {% endif %}
+
                                             {% if field.errors %}
                                                 {% for error in field.errors %}
                                                     <span class="help-block">{{ error }}</span>
                                                 {% endfor %}
                                             {% endif %}
+
                                             {% if field.help_text %}
                                                 <span class="help-block">{{ field.help_text|safe }}</span>
                                             {% endif %}
@@ -276,9 +295,10 @@
                     {% elif field|is_description %}
                         <p>{{ filed.label }}</p>
                     {% else %}
-                        <div class="mb-4{% if field.errors %} has-error{% endif %}{% if field.field.css_classes %} {{ field.field.css_classses }}{% endif %}">
-                            <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="control-label sm:w-1/4 pr-4 pl-4{% if field.field.required %} required{% endif %}">{{ field.label }}</label>
-                            <div class="sm:w-3/4 pr-4 pl-4">
+                        <div class="form-group{% if field.errors %} has-error{% endif %}{% if field.field.css_classes %} {{ field.field.css_classses }}{% endif %}">
+                            <label {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}for="{{ field.id_for_label }}"{% endif %} class="control-label col-sm-3{% if field.field.required %} required{% endif %}">{{ field.label }}</label>
+
+                            <div class="col-sm-9">
                                 {% if field|is_checkbox %}
                                     <div class="checkbox">
                                         <label>{{ field }}</label>
@@ -302,11 +322,13 @@
                                 {% else %}
                                     {{ field }}
                                 {% endif %}
+
                                 {% if field.errors %}
                                     {% for error in field.errors %}
                                         <span class="help-block">{{ error }}</span>
                                     {% endfor %}
                                 {% endif %}
+
                                 {% if field.help_text %}
                                     <span class="help-block">{{ field.help_text|safe }}</span>
                                 {% endif %}

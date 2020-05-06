@@ -8,7 +8,9 @@ function generatePreviewElements(){
         var last_name = dvalue.find('#id_registrant-'+(index)+'-last_name').val();
         prev_conf.append("<p>"+first_name+" "+last_name+"</p>");
     });
+
 };
+
 $(document).ready(function(){
     $('#discount_check').on("click", function(){
         code = $('#id_discount_code').val();
@@ -27,6 +29,7 @@ $(document).ready(function(){
             }
         });
         {% endif %}
+
         $.post(
             '{% url "discount.discounted_prices" %}',
             {
@@ -51,6 +54,7 @@ $(document).ready(function(){
             }
         );
     });
+
     $('#registration-form').on("submit", function() {
         $(this).find('#register-button').off('click').on('click', function() {
             return false;

@@ -1,4 +1,5 @@
 {% extends "reports/base.html" %}
+
 {% block extra_head %}
 {{ block.super }}
 <link type="text/css" href="{% static 'tablesorter/sortthemes.css' %}" rel="Stylesheet" />
@@ -11,13 +12,14 @@
     }
 </style>
 {% endblock %}
+
 {% block content %}
 <div class="page-header">
-  <h1 class="text-xl font-semibold">{% trans "Current Members by Company" %}</h1>
+  <h1>{% trans "Current Members by Company" %}</h1>
 </div>
 <div class="mems-wrap">
 {% if companies %}
-<table class="w-full max-w-full mb-4 bg-transparent table-tendenci-reports">
+<table class="table table-tendenci-reports">
     <thead>
     <tr>
         <th>{% trans "Company" %}</th>
@@ -37,7 +39,9 @@
     {% trans "No company data available." %}
 {% endif %}
 </div>
+
 {% endblock content %}
+
 {% block extra_body %}
 {{ block.super }}
 {# dynamically load jquery #}
@@ -49,6 +53,7 @@
         document.getElementsByTagName('head')[0].appendChild(s);}
 </script>
 <script type="text/javascript" src="{% static 'tablesorter/jquery.tablesorter.min.js' %}"></script>
+
 <script type="text/javascript">
 var cname_extraction = function(node)
 {
@@ -61,6 +66,9 @@ $(document).ready(function(){
     $(".tablesorter").tablesorter({
         textExtration: cname_extraction
     });
+
 });
+
 </script>
+
 {% endblock %}

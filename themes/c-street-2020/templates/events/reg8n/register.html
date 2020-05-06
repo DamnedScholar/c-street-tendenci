@@ -2,13 +2,16 @@
 {% load event_tags %}
 {% load styled_forms %}
 {% load base_filters %}
+
 {% block title %}{{ block.super }}{% trans "Registration" %} {{ event.title }} {{ event.start_dt|date:"M j, Y" }}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}" />
 <link rel="stylesheet" href="{% static 'css/event-registration.css' %}" />
 <link rel="stylesheet" href="{% static 'css/event-addons.css' %}" />
 <link rel="stylesheet" href="{% static 'css/events-reg.css' %}" />
+
 <style type="text/css">
     input.registrant-pricing {
         float: left;
@@ -34,9 +37,10 @@
     }
 </style>
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "Registration" %}</h1>
+    <h1>{% trans "Registration" %}</h1>
     <div>
         <div class="event-title"><a href="{% url "event" event.id %}">{{ event.title }}</a></div>
         {% if event.is_table %}
@@ -49,7 +53,9 @@
             {{ event.start_dt|date:"P" }} - {{ event.end_dt|date:"P" }}{% endif %}</div>
         </div>
          {% include "events/include/spots_status.html" %}
+
     </div>
+
     {% if not event.registration_configuration.require_guests_info and event.anony_setting == 'open'  or event.is_table %}
     <div class="event-info well" style="background-color:#FFFFEB;">
     {% if not event.registration_configuration.require_guests_info and event.anony_setting == 'open'  %}
@@ -65,17 +71,19 @@
      </div>
     {% endif %}
      <noscript>
-        <div id="noscript" class="relative px-3 py-3 mb-4 border rounded alert-error">
+        <div id="noscript" class="alert alert-error">
             {% blocktrans %}JavaScript must be enabled in order for you to use this page. Please enable
             javascript and <a href="{{ request.path }}">try again</a>.{% endblocktrans %}
         </div>
     </noscript>
+
     {% if reg_form.errors.values or registrant.non_form_errors or has_registrant_form_errors or not within_available_spots %}
         <div class="errors-box">
-            <ul class="list-disc pl-4">
+            <ul>
             	{% for error in registrant.non_form_errors %}
 			        <li>{{ error }}</li>
 			    {% endfor %}
+            
                 {% if not within_available_spots %}
                 <li>{% blocktrans with spots_available=event.spots_available %}Only {{ spots_available }} spot{{ spots_available|pluralize }} available. No more {{ spots_available }} registrant{{ spots_available|pluralize }} please!{% endblocktrans %}</li>
                 {% endif %}
@@ -87,6 +95,7 @@
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
+
                 {% for form in registrant.forms %}
                     {{ form.non_field_errors }}
                     {% for field in form %}
@@ -100,34 +109,42 @@
             </ul>
         </div>
     {% endif %}
+
+
     <div class="form-wrap">
         <form id="registration-form" action="" method="post">{% csrf_token %}
         <div class="forms" id="fillup-div">
+
             <div id="reg-form-wrap">
                 <div class="float-anchor"><!-- ie7 fix --></div>
                 <div class="float-window">
+
                 <div id="reg-form-box" {% if event.free_event %}style="display:none;"{% endif %}>
                     <div style="background:#3E83C9;color:#fff; padding: 3px; font-weight: bold; font-size:1.2em; text-align: center;">
                         <div >{% trans 'Summary' %}</div>
                     </div>
+
                     <div style="padding: 1em;">
                         <div id="original-price" style="display:none;">{{ total_price|floatformat:2 }}</div>
                         <div class="summary-total">
                             {{ SITE_GLOBAL_CURRENCYSYMBOL }}
                             <span class="summary-total-amount" id="summary-total-amount" data-price="{{ total_price}}">{{ total_price|floatformat:2 }}</span>
                         </div>
+
                         <div class="summary-payment">
                             <noscript>
                             <div>
-                                <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" title="{% trans "Update Summary" %}" type="submit" id="update_summary" name="update_summary" value="{% trans "Update Summary" %}" />
+                                <input class="btn btn-default" title="{% trans "Update Summary" %}" type="submit" id="update_summary" name="update_summary" value="{% trans "Update Summary" %}" />
                             </div>
                             </noscript>
+
                         </div>
+
                         {# price list #}
                         <table id="summary-price">
                             {% if event.is_table %}
                             <tr class="summary-registrant" id="summary-registrant-0">
-                                <td width="50%" class="item-label">{% trans "w-full max-w-full mb-4 bg-transparent of " %}{{ pricing.quantity }}</td>
+                                <td width="50%" class="item-label">{% trans "Table of " %}{{ pricing.quantity }}</td>
                                 <td width="50%" align="right">
                                     <span class="currency-symbol">{{ SITE_GLOBAL_CURRENCYSYMBOL }}</span>
                                     {% with price_list|first as price_entry %}
@@ -179,19 +196,25 @@
                                 </td>
                             </tr>
                         </table>
+
                     </div>
+
                </div>
                </div>  {# float-widow#}
             </div>
+
             <div id="registrant-forms">
                 {{ registrant.management_form }}
                 {% for form in registrant.forms %}
                     {% with forloop.counter as forloop_counter %}
                     <div id="registrant_{{ forloop.counter }}" class="registrant-form">
                         <div class="registrant-header{% if total_regt_forms == 1 %} hidden{% endif %}">
-                            <span class="opacity-100 blockhide"></span>{% trans "Registrant" %} #<span class="item-counter">{{ forloop_counter }}</span>:
+                            <span class="showhide"></span>{% trans "Registrant" %} #<span class="item-counter">{{ forloop_counter }}</span>:
                         </div>
+
                         <div class="{% cycle 'odd-registrant' 'even-registrant'%}">
+
+
                             {% for field in form %}
                             {% if field.label != 'Delete' and field.name != 'use_free_pass' %}
                                 {% if field.name == 'override' or field.name == 'override_price' %}
@@ -252,6 +275,7 @@
                                 {% endif %}
                             {% endif %}
                             {% endfor %}
+
                             {% if not event.is_table and event.registration_configuration.allow_free_pass %}
                             <div class="free-pass-wrap">
                             <button type="button" class="fp_chk_btn">{% trans "Check Free Pass Eligibility" %}</button>
@@ -260,35 +284,45 @@
                             <div class="fp-field">{{ form.use_free_pass }}<label for="id_registrant-{{ forloop_counter|add:'-1'}}-use_free_pass"> {{ form.use_free_pass.label }}</label></div>
                             </div>
                             {% endif %}
+
                             {% if form.DELETE %}
                             <div class="form-field delete{% if forloop.first %} hidden{% endif %}">
                                 <div class="delete-button-wrap">
-                                    <button type="button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-red-100 bg-red-500 hover:bg-red-400 delete-button">&nbsp;&nbsp;{% trans "Delete" %}</button>
+                                    <button type="button" class="btn btn-danger delete-button">&nbsp;&nbsp;{% trans "Delete" %}</button>
                                 </div>
+
                                 <noscript>
                                     <div>{{ form.DELETE }} {% trans "Delete" %}</div>
                                 </noscript>
+
                             </div>
                             {% endif %}
+
                         </div>
                         {% if forloop_counter == 1 and event.is_table %}
-                        <button type="button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" id="populate-fields">{% blocktrans %}Auto fill guest(s) infomation
+                        <button type="button" class="btn btn-default" id="populate-fields">{% blocktrans %}Auto fill guest(s) infomation
                             <br /><small>Guests' company name, phone, etc are the same as mine</small>{% endblocktrans %}</button>
                         {% endif %}
+
                     </div>
                 {% endwith %}
                 {% endfor %}
             </div>
+
+
              {% if not event.is_table %}
             <div class="add-registrant-box">
-                <button type="button" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" onClick="add_registrants(this, 'registrant'); return false;" title="{% trans "Add another one before pressing Register & Pay" %}">{% trans "Add Another Registrant" %}</button>
+                <button type="button" class="btn btn-default" onClick="add_registrants(this, 'registrant'); return false;" title="{% trans "Add another one before pressing Register & Pay" %}">{% trans "Add Another Registrant" %}</button>
             </div>
             {% endif %}
+
+
             {% if addons %}
             <div class="addon-wrap">
                 <div class="add-addons-box">
                 {% include 'events/addons/addon-add-box.html' %}
                 </div>
+                
                 <div class="addon-forms">
                     <div>{% trans "Addons Added:" %}</div>
                     {% include 'events/addons/formset.html' %}
@@ -297,6 +331,7 @@
             {% else %}
                  {{ addon_formset.management_form }}
             {% endif %}
+
             {% if event.is_table %}
             <div id="admin-override-table-wrap">
                 <div id="admin-override-table" class="override">
@@ -314,7 +349,9 @@
                     {% endif %}
                 </div>
             </div>
+
             {% endif %}
+
             {% if reg_form.discount_code %}
                 <div class="form-field discount-field-wrap">
                     <div id="discount-message" class="error">{{ reg_form.discount_code.errors }}</div>
@@ -323,6 +360,8 @@
                     <button type="button" id="discount_check">Check Discount</button>
                 </div>
             {% endif %}
+
+
             <div class="clear"></div>
             {% if event.free_event %}
                 {{ reg_form.payment_method }}
@@ -333,6 +372,7 @@
                     <div class="field">{{ reg_form.payment_method }}</div>
                 </div>
             {% endif %}
+
             {% if reg_form.captcha %}
                 <div class="form-field">
                     <div class="error">{{ reg_form.captcha.errors }}</div>
@@ -340,7 +380,8 @@
                     <div class="field">{{ reg_form.captcha }}</div>
                 </div>
             {% endif %}
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit" name="commit" id="register-form-button" class="registration-green-button" value="{% if event.free_event %}{% trans 'RSVP' %}{% else %}{% trans 'Register'%}{% endif %}" />
+            <input class="btn btn-primary" type="submit" name="commit" id="register-form-button" class="registration-green-button" value="{% if event.free_event %}{% trans 'RSVP' %}{% else %}{% trans 'Register'%}{% endif %}" />
+
             <div class="clear"></div>
         </div>
         {% if do_confirmation %}
@@ -356,11 +397,14 @@
                     <p>Disclaimer: The availability of discount code is subject to
                     change without any warranty before confirming your registration.</p>
                 {% endif %}
+                           
+                           
                 {% if gratuity_form.gratuity or gratuity_form.gratuity_preferred %}
                 <div class="gratuity-section clearfix">
+                
 	                {% if gratuity_form.errors.values %}
 				        <div class="errors-box">
-				            <ul class="list-disc pl-4">
+				            <ul>
 				                {{ gratuity_form.non_field_errors }}
 				                {% for field in gratuity_form %}
 				                    {% if field.errors %}
@@ -372,35 +416,39 @@
 				            </ul>
 				        </div>
 				    {% endif %}
+                
                 	{% if gratuity_form.gratuity %}
-                	<div class="mb-4">
-                		<label for="id_gratuity" class="sm:w-1/2 pr-4 pl-4 control-label" style="text-align: right !important;">{{gratuity_form.gratuity.label}}</label>
-                	    <div class="sm:w-1/2 pr-4 pl-4">
+                	<div class="form-group">
+                		<label for="id_gratuity" class="col-xs-6 control-label" style="text-align: right !important;">{{gratuity_form.gratuity.label}}</label>
+                	    <div class="col-xs-6">
       					{{ gratuity_form.gratuity }}
       					</div>
                 	</div>
                 	{% endif %}
                 	{% if gratuity_form.gratuity_preferred %}
-                	<div class="mb-4">
-                		<label for="id_gratuity_preferred" class="sm:w-1/2 pr-4 pl-4 control-label" style="text-align: right !important;">{% trans "*OR*" %} {{gratuity_form.gratuity_preferred.label}}</label>
-                	    <div class="sm:w-1/2 pr-4 pl-4">
+                	<div class="form-group">
+                		<label for="id_gratuity_preferred" class="col-xs-6 control-label" style="text-align: right !important;">{% trans "*OR*" %} {{gratuity_form.gratuity_preferred.label}}</label>
+                	    <div class="col-xs-6">
       					{{ gratuity_form.gratuity_preferred }}
                          <div class="help-text">{{ gratuity_form.gratuity_preferred.help_text }}</div>
                          <br />
                 	  </div>
                 	</div>
                 	{% endif %}
-                	<div id="tbl-gratuity-summary" class="sm:w-1/2 pr-4 pl-4 pull-right">
-                	<table class="w-full max-w-full mb-4 bg-transparent">
+                	
+                	<div id="tbl-gratuity-summary" class="col-sm-6 pull-right">
+                	<table class="table">
                 		<tr>
                 			<td>{% trans "Subtotal:" %}</td><td>{{ SITE_GLOBAL_CURRENCYSYMBOL }}<span id="tbl-gratuity-subtotal" data-subtotal="{{ subtotal }}">{{ subtotal }}</span></td>
                 		</tr>
                 		<tr>
                 			<td>{% trans "Gratuity:" %}</td><td><span id="tbl-gratuity">0</span>%</td>
                 		</tr>
+                		
                 		<tr{% if not total_tax %} class="hidden"{% endif %}>
                 			<td>{% trans "Tax:" %}</td><td>{{ SITE_GLOBAL_CURRENCYSYMBOL }}<span id="tbl-total_tax" data-total_tax="{{ total_tax }}">{{ total_tax }}</span></td>
                 		</tr>
+                		
                 		<tr>
                 			<td>{% trans "Total:" %}</td><td>{{ SITE_GLOBAL_CURRENCYSYMBOL }}<span id="tbl-gratuity-total">{{ grand_total }}</span></td>
                 		</tr>
@@ -409,11 +457,12 @@
                 </div>
                 {% endif %}
             </div>
+            
             <input type="hidden" name="confirmed" />
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" type="submit" name="addmore" value="{% trans "Add Another Registrant" %}" />
+            <input class="btn btn-default" type="submit" name="addmore" value="{% trans "Add Another Registrant" %}" />
              <br /><br />
             <div class="clear"></div>
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-green-100 bg-green-500 hover:bg-green-400" type="submit" name="commit" value="{% trans 'Confirm My Registration' %}" />
+            <input class="btn btn-success" type="submit" name="commit" value="{% trans 'Confirm My Registration' %}" />
            <br /><br />
             <div class="clear"></div>
         </div>
@@ -425,6 +474,7 @@
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 <script type="text/javascript" src="{% static 'js/email-verification.js' %}"></script>
 <script type="text/javascript">
@@ -435,12 +485,15 @@
     {% if do_confirmation %}
     $(document).ready(function(){
         $('#fillup-div').addClass('event-registration-hidden');
+        
         {% if gratuity_form.gratuity or gratuity_form.gratuity_preferred %}
         var total_tax = $("#tbl-total_tax").data('total_tax');
+        
         var calc_total = function(subtotal, gratuity){
             grand_total = parseFloat(subtotal) + parseFloat(total_tax) + parseFloat(subtotal) * parseFloat(gratuity)/100.0;
             return grand_total.toFixed(2);
         };
+        
         var assign_total = function(subtotal){
         	var gratuity = $("select#id_gratuity").val();
         	var gratuity_preferred = $("#id_gratuity_preferred").val();
@@ -454,6 +507,7 @@
         	}	        	
         	$('#tbl-gratuity-total').html(total);
         };
+    
         var subtotal = $("#tbl-gratuity-subtotal").data('subtotal');
         assign_total(subtotal);
         $('select#id_gratuity').on("change", function(e){
@@ -463,6 +517,7 @@
         	assign_total(subtotal);
         });
     {% endif %}
+    
     });
     {% endif %}
     {% if add_more_registrants %}
@@ -476,12 +531,14 @@
        });
    {% endif %}
 </script>
+
 <script type="text/javascript">
 {# process default yes addons #}
 $(function () {
 	var i;
 	var myid;
 	var has_checked_addon = false;
+	
  	if ($('input[id="id_addon-TOTAL_FORMS"]').attr('value') == "0") {
 	   $('input[name="add-addons"]').each(function() {
 	      i = $(this).attr('value');
@@ -495,6 +552,7 @@ $(function () {
 	   });
 	   if (has_checked_addon){
 		   $("#add-addons-button").trigger("click");
+			
 		   $('input[name="add-addons"]').each(function() {
 		      this.checked = false;
 		      i = $(this).attr('value');
@@ -505,6 +563,7 @@ $(function () {
 	} 
 });
 </script>
+
 {% if not event.is_table and event.registration_configuration.allow_free_pass %}
 <script type="text/javascript">
     {% include 'events/reg8n/include/free_passes.js' %}

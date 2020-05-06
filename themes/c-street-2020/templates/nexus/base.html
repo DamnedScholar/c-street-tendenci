@@ -1,14 +1,18 @@
 {% load nexus_helpers %}
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="utf-8">
         <title>{% block title %}{% if title %}{{ title }} | {% endif %}Nexus{% endblock %}</title>
+
         <link rel="stylesheet" href="{% nexus_media_prefix %}/nexus/css/nexus.css">
         <link rel="stylesheet" href="{% nexus_media_prefix %}/nexus/css/facebox.css">
         <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:light,regular&amp;subset=latin' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet'>
+
         <meta name="robots" content="NONE,NOARCHIVE">
+
         <script>
             var GARGOYLE = {
                 facebox: {
@@ -17,27 +21,32 @@
                 }
             };
         </script>
+
         <script src="{% nexus_media_prefix %}/nexus/js/lib/jquery.js"></script>
         <script src="{% nexus_media_prefix %}/nexus/js/lib/jquery.tmpl.js"></script>
         <script src="{% nexus_media_prefix %}/nexus/js/lib/facebox/facebox.js"></script>
         <script src="{% nexus_media_prefix %}/nexus/js/nexus.js"></script>
+
         {% block head %}
         {% endblock %}
     </head>
+
     <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
         <div id="header">
             <div class="wrapper">
                 <h2>{% block heading %}{% if module_title %}{{ module_title }}{% endif %}{% endblock %}</h2>
-                <ul class="flex flex-wrap list-none p-0 pl-0 mb-0" id="account">
+                <ul class="nav" id="account">
                     {% if request.user.is_authenticated %}
                         <li>Logged in as {{ request.user.username }} (<a href="{% url "nexus:logout" %}">Logout</a>)
                     {% endif %}
                 </ul>
             </div>
         </div>
+
         {% block navigation %}
             {% show_navigation %}
         {% endblock %}
+
         {% block container %}
             <div id="container">
                 <div class="wrapper">
@@ -63,7 +72,7 @@
                         {% block base_content %}
                             {% block pretitle %}{% endblock %}
                             {% block content_title %}
-                                {% if title %}<h1 class="text-xl font-semibold">{{ title }}</h1>{% endif %}
+                                {% if title %}<h1>{{ title }}</h1>{% endif %}
                             {% endblock %}
                             {% block content %}
                                 {% block object-tools %}{% endblock %}
@@ -76,6 +85,7 @@
                 </div>
             </div>
         {% endblock %}
+
         <div id="footer">
             <!-- <div class="wrapper">
                 Nexus | Powered by sexy Django magic | Conjured up by the <a href="https://code.disqus.com">DISQUS</a> team and other noble <a href="https://github.com/dcramer/nexus/contributors">sorcerers</a>.

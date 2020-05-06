@@ -1,9 +1,10 @@
 {% extends "photos/base.html" %}
 {% load photo_tags %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_PHOTOS_LABEL 'Photo' %} {% trans "Delete Page" %}</h1>
-    <div class="delete-prompt text-yellow-500">
+    <h1>{% firstof MODULE_PHOTOS_LABEL 'Photo' %} {% trans "Delete Page" %}</h1>
+    <div class="delete-prompt text-warning">
         {% trans "Are you sure you want to permanently delete this photo?" %}
     </div>
     <div class="info" style="margin: 10px 0px 10px 0px;">
@@ -16,7 +17,7 @@
     <div class="delete-form">
         <form name="photo-delete" method="POST" action="{% url "photo_destroy" photo.id %}">{% csrf_token %}
             <input type="hidden" name="action" value="delete">
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-red-100 bg-red-500 hover:bg-red-400" type="submit" name="submit" value="{% trans 'Confirm Delete' %}">
+            <input class="btn btn-danger" type="submit" name="submit" value="{% trans 'Confirm Delete' %}">
         </form>
     </div>
 </div>

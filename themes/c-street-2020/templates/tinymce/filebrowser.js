@@ -2,6 +2,7 @@ function tendenciFileManager(field_name, url, type, win) {
 	var app_label = tinymce.activeEditor.settings.storme_app_label;
 	var model = tinymce.activeEditor.settings.storme_model;
 	var object_id = tinymce.activeEditor.settings.app_instance_id;
+	
  	var filebrowser = "/files/tinymce-fb/";
 	filebrowser += (filebrowser.indexOf("?") < 0) ? "?type=" + type : "&type=" + type;
 	if (app_label){
@@ -13,6 +14,7 @@ function tendenciFileManager(field_name, url, type, win) {
 	if (object_id){
 		filebrowser += "&object_id=" + object_id;
 	}
+	
 	var title = (type == 'image') ? 'Image ' : 'File ';
 	title += 'Gallery | Tendenci';
 	tinymce.activeEditor.windowManager.open({

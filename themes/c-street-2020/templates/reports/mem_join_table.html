@@ -1,4 +1,5 @@
-<table class="w-full max-w-full mb-4 bg-transparent table-striped table-bordered table-hover table-condensed">
+
+<table class="table table-striped table-bordered table-hover table-condensed">
     <tr style="font-size: .9em;">
         <th>{% trans "#" %}</th>
         <th>{% trans "First Name" %}</th>
@@ -12,6 +13,7 @@
         <th>{% trans "Status" %}</th>
     </tr>
     {% for mem in mems %}
+
     {% if mem.is_active %}
         <tr class="success">
     {% elif mem.is_pending %}

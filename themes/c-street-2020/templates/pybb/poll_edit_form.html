@@ -12,6 +12,7 @@
     {% endfor %}
   {{ pollformset.management_form }}
 </div>
+
 <script type="text/javascript">
   window.onload = function () {
     $('div#poll-answers-formset div.poll-answer-form').formset({
@@ -19,6 +20,7 @@
       addText:'{% trans 'add answer' %}',
       prefix: 'poll_answers'
     });
+
     var toggle_poll_answers_formset = function (poll_type) {
       if (poll_type === "0") {
         $('div#poll-answers-formset').hide();
@@ -28,6 +30,7 @@
         $('div#poll-question').show();
       }
     };
+
     $('#id_poll_type').each(function () {
       toggle_poll_answers_formset($(this).val());
     }).on("change", function () {

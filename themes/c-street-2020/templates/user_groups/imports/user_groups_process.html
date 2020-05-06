@@ -3,14 +3,17 @@
 {% load base_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{% firstof MODULE_EVENTS_LABEL_PLURAL trans 'User Groups' %} {% trans "Import" %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/usergroups.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-<h1 class="text-xl font-semibold">{% trans "Import Groups Process" %}</h1>
+<h1>{% trans "Import Groups Process" %}</h1>
 <div class="imports">
 {% if import_i.status == "pending" %}
 {% trans "We're not done yet! This page will be updated as your groups are imported." %}
@@ -28,6 +31,7 @@
 </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 {% if import_i.status == "pending" %}

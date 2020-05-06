@@ -3,41 +3,50 @@
 {% load tagging_tags %}
 {% load base_tags %}
 {% load category_tags %}
+
 {% block title %}{{ block.super }} {% endblock %}
 {% block meta_description %} {% endblock %}
 {% block meta_keywords %} {% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 <link rel="stylesheet" href="{% static 'css/events-day-view.css' %}">
 <link type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 {% endblock %}
+
 {% block content %}
+
 <div class="day-view">
     <h2>{{ date|date:"l, F j Y" }}</h2>
-    <div class="relative inline-flex align-middle py-1 px-2 text-sm leading-tight mb-1" role="group" aria-label="Events Views">
-      <a href="{% url "event.month" %}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400">{% trans "Month View" %}</a>
-      <a href="{% url "event.week" %}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400">{% trans "Week View" %}</a>
-      <a href="{% url "event.today" %}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-grey-100 bg-gray-500 hover:bg-grey-400">{% trans "Day View" %}</a>
-      <a href="{% url "event.search" %}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400">{% trans "List/Search" %}</a>
-      <a href="{% url "event.ics" %}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400">{% trans "Download" %}</a>
+
+    <div class="btn-group btn-group-sm mb-1" role="group" aria-label="Events Views">
+      <a href="{% url "event.month" %}" class="btn btn-primary">{% trans "Month View" %}</a>
+      <a href="{% url "event.week" %}" class="btn btn-primary">{% trans "Week View" %}</a>
+      <a href="{% url "event.today" %}" class="btn btn-secondary">{% trans "Day View" %}</a>
+      <a href="{% url "event.search" %}" class="btn btn-primary">{% trans "List/Search" %}</a>
+      <a href="{% url "event.ics" %}" class="btn btn-primary">{% trans "Download" %}</a>
     </div>
+
 <form class="search-form" action="{% url "event.today" %}" method="get">
+
 <div class="form-field clearfix">
     <div class="id_start_dt">
             <div class="label">
                 <label for="today_date">{% trans 'Event List for' %} </label>
                 <input style="width: 70px;" type="text" class="datepicker" name="today_date" value="{{ date|date:"Y-m-d" }}" />
-                <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal " type="submit" value="Jump to Date" />
+                <input class="btn" type="submit" value="Jump to Date" />
             </div>
      </div>
 </div>
 </form>
+
 <form class="search-form" action="" method="get">
     {{ form.search_category }}
     {{ form.q }}
-    <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal " type="submit" value="{% trans 'Search' %}" />
+    <input class="btn" type="submit" value="{% trans 'Search' %}" />
 </form>
+
     <div class="days-nav">
         <div class="yesterday-link">
             <a href="{{ yesterday_url }}">&laquo; {{ yesterday|date:"SHORT_DATE_FORMAT" }}</a>
@@ -47,6 +56,7 @@
         </div>
         <div style="clear: both;"></div>
     </div>
+
     {% event_list date type 'single_day' as events %}
     {% for event in events %}
         <div class="event-wrap" itemscope itemtype="https://schema.org/Event">
@@ -75,7 +85,9 @@
             {% endif %}
             </div>
             <div class="event-info">
+
                 <div class="options">{% event_options user event %}</div>
+
                 <h3>{% if event.priority %}
                         <div class="event-priority"></div>
                     {% endif %}
@@ -84,13 +96,18 @@
                 <div class="description" itemprop="description">
                 {{ event.description|safe }}
                 </div>
+
                 {% if event.registration_configuration.enabled %}
+
                     {% if now > event.end_dt or now > event.registration_configuration.end_dt %}
+
                     <div class="attend-wrap closed">
                         <div class="attend"><a href="">{% trans "Registration Closed" %}</a></div>
                         <div style="clear:both;"></div>
                     </div>
+
                     {% else %}
+
                     {% is_registered_user user event as registered_user %}
                     {% if registered_user %}
                     <div class="attend-wrap registered">
@@ -103,10 +120,14 @@
                         <div style="clear:both;"></div>
                     </div>
                     {% endif %}
+
                     {% endif %}
+
                 {% endif %}
+
             </div>
             <div style="clear:both;"></div>
+
             <!-- delete-event form -->
             <form name="event-delete" method="POST" action="{% url "event.delete" event.pk %}">{% csrf_token %}
                 <input type="hidden" name="action" value="delete">
@@ -119,6 +140,7 @@
             {% endcomment %}
         </div>
     {% endfor %}
+
     {% if events %}
     <div class="days-nav">
         <div class="yesterday-link">
@@ -130,8 +152,11 @@
         <div style="clear: both;"></div>
     </div>
     {% endif %}
+
 </div>
+
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript">

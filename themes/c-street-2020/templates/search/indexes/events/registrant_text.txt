@@ -13,16 +13,20 @@
 {{ entry.label }}:{{ entry.value }}
 {% endfor %}
 {% endif %}
+
 {% if object.cancel_dt %}
 is:canceled
 is:cancelled
 {% else %}
 is:active
 {% endif %}
+
 {% if object.registration.invoice.balance <= 0 %}
 is:paid
 {% else %}
 is:non-paid
 {% endif %}
+
 hash:{{ object.hash }}
+
 is:registrant

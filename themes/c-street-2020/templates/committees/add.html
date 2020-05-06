@@ -2,35 +2,44 @@
 {% load committee_tags %}
 {% load perm_tags %}
 {% load styled_forms %}
+
 {% block title %}{% firstof MODULE_COMMITTEES_LABEL 'Committee' %} Add{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'chosen/chosen.css' %}">
 {% endblock %}
+
 {% block content %}
+
 <div class="page-header">
-  <h1 class="text-xl font-semibold">{% firstof MODULE_COMMITTEES_LABEL trans 'Committee' %} {% trans "Add" %}</h1>
+  <h1>{% firstof MODULE_COMMITTEES_LABEL trans 'Committee' %} {% trans "Add" %}</h1>
 </div>
+
   <div class="clearfix">
      <form class="form-horizontal" action="{% url "committees.add" %}" method="post" enctype="multipart/form-data">{% csrf_token %}
           {% committee_form form formset %}
-    <fieldset class="boxy-gray-500" >
+
+    <fieldset class="boxy-grey" >
                <legend id="category-title" style="cursor: pointer"><span>+</span> {% trans "Category" %}</legend>
                <div id="category-form">
                    {{ categoryform|styled_form }}
                </div>
            </fieldset>
-    <fieldset class="boxy-gray-500">
+    <fieldset class="boxy-grey">
                <legend id="meta-title" style="cursor: pointer"><span>+</span> {% trans "SEO Meta" %}</legend>
                <div id="meta-form">
                    {{ metaform|styled_form }}
                </div>
            </fieldset>
-         <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" type="submit" value="Add {% firstof MODULE_COMMITTEE_LABEL 'Committee' %}" />
+
+         <input class="btn btn-default" type="submit" value="Add {% firstof MODULE_COMMITTEE_LABEL 'Committee' %}" />
+       
        </form>
     <br />
   </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     {{ form.media }}

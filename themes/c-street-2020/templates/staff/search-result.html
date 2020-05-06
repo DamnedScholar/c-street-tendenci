@@ -2,14 +2,16 @@
 {% load pagination_tags %}
 {% load staff_tags %}
 {% load perm_tags %}
+
 <div class="wrap-search-item">
+  
   <div class="panel panel-default">
     <div class="panel-body">
       <div class="search-item staff-item">
         {% for img in staff.stafffile_set.all %}
         {% if img.photo_type == "featured" %}
         <div class="member-photo">
-          <div class="md:w-1/6 pr-4 pl-42 member-photo-thumb">
+          <div class="col-md-12 member-photo-thumb">
             <a href="{{ staff.get_absolute_url }}"><img alt="Contact {{ staff.name }}" class="img-responsive" src="{% url "file" img.pk %}" /></a>
           </div>
         </div>
@@ -23,6 +25,9 @@
         </div>
       </div><!-- /staff-item -->
     </div>
+    
     {% include 'staff/meta.html' %}
+    
   </div> <!-- end: panel-default -->
+  
 </div> <!-- end: wrap -->

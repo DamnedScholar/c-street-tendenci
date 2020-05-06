@@ -2,10 +2,12 @@
 {% load base_filters %}
 {% load corporate_memberships_tags %}
 {% load styled_forms %}
+
 {% block title %}{% endblock %}
 {% block meta_description %}{% endblock %}
 {% block meta_keywords %}{% endblock %}
 {% block meta_canonical_url %}<link rel="canonical" href="" />{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -61,20 +63,25 @@
     }
 </style>
 {% endblock %}
+
 {% block content %}
 <div class="t">
 <div class="application-form-wrap">
-        <h1 class="text-xl font-semibold">{% trans "Edit Corporate Membership" %}</h1>
+        <h1>{% trans "Edit Corporate Membership" %}</h1>
         {{ app.description|safe }}
+
    <form id="t-corp-form" class="form-horizontal clearfix" action="" enctype="multipart/form-data" method="post">{% csrf_token %}
+
     {% if corpmembership_form.errors.values %}
         <div class="form-errors">
+
             {% trans 'There were some problems in the form. Please review. Thanks!' %}
             {% if corpmembership_form.errors.values %}
             {% for error in corpmembership_form.non_field_errors %}
                 <p><a href="#">{{ error }}</a></p>
             {% endfor %}
             {% endif %}
+
             {% for field in corpmembership_form %}
                 {% if field.errors %}
                       {% for error in field.errors %}
@@ -84,20 +91,26 @@
                       {% endfor %}
                 {% endif %}
             {% endfor %}
+
         </div>
   {% endif %}
+
        {% for field_obj in app_fields %}
             {% render_corpmembership_field request field_obj corpprofile_form corpmembership_form %}
         {% endfor %}
-        <div class="mb-4">
-            <div class=":flex-growsm-offset-3 sm:w-3/4 pr-4 pl-4">
-                <button type="submit" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400">{% trans "Submit" %}</button>
+
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-primary">{% trans "Submit" %}</button>
             </div>
         </div>
     </form>
+
 </div>
 </div>
 {% endblock %}
+
+
 {% block extra_body %}
     {{ block.super }}
       <script type="text/javascript"

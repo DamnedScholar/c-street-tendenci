@@ -1,6 +1,8 @@
 {% load base_filters %}
+
 {%if job_pricings %}
-    <table class="job-pricing-rate w-full max-w-full mb-4 bg-transparent table-bordered">
+    <table class="job-pricing-rate table table-bordered">
+
     {% if show_member_price %}
         <tr class="header-row">
         <td>&nbsp;</td>
@@ -8,6 +10,7 @@
         <td colspan="2">{% trans "Member" %}</td>
         </tr>
     {% endif %}
+
     <tr class="header-row">
     <td>{% trans "Title" %}</td>
     <td>{% trans "Duration" %}</td>
@@ -27,7 +30,7 @@
     {% endif %}
     </tr>
     {% for jp in job_pricings %}
-        <tr class="{% cycle 'flex flex-wrap1' 'row2' %}">
+        <tr class="{% cycle 'row1' 'row2' %}">
             <td>{{ jp.get_title }}</td>
             <td>{% blocktrans count jp.duration as jp_duration %}{{ jp_duration  }} day{% plural %}{{ jp_duration  }} days{% endblocktrans %}</td>
             {% if show_premium_price %}
@@ -45,6 +48,7 @@
                 {% endif %}
             {% endif %}
         </tr>
+
     {%endfor%}
     </table>
 {%endif%}

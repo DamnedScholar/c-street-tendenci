@@ -4,12 +4,17 @@
 {% load perm_tags %}
 {% load base_tags %}
 {% load base_filters %}
+
+
 {% block title %}{% trans 'Dashboard' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 {% endblock %}
+
 {% block content %}
+
 {% has_perm user events.view_event as view_events %}
 {% has_perm user articles.view_article as view_articles %}
 {% has_perm user jobs.view_job as view_jobs %}
@@ -31,12 +36,14 @@
 {% has_perm user eventlogs.view_setting as view_settings %}
 {% has_perm user forms.view_form as view_forms %}
 {% has_perm user resumes.view_reume as view_resumes %}
+
 <div class="main-panel">
+
     {% if "Self-Signup" == SITE_DEVELOPER_PARTNER|join:"" %}
         {% if user.is_superuser %}
             {% if not has_paid and activate_url %}
-            <div class=" alert-message block-message opacity-0 in" data-alert="relative px-3 py-3 mb-4 border rounded">
-                <a class="absolute top-0 bottom-0 right-0 px-4 py-3" href="#">×</a>
+            <div class=" alert-message block-message fade in" data-alert="alert">
+                <a class="close" href="#">×</a>
                 {% if expired %}
                     {% blocktrans with dt=expiration_dt %}
                     Your free trial period expired on {{ expiration_dt }}.
@@ -47,43 +54,55 @@
                     {% endblocktrans %}
                 {% endif %}
                 <div class="alert-actions">
-                    <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal " href="{{ activate_url }}">{% trans 'Activate Your Account' %}</a>
+                    <a class="btn" href="{{ activate_url }}">{% trans 'Activate Your Account' %}</a>
                 </div>
             </div>
             {% endif %}
-        <div class="alert-message block-message opacity-0 in success" data-alert="relative px-3 py-3 mb-4 border rounded">
-        <a class="absolute top-0 bottom-0 right-0 px-4 py-3" href="#">×</a>
+
+
+        <div class="alert-message block-message fade in success" data-alert="alert">
+        <a class="close" href="#">×</a>
         <p><strong>{% trans 'Welcome to the Tendenci Dashboard!' %}</strong></p>
         <p>{% trans 'Your Tendenci site comes with a built-in guide to get you started. In includes basic concepts like adding pages and other content, editing your navigation, uploading photos, and other general topics.' %}</p>
         <div class="alert-actions">
-            <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal " href="{% url "tendenci_guide.guide_page" "getting-started-with-tendenci" %}">{% trans 'Go to the Guide' %}</a>
+            <a class="btn" href="{% url "tendenci_guide.guide_page" "getting-started-with-tendenci" %}">{% trans 'Go to the Guide' %}</a>
         </div>
     </div>
+
         {% endif %}
     {% endif %}
+
     <div class="modules">
-    <ul class="list-disc pl-4">
+    <ul>
+
         {% if MODULE_USERS_ENABLED %}
         <li class="users"><a href="{% url "profile.search" %}"><span>{% trans "Users" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_GROUPS_ENABLED %}
         <li class="groups"><a href="{% url "group.search" %}"><span>{% trans "Groups" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_ARTICLES_ENABLED %}
         <li class="articles"><a href="{% url "article.search" %}"><span>{% trans "Articles" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_NEWS_ENABLED %}
         <li class="news"><a href="{% url "news.search" %}"><span>{%  trans "News" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_DIRECTORIES_ENABLED %}
         <li class="directories"><a href="{% url "directory.search" %}"><span>{% trans "Directories" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_JOBS_ENABLED %}
         <li class="jobs"><a href="{% url "job.search" %}"><span>{%  trans "Jobs" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_RESUMES_ENABLED %}
         <li class="resumes"><a href="{% url "resume.search" %}"><span>{%  trans "Resumes" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_MEMBERSHIPS_ENABLED %}
         <li class="memberships">
             <a href="{% url "membership.search" %}"><span>{%  trans "Memberships" %}</span></a></li>
@@ -92,33 +111,43 @@
         <li class="corporatememberships">
             <a href="{% url "corpmembership.search" %}"><span>{% trans "Corp. Memb." %}</span></a></li>
         {% endif %}
+
         {% if MODULE_EVENTS_ENABLED %}
         <li class="events"><a href="{% url "event.month" %}"><span>{% trans "Events" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_PHOTOS_ENABLED %}
         <li class="photo-albums"><a href="{% url 'photoset_latest' %}"><span>{% trans "Photo Albums" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_STORIES_ENABLED %}
         <li class="stories"><a href="{% url "story.search" %}"><span>{% trans "Stories" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_PAGES_ENABLED %}
         <li class="pages"><a href="{% url "page.search" %}"><span>{% trans "Pages" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_FILES_ENABLED %}
         <li class="files"><a href="{% url "file.search" %}"><span>{% trans "Files" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_LOCATIONS_ENABLED %}
         <li class="locations"><a href="{% url "location.search" %}"><span>{%  trans "Locations" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_CONTRIBUTIONS_ENABLED %}
         <li class="contributions"><a href="{% url "contribution.search" %}"><span>{% trans "Contributions" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_INVOICES_ENABLED %}
          <li class="invoices"><a href="{% url "invoice.search" %}"><span>{%  trans "Invoices" %}</span></a></li>
         {% endif %}
+
         {% if MODULE_FORMS_ENABLED %}
          <li class="forms"><a href="{% url 'forms' %}"><span>{%  trans "Forms" %}</span></a></li>
         {% endif %}
+
         {% if user.is_superuser %}
          <li class="redirects"><a href="{% url 'redirects' %}"><span>{% trans "Redirects" %}</span></a></li>
         <li class="contacts"><a href="{% url "contact.search" %}"><span>{%  trans "Contacts" %}</span></a></li>
@@ -126,23 +155,27 @@
         <li class="event-logs"><a href="{% url 'event_logs' %}"><span>{% trans "Event Logs" %}</span></a></li>
         <li class="rss"><a href="/rss/"><span>RSS</span></a></li>
         {% endif %}
+
         <div style="clear: both"><!-- IE7 --></div>
     </ul>
     </div> <!-- modules -->
+
+
     <div class="rss-feeds">
         <div class="rss-feed">
             <h3>{% trans "Tendenci Blog" %}</h3>
-            <ul class="list-disc pl-4">
+            <ul>
             <li>
                 <a href="https://blog.tendenci.com/">{% trans 'View latest posts' %}</a>
             </li>
         </ul>
         </div>
+
         <div class="rss-feed">
             <h3>{% trans "Tendenci Help" %}</h3>
             {% cache 14400 tendenci_help_rss %}
                 {% get_rss "https://www.tendenci.com/help-files/feed/" as tendencihelprss %}
-                <ul class="list-disc pl-4">
+                <ul>
                 {% for entry in tendencihelprss.entries|slice:":3" %}
                     <li>
                         <div class="rss-title"><a href="{{ entry.link }}">
@@ -155,16 +188,21 @@
             {% endcache %}
         </div>
     </div>
+
 </div> <!-- main-panel -->
+
+
 <div class="side-panel">
     {% if user.is_superuser %}
     <div class="admin-quick-links">
     <h3>{% trans "Admin Quick Links" %}</h3>
-    <ul class="list-disc pl-4">
+    <ul>
         {% if MODULE_PAGES_ENABLED %}
         <li><a href="{% url "page.add" %}">{% trans "Add a page" %}</a></li>
         {% endif %}
+
         <li><a href="{% url 'haystack_search' %}">{% trans "Search All Modules" %}</a></li>
+
         <!--<li><a href="{% url "entity.search" %}">Search entities</a></li>
         <li><a href="javascript:;">Edit navigation</a></li>
         <li><a href="{% url "event_log.search" %}">Search event logs</a></li>
@@ -181,9 +219,10 @@
         {% endif %}
     </ul>
     </div>
+
     <div class="theme-management">
     <h3>{% trans "Update Theme" %}</h3>
-    <ul class="list-disc pl-4">
+    <ul>
         <li><a href="{% url "theme_editor.editor" %}?file=media/css/styles.css">{% trans "Update Styles" %}</a></li>
         <li><a href="{% url "theme_editor.editor" %}?file=templates/homepage.html">{% trans "Update Template" %} </a></li>
         <li><a href="{% url "theme_editor.editor" %}?file=templates/nav.html">{% trans "Update Navigation" %}</a></li>
@@ -191,7 +230,10 @@
         <li><a href="/settings/module/theme/">{% trans "Theme Settings" %}</a></li>
     </ul>
     </div>
+
     {% endif %}
 </div>
+
 <div style="clear:both;"></div>
+
 {% endblock %}

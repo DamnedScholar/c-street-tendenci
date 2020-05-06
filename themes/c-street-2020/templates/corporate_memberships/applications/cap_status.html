@@ -1,11 +1,13 @@
 {% extends "corporate_memberships/base-wide.html" %}
 {% load base_filters %}
+
 {% block content %}
 <div class="t">
 <div class="application-form-wrap">
-    <h1 class="text-xl font-semibold">{% trans "Memberships Cap Status" %}</h1>
+    <h1>{% trans "Memberships Cap Status" %}</h1>
+
     {% if corp_memberships %}
-    <table class="w-full max-w-full mb-4 bg-transparent table-striped">
+    <table class="table table-striped">
         <tr>
             <th width="20%">{% trans 'Corporate Name' %}</th>
             <th width="20%">{% trans 'Membership Type' %}</th>

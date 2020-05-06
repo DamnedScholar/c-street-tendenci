@@ -1,26 +1,35 @@
 {% extends "files/base.html" %}
+
 {% load file_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }}{% trans 'Edit' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/files.css' %}">
 <script type="text/javascript" src="{{ TINYMCE_JS_URL }}"></script>
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% trans "File Edit" %}</h1>
+    <h1>{% trans "File Edit" %}</h1>
+
     <div class="forms">
         <form action="{% url "file.edit" file.pk %}" method="post" enctype="multipart/form-data">{% csrf_token %}
             {{ form|styled_form }}
-            <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit" value="{% trans 'Save changes' %}" />
+            <input class="btn btn-primary" type="submit" value="{% trans 'Save changes' %}" />
         </form>
     </div>
+
     <div class="loading-message">
         <img src="{% static 'images/loadingicon.gif' %}" alt="{% trans 'loading' %}" title="{% trans 'loading' %}" />
     </div>
+
 </div>
+
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript" src="{% static 'js/jquery-blockUI.js' %}"></script>

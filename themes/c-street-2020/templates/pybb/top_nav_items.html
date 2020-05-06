@@ -1,7 +1,10 @@
 {% load base_tags %}
 {% load perm_tags %}
+
+
 {% has_perm user site_settings.change_setting as can_edit_setting %}
 {% has_perm user forums.add_forum as can_add_forum %}
+
 {% if app_object %}
     {% has_perm user forums.view_forum app_object as can_view_forum %}
     {% has_perm user forums.change_forum app_object as can_edit_forum %}
@@ -10,16 +13,19 @@
     {% has_perm user forums.view_forum as can_view_forum %}
     {% has_perm user forums.change_forum as can_edit_forum  %}
 {% endif %}
-<ul id="t-admin-megamenu-forums-dd" class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded" role="menu">
+
+
+<ul id="t-admin-megamenu-forums-dd" class="dropdown-menu" role="menu">
     <li>
         <div class="yamm-content content-dropdown">
-            <div class="flex flex-wrap">
-                <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+            <div class="row">
+                <ul class="list-unstyled content-dropdown-col col-sm-12 col-xs-12">
                     {% if app_object %}
                         <li>
                             <span class="content-head text-content-head">{% trans "All" %} {% trans "Forums" %}</span>
                         </li>
                     {% endif %}
+
                     {% if can_edit_setting %}
                         <li class="content-item">
                             <span class="app-name">
@@ -27,11 +33,13 @@
                             </span>
                         </li>
                     {% endif %}
+
                     <li class="content-item">
                         <span class="app-name">
                             <a href="{% url 'pybb:index' %}">{% trans "Forums List" %}</a>
                         </span>
                     </li>
+
                     {% if can_add_forum %}
                         <li class="content-item">
                             <span class="app-name">
@@ -44,13 +52,16 @@
                             </span>
                         </li>
                     {% endif %}
+                   
                 </ul>
+
                 {% if app_object %}
                     {% if can_view_forum or can_edit_forum %}
-                        <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                        <ul class="list-unstyled content-dropdown-col col-sm-12 col-xs-12">
                             <li>
                                 <span class="content-head text-content-head">{% trans "This Forum" %}</span>
                             </li>
+
                             {% if can_view_forum %}
                                 <li class="content-item">
                                     <span class="app-name">
@@ -58,8 +69,11 @@
                                     </span>
                                 </li>
                             {% endif %}
+
+
                             {% if can_delete_forum %}
                                 <li class="divider"></li>
+
                                 <li class="content-item">
                                     <span class="app-name">
                                         <a class="delete" href="{% url 'admin:forums_forum_delete' app_object.pk %}">{% trans "Delete Forum" %}</a>

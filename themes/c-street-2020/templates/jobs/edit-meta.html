@@ -1,15 +1,19 @@
 {% extends "jobs/base.html" %}
 {% load job_tags %}
 {% load styled_forms %}
+
 {% block title %}{{ block.super }}{% trans 'Edit Meta Information' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
-    <h1 class="text-xl font-semibold">{% firstof MODULE_JOBS_LABEL trans 'Job' %} {% blocktrans with job.title as job_title %} Meta Information for<br />
+    <h1>{% firstof MODULE_JOBS_LABEL trans 'Job' %} {% blocktrans with job.title as job_title %} Meta Information for<br />
     {{ job_title }}{% endblocktrans %}</h1>
+
     <div class="job-wrap">
         <div class="options">
              <div class="quick-options">
@@ -26,6 +30,7 @@
     </div>
 </div>
 {% endblock %}
+
 {% block extra_body %}
     {{ block.super }}
     <script type="text/javascript">

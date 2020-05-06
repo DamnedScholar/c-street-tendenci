@@ -1,8 +1,11 @@
 {% extends 'pybb/base.html' %}
+
 {% load pybb_tags %}
+
 {% block title %}{% trans "Profile editing" %}{% endblock title %}
+
 {% block content %}
-    <h1 class="text-xl font-semibold">{% trans "Profile editing" %}</h1>
+    <h1>{% trans "Profile editing" %}</h1>
     {% include 'pybb/avatar.html' with user=user %}
     <form method="post" enctype="multipart/form-data" class="profile-edit">
         {% csrf_token %}
@@ -12,8 +15,8 @@
             <p>{% include "pybb/_button_save.html" %}</p>
         </fieldset>
     </form>
-    <h1 class="text-xl font-semibold">{% trans "Subscriptions on topics" %}</h1>
-    <ul class="list-disc pl-4">
+    <h1>{% trans "Subscriptions on topics" %}</h1>
+    <ul>
         {% for sub in user.subscriptions.all %}
             <li>
                 {% pybb_link sub %}

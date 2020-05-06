@@ -1,14 +1,17 @@
 {% extends "stories/base.html" %}
 {% load base_tags %}
+
 {% block title %}{% trans "Delete Discount" %} {{ discount.discount_code }}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/delete.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
     <div class="discount-wrap">
-        <h1 class="text-xl font-semibold">{% trans "Delete a Discount" %}</h1>
+        <h1>{% trans "Delete a Discount" %}</h1>
         <div class="content">
         <h2>{{ discount.discount_code }}</h2>
         </div>

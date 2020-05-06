@@ -1,13 +1,16 @@
+
 {% comment %}
 TODO : delete this template in the next major release
 This template will not exist anymore in the next release. Please do not use it.
 See docs about PYBB_MARKUP_ENGINES_PATHS setting and pybb.markup.bbcode.py
 {% endcomment %}
+
 <script type="text/javascript" src="{% static 'markitup/ajax_csrf.js' %}"></script>
 <script type="text/javascript" src="{% static 'markitup/jquery.markitup.js' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'markitup/skins/simple/style.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'markitup/sets/{{ PYBB_MARKUP }}/style.css' %}">
 <script type="text/javascript" src="{% static 'markitup/sets/{{ PYBB_MARKUP }}/set.js' %}"></script>
+
 <script type="text/javascript">
 $(function() {
     mySettings['previewParserPath'] = '{% url 'pybb:post_ajax_preview' %}';
@@ -33,6 +36,7 @@ $(function() {
         {name:'{% trans 'Preview' %}', className:"preview", call:'preview' }
     ];
     $('textarea:not([class="no-markitup"])').markItUp(mySettings);
+
     $('#emoticons a').on("click", function() {
         var emoticon = $(this).attr("title");
         $.markItUp({replaceWith: emoticon});

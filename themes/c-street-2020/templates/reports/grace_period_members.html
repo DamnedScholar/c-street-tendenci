@@ -1,8 +1,10 @@
 {% extends "reports/base.html" %}
 {% load reports_tags %}
+
 {% block content %}
-<h1 class="text-xl font-semibold">{% trans "Members in Grace Period" %}</h1>
+<h1>{% trans "Members in Grace Period" %}</h1>
 <div class="mems-wrap stat-table">
+
 {% if members %}
 <p>{% trans "These members are past their expiration dates, but still in the grace period defined in their membership types." %}
     <table>

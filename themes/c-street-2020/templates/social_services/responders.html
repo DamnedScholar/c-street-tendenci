@@ -1,16 +1,20 @@
 {% extends "social_services/base-wide.html" %}
 {% load pagination_tags %}
 {% load social_services_tags %}
+
 {% block title %}{{ block.super }}{% trans 'Responders List' %}{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/profiles.css' %}">
 <link rel="stylesheet" href="{% static 'css/social_services.css' %}" />
 <link rel="stylesheet" href="{% static 'css/jquery.jqplot.min.css' %}" />
 {% endblock %}
+
 {% block content %}
 <div class="social-services-wrap t">
     <h1 class="capitalize">{% trans "responders list" %}</h1>
+
     <div class="clearfix">
     <div id="emergency-chart" style="height:300px;width:300px; "></div>
     <div id="transpo-chart" style="height:300px;width:300px; "></div>
@@ -19,6 +23,7 @@
     <div id="education-chart" style="height:300px;width:300px; "></div>
     <div id="military-chart" style="height:300px;width:300px; "></div>
     </div>
+
     {% if lon and lat %}
     <form action='' method='get'>
         <p>Showing responders within
@@ -36,15 +41,19 @@
     {% else %}
         <p>{% trans 'Showing all reponders' %}</p>
     {% endif %}
+
     {% autopaginate responders 20 %}
+
     <div class="profiles-wrap">
     {% for responder in responders %}
         {% profile_result responder.user.profile %}
     {% endfor %}
     </div>
+
     {% paginate %}
 </div>
 {% endblock %}
+
 {% block extra_body %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'js/jquery.jqplot.min.js' %}"></script>

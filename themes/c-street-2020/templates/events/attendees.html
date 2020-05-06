@@ -7,21 +7,25 @@
 {% load category_tags %}
 {% load humanize %}
 {% load profile_tags %}
+
+
 {% block title %}{{ block.super }}{{ event.get_title }}{% endblock %}
 {% block meta_description %}{{ event.get_description }}{% endblock %}
 {% block meta_keywords %}{{ event.get_keywords }}{% endblock %}
 {% block meta_canonical_url %}<link rel="canonical" href="{{ event.get_canonical_url }}" />{% endblock %}
+
 {% block extra_head %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
 <link rel="stylesheet" href="{% static 'css/events-attendees.css' %}">
 <link rel="stylesheet" href="{% static 'css/tipsy.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="t">
     <div class="event-wrap">
         <div class="info">
-            <h1 class="text-xl font-semibold">{{ event.title }}</h1>
+            <h1>{{ event.title }}</h1>
             <div class="event-date">
                 {% for span in event.date_spans %}
                     {% if span.same_date %}
@@ -41,15 +45,16 @@
                     {% endif %}
                 {% endfor %}
             </div>
+
             <div class="registration-info">
                 {% if is_registrant %}
                     <div class="registration-notice"><a href="{% url "event.registrant.search" event.pk %}?q={{ user.email }}">{% trans "You are already registered for this event" %}</a></div>
                 {% else %}
                     {% if reg_ended %}
-                        <div class="registration-red-500">{% trans "We are unable to register you for this event as the event deadline has already passed" %}</div>
+                        <div class="registration-red">{% trans "We are unable to register you for this event as the event deadline has already passed" %}</div>
                     {% else %}
                         {% if not reg_started %}
-                            <div class="registration-red-500">
+                            <div class="registration-red">
                                 <div>{% trans "Registration starts on " %}</div>
                                 <div><strong>{{ earliest_time }}</strong></div>
                             </div>
@@ -66,6 +71,8 @@
                 {% endif %}
                 </div>
             </div>
+
+
             <div class="attendees-wrap">
                 <div class="attendees-header">
                     <h2>{{ event.registrants|length }} {% trans "Attendee" %}{{ event.registrants.count|pluralize }}</h2>

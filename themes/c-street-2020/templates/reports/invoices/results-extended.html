@@ -1,5 +1,6 @@
 {% load base_filters %}
-<div class="flex flex-wrap invoice-resultset">
+
+<div class="row invoice-resultset">
     <div class="span6">
         <h2>{% trans 'Totals' %}</h2>
         <table>
@@ -37,10 +38,12 @@
         </ol>
     </div>
 </div>
+
 {% for item in results %}
-<div class="flex flex-wrap invoice-resultset{% if forloop.last %} last{% endif %}">
+<div class="row invoice-resultset{% if forloop.last %} last{% endif %}">
     <div class="span12">
         <h3 id="app-{{ forloop.counter }}">{{ forloop.counter }}. {{ item.object_type }} <a class="back-to-top no-print" href="#top">{% trans 'Back to Top' %}</a></h3>
+
         <table class="">
             <tr>
                 <th>{% trans 'Count' %}</th>
@@ -55,7 +58,9 @@
                 <th>{{ item.balance__sum|format_currency }}</th>
             </tr>
         </table>
+
         <p>{% blocktrans with t=item.object_type %}Invoices for {{ t }} sorted by Date{% endblocktrans %}</p>
+
         <table class="invoice-list">
             <tr>
                 <th title="Invoice ID">{% trans 'Inv. ID' %}</th>
@@ -85,9 +90,12 @@
                 <td>
                     {% if invoice.get_object.event.pk %}
                     <a href="{% url 'event' invoice.get_object.event.pk %}">{{ invoice.get_object.event.pk }}</a> - {{ invoice.get_object.event.title|truncatewords:"3" }}
+
                     {% elif invoice.get_object.membership_type %}
                     {{ invoice.get_object.membership_type }}
+
                     {% elif invoice.title %}{{ invoice.title }}{% endif %}</td>
+
                 {% with payment=invoice.get_first_approved_payment %}
                 <td class="inv-payment-id">
                     {% if payment %}
@@ -97,6 +105,7 @@
                 <td class="inv-payer">{{ payment.first_name }} {{ payment.last_name }}</td>
                 <td class="inv-transaction-id">{{ payment.trans_id }}</td>
                 {% endwith %}
+
                 <td class="inv-total">{{ invoice.total|format_currency }}</td>
                 <td class="inv-payments-credits">
                     {{ invoice.payments_credits|format_currency }}</td>
@@ -128,4 +137,6 @@
         </table>
     </div> <!-- /.span12 -->
 </div>
+
+
 {% endfor %}
