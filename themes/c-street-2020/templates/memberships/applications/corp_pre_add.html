@@ -1,0 +1,27 @@
+{% extends "memberships/base.html" %}
+{% load styled_forms %}
+{% block title %}{% endblock %}
+{% block meta_description %}{% endblock %}
+{% block meta_keywords %}{% endblock %}
+{% block meta_canonical_url %}<link rel="canonical" href="" />{% endblock %}
+{% block extra_head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/memberships.css' %}">
+{% endblock %}
+{% block content %}
+<div class="t">
+    <h2>{{ app.name }}</h2>
+    <p>{{ app.description|safe }}</p>
+     <form method="post">{% csrf_token %}
+         {{ form|styled_form }}
+         {% if 'username' in request.GET %}
+         <input name="username" type="hidden" value="{{ request.GET.username }}">
+         {% endif %}
+        <div class="mb-4">
+            <div class=":flex-growsm-offset-3 sm:w-3/4 pr-4 pl-4">
+                <button class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit">{% trans 'Submit' %} &raquo;</button>
+         </div>
+         </div>
+     </form>
+</div>
+{% endblock %}

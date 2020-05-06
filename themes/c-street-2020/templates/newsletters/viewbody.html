@@ -1,0 +1,2 @@
+{% load email_filters %}
+{{ email.body|relative_to_absolute_urls|safe }}

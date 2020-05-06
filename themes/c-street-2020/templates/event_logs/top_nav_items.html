@@ -1,0 +1,28 @@
+{% load base_tags %}
+{% load perm_tags %}
+{% has_perm user site_settings.change_setting as can_edit_setting %}
+{% if app_object %}
+    {% has_perm user event_log.view_eventlog app_object as can_view_el %}
+{% else %}
+    {% has_perm user event_log.view_eventlog as can_view_el %}
+{% endif %}
+<ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+    <li>
+        <div class="yamm-content custom-yamm-content content-dropdown">
+            <div class="flex flex-wrap">
+                <ul class="list-unstyled content-dropdown sm:w-1/2 pr-4 pl-4 sm:w-1/6 pr-4 pl-42">
+                    <li class="content-item">
+                        <span class="app-name">
+                            <a href="{% url 'event_log.search' %}">{% trans "Search" %}</a>
+                        </span>
+                    </li>
+                    <li class="content-item">
+                        <span class="app-name">
+                            <a href="{% url 'event_log.info' %}">{% trans "Info List" %}</a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </li>
+</ul>

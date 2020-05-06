@@ -1,0 +1,14 @@
+{% if SITE_GLOBAL_SEARCHINDEX %}
+<form id="t-{{ module_name }}-search-form" class="flex items-center t-search-form" action="{{ form_action }}" method="get" role="search">
+  <div class="mb-4">
+    <div class="relative flex items-stretch w-full">
+      <input class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-800 border border-gray-500 rounded" style="float: left; width:80%;"   type="text" name="q" value="{{ request.GET.q|striptags }}" placeholder="Search" />
+      <button class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  btn-default" style="float: left; width:20%;"   type="submit">
+        <i class="glyphicon glyphicon-search"></i>
+      </button>
+    </div>
+    <div class="clearfix"></div>
+ </div>
+</form>
+<br />
+{% endif %}

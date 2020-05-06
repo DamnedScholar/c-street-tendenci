@@ -1,0 +1,13 @@
+{% load base_tags %}
+{% load perm_tags %}
+{% has_perm user navs.change_nav opt_object as can_edit %}
+{% has_perm user navs.delete_nav opt_object as can_delete %}
+<div class="t-iconflex flex-wrap">
+    {% if can_edit %}
+        <a class="option-link edit" href="{% url "flex flex-wrap list-reset pl-0 mb-0s.edit" opt_object.pk %}">{% trans "Edit" %}</a>
+        <a class="option-link edit" href="{% url "flex flex-wrap list-reset pl-0 mb-0s.edit_items" opt_object.pk %}">{% trans "Edit Nav Items" %}</a>
+    {% endif %}
+    {% if can_delete %}
+        <a class="option-link delete" href="{% url "flex flex-wrap list-reset pl-0 mb-0s.delete" opt_object.pk %}">{% trans "Delete" %}</a>
+    {% endif %}
+</div>

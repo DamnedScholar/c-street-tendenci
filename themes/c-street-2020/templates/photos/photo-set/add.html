@@ -1,0 +1,19 @@
+{% extends "photos/base-wide.html" %}
+{% load styled_forms %}
+{% load photo_tags %}
+{% block title %}{% blocktrans %}Add Photo Set{% endblocktrans %}{% endblock %}
+{% block content %}
+    <h1 class="text-xl font-semibold">{{ MODULE_PHOTOS_LABEL }} {% trans 'Set Add' %}</h1>
+    <div class="forms">
+    <form method="POST" class="form-horizontal" action="">{% csrf_token %}
+        {{ photoset_form|styled_form }}
+        <input type="hidden" name="action" value="add" />
+        <input class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400" type="submit" value="{% trans 'Add' %}"/>
+    </form>
+    </div>
+    <br />
+{% endblock %}
+{% block extra_body %}
+    {{ block.super }}
+    {% include 'tags/autocomplete.html' %}
+{% endblock %}

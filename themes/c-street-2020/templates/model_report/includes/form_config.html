@@ -1,0 +1,10 @@
+{% if form_config %}
+    <div class="sm:w-1/6 pr-4 pl-42 md:w-1/4 pr-4 pl-4">
+    {% with form_config as form %}
+        <fieldset>
+            <legend>{% trans "Config chart by" %}</legend>
+            {% include "model_report/includes/form_fields.html" %}
+        </fieldset>
+    {% endwith %}
+    </div>
+{% endif %}

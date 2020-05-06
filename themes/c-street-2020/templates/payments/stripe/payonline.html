@@ -1,0 +1,75 @@
+{% extends "payments/base.html" %}
+{% load payments_tags %}
+{% load base_filters %}
+{% load styled_forms %}
+{% block extra_head %}
+{{ block.super }}
+<script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+<link rel="stylesheet" href="{% static 'css/stripe.css' %}">
+{% endblock %}
+{% block content %}
+<div class="well basic-info">
+  <div>{% trans 'Invoice #' %}: {{ payment.invoice.id }}</div>
+  <div>{% trans 'Description' %}: {{ payment.description }}</div>
+  <div id="total-amount">{% trans 'Total' %}: {{ payment.amount|format_currency }}</div>
+</div>
+<div class="forms">
+{% if billing_info_form.errors.values %}
+    <div class="errors">
+        <ul class="list-disc pl-4">
+            {{ billing_info_form.non_field_errors }}
+            {% for field in billing_info_form %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                    <li>{{ field.label_tag }}  &ndash; {{ error }}</li>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+<p>{% trans 'Please fill out the fields below' %}</p>
+<form action="" method="POST" id="payment-form" class="form-horizontal">{% csrf_token %}
+  <h3>{% trans 'Payment Information' %}</h3>
+    <div class="mb-4">
+        <label for="card-element" class="sm:w-1/4 pr-4 pl-4 control-label">
+          Credit or debit card:
+        </label>
+        <div id="card-element" class="sm:w-3/4 pr-4 pl-4">
+          <!-- a Stripe Element will be inserted here. -->
+        </div>
+        <br />
+        <div id="card-errors"  class=":flex-growsm-offset-3 sm:w-3/4 pr-4 pl-4" role="relative px-3 py-3 mb-4 border rounded"></div>
+    </div>
+    <div class="mb-4">
+        <label for="id_card_name" class="required sm:w-1/4 pr-4 pl-4  control-label">{% trans 'Name on relative flex flex-col min-w-0 rounded break-words border bg-white border-1 border-grey-light' %}:</label>
+        <div class="sm:w-3/4 pr-4 pl-4">
+        <input class="card-name block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-grey-800 border border-gray-500 rounded" id="id_card_name" maxlength="100" type="text">
+        <span class="error text-red-500">{{ form.card_name.errors }}</span>
+        </div>
+    </div>
+    <h3>Billing Information</h3>
+    {% for field in billing_info_form %}
+     <div class="mb-4">
+        <label for="id_{{ field.name }}" class="{% if field.field.required %}required {% endif %}sm:w-1/4 pr-4 pl-4 control-label">{{ field.label }}:</label>
+        <div class=":flex-growsm-{% if field.field.width %}{{ field.field.width }}{% else %}9{% endif %}">
+          {{ field }}
+          <span class="error text-red-500">{{ field.errors }}</span>
+        </div>
+    </div>
+    {% endfor %}
+    <div class=":flex-growsm-offset-3 sm:w-3/4 pr-4 pl-4">
+    <button type="submit" class="submit-button inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  text-blue-100 bg-blue-500 hover:bg-blue-400">{% trans 'Submit Payment' %}</button>
+     </div>
+    <div class=":flex-growsm-offset-3 sm:w-3/4 pr-4 pl-4" id="submit-loader" style="font-style:italic; font-size:0.9em; margin-top: 1em; display:none;">
+      <img src="{% static 'images/ajax-loader.gif' %}" alt="{% trans 'loading' %}" title="{% trans 'loading' %}"/> {% trans 'loading...' %}
+    </div>
+</form>
+</div>
+<p>&nbsp;</p>
+{% endblock %}
+{% block extra_body %}
+    {{ block.super }}
+{% set_stripe_key %}
+<script type="text/javascript" src="{% static 'js/stripe_payment.js' %}"></script>
+{% endblock %}

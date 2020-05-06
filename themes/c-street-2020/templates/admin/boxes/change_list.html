@@ -1,0 +1,12 @@
+{% extends 'django_admin_bootstrapped:admin/change_list.html' %}
+{% load admin_urls admin_list bootstrapped_goodies_tags %}
+{% block object-tools-items %}
+{{ block.super }}
+{% if request.user.is_superuser %}
+<li>
+    <a href="{% url 'boxes.export' %}" class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap py-2 px-4 rounded text-base leading-normal  font-normal blue bg-transparent" role="button">
+        {% blocktrans with cl.opts.verbose_name_plural as name %}Export {{ name }}{% endblocktrans %}
+    </a>
+</li>
+{% endif %}
+{% endblock %}

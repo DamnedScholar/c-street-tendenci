@@ -1,0 +1,32 @@
+{% load base_tags %}
+{% load perm_tags %}
+{% has_perm user site_settings.change_setting as can_edit_setting %}
+{% if nav_object %}
+    {% has_perm user event_log.view_eventlog nav_object as can_view_el %}
+{% else %}
+    {% has_perm user event_log.view_eventlog as can_view_el %}
+{% endif %}
+{% if not SITE_GLOBAL_HIDEALLTABS %}
+<ul id="module-tabs" class="tabs">
+    {% if user.is_authenticated and not SITE_GLOBAL_HIDETENDENCITABS %}
+    <li class="relative" data-dropdown="dropdown">
+        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative">{% trans "Tendenci" %}</a>
+        <ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+            <a href="{% url "dashboard" %}" title="{% trans 'Tendenci Home Page' %}">{% trans "Dashboard" %}</a>
+            <li><a href="{% url "profile.index" %}">{% trans "My Profile" %}</a></li>
+            <li><a href="{% url "auth_logout" %}">{% trans "Log Off" %}</a></li>
+        </ul>
+    </li>
+    {% endif %}
+    <li class="relative active" data-dropdown="dropdown">
+        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative">{% firstof MODULE_EVENT_LOGS_LABEL trans 'Event Logs' %}</a>
+        <ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+            <li><a href="{% url "event_log.search" %}">{% trans "Search" %}</a></li>
+            <li><a href="{% url "event_log.info" %}">{% trans "Info List" %}</a></li>
+        </ul>
+    </li>
+    {% if MODULE_USERS_ENABLED %}
+    <li><a href="{% url "profile.search" %}">{% firstof MODULE_USERS_LABEL 'Users' %}</a></li>
+    {% endif %}
+</ul>
+{% endif %}

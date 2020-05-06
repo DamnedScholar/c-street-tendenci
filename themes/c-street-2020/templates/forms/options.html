@@ -1,0 +1,36 @@
+{% load base_tags %}
+{% load perm_tags %}
+{% has_perm user forms.change_form opt_object as can_edit %}
+{% has_perm user forms.delete_form opt_object as can_delete %}
+{% has_perm user forms.add_form as can_add %}
+{% if can_edit %}
+    <nav class="flex flex-wrap list-none p-0 pl-0 mb-0bar-default t-meta-editor-bar">
+        <div class="container mx-auto mx-auto">
+            <div class="flex-growlapse flex flex-wrap list-none p-0 pl-0 mb-0bar-collapse">
+                <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 t-meta-options-links">
+                    <li>{{ opt_object.obj_perms }}</li>
+                    <li>{{ opt_object.obj_status }}</li>
+                </ul>
+                <ul class="flex flex-wrap list-reset pl-0 mb-0 flex flex-wrap list-none p-0 pl-0 mb-0 navbar-right t-meta-options-links">
+                    <li class="relative">
+                        <a href="#" class=" inline-block w-0 h-0 ml-1 align border-b-0 border-t-1 border-r-1 border-l-1" data-toggle="relative" role="button" aria-expanded="false">{% spaceless %}
+                            {% trans "Options" %} <span class="caret"></span>
+                        {% endspaceless %}</a>
+                        <ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded" role="menu">
+                          <li><a class="edit-link" href="{% url "admin:forms_form_change" opt_object.pk %}">{% trans "Edit" %}</a></li>
+					      <li><a href="{% url "admin:forms_form_change" opt_object.pk %}">{% trans "Edit Fields" %}</a></li>
+					      <li><a href="{% url 'form_entries' opt_object.pk %}">{% trans "Entries" %}</a></li>
+					      <li><a href="{% url "admin:forms_form_export" opt_object.pk %}">{% trans "Export Entries" %}</a></li>
+					      {% if can_add %}
+					      <li><a href="{% url 'form_copy' opt_object.pk %}">{% trans "Copy" %}</a></li>
+					      {% endif %}
+					      {% if can_delete %}
+					      <li><a href="{% url 'form_delete' opt_object.pk %}">{% trans "Delete" %}</a></li>
+					      {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endif %}

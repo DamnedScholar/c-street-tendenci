@@ -1,0 +1,47 @@
+{% load base_tags %}
+{% load perm_tags %}
+{% has_perm user site_settings.change_setting as can_edit_setting %}
+{% has_perm user files.add_file as can_add_file %}
+<ul class=" absolute left-0 z-50 float-left hidden list-none p-0	 py-2 mt-1 text-base bg-white border border-grey-400 rounded">
+    <li>
+        <div class="yamm-content custom-yamm-content content-dropdown">
+            <div class="flex flex-wrap">
+                <ul class="list-unstyled content-dropdown-col sm:w-1/6 pr-4 pl-42 sm:w-1/6 pr-4 pl-42">
+                    {% if can_edit_setting %}
+                        <li class="content-item">
+                            <span class="app-name">
+                                <a href="{% url 'settings.index' 'module' 'files' %}">{% trans "Settings" %}</a>
+                            </span>
+                        </li>
+                    {% endif %}
+                    <li class="content-item">
+                        <span class="app-name">
+                            <a href="{% url 'files' %}">{% trans 'File List' %}</a>
+                        </span>
+                    </li>
+                    {% if can_add_file %}
+                        <li class="content-item">
+                            <span class="app-name">
+                                <a href="{% url 'file.add' %}">{% trans 'Add a File' %}</a>
+                            </span>
+                        </li>
+                     	{% if user.profile.is_superuser %} 
+                        <li class="content-item">
+                            <span class="app-name">
+                                <a href="{% url 'admin:multiplefile_add' %}">{% trans 'Multiple File Upload' %}</a>
+                            </span>
+                        </li>
+						{% endif %}
+                    {% endif %}
+                    {% if user.profile.is_staff %}
+                        <li class="content-item">
+                            <span class="app-name">
+                                <a href="{% url 'file.report_most_viewed' %}">{% trans 'Most Viewed' %}</a>
+                            </span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </li>
+</ul>
