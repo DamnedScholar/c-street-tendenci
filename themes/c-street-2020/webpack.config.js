@@ -25,6 +25,7 @@ module.exports = {
     },
     {
       test: /\.s[a]ss$/i,
+      resourceQuery: /tailwind/,
       type: 'asset/resource',
       use: [
         {
@@ -43,16 +44,16 @@ module.exports = {
         filename: '../css/[name].css'
       }
     },
-    // {
-    //   test: /\.s[a]ss$/i,
-    //   type: 'asset/resource',
-    //   use: [
-    //     "sass-loader"
-    //   ],
-    //   generator: {
-    //     filename: '../css/[name].css'
-    //   }
-    // },
+    {
+      test: /\.s[a]ss$/i,
+      type: 'asset/resource',
+      use: [
+        "sass-loader"
+      ],
+      generator: {
+        filename: '../css/[name].css'
+      }
+    },
     {
       test: /heroes\/.*\.(jpe?g|png)$/i,
       loader: 'responsive-loader',
