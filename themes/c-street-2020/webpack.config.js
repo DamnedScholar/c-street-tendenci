@@ -23,27 +23,27 @@ module.exports = {
         }
       }
     },
-    {
-      test: /\.s[a]ss$/i,
-      resourceQuery: /tailwind/,
-      type: 'asset/resource',
-      use: [
-        {
-          loader: 'postcss-loader',
-          options: {
-            ident: 'postcss',
-            plugins: [
-              require('tailwindcss'),
-              require('autoprefixer'),
-            ],
-          }
-        },
-        'sass-loader'
-      ],
-      generator: {
-        filename: '../css/[name].css'
-      }
-    },
+    // {
+    //   test: /\.s[a]ss$/i,
+    //   resourceQuery: /tailwind/,
+    //   type: 'asset/resource',
+    //   use: [
+    //     {
+    //       loader: 'postcss-loader',
+    //       options: {
+    //         ident: 'postcss',
+    //         plugins: [
+    //           require('tailwindcss'),
+    //           require('autoprefixer'),
+    //         ],
+    //       }
+    //     },
+    //     'sass-loader'
+    //   ],
+    //   generator: {
+    //     filename: '../css/[name].css'
+    //   }
+    // },
     {
       test: /\.s[a]ss$/i,
       type: 'asset/resource',
