@@ -16,6 +16,10 @@ require('./styles/tailwind.sass?tailwind')
 // window.jQuery = $
 // window.$ = $
 
+// Start bootstrap
+
+bs
+
 // Start StimulusJS
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
