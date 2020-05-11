@@ -1,6 +1,6 @@
 // Importing styles
 require('./styles-bs/base.sass')
-// require('./styles/tailwind.sass?tailwind')
+require('./styles/tailwind.sass?tailwind')
 
 // Importing JQuery and Lodash
 // const $ = require('jquery')

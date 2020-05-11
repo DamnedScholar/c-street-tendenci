@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   mode: "production",
@@ -26,23 +27,30 @@ module.exports = {
     // {
     //   test: /\.s[a]ss$/i,
     //   resourceQuery: /tailwind/,
-    //   type: 'asset/resource',
     //   use: [
+    //     {
+    //       loader: MiniCssExtractPlugin.loader,
+    //       options: {
+    //         publicPath: '../css/',
+    //       },
+    //     },
+    //     {
+    //       loader: 'css-loader',
+    //       // options: { importLoaders: 1 }
+    //     },
     //     {
     //       loader: 'postcss-loader',
     //       options: {
     //         ident: 'postcss',
     //         plugins: [
+    //           require('postcss-import'),
     //           require('tailwindcss'),
     //           require('autoprefixer'),
     //         ],
     //       }
     //     },
     //     'sass-loader'
-    //   ],
-    //   generator: {
-    //     filename: '../css/[name].css'
-    //   }
+    //   ]
     // },
     {
       test: /\.s[a]ss$/i,
@@ -68,6 +76,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
