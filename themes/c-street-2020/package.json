@@ -6,7 +6,8 @@
   "author": "Holland Wilson",
   "license": "MIT",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "tw": "tailwindcss build src/styles-tw/tailwind.css -o media/css/tailwind.css"
   },
   "dependencies": {
     "@babel/preset-env": "^7.9.5",

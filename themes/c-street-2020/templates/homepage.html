@@ -13,6 +13,7 @@
    =========================================================== -->
 {% load base_filters %}
 {% load base_tags %}
+{% load nav_tags %}
 {% load theme_tags %}
 {% load story_tags %}
 {% load box_tags %}
@@ -44,6 +45,9 @@
   data-image-h="300">
     <img src="{% static 'img/Streetscape.jpg' %}" alt="An image of Commercial Street, looking east from Boonville.">
   </div>
+
+  <h1 id="hero-text">Six Blocks of Fun</h1>
+  <nav id="hero-nav">{% nav 4 %}</nav>
 </div>
 <!-- end: header -->
 <div id="page-top-home" role="main">
