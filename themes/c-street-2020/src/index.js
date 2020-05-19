@@ -2,14 +2,8 @@
 require('./styles-bs/base.sass')
 // require('./styles-tw/tailwind.sass?tailwind')
 
-// Importing JQuery and Lodash
-// const $ = require('jquery')
-// const jQuery = require('jquery')
-// const _ = require('lodash')
-//
-// // Importing Bootstrap and FontAwesome
-// const bs = require('bootstrap')
-// const fa = require('@fortawesome/fontawesome-pro')
+// Importing Focuspoint
+require('jquery-focuspoint')
 
 // For Bootstrap compatibility, jQuery needs to be attached to `window`
 // jquery = $

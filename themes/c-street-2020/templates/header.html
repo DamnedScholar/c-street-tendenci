@@ -4,9 +4,9 @@
 {% load theme_tags %}
 
 <!-- start: navbar outer -->
-<nav id="site-navbar" class="navbar fixed-top navbar-expand-lg navbar-expand-md justify-content-between align-items-start">
+<nav id="site-nav" class="navbar fixed-top navbar-expand-lg navbar-expand-md justify-content-between align-items-start">
 <!-- logo -->
-  <div class="navbar-brand col-2" href="/">
+  <div class="relative lg:w-24 lg:h-24 sm:w-16 sm:h-16" href="/">
     <svg id="brand-background" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <radialGradient id="radial" fx="50%" fy="50%" cx="50%" cy="50%" r="50%">
@@ -19,7 +19,10 @@
       </defs>
       <circle fill="url(#radial)"/>
     </svg>
-    {% box 1 %}
+    <div class="absolute p-1">
+      <!-- Padding makes the logo fit inside the SVG background -->
+      <a href="/"><img class="" src="themes/c-street-2020/media/img/logo.png" alt="" /></a>
+    </div>
   </div>
 <!-- responsive btn -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navTop" aria-controls="navTop" aria-expanded="false" aria-label="Toggle navigation">

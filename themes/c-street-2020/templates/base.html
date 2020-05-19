@@ -37,7 +37,7 @@ Fork us at github.com/tendenci  -->
     <link rel="search" type="application/opensearchdescription+xml" title="{{ SITE_GLOBAL_SITEDISPLAYNAME }}" href="{{ SITE_GLOBAL_SITEURL }}{% url 'open_search' %}">
 
     {% block jquery_script %}
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
     {% endblock jquery_script %}
 
@@ -76,7 +76,7 @@ Fork us at github.com/tendenci  -->
 
     <!-- Custom styles for this template
     =========================================================== -->
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600;700&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600;700&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/tailwind.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
 
@@ -145,12 +145,15 @@ Fork us at github.com/tendenci  -->
 
     <script type="text/javascript">
       jQuery(document).ready(function () {
-      jQuery('#t-megamenu-lang-dd a').on("click", function (e) {
-      var lang = jQuery(this).data('lang');
-      jQuery('#t-megamenu-lang-input').attr('value', lang);
-      jQuery('#t-megamenu-lang-form').submit();
-      });
-      jQuery('body').css('margin-top', jQuery('#t-admin-megamenu').outerHeight(true) + 'px' );
+        jQuery('#t-megamenu-lang-dd a').on("click", function (e) {
+        var lang = jQuery(this).data('lang');
+        jQuery('#t-megamenu-lang-input').attr('value', lang);
+        jQuery('#t-megamenu-lang-form').submit();
+        });
+        jQuery('#site-nav').css('margin-top', jQuery('#t-admin-megamenu').outerHeight(true) + 'px' );
+
+        // Start Focuspoint
+        $('.focuspoint').focusPoint();
       });
     </script>
 

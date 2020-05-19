@@ -3,3 +3,110 @@
 @tailwind components;
 
 @tailwind utilities;
+
+div.focuspoint {
+  position: absolute;
+  @apply w-full h-full;
+}
+
+.nav-icon {
+  @apply w-4 h-4 inline-block;
+}
+
+.hero {
+  @apply w-full max-h-screen flex flex-col items-center justify-center relative;
+}
+
+#hero-title {
+  @apply font-serif font-bold text-gray-300 z-10;
+}
+#hero-nav ul {
+  @apply flex-row flex-wrap justify-center;
+}
+#hero-nav ul.flex>li:not(:first-child) {
+  @apply ml-8;
+}
+#hero-nav .btn {
+  @apply bg-green text-gray-900;
+}
+#site-nav ul.flex>li:not(:first-child) {
+  @apply ml-6;
+}
+#site-nav .dropdown-menu {
+  min-width: max-content;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  padding: 0;
+  margin: .125rem 0 0;
+  font-size: .875rem;
+  color: #465966;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(38,49,56,0.15);
+  border-radius: .25rem;
+}
+#site-nav .dropdown-menu.show {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .hero {
+    @apply h-96;
+  }
+  #hero-title {
+    @apply text-4xl;
+  }
+  #hero-nav .btn {
+    @apply text-sm py-1 px-2;
+  }
+  #hero-nav ul.flex>li:not(:first-child) {
+    @apply ml-4;
+  }
+
+  .t-admin-inline {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .hero {
+    @apply h-128;
+  }
+  #hero-title {
+    @apply text-6xl;
+  }
+  #hero-nav .btn {
+    @apply text-lg py-3 px-5;
+  }
+  #hero-nav ul.flex>li:not(:first-child) {
+    @apply ml-6;
+  }
+
+  #t-admin-megamenu .nav-label {
+    display: none;
+  }
+  .t-admin-inline {
+    display: none;
+  }
+}
+@media (min-width: 1024px) {
+  .hero {
+    @apply h-screen;
+  }
+  #hero-title {
+    @apply text-title;
+  }
+  #hero-nav .btn {
+    @apply text-xl py-5 px-8;
+  }
+}
+@media (orientation:landscape) {
+  .hero {
+    @apply h-screen;
+  }
+}

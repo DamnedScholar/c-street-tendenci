@@ -6,10 +6,10 @@ module.exports = {
   separator: ':',
   theme: {
     screens: {
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1280px',
+      'sm': {'max': '767px'},
+      'md': {'min': '768px'},
+      'lg': {'min': '1024px'},
+      'xl': {'min': '1280px'},
     },
     colors: {
       transparent: 'transparent',
@@ -60,6 +60,8 @@ module.exports = {
       '48': '12rem',
       '56': '14rem',
       '64': '16rem',
+      '96': '24rem',
+      '128': '32rem',
     },
     backgroundColor: theme => theme('colors'),
     backgroundOpacity: theme => theme('opacity'),
@@ -142,9 +144,9 @@ module.exports = {
       default: '1',
     },
     fontFamily: {
-      sans: ['Lato'],
-      serif: ['Ovo'],
-      mono: ['Inconsolata'],
+      sans: ['Lato', 'sans-serif'],
+      serif: ['Crimson Text', 'serif'],
+      mono: ['Inconsolata', 'monospace'],
     },
     fontSize: {
       xs: '0.75rem',
@@ -157,6 +159,7 @@ module.exports = {
       '4xl': '2.25rem',
       '5xl': '3rem',
       '6xl': '4rem',
+      'title': '4rem',
     },
     fontWeight: {
       hairline: '100',
