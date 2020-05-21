@@ -9,6 +9,11 @@ module.exports = {
     path: __dirname + '/media/js',
     filename: "[name].js"
   },
+  // devServer: {
+  //   contentBase: path.join(__dirname, 'mock'),
+  //   compress: true,
+  //   port: 9000
+  // },
   experiments: {
     asset: true
   },
@@ -51,6 +56,14 @@ module.exports = {
     //     },
     //     'sass-loader'
     //   ]
+    // },
+    // {
+    //   test: /\.css$/i,
+    //   type: 'asset/resource',
+    //   resourceQuery: /tailwind/,
+    //   generator: {
+    //     filename: '../css/[name].css'
+    //   }
     // },
     {
       test: /\.s[a]ss$/i,

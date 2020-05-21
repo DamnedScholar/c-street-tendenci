@@ -10977,8 +10977,12 @@ div.focuspoint {
     margin-left: 1rem;
   }
 
+  #t-admin-megamenu .nav-label {
+    display: none !important;
+  }
+
   .t-admin-inline {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -11004,11 +11008,15 @@ div.focuspoint {
   }
 
   #t-admin-megamenu .nav-label {
-    display: none;
+    display: none !important;
   }
 
   .t-admin-inline {
-    display: none;
+    display: none !important;
+  }
+
+  #site-footer {
+    display: none !important;
   }
 }
 

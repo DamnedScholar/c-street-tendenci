@@ -1,6 +1,6 @@
 // Importing styles
 require('./styles-bs/base.sass')
-// require('./styles-tw/tailwind.sass?tailwind')
+// require('./styles-tw/out/tailwind.css?tailwind')
 
 // Importing Focuspoint
 require('jquery-focuspoint')

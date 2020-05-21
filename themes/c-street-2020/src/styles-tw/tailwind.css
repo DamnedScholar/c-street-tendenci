@@ -55,6 +55,10 @@ div.focuspoint {
   display: block;
 }
 
+#site-footer {
+  overflow: hidden;
+}
+
 @media (max-width: 767px) {
   .hero {
     @apply h-96;
@@ -69,8 +73,14 @@ div.focuspoint {
     @apply ml-4;
   }
 
+  #t-admin-megamenu .nav-label {
+    display: none !important;
+  }
   .t-admin-inline {
-    display: none;
+    display: none !important;
+  }
+  #site-footer {
+    display: none !important;
   }
 }
 @media (min-width: 768px) {
@@ -88,10 +98,13 @@ div.focuspoint {
   }
 
   #t-admin-megamenu .nav-label {
-    display: none;
+    display: none !important;
   }
   .t-admin-inline {
-    display: none;
+    display: none !important;
+  }
+  #site-footer {
+    display: none !important;
   }
 }
 @media (min-width: 1024px) {
