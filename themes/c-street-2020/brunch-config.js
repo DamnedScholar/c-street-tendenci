@@ -3,7 +3,16 @@ exports.files = {
 };
 
 exports.paths = {
-  watched: [ "src/styles-tw/" ]
+  public: '.',
+  watched: [
+    "src/styles-tw/",
+    "mock/index.html",
+    "mock/files/"
+  ]
+}
+
+exports.server = {
+  run: true
 }
 
 exports.plugins = {
@@ -11,10 +20,17 @@ exports.plugins = {
     processors: [
       require('tailwindcss'),
       require('autoprefixer')(['last 8 versions']),
-      require('cssnano')()
+      // require('cssnano')()
     ]
   }
 };
+
+exports.hooks = {
+  onCompile: function(generatedFiles, changedAssets) {
+    JSON.stringify(generatedFiles)
+    JSON.stringify(changedAssets)
+  }
+}
 
 // exports.npm = {
 //   globals: {

@@ -29,6 +29,10 @@ div.focuspoint {
 #hero-nav .btn {
   @apply bg-green text-gray-900;
 }
+#site-nav .btn {
+  @apply bg-blue text-gray-200;
+  min-width: max-content;
+}
 #site-nav ul.flex>li:not(:first-child) {
   @apply ml-6;
 }
@@ -60,11 +64,20 @@ div.focuspoint {
 }
 
 @media (max-width: 767px) {
+  #site-nav .dropdown-menu {
+    @apply left-auto right-100 top-0;
+  }
+  #site-nav .btn {
+    @apply text-lg py-2 px-3;
+  }
+  #site-nav ul.flex>li:not(:first-child) {
+    @apply mt-4 ml-0;
+  }
   .hero {
     @apply h-96;
   }
   #hero-title {
-    @apply text-4xl;
+    @apply text-4xl max-w-sm;
   }
   #hero-nav .btn {
     @apply text-sm py-1 px-2;
@@ -84,14 +97,20 @@ div.focuspoint {
   }
 }
 @media (min-width: 768px) {
+  #site-nav .btn {
+    @apply text-base py-1 px-3;
+  }
+  #site-nav ul.flex>li:not(:first-child) {
+    @apply ml-2;
+  }
   .hero {
     @apply h-128;
   }
   #hero-title {
-    @apply text-6xl;
+    @apply text-6xl max-w-lg;
   }
   #hero-nav .btn {
-    @apply text-lg py-3 px-5;
+    @apply text-lg py-3 px-5 font-bold;
   }
   #hero-nav ul.flex>li:not(:first-child) {
     @apply ml-6;
@@ -108,14 +127,20 @@ div.focuspoint {
   }
 }
 @media (min-width: 1024px) {
+  #site-nav .btn {
+    @apply text-lg py-1 px-3;
+  }
+  #site-nav ul.flex>li:not(:first-child) {
+    @apply ml-6;
+  }
   .hero {
     @apply h-screen;
   }
   #hero-title {
-    @apply text-title;
+    @apply text-title max-w-5xl;
   }
   #hero-nav .btn {
-    @apply text-xl py-5 px-8;
+    @apply text-xl py-5 px-8 font-bold;
   }
 }
 @media (orientation:landscape) {

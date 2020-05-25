@@ -9,14 +9,10 @@ module.exports = {
     path: __dirname + '/media/js',
     filename: "[name].js"
   },
-  // devServer: {
-  //   contentBase: path.join(__dirname, 'mock'),
-  //   compress: true,
-  //   port: 9000
-  // },
   experiments: {
     asset: true
   },
+  devtool: "source-map",
   module: {
     rules: [{
       test: /\.js$/,
