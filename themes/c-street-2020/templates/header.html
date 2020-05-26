@@ -24,14 +24,17 @@
       <a href="/"><img class="" src="themes/c-street-2020/media/img/logo.png" alt="" /></a>
     </div>
   </div>
-<!-- responsive btn -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navTop" aria-controls="navTop" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-<!-- navigation -->
-  <div class="navbar-collapse col-6" id="navTop">
-    <!-- main nav -->
-    {% nav 1 %}
+  <div class="collapsable flex flex-col items-start" data-controller="dropdown" data-dropdown-class="sm:hidden">
+    <!-- responsive btn -->
+    <button class="btn btn-primary self-end lg:hidden md:hidden" type="button" data-action="click->dropdown#toggle click@window->dropdown#hide" aria-controls="navTop" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">
+        <i class="far fa-bars"></i>
+      </span>
+    </button>
+    <!-- navigation -->
+    <div class="sm:mt-2" id="navTop">
+      <!-- main nav -->
+      {% nav 1 %}
   </div>
 </nav>
 <!-- end: navbar outer -->

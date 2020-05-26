@@ -20,5 +20,8 @@ media
 node_modules
 themes/*/node_modules
 
+# ignore the symlink monstrosity I use to mock the site
+mock
+
 whoosh_index/*
 !whoosh_index/README

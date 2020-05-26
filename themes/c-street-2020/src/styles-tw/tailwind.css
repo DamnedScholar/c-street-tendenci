@@ -2,8 +2,6 @@
 
 @tailwind components;
 
-@tailwind utilities;
-
 div.focuspoint {
   position: absolute;
   @apply w-full h-full;
@@ -148,3 +146,5 @@ div.focuspoint {
     @apply h-screen;
   }
 }
+
+@tailwind utilities;

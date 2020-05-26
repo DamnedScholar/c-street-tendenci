@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <!-- Tendenci2020 Theme Powered by Tendenci — The Open Source AMS
+ ______                   __                                     ___       __       ___       __
+/\__  _\                 /\ \                         __       /'___`\   /'__`\   /'___`\   /'__`\
+\/_/\ \/    __    ___    \_\ \     __    ___     ___ /\_\     /\_\ /\ \ /\ \/\ \  /\_\ /\ \ /\ \/\ \
+   \ \ \  /'__`\/' _ `\  /'_` \  /'__`\/' _ `\  /'___\/\ \    \/_/// /__\ \ \ \ \ \/_/// /__\ \ \ \ \
+    \ \ \/\  __//\ \/\ \/\ \L\ \/\  __//\ \/\ \/\ \__/\ \ \      // /_\ \\ \ \_\ \   // /_\ \\ \ \_\ \
+     \ \_\ \____\ \_\ \_\ \___,_\ \____\ \_\ \_\ \____\\ \_\    /\______/ \ \____/  /\______/ \ \____/
+      \/_/\/____/\/_/\/_/\/__,_ /\/____/\/_/\/_/\/____/ \/_/    \/_____/   \/___/   \/_____/   \/___/
+Really, really, you're looking at our source code?  You're with us!  You like Open Source, join us!
+Fork us at github.com/tendenci  -->
+  <title>Tendenci | </title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="Tendenci, , " />
+  <meta name="generator" content="Tendenci" />
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="rss/">
+  <link rel="search" type="application/opensearchdescription+xml" title="Tendenci" href="https://www.eclectic-co.com/search/open-search/">
+  <script type="text/javascript" src="static/themes/t7-base/js/jquery-3.4.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
+  <link href="static/themes/t7-base/yamm/yamm.css" rel="stylesheet" type="text/css">
+  <link href="static/themes/t7-base/css/websymbols.css" rel="stylesheet" type="text/css">
+  <!-- Starts Tendenci Head Tag
+    =========================================================== -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- To change Bootswatch Theme, use this link
+    ============================================================================ -->
+  <!-- link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" type="text/css" -->
+    <!-- Custom styles for this template
+    =========================================================== -->
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600;700&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/ea5e0b7c05.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="themes/c-street-2020/media/css/base.css" type="text/css">
+  <link rel="stylesheet" href="themes/c-street-2020/media/css/tailwind.css" type="text/css">
+  <!-- Custom JS for this template
+    =========================================================== -->
+  <script type="text/javascript" src="themes/c-street-2020/media/js/main.js"></script>
+  <script type="text/javascript" src="themes/c-street-2020/media/utilities/jquery.focuspoint.min.js"></script>
+  <!-- FAVICON -->
+  <link rel="icon" type="image/png" sizes="16x16" href="static/themes/t7-base/images/favicon.ico">
+  <!-- Custom Fonts -->
+  <link rel="stylesheet" href="static/themes/t7-base/font-awesome/css/font-awesome.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre:300,400,700|Montserrat|Montserrat+Alternates:400,500" rel="stylesheet">
+</head>
+<body id="home" class="t-auth-admin-loggedin home">
+  <div id="t-admin-megamenu" class="navbar-inverse fixed-top navbar-expand-lg navbar-expand-md yamm t-megamenu" role="navigation">
+    <div class="container-fluid d-flex">
+      <div class="navbar-header">
+        <button id="t-admin-megamenu-toggle" class="navbar-toggle t-megamenu-toggle" type="button" data-toggle="collapse" data-target="#t-admin-megamenu-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="dashboard/" class="navbar-brand"><img src="static/themes/t7-base/images/tendenci_white_small_100x51.gif" class="nav-logo" height="24"></a>
+      </div>
+      <div id="t-admin-megamenu-collapse" class="navbar-collapse">
+        <ul class="flex flex-row">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/user_orange.png"><span class="nav-label">damnedscholar</span><span class="caret"></span>
+            </a>
+            <ul id="t-admin-megamenu-profile-dd" class="dropdown-menu profile-dropdown" role="menu">
+              <li>
+                <div class="yamm-content content-dropdown">
+                  <div class="row">
+                    <div class="col-sm-4 content-dropdown-col">
+                      <ul class="list-unstyled">
+                        <div class="profile-icon">
+                          <a href="profiles/damnedscholar/"><img src="/www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?d=https%3A%2F%2Fwww.eclectic-co.com%2Fstatic%2Fthemes%2Ft7-base%2Fimages%2Ficons%2Fdefault-user-80.jpg&amp;s=100" alt="damnedscholar"
+                              width="100" height="100" />
+                          </a>
+                        </div>
+                        <a class="update-avatar-link" href="/gravatar.com/">Update Photo</a>
+                      </ul>
+                    </div>
+                    <div class="col-sm-8 content-dropdown-col">
+                      <ul class="list-unstyled">
+                        <li class="content-head"><a href="profiles/">Welcome damnedscholar</a></li>
+                        <li class="content-item">
+                          <a href="profiles/">
+                            <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/user_orange.png"><span class="nav-label">Profile</span>
+                          </a>
+                        </li>
+                        <li class="content-item">
+                          <a href="invoices/search/?search_criteria=owner_id&search_text=2&search_method=exact"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/page_white_width.png" /><span class="nav-label">Invoices</span></a>
+                        </li>
+                        <li class="content-item">
+                          <a href="events/myevents/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/date.png" /><span class="nav-label">Events</span></a>
+                        </li>
+                        <li class="content-item">
+                          <a href="contributions/search/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/application.png" /><span class="nav-label">Content</span></a>
+                        </li>
+                        <li>
+                          <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/world.png" />
+                          <span class="nav-label">Language: English</span>
+                          <a href="#" data-toggle="modal" data-target="#myModalL">Change</a>
+                          <!-- Modal -->
+                          <div id="myModalL" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-sm">
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">Select a Language</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <ul id="t-megamenu-lang-dd">
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="af">Afrikaans (af)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ar">العربيّة (ar)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ast">asturianu (ast)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="az">Azərbaycanca (az)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="be">беларуская (be)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="bg">български (bg)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="bn">বাংলা (bn)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="br">brezhoneg (br)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="bs">bosanski (bs)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ca">català (ca)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="cs">česky (cs)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="cy">Cymraeg (cy)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="da">dansk (da)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="de">Deutsch (de)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="dsb">dolnoserbski (dsb)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="el">Ελληνικά (el)</a>
+                                    </li>
+                                    <li class="active">
+                                      <a href="javascript:void(0);" data-lang="en">English (en)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="en-au">Australian English (en-au)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="en-gb">British English (en-gb)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="eo">Esperanto (eo)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="es">español (es)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="es-ar">español de Argentina (es-ar)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="es-co">español de Colombia (es-co)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="es-mx">español de Mexico (es-mx)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="es-ni">español de Nicaragua (es-ni)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="es-ve">español de Venezuela (es-ve)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="et">eesti (et)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="eu">Basque (eu)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="fa">فارسی (fa)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="fi">suomi (fi)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="fr">français (fr)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="fy">frysk (fy)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ga">Gaeilge (ga)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="gd">Gàidhlig (gd)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="gl">galego (gl)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="he">Hebrew (he)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="he">Hebrew (he)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="hi">Hindi (hi)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="hr">Hrvatski (hr)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="hsb">hornjoserbsce (hsb)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="hu">Magyar (hu)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="hy">հայերեն (hy)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ia">Interlingua (ia)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="id">Bahasa Indonesia (id)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="io">ido (io)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="is">Íslenska (is)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="it">italiano (it)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ja">日本語 (ja)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ka">ქართული (ka)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="kab">taqbaylit (kab)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="kk">Қазақ (kk)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="km">Khmer (km)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="kn">Kannada (kn)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ko">한국어 (ko)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="lb">Lëtzebuergesch (lb)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="lt">Lietuviškai (lt)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="lv">latviešu (lv)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="mk">Македонски (mk)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ml">Malayalam (ml)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="mn">Mongolian (mn)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="mr">मराठी (mr)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="my">မြန်မာဘာသာ (my)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="nb">norsk (bokmål) (nb)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ne">नेपाली (ne)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="nl">Nederlands (nl)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="nn">norsk (nynorsk) (nn)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="os">Ирон (os)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="pa">Punjabi (pa)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="pl">polski (pl)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="pt">Português (pt)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="pt-br">Português Brasileiro (pt-br)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ro">Română (ro)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ru">Русский (ru)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="sk">Slovensky (sk)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="sl">Slovenščina (sl)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="sq">shqip (sq)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="sr">српски (sr)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="sr-latn">srpski (latinica) (sr-latn)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="sv">svenska (sv)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="sw">Kiswahili (sw)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ta">தமிழ் (ta)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="te">తెలుగు (te)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="th">ภาษาไทย (th)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="tl">Tagalog (tl)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="tl_PH">Tagalog (Philippines) (tl_PH)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="tr">Türkçe (tr)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="tt">Татарча (tt)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="udm">Удмурт (udm)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="uk">Українська (uk)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="ur">اردو (ur)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="vi">Tiếng Việt (vi)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="zh-hans">简体中文 (zh-hans)</a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0);" data-lang="zh-hant">繁體中文 (zh-hant)</a>
+                                    </li>
+                                  </ul>
+                                  <form id="t-megamenu-lang-form" class="hidden" action="/base/setlang/" method="post">
+                                    <input type="hidden" name="csrfmiddlewaretoken" value="ok6jffaLNPX02UHGrvAIBbd3PgIwmv4mUUxVWk9956U8fEW5yCRXNm4GUSxRpAPk">
+                                    <input id="t-megamenu-lang-input" name="language" type="hidden" value="en">
+                                  </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="content-item">
+                          <a href="accounts/logout/"><span class="glyph">&#88;</span><span class="nav-label">Logout</span></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/application.png" /><span class="nav-label">Community</span><span class="caret"></span>
+            </a>
+            <ul id="t-admin-megamenu-community-dd" class="dropdown-menu community-dropdown" role="menu">
+              <li>
+                <div class="yamm-content content-dropdown">
+                  <div class="row">
+                    <div class="col-sm-12 content-dropdown-col">
+                      <ul class="list-unstyled">
+                        <li class="content-item">
+                          <a href="profiles/search/">
+                            <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/arrow_join.png" /><span class="nav-label">Users</span>
+                          </a>
+                        </li>
+                        <li class="content-item">
+                          <a href="profiles/search/?member_only=on">
+                            <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/arrow_join.png" /><span class="nav-label">Members</span>
+                          </a>
+                        </li>
+                        <li class="content-item">
+                          <a href="admin/memberships/membershipdefault/">
+                            <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/arrow_join.png" /><span class="nav-label">Members (Admin)</span>
+                          </a>
+                        </li>
+                        <li class="content-item">
+                          <a href="corporatememberships/applications/search/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/user_suit.png" /><span class="nav-label">Corporate Members</span></a>
+                        </li>
+                        <li class="content-item">
+                          <a href="groups/">
+                            <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/group.png" /><span class="nav-label">Groups</span>
+                          </a>
+                        </li>
+                        <li class="content-item">
+                          <a href="committees/">
+                            <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/group_gear.png" /><span class="nav-label">Committees</span>
+                          </a>
+                        </li>
+                        <li class="content-item">
+                          <a href="forums/">
+                            <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/comments.png" /><span class="nav-label">Forums</span>
+                          </a>
+                        </li>
+                        <li class="content-item">
+                          <a href="users/reports/admin/">
+                            <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/wand.png" /><span class="nav-label">Superusers</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/application_view_tile.png" /><span class="nav-label">Apps</span>
+              <span class="caret"></span>
+            </a>
+            <ul id="t-admin-megamenu-apps-dd" class="dropdown-menu apps-dropdown" role="menu">
+              <li>
+                <div class="yamm-content content-dropdown">
+                  <div class="row">
+                    <div class="col-sm-12 content-dropdown-col">
+                      <div id="accordion" class="panel-group" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="headingZero">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseZero">1. Admin</a>
+                            </h4>
+                          </div>
+                          <div id="collapseZero" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingZero">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="admin/">
+                                      <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/house.png" /><span class="nav-label">Admin Backend</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/reports/overview/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/report.png" /><span class="nav-label">Reports</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="base/apps-list/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/application_view_list.png" /><span class="nav-label">App List</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="dashboard/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/controller.png" /><span class="nav-label">Dashboard</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="settings/site/global/">
+                                      <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/wrench.png"><span class="nav-label">Site Settings</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="settings/">
+                                      <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/wrench.png" /><span class="nav-label">Full Settings</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="explorer/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/application.png" /><span class="nav-label">Database Export</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="theme-editor/editor/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/layout_edit.png" /><span class="nav-label">Theme Editor</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">2. Content</a>
+                            </h4>
+                          </div>
+                          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="pages/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/page_white_stack.png" /><span class="nav-label">Pages</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="stories/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/book_open.png" /><span class="nav-label">Stories</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="news/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/newspaper.png" /><span class="nav-label">News</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="articles/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/page_green.png" /><span class="nav-label">Articles</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="forms/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/application_form.png" /><span class="nav-label">Forms</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="files/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/folder.png" /><span class="nav-label">File</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="directories/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/folder_page_white.png" /><span class="nav-label">Directories</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="jobs/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/briefcase.png" /><span class="nav-label">Jobs</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="resumes/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/page_attach.png" /><span class="nav-label">Resumes</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="help-files/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/help.png" /><span class="nav-label">Help Files</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="testimonials/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/thumb_up.png" /><span class="nav-label">Testimonials</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">3. Events</a>
+                            </h4>
+                          </div>
+                          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="events/month/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/calendar.png" /><span class="nav-label">Calendar</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="events/search/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/date.png" /><span class="nav-label">Events List</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="events/reports/financial/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/report.png" /><span class="nav-label">Reports</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="speakers/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/user_suit.png" /><span class="nav-label">Speakers</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">4. Member Engagement</a>
+                            </h4>
+                          </div>
+                          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="photos/set/latest/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/photos.png" /><span class="nav-label">Photo Album</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="videos/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/camera.png" /><span class="nav-label">Video</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="newsletters/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/email_go.png" /><span class="nav-label">Newsletters</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="admin/announcements/">
+                                      <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/bell.png" /><span class="nav-label">Announcements</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="forums/">
+                                      <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/comments.png" /><span class="nav-label">Forums</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="headingFour">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">5. Organization</a>
+                            </h4>
+                          </div>
+                          <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="staff/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/drive_user.png" /><span class="nav-label">Staff</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="study-groups/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/group_go.png" /><span class="nav-label">Study Groups</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="admin/entities/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/world_link.png" /><span class="nav-label">Entities</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="committees/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/group.png" /><span class="nav-label">Committees</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="headingFive">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">6. Financial</a>
+                            </h4>
+                          </div>
+                          <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="invoices/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/page_white_width.png" /><span class="nav-label">Invoices</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="reports/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/report.png" /><span class="nav-label">Invoicing Reports</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="py/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/money.png" /><span class="nav-label">Make Payment</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="discounts/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/money_delete.png" /><span class="nav-label">Discounts</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="donations/search/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/money.png" /><span class="nav-label">Donations</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="headingSix">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">7. Layout</a>
+                            </h4>
+                          </div>
+                          <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="theme-editor/editor/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/layout_edit.png" /><span class="nav-label">Theme Editor</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="admin/navs/nav/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/folder_explore.png" /><span class="nav-label">Navigation</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                                <ul class="list-unstyled col-sm-6 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="admin/boxes/box/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/box.png" /><span class="nav-label">Boxes</span>
+                                    </a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="redirects/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/arrow_turn_right.png" /><span class="nav-label">Redirects</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/chart_bar.png" /><span class="nav-label">Reports</span>
+              <span class="caret"></span>
+            </a>
+            <ul id="t-admin-megamenu-reports-dd" class="dropdown-menu apps-dropdown" role="menu">
+              <li>
+                <div class="yamm-content content-dropdown">
+                  <div class="row">
+                    <div class="col-sm-12 content-dropdown-col">
+                      <div id="megamenu-reports-accordion" class="panel-group" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="reports-heading-1">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-1">1. Membership Overview</a>
+                            </h4>
+                          </div>
+                          <div id="report-collapse-1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="reports-heading-1">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-12 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="memberships/reports/overview/"><span class="nav-label">Overview</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/reports/members_stats/"><span class="nav-label">Active, Pending, Expired by Type</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/reports/member_quick_list/"><span class="nav-label">Member List</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/reports/members_by_company/"><span class="nav-label">Members by Company</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/reports/"><span class="nav-label">All Membership Reports</span></a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="reports-heading-2">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-2">2. Membership Data</a>
+                            </h4>
+                          </div>
+                          <div id="report-collapse-2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reports-heading-2">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-12 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="memberships/reports/active_members/"><span class="nav-label">Active Memberships</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="admin/memberships/membershipdefault/?status_detail=pending"><span class="nav-label">Pending Memberships</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/reports/renewed_members/"><span class="nav-label">Renewed Memberships</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/reports/expired_members/"><span class="nav-label">Expired Memberships</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/reports/members_in_renewal_period/"><span class="nav-label">Memberships in Renewal Period</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/reports/members_in_grace_period/"><span class="nav-label">Expired Members in Grace Period</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/import_default/"><span class="nav-label">Membership Import</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/export/"><span class="nav-label">Membership Export</span></a>
+                                  </li>
+                                </ul>
+                              </div>
+                              <hr>
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-12 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="corporatememberships/reports/overview/"><span class="nav-label">Corporate Memberships Overview</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="admin/corporate_memberships/corpmembership/"><span class="nav-label">Corporate Memberships List</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="admin/corporate_memberships/corpmembershiprep/"><span class="nav-label">Corporate Membership Representatives</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="corporatememberships/reports/corp_members_by_status/"><span class="nav-label">Corporate Memberships by Status</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="corporatememberships/reports/active_members_by_type/"><span class="nav-label">Corporate Memberships by Member Type</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="corporatememberships/applications/cap_status/"><span class="nav-label">Memberships Cap Status</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="corporatememberships/import/"><span class="nav-label">Corporate Membership Import</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="corporatememberships/corp-export/"><span class="nav-label">Corporate Membership Export</span></a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="reports-heading-3">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-3">3. Membership Trends</a>
+                            </h4>
+                          </div>
+                          <div id="report-collapse-3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reports-heading-3">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-12 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="memberships/reports/members_over_time/"><span class="nav-label">Memberships Over Time</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/reports/active_members_ytd/"><span class="nav-label">Active Members YTD</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/reports/members_ytd_type/"><span class="nav-label">Members YTD by Type</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/reports/join_summary"><span class="nav-label">Memberships by Join Date</span></a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="reports-heading-4">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-4">4. User Management</a>
+                            </h4>
+                          </div>
+                          <div id="report-collapse-4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reports-heading-4">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-12 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="users/reports/active-logins/"><span class="nav-label">User Access</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="users/reports/users-activity-top10/"><span class="nav-label">User Activity Summary</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="profiles/similar/"><span class="nav-label">Similar Users List</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="users/reports/not-in-groups/"><span class="nav-label">Users Not In Groups</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="users/reports/admin/"><span class="nav-label">Superusers</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="profiles/import/"><span class="nav-label">User Import</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="profiles/export/"><span class="nav-label">User Export</span></a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="reports-heading-5">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-5">5. Financial</a>
+                            </h4>
+                          </div>
+                          <div id="report-collapse-5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reports-heading-5">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-12 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="reports/"><span class="nav-label">Invoicing</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="memberships/reports/members_donated/"><span class="nav-label">Donations on Join/Renewal</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="invoices/report/top_spenders/"><span class="nav-label">Top Spenders</span></a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="reports-heading-6">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-6">6. Site Activity</a>
+                            </h4>
+                          </div>
+                          <div id="report-collapse-6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reports-heading-6">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-12 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="event-logs/reports/summary/"><span class="nav-label">Event Log Summary</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="dashboard/"><span class="nav-label">Dashboard Statistics</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="files/reports/most-viewed/"><span class="nav-label">Most Viewed Files</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="404/reports/"><span class="nav-label">404 Tracker</span></a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="reports-heading-7">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#megamenu-reports-accordion" href="#report-collapse-7">7. Custom Reports</a>
+                            </h4>
+                          </div>
+                          <div id="report-collapse-7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="reports-heading-7">
+                            <div class="panel-body">
+                              <div class="row">
+                                <ul class="list-unstyled col-sm-12 col-xs-12">
+                                  <li class="content-item">
+                                    <a href="explorer/export_database/"><span class="nav-label">Data Exports</span></a>
+                                  </li>
+                                  <li class="content-item">
+                                    <a href="explorer/"><span class="nav-label">Data Explorer</span></a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/page_white_stack.png"><span class="nav-label">Pages</span><span class="caret"></span></a>
+            <ul id="t-admin-megamenu-pages-dd" class="dropdown-menu" role="menu">
+              <li>
+                <div class="yamm-content content-dropdown">
+                  <div class="row">
+                    <ul class="list-unstyled content-dropdown-col col-sm-12 col-xs-12">
+                      <li class="content-item">
+                        <span class="app-name">
+                          <a href="settings/module/pages/">Settings</a>
+                        </span>
+                      </li>
+                      <li class="content-item">
+                        <span class="app-name">
+                          <a href="pages/search/">Search Pages</a>
+                        </span>
+                      </li>
+                      <li class="content-item">
+                        <span class="app-name">
+                          <a href="pages/add/">Add Page</a>
+                        </span>
+                      </li>
+                      <li class="content-item">
+                        <span class="app-name">
+                          <a href="pages/export/">Export Pages</a>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-right inner-top-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <img width="16" height="16" class="nav-icon" src="static/themes/t7-base/images/icons/tendenci_white.png" /><span class="nav-label">Support</span><span class="caret"></span>
+            </a>
+            <ul id="t-admin-megamenu-support-dd" class="dropdown-menu support-dropdown" role="menu">
+              <li>
+                <div class="yamm-content content-dropdown">
+                  <div class="row">
+                    <div class="col-sm-12 content-dropdown-col">
+                      <ul class="list-unstyled">
+                        <li class="content-head">
+                          <span class="nav-label"><strong>My Site</strong></span>
+                        </li>
+                        <li class="content-item">
+                          <a href="base/clear-cache/"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/computer_delete.png" /><span class="nav-label">Clear Cache</span>
+                          </a>
+                        </li>
+                        <li class="content-head">
+                          <span class="nav-label"><strong>Request Help</strong></span>
+                        </li>
+                        <li class="content-item">
+                          <a href="https://www.tendenci.com/help-files/" target="_blank" rel="noopener"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/help.png" /><span class="nav-label">Search Help Files</span>
+                          </a>
+                        </li>
+                        <li class="content-item">
+                          <a href="https://www.tendenci.com/forums/" target="_blank" rel="noopener"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/application_get.png" /><span class="nav-label">Community Forums</span>
+                          </a>
+                        </li>
+                        <li class="content-item">
+                          <a href="https://www.tendenci.com/support/" target="_blank" rel="noopener"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/application_get.png" /><span class="nav-label">Submit a Ticket</span>
+                          </a>
+                        </li>
+                        <li class="content-head">
+                          <span class="nav-label"><strong>Contact Tendenci</strong></span>
+                        </li>
+                        <li class="content-item">
+                          <a href="https://www.tendenci.com/py/" target="_blank" rel="noopener"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/money_add.png" /><span class="nav-label">Make a Payment</span>
+                          </a>
+                        </li>
+                        <li class="content-item">
+                          <a href="https://www.tendenci.com/contact/" target="_blank" rel="noopener"><img class="nav-icon" src="static/themes/t7-base/famfamfam/icons/telephone.png" /><span class="nav-label">Contact Form</span>
+                          </a>
+                        </li>
+                        <li class="content-item">
+                          <a href="/github.com/tendenci/tendenci">
+                            <span class="nav-label">Tendenci Version: 12.0.2</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- begin: header -->
+  <!-- start: navbar outer -->
+  <nav id="site-nav" class="navbar fixed-top navbar-expand-lg navbar-expand-md justify-content-between align-items-start">
+    <!-- logo -->
+    <div class="relative lg:w-24 lg:h-24 sm:w-16 sm:h-16" href="">
+      <svg id="brand-background" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="radial" fx="50%" fy="50%" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#718c9e; stop-opacity:0.8" />
+            <stop offset="68%" style="stop-color:#718c9e; stop-opacity:0.5" />
+            <stop offset="70%" style="stop-color:#ced7dd; stop-opacity:0.4" />
+            <stop offset="80%" style="stop-color:#e5eaed; stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#fcfdfd; stop-opacity:1" />
+          </radialGradient>
+        </defs>
+        <circle fill="url(#radial)" />
+      </svg>
+      <div class="absolute p-1">
+        <a href="/"><img class="" src="themes/c-street-2020/media/img/logo.png" alt="" /></a>
+      </div>
+    </div>
+    <div class="collapsable flex flex-col items-start" data-controller="dropdown" data-dropdown-class="sm:hidden">
+      <!-- responsive btn -->
+      <button class="btn btn-primary self-end lg:hidden md:hidden" type="button" data-action="click->dropdown#toggle click@window->dropdown#hide" aria-controls="navTop" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+          <i class="far fa-bars"></i>
+        </span>
+      </button>
+      <!-- navigation -->
+      <div class="sm:mt-2" id="navTop">
+        <!-- main nav -->
+        <ul class="justify-center flex md:flex-row sm:flex-col sm:hidden" id="t-navbar1" data-target="dropdown.menu">
+          <li class="dropdown"><a class="btn btn-primary dropdown-toggle" href="mission-vision/" data-toggle="dropdown" role="button" aria-expanded="false">
+              About
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a class="" href="welcome/">
+                  City Market
+                </a>
+              </li>
+              <li><a class="" href="mission-vision/">
+                  History
+                </a>
+              </li>
+              <li><a class="" href="case-studies/">
+                  Commercial Club
+                </a>
+              </li>
+              <li><a class="" href="testimonials/">
+                  CID
+                </a>
+              </li>
+              <li><a class="" href="staff/">
+                  Loft Living
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown"><a class="btn btn-primary dropdown-toggle" href="membership-benefits/" data-toggle="dropdown" role="button" aria-expanded="false">
+              Discover
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a class="" href="membership-benefits/">
+                  Eat and Drink
+                </a>
+              </li>
+              <li><a class="" href="study-groups/">
+                  Event Venues
+                </a>
+              </li>
+              <li><a class="" href="committees/">
+                  Loft Living
+                </a>
+              </li>
+              <li><a class="" href="volunteer/">
+                  Lifestyle
+                </a>
+              </li>
+              <li><a class="" href="forms/grant-request-npo/">
+                  Shopping
+                </a>
+              </li>
+              <li><a class="" href="articles/">
+                  Services
+                </a>
+              </li>
+              <li><a class="" href="forums/">
+                  Photo Gallery
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li><a class="btn btn-primary" href="forums/">
+              Events
+            </a>
+          </li>
+          <li><a class="btn btn-primary" href="about/">
+              Get in Touch
+            </a>
+          </li>
+        </ul>
+        <!-- <div> -->
+        <a href="navs/edit/1/items/?next=/" title="Edit Nav" class="t-admin-inline btn btn-outline-danger btn-sm">Edit Nav</a>
+        <!-- </div> -->
+      </div>
+    </div>
+  </nav>
+  <!-- end: navbar outer -->
+  <!-- Pulls in Header Include -->
+  <div id="front-page-hero" class="hero">
+    <div class="focuspoint" data-focus-x="-0.18" data-focus-y="0.14" data-image-w="2000" data-image-h="1092">
+      <img src="themes/c-street-2020/media/img/Streetscape.jpg" alt="An image of Commercial Street, looking east from Boonville.">
+    </div>
+    <h1 id="hero-title" class=""><img src="themes/c-street-2020/media/img/SixBlocks.png" alt="Six Blocks of Fun!"></h1>
+    <nav id="hero-nav" class="relative w-full">
+      <ul class="justify-center flex flex-row" id="t-navbar4">
+        <li><a class="btn btn-success" href="explore">
+            Explore C-Street
+          </a>
+        </li>
+        <li><a class="btn btn-success" href="events">
+            Gatherings and Events
+          </a>
+        </li>
+      </ul>
+      <!-- <div> -->
+      <a href="navs/edit/4/items/?next=/" title="Edit Nav" class="t-admin-inline btn btn-outline-danger btn-sm">Edit Nav</a>
+      <!-- </div> -->
+    </nav>
+  </div>
+  <!-- end: header -->
+  <div id="page-top-home" role="main">
+    <div id="frontCarousel" class="carousel slide hidden" data-ride="carousel">
+      <!-- begin: carousel-inner -->
+      <div class="carousel-inner" id="rotator_inner">
+        <!-- begin: item active -->
+        <div class="carousel-item active">
+          <img class="img-responsive" src="media/files/story/c20b0de3/conferencesmaller.png" alt="Start Here" style="object-position:0 1px;">
+          <!-- begin: carousel-caption -->
+          <div class="carousel-caption col-md-5 col-md-offset-3">
+            <div class="container-fluid">
+              <h2><a href="getting-started">Start Here</a></h2>
+              <p class="story-summary">Some helpful tips for building out your site!</p>
+              <p><a class="btn btn-lg btn-primary" href="getting-started" role="button">Read more</a></p>
+            </div>
+          </div>
+          <!-- end: carousel-caption -->
+        </div>
+        <!-- end: item active -->
+        <div class="carousel-item">
+          <!-- keep empty -->
+          <img class="img-responsive" src="media/files/story/3c007eae/wheel204x1024.png" alt="About Us" style="object-position:0 1px;">
+          <!-- begin: carousel-caption -->
+          <div class="carousel-caption col-md-5 col-md-offset-3">
+            <div class="container-fluid">
+              <h2><a href="about/">About Us</a></h2>
+              <p class="story-summary">Learn about the association and how to get involved. Founded in 1997 we have become leaders in helping associations grow.</p>
+              <p><a class="btn btn-lg btn-primary" href="about/" role="button">Read more</a></p>
+            </div>
+          </div>
+          <!-- end: carousel-caption -->
+        </div>
+        <!-- end: item active -->
+        <div class="carousel-item">
+          <!-- keep empty -->
+          <img class="img-responsive" src="media/files/story/55eb07e6/chairs204x1024.jpg" alt="Join Today" style="object-position:0 1px;">
+          <!-- begin: carousel-caption -->
+          <div class="carousel-caption col-md-5 col-md-offset-3">
+            <div class="container-fluid">
+              <h2><a href="membership-benefits/">Join Today</a></h2>
+              <p class="story-summary">Join our Association Today. Help support the cause to educate and promote to future generations.</p>
+              <p><a class="btn btn-lg btn-primary" href="membership-benefits/" role="button">Read more</a></p>
+            </div>
+          </div>
+          <!-- end: carousel-caption -->
+        </div>
+        <!-- end: item active -->
+        <div class="carousel-item">
+          <!-- keep empty -->
+        </div>
+      </div>
+      <!-- end: carousel-inner -->
+      <!-- commenting out arrows
+     <a class="left carousel-control" href="#frontCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#frontCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+      </a>
+ end comment out arrows -->
+    </div>
+    <!-- begin: home-first-content-row -->
+    <section id="get-updates-form">
+      <div class="container">
+        <div class="jumbotron text-center">
+          <h1>Get Updates</h1>
+          <p>Stay in touch! Get updates about our events, articles, and other news.</p>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Join our Mailing List
+          </button>
+          <!-- MODAL NEWSLETTER -->
+          <div id="myModal" class="modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="embed-form">
+                    <style>
+                      .id_captcha input[type="text"]{
+    width: 160px !important;
+}
+</style>
+                    <h4>Get Updates</h4>
+                    <div>
+                      <p>Stay in touch! Get updates about our events, articles, and other news.</p>
+                    </div>
+                    <div class="form-builder-wrap">
+                      <form method="post" enctype="multipart/form-data" action="/forms/get-updates/"><input type="hidden" name="csrfmiddlewaretoken" value="ok6jffaLNPX02UHGrvAIBbd3PgIwmv4mUUxVWk9956U8fEW5yCRXNm4GUSxRpAPk">
+                        <div class="forms">
+                          <div class="form-group">
+                            <label for="id_field_36" class="control-label col-sm-3">E-mail Address</label>
+                            <div class="col-sm-9">
+                              <input type="text" name="field_36" maxlength="2000" title="E-mail Address" class="formforform-field form-control" id="id_field_36">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="id_captcha_1" class="control-label col-sm-3 required">Type the code below</label>
+                            <div class="col-sm-9">
+                              <img src="captcha/image/d6438938562cbfee7128fc2439e46b8dfe40e32b/" alt="captcha" class="captcha" /> <br /><input id="id_captcha_0" name="captcha_0" type="hidden" value="d6438938562cbfee7128fc2439e46b8dfe40e32b" />
+                              <input autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" id="id_captcha_1" name="captcha_1" type="text" />
+                            </div>
+                          </div>
+                          <input class="btn btn-lg btn-primary" type="submit" value="Submit" />
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END MODAL NEWSLETTER -->
+        </div>
+      </div>
+    </section>
+    <!-- end: home-first-content-row -->
+    <!-- begin: home-second-content-row -->
+    <section id="about-us">
+      <div class="container">
+        <div class="row justify-content-around col-md-10 col-md-offset-1">
+          <div class="col-md-5">
+            <div id="box-4" class="boxes">
+              <h1 style="line-height: 1.3em; margin-top: 0;">About The Organization</h1>
+              <div class="col-md-6" style="border-top: 5px solid #666666; margin-top: 30px;">
+                <p>&nbsp;</p>
+              </div>
+              <a href="admin/boxes/box/4/change/?next=/" title="Edit Box" class="t-admin-inline btn btn-outline-danger btn-sm">Edit</a>
+            </div>
+          </div>
+          <div class="col-md-6 col-md-offset-1">
+            <div id="box-5" class="boxes">
+              <p>&nbsp;</p>
+              <p>Our Association is a 501(c)3 nonprofit that serves to futher our mission of making the world a better place through our programs and events. Each year, we put on programs such as events and educational workshops, and provide online
+                content to further our cause.</p>
+              <p>&nbsp;</p>
+              <a href="admin/boxes/box/5/change/?next=/" title="Edit Box" class="t-admin-inline btn btn-outline-danger btn-sm">Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end: home-second-content-row -->
+    <!-- begin: home-third-content-row -->
+    <section id="our-resources">
+      <div class="container d-flex justify-content-around">
+        <div class="white-heading text-center">
+          <h1>Our Resources</h1>
+          <br />
+        </div>
+        <div class="col-md-4">
+          <div class="thumbnail panel panel-default">
+            <div id="box-20" class="boxes">
+              <p><a href="case-studies/"><img src="static/themes/t7-tendenci2020/img/willow1.jpg" width="100%" /></a></p>
+              <a href="admin/boxes/box/20/change/?next=/" title="Edit Box" class="t-admin-inline btn btn-outline-danger btn-sm">Edit</a>
+            </div>
+            <div class="caption">
+              <div id="box-24" class="boxes">
+                <h3 style="text-align: left;"><a href="case-studies/">Case Studies</a></h3>
+                <p>Read case studies for stories from children who have gone through our program.</p>
+                <a href="admin/boxes/box/24/change/?next=/" title="Edit Box" class="t-admin-inline btn btn-outline-danger btn-sm">Edit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="thumbnail panel panel-default">
+            <div id="box-19" class="boxes">
+              <p><a href="articles/"><img src="static/themes/t7-tendenci2020/img/willow2.jpg" alt="image of books" width="100%" /></a></p>
+              <a href="admin/boxes/box/19/change/?next=/" title="Edit Box" class="t-admin-inline btn btn-outline-danger btn-sm">Edit</a>
+            </div>
+            <div class="caption">
+              <div id="box-25" class="boxes">
+                <h3 style="text-align: left;"><a href="articles/">Read Articles</a></h3>
+                <p style="text-align: left;">Read our industry articles to learn more about our methodology.</p>
+                <a href="admin/boxes/box/25/change/?next=/" title="Edit Box" class="t-admin-inline btn btn-outline-danger btn-sm">Edit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="thumbnail panel panel-default">
+            <div id="box-18" class="boxes">
+              <p><a href="contact/"><img src="static/themes/t7-tendenci2020/img/willow3.jpg" alt="" width="100%" /></a></p>
+              <a href="admin/boxes/box/18/change/?next=/" title="Edit Box" class="t-admin-inline btn btn-outline-danger btn-sm">Edit</a>
+            </div>
+            <div class="caption">
+              <div id="box-26" class="boxes">
+                <h3 style="text-align: left;"><a href="contact/">Get in Contact</a></h3>
+                <p>Reach out to our specialized team and get involved!</p>
+                <a href="admin/boxes/box/26/change/?next=/" title="Edit Box" class="t-admin-inline btn btn-outline-danger btn-sm">Edit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end: home-third-content-row -->
+    <!-- begin: home-fourth-content-row -->
+    <section id="recent-events">
+      <div class="container d-flex justify-content-around">
+        <div class="col-md-6 col-md-offset-1 jumbotron">
+          <ul class="list-unstyled">
+            Events will be shown here. <a href="events/add/">Start adding events now!</a>
+          </ul>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+          <div id="box-21" class="boxes">
+            <h1>Upcoming Events</h1>
+            <div style="border-top: 5px solid #666666; margin-top: 30px; width: 60%;">&nbsp;</div>
+            <div>
+              <p>&nbsp;</p>
+              <p>Follow our events for more information about Open House Nights and other events hosted by Tendenci.</p>
+              <p>&nbsp;</p>
+            </div>
+            <p><a class="btn btn-lg btn-primary" href="events/">More events</a></p>
+            <a href="admin/boxes/box/21/change/?next=/" title="Edit Box" class="t-admin-inline btn btn-outline-danger btn-sm">Edit</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end: home-fourth-content-row -->
+    <!-- begin: home-fifth-content-row -->
+    <section id="follow-us">
+      <div class="container d-flex">
+        <div class="row justify-content-around">
+          <div class="col-md-3 col-md-offset-1">
+            <div id="box-22" class="boxes">
+              <h1>Follow Tendenci</h1>
+              <div style="border-top: 5px solid #666666; margin-top: 30px; width: 60%;">&nbsp;</div>
+              <a href="admin/boxes/box/22/change/?next=/" title="Edit Box" class="t-admin-inline btn btn-outline-danger btn-sm">Edit</a>
+            </div>
+            <br />
+            <div class="row justify-content-around">
+              <div class="col-md-3 col-sm-3 col-xs-6">
+                <a href="https://facebook.com/tendenci"><span class="fa fa-facebook fa-4x"></span></a>
+              </div>
+              <div class="col-md-3 col-sm-3 col-xs-6">
+                <a href="https://twitter.com/tendenci"><span class="fa fa-twitter fa-4x"></span></a>
+              </div>
+            </div>
+            <br />
+            <div class="row justify-content-around">
+              <div class="col-md-3 col-sm-3 col-xs-6">
+                <a href="https://instagram.com/tendenci"><span class="fa fa-instagram fa-4x"></span></a>
+              </div>
+              <div class="col-md-3 col-sm-3 col-xs-6">
+                <a href="https://youtube.com/tendenci"><span class="fa fa-youtube fa-4x"></span></a>
+              </div>
+            </div>
+            <br />
+          </div>
+          <div class="col-md-6 col-md-offset-1">
+            <div id="box-23" class="boxes">
+              <p><img class="thumbnail img-responsive" src="static/themes/t7-tendenci2020/img/willow4.jpg" alt="child sitting on a bench with a book laughing" width="100%" height="auto" /></p>
+              <a href="admin/boxes/box/23/change/?next=/" title="Edit Box" class="t-admin-inline btn btn-outline-danger btn-sm">Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end: home-fifth-content-row -->
+    <!-- Footer starts
+      =========================================================== -->
+    <footer>
+      <!-- ---------------------------------------------------------------
+NOTES: This Footer Template used 1 box to layout the Footer Links
+the Bootstrap Grid System is implemented inside the wysiwyg
+Modals called below are connected to btns also inside the wysiwyg.
+----------------------------------------------------------------- -->
+      <div id="site-footer" class="container">
+        <!-- MAIN FOOTER LINKS INFO: -->
+        <div id="box-10" class="boxes">
+          <div class="container d-flex d-row">
+            <div class="col-md-2 col-sm-2 col-xs-6">
+              <h3>About Us</h3>
+              <ul class="list-unstyled">
+                <li><a href="welcome/">Welcome</a></li>
+                <li><a href="mission-vision/">Mission/Vision</a></li>
+                <li><a href="case-studies/">Case Studies</a></li>
+                <li><a href="staff/">Our Staff</a></li>
+                <li><a href="login/">Login</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-6 left-line">
+              <h3>Program</h3>
+              <ul class="list-unstyled">
+                <li><a href="membership-benefits/">Membership</a></li>
+                <li><a href="study-groups/">Study Groups</a></li>
+                <li><a href="committees/">Committees</a></li>
+                <li><a href="volunteer/">Volunteer</a></li>
+                <li><a href="grant-request-npo/">Financial Support</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-6 left-line">
+              <h3>Resources</h3>
+              <ul class="list-unstyled">
+                <li><a href="articles/">Articles</a></li>
+                <li><a href="forums/">Forums</a></li>
+                <li><a href="news/">News</a></li>
+                <li><a href="events/">Events</a></li>
+                <li><a href="photos/">Photos</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-6 left-line">
+              <h3>Follow Us</h3>
+              <ul class="list-unstyled">
+                <li class="fa fa-facebook">&nbsp; <a href="https://facebook.com/tendenci/" target="_blank" rel="noopener">Facebook</a></li>
+                <li class="fa fa-instagram">&nbsp; <a href="https://instagram.com/tendenci">Instagram</a></li>
+                <li class="fa fa-twitter">&nbsp; <a href="https://twitter.com/tendenci" target="_blank" rel="noopener">Twitter</a></li>
+                <li class="fa fa-youtube">&nbsp; <a href="https://www.youtube.com/user/TendenciCMS" target="_blank" rel="noopener">Youtube</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-6 left-line">
+              <h3>Contact Us</h3>
+              <ul class="list-unstyled">
+                <li><a href="contact/">Contact Us</a></li>
+                <li><a href="help-files/">FAQs</a></li>
+                <li><a href="donations/">Donate</a></li>
+                <li><a href="contact/">Apply</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-12"><button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#myModal"> Subscribe </button></div>
+            <div class="col-md-2 col-sm-2 col-xs-12"><br /> <button class="btn btn-default btn-lg" type="button" data-toggle="modal" data-target="#myModal2"> Contact </button></div>
+          </div>
+          <a href="admin/boxes/box/10/change/?next=/" title="Edit Box" class="t-admin-inline btn btn-outline-danger btn-sm">Edit</a>
+        </div>
+        <!-- FOOTER ADD-ONS, can be removed and stay with regular links in footer links box -->
+        <!-- MODAL CONTACT -->
+        <div id="myModal2" class="modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              </div>
+              <div class="modal-body">
+                <div class="embed-form">
+                  <style>
+                    .id_captcha input[type="text"]{
+    width: 160px !important;
+}
+</style>
+                  <h4>Contact Us</h4>
+                  <div>
+                    <p>Thank you for your interest in our organization!</p>
+                  </div>
+                  <div class="form-builder-wrap">
+                    <form method="post" enctype="multipart/form-data" action="/forms/contact-us/"><input type="hidden" name="csrfmiddlewaretoken" value="ok6jffaLNPX02UHGrvAIBbd3PgIwmv4mUUxVWk9956U8fEW5yCRXNm4GUSxRpAPk">
+                      <div class="forms">
+                        <div class="form-group">
+                          <label for="id_field_1" class="control-label col-sm-3 required">First Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="field_1" maxlength="30" title="First Name" class="formforform-field form-control" required id="id_field_1">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="id_field_2" class="control-label col-sm-3 required">Last Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="field_2" maxlength="30" title="Last Name" class="formforform-field form-control" required id="id_field_2">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="id_field_3_0" class="control-label col-sm-3 required">Email address (Enter twice to verify)</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="field_3_0" class="form-control" maxlength="75" title="Email" placeholder="Email" required id="id_field_3_0"><input type="text" name="field_3_1" class="form-control" maxlength="75" title="Confirm Email"
+                              placeholder="Confirm Email" required id="id_field_3_1">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="id_field_4" class="control-label col-sm-3">Phone Number</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="field_4" maxlength="50" title="Phone Number" class="formforform-field form-control" id="id_field_4">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="id_field_5" class="control-label col-sm-3 required">Message</label>
+                          <div class="col-sm-9">
+                            <textarea name="field_5" cols="40" rows="10" maxlength="2000" title="Message" class="formforform-field form-control" required id="id_field_5">
+</textarea>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="id_captcha_1" class="control-label col-sm-3 required">Type the code below</label>
+                          <div class="col-sm-9">
+                            <img src="captcha/image/f40030ed316b2e7d139c70f80a791d516739b662/" alt="captcha" class="captcha" /> <br /><input id="id_captcha_0" name="captcha_0" type="hidden" value="f40030ed316b2e7d139c70f80a791d516739b662" />
+                            <input autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" id="id_captcha_1" name="captcha_1" type="text" />
+                          </div>
+                        </div>
+                        <input class="btn btn-lg btn-primary" type="submit" value="Submit" />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END MODAL CONTACT -->
+        <!-- MODAL NEWSLETTER -->
+        <div id="myModal" class="modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              </div>
+              <div class="modal-body">
+                <div class="embed-form">
+                  <style>
+                    .id_captcha input[type="text"]{
+    width: 160px !important;
+}
+</style>
+                  <h4>Get Updates</h4>
+                  <div>
+                    <p>Stay in touch! Get updates about our events, articles, and other news.</p>
+                  </div>
+                  <div class="form-builder-wrap">
+                    <form method="post" enctype="multipart/form-data" action="/forms/get-updates/"><input type="hidden" name="csrfmiddlewaretoken" value="ok6jffaLNPX02UHGrvAIBbd3PgIwmv4mUUxVWk9956U8fEW5yCRXNm4GUSxRpAPk">
+                      <div class="forms">
+                        <div class="form-group">
+                          <label for="id_field_36" class="control-label col-sm-3">E-mail Address</label>
+                          <div class="col-sm-9">
+                            <input type="text" name="field_36" maxlength="2000" title="E-mail Address" class="formforform-field form-control" id="id_field_36">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="id_captcha_1" class="control-label col-sm-3 required">Type the code below</label>
+                          <div class="col-sm-9">
+                            <img src="captcha/image/043d3ae74bae1ad507b49bc7e8c4d2a51134f5c8/" alt="captcha" class="captcha" /> <br /><input id="id_captcha_0" name="captcha_0" type="hidden" value="043d3ae74bae1ad507b49bc7e8c4d2a51134f5c8" />
+                            <input autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" id="id_captcha_1" name="captcha_1" type="text" />
+                          </div>
+                        </div>
+                        <input class="btn btn-lg btn-primary" type="submit" value="Submit" />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END MODAL NEWSLETTER -->
+      </div>
+    </footer>
+    <!-- Footer Ends -->
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <p class="text-muted">
+          Powered by <a href="https://www.tendenci.com">Tendenci - The Open Source AMS</a>
+          | <a href="https://www.schipul.com">a Schipul Factory Production</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    jQuery(document).ready(function() {
+      jQuery('#t-megamenu-lang-dd a').on("click", function(e) {
+        var lang = jQuery(this).data('lang');
+        jQuery('#t-megamenu-lang-input').attr('value', lang);
+        jQuery('#t-megamenu-lang-form').submit();
+      });
+        jQuery('#site-nav').css('margin-top', jQuery('#t-admin-megamenu').outerHeight(true) + 'px');
+
+      // Start Focuspoint
+      $('.focuspoint').focusPoint();
+    });
+  </script>
+  <script type="text/javascript" src="static/themes/t7-base/bootstrap3/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="static/themes/t7-base/js/admin_menu.js"></script>
+  <script type="text/javascript" src="static/themes/t7-base/js/global/authenticated.js"></script>
+  <!-- Bootstrap core JavaScript
+   ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script>
+    ! function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        p = /^http:/.test(d.location) ? 'http' : 'https';
+      if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = p + "://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }
+    }
+    "
+    (document, "script", "twitter-wjs");
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      //code below helps remove extra .item that is added.
+      //#rotator_inner helps target which carousel
+      $('#rotator_inner > .item:last').remove();
+    });
+  </script>
+  <script type="text/javascript">
+    jQuery(document).on('click', '.yamm .dropdown-menu', function(e) {
+      e.stopPropagation()
+    })
+  </script>
+</body>
+</html>
