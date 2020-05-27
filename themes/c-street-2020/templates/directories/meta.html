@@ -13,55 +13,55 @@
         <li><strong>{% trans "Source:" %}</strong> <span>{{ directory.source|urlize }}</span></li>
     {% endif %}
 
-    {% if show_contact|default:False %}
-        <address>
-            {% if directory.first_name and directory.last_name %}
-                {{ directory.first_name }} {{ directory.last_name }}<br>
-            {% endif %}
+    <!-- {% if show_contact|default:False %}
+    <address>
+        {% if directory.first_name and directory.last_name %}
+            {{ directory.first_name }} {{ directory.last_name }}<br>
+        {% endif %}
 
-            {% if directory.address %}
-                {{ directory.address }}<br>
-            {% endif %}
+        {% if directory.address %}
+            {{ directory.address }}<br>
+        {% endif %}
 
-            {% if directory.address2 %}
-                {{ directory.address2 }}<br>
-            {% endif %}
+        {% if directory.address2 %}
+            {{ directory.address2 }}<br>
+        {% endif %}
 
-            {% if directory.city or directory.state or directory.zip_code %}
-                {% if directory.city %}{{ directory.city }}<br>{% endif %}
-                {% if directory.state %}{{ directory.state }}<br>{% endif %}
-                {% if directory.zip_code %}{{ directory.zip_code }}<br>{% endif %}
-            {% endif %}
+        {% if directory.city or directory.state or directory.zip_code %}
+            {% if directory.city %}{{ directory.city }}<br>{% endif %}
+            {% if directory.state %}{{ directory.state }}<br>{% endif %}
+            {% if directory.zip_code %}{{ directory.zip_code }}<br>{% endif %}
+        {% endif %}
 
-            {% if directory.country %}
-                {{ directory.country }}<br>
-            {% endif %}
+        {% if directory.country %}
+            {{ directory.country }}<br>
+        {% endif %}
 
-            {% if directory.phone %}
-                {{ directory.phone|phonenumber }}<br>
-            {% endif %}
+        {% if directory.phone %}
+            {{ directory.phone|phonenumber }}<br>
+        {% endif %}
 
-            {% if directory.phone2 %}
-                {{ directory.phone2|phonenumber }}<br>
-            {% endif %}
+        {% if directory.phone2 %}
+            {{ directory.phone2|phonenumber }}<br>
+        {% endif %}
 
-            {% if directory.fax %}{% blocktrans with fax=directory.fax %}
-                {{ fax }} fax.<br>
-            {% endblocktrans %}{% endif %}
+        {% if directory.fax %}{% blocktrans with fax=directory.fax %}
+            {{ fax }} fax.<br>
+        {% endblocktrans %}{% endif %}
 
-            {% if directory.email %}
-                {{ directory.email|obfuscate_email }}<br>
-            {% endif %}
+        {% if directory.email %}
+            {{ directory.email|obfuscate_email }}<br>
+        {% endif %}
 
-            {% if directory.email2 %}
-                {{ directory.email2|obfuscate_email }}<br>
-            {% endif %}
+        {% if directory.email2 %}
+            {{ directory.email2|obfuscate_email }}<br>
+        {% endif %}
 
-            {% if directory.website %}
-                {{ directory.website|urlize }}<br>
-            {% endif %}
-        </address>
-    {% endif %}
+        {% if directory.website %}
+            {{ directory.website|urlize }}<br>
+        {% endif %}
+    </address>
+    {% endif %} -->
 
     {% with directory.cat as directory_cat %}
         {% if directory_cat %}
@@ -121,7 +121,7 @@
                         <ul class="dropdown-menu" role="menu">
                        		<li><a class="t-meta-edit-link" href="{% url 'directory.edit' directory.pk %}">{% trans "Edit" %}</a></li>
                             <li><a class="t-meta-eventlog-link" href="{% url 'event_log.search' %}?object_id={{ directory.pk }}&source={{ directory.opt_app_label }}">{% trans "Eventlogs" %}</a></li>
-                            
+
                             <li>
                                 <a href="{% url 'directory.edit.meta' directory.pk %}">{% trans "Edit Meta" %}</a>
                             </li>
