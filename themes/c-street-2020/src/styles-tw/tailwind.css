@@ -119,9 +119,9 @@ div.focuspoint {
   #site-nav ul.flex>li:not(:first-child) {
     @apply ml-6;
   }
-  .hero {
+  /* .hero {
     @apply h-screen;
-  }
+  } */
   #hero-title {
     @apply text-title max-w-5xl;
   }
@@ -133,10 +133,10 @@ div.focuspoint {
     @apply inline-block;
   }
 }
-@media (orientation:landscape) {
+/* @media (orientation:landscape) {
   .hero {
     @apply h-screen;
   }
-}
+} */
 
 @tailwind utilities;

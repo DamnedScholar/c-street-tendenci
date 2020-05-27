@@ -1160,9 +1160,9 @@ div.focuspoint {
     margin-left: 1.5rem;
   }
 
-  .hero {
-    height: 100vh;
-  }
+  /* .hero {
+    @apply h-screen;
+  } */
 
   #hero-title {
     font-size: 4rem;
@@ -1183,11 +1183,11 @@ div.focuspoint {
   }
 }
 
-@media (orientation:landscape) {
+/* @media (orientation:landscape) {
   .hero {
-    height: 100vh;
+    @apply h-screen;
   }
-}
+} */
 
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
