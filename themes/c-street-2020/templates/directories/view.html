@@ -20,70 +20,63 @@
 {% endblock %}
 
 {% block content %}
-<article id="t-directories-directory-{{ directory.pk }}" class="t-directories-directory">
+  <article id="t-directories-directory-{{ directory.pk }}" class="t-directories-directory">
+    {{ directory.body|safe }}
 
+    {% include "directories/meta.html" with show_source=True show_contact=True %}
+  </article>
+{% endblock %}
 
-  <div class="flex sm:flex-col md:flex-row-reverse">
-    <div class="sidebar flex flex-col items-center m-4 py-4 px-2 bg-gray-600">
-      {% if directory.logo %}
-        <img class="t-directories-directory-image" src="{{ directory.get_logo_url }}" alt="{{ directory.headline|truncatechars:123 }}" title="{{ directory.headline|truncatechars:123 }}">
+{% block sidebar %}
+  {% if directory.logo %}
+    <img class="t-directories-directory-image" src="{{ directory.get_logo_url }}" alt="{{ directory.headline|truncatechars:123 }}" title="{{ directory.headline|truncatechars:123 }}">
+  {% endif %}
+
+  <address class="font-serif lg:text-2xl text-gray-100">
+      {% if directory.first_name and directory.last_name %}
+          <p class="font-bold">{{ directory.first_name }} {{ directory.last_name }}</p>
       {% endif %}
 
-      <address class="font-serif lg:text-2xl text-gray-100">
-          {% if directory.first_name and directory.last_name %}
-              <p class="font-bold">{{ directory.first_name }} {{ directory.last_name }}</p>
-          {% endif %}
-
-          {% if directory.address %}
-              <p class="">{{ directory.address }}</p>
-          {% endif %}
-
-          {% if directory.address2 %}
-              <p class="">{{ directory.address2 }}</p>
-          {% endif %}
-
-          {% if directory.city or directory.state or directory.zip_code %}
-              {% if directory.city %}
-                <p class="">{{ directory.city }}, {{ directory.state }} {{ directory.zip_code }}</p>
-              {% endif %}
-          {% endif %}
-
-          {% if directory.phone %}
-              <p class="">{{ directory.phone|phonenumber }}</p>
-          {% endif %}
-
-          {% if directory.phone2 %}
-              <p class="">{{ directory.phone2|phonenumber }}</p>
-          {% endif %}
-
-          {% if directory.fax %}{% blocktrans with fax=directory.fax %}
-              <p class="">{{ fax }} fax.</p>
-          {% endblocktrans %}{% endif %}
-
-          {% if directory.email %}
-              <p class="">{{ directory.email|obfuscate_email }}</p>
-          {% endif %}
-
-          {% if directory.email2 %}
-              <p class="">{{ directory.email2|obfuscate_email }}</p>
-          {% endif %}
-
-          {% if directory.website %}
-              <p class="">{{ directory.website|urlize }}</p>
-          {% endif %}
-      </address>
-
-      {% if directory.has_social_media %}
-        {% include "directories/include/social_media_links.html" %}
+      {% if directory.address %}
+          <p class="">{{ directory.address }}</p>
       {% endif %}
-    </div>
 
-    <div class="flex-auto">
-      {{ directory.body|safe }}
-    </div>
-  </div>
+      {% if directory.address2 %}
+          <p class="">{{ directory.address2 }}</p>
+      {% endif %}
 
-  {% include "directories/meta.html" with show_source=True show_contact=True %}
-</article>
-<br />
+      {% if directory.city or directory.state or directory.zip_code %}
+          {% if directory.city %}
+            <p class="">{{ directory.city }}, {{ directory.state }} {{ directory.zip_code }}</p>
+          {% endif %}
+      {% endif %}
+
+      {% if directory.phone %}
+          <p class="">{{ directory.phone|phonenumber }}</p>
+      {% endif %}
+
+      {% if directory.phone2 %}
+          <p class="">{{ directory.phone2|phonenumber }}</p>
+      {% endif %}
+
+      {% if directory.fax %}{% blocktrans with fax=directory.fax %}
+          <p class="">{{ fax }} fax.</p>
+      {% endblocktrans %}{% endif %}
+
+      {% if directory.email %}
+          <p class="">{{ directory.email|obfuscate_email }}</p>
+      {% endif %}
+
+      {% if directory.email2 %}
+          <p class="">{{ directory.email2|obfuscate_email }}</p>
+      {% endif %}
+
+      {% if directory.website %}
+          <p class="">{{ directory.website|urlize }}</p>
+      {% endif %}
+  </address>
+
+  {% if directory.has_social_media %}
+    {% include "directories/include/social_media_links.html" %}
+  {% endif %}
 {% endblock %}

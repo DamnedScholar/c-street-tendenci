@@ -39,7 +39,7 @@
   {% endblock %}
 </div>
 <div id="page-top flex sm:flex-col md:flex-row">
-    <div class="{% block content_classes %}col-xs-12 col-sm-7 col-md-8{% endblock %}">
+    <div class="{% block content_classes %}{% endblock %}">
 
       {% block content_messages %}
       {% spaceless %}{% theme_include "base/messages.html" %}{% endspaceless %}
@@ -54,10 +54,10 @@
 
     </div> <!-- close content -->
 
-    <div class="{% block sidebar_classes %}sidebar col-xs-12 col-sm-5 col-md-4{% endblock %}" id="sidebar">
+    <div class="{% block sidebar_classes %}sidebar flex flex-col items-center md:m-4 py-4 px-2 md:bg-gray-600{% endblock %}" id="sidebar">
 
         {% block sidebar %}
-        {% theme_include "sidebar.html" %}
+        <!-- {% theme_include "sidebar.html" %} -->
         {% endblock %}
 
     </div>  <!-- close side-bar -->
