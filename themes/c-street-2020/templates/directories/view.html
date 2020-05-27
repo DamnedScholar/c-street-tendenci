@@ -9,18 +9,19 @@
 {% block meta_keywords %}{{ directory.get_keywords }}{% endblock %}
 {% block meta_canonical_url %}<link rel="canonical" href="{{ directory.get_canonical_url }}">{% endblock %}
 
-{% block content %}
-<div id="directory-hero" class="hero"></div>
-<article id="t-directories-directory-{{ directory.pk }}" class="t-directories-directory">
-  <div class="hero">
-    <div class="focuspoint"
-      data-focus-x="-0.50" data-focus-y="0.12"
-      data-image-w="2400" data-image-h="1590">
-      <img src="{% static 'img/bigmommas.jpg' %}">
-    </div>
-
-    <h1 id="hero-title">{{ directory.headline }}</h1>
+{% block hero %}
+  <div class="focuspoint"
+    data-focus-x="-0.50" data-focus-y="0.12"
+    data-image-w="2400" data-image-h="1590">
+    <img src="{% static 'img/bigmommas.jpg' %}">
   </div>
+
+  <h1 id="hero-title">{{ directory.headline }}</h1>
+{% endblock %}
+
+{% block content %}
+<article id="t-directories-directory-{{ directory.pk }}" class="t-directories-directory">
+
 
   <div class="flex sm:flex-col md:flex-row-reverse">
     <div class="sidebar flex flex-col items-center m-4 py-4 px-2 bg-gray-600">

@@ -27,33 +27,40 @@
 =========================================================== -->
 {% theme_include "header.html" %}<!-- Pulls in Header Include -->
 <!-- Header Ends -->
-<div id="page-top">
-  <div class="container">
- 
-    <div class="{% block content_classes %} col-xs-12 col-sm-7 col-md-8{% endblock %}">
-      
+<div class="hero {% block hero_classes %}{% endblock %}">
+  {% block hero %}
+    <div class="focuspoint"
+      data-focus-x="-0.18" data-focus-y="0.14"
+      data-image-w="2000" data-image-h="1092">
+      <img src="{% static 'img/Streetscape.jpg' %}">
+    </div>
+
+    <h1 id="hero-title">{% block title %}{{ block.super }} | {{ SITE_GLOBAL_SITEPRIMARYKEYWORDS }}{% endblock %}</h1>
+  {% endblock %}
+</div>
+<div id="page-top flex sm:flex-col md:flex-row">
+    <div class="{% block content_classes %}col-xs-12 col-sm-7 col-md-8{% endblock %}">
+
       {% block content_messages %}
       {% spaceless %}{% theme_include "base/messages.html" %}{% endspaceless %}
       {% endblock %}
-      
+
       {% block content %}
       {# Main content goes here #}
       <div class="jumbotron">
         <h1>{% trans "Welcome to your Tendenci powered site!" %}</h1>
       </div>
       {% endblock %}
-      
+
     </div> <!-- close content -->
-    
+
     <div class="{% block sidebar_classes %}sidebar col-xs-12 col-sm-5 col-md-4{% endblock %}" id="sidebar">
-      
+
         {% block sidebar %}
         {% theme_include "sidebar.html" %}
         {% endblock %}
-      
+
     </div>  <!-- close side-bar -->
-    
-  </div> <!-- close container -->
 </div> <!-- close page-top -->
 
 <footer class="{% block footer_classes %}col-xs-12 col-sm-12 col-md-12{% endblock %}">

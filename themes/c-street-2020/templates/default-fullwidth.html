@@ -31,27 +31,25 @@
 <!-- Header Ends -->
 
 <div id="page-top">
-  <div class="container">
-    <!-- Start -->
+  <!-- Start -->
+
+  <div class="{% block content_classes %} {% endblock %}">
+
+    {% block content_messages %}
+    {% spaceless %}{% theme_include "base/messages.html" %}{% endspaceless %}
+    {% endblock %}
     
-    <div class="{% block content_classes %} {% endblock %}">
-      
-      {% block content_messages %}
-      {% spaceless %}{% theme_include "base/messages.html" %}{% endspaceless %}
-      {% endblock %}
-      
-      {% block content %}
-      {# Main content goes here #}
-      <div class="jumbotron">
-        <h1>{% trans "Welcome to your Tendenci powered site!" %}</h1>
-      </div>
-      {% endblock %}
-      
+    {% block content %}
+    {# Main content goes here #}
+    <div class="jumbotron">
+      <h1>{% trans "Welcome to your Tendenci powered site!" %}</h1>
     </div>
-    
+    {% endblock %}
+
   </div>
+
   <!-- End -->
-  
+
 </div>
 <footer class="{% block footer_classes %}col-xs-12 col-sm-12 col-md-12{% endblock %}">
   {% block footer %}

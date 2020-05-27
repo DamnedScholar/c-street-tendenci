@@ -1,5 +1,7 @@
 ## Tendenci Theme Update
 The base theme is kind of a mess.
+* `base.html` is the top-level parent, and `default.html` and `default-fullwidth.html` fill in the basic HTML body content, but then `base-wide.html` and `base-column.html` inherit from those. It's confusing to have different files called "base" at different levels of the family tree.
+* There doesn't seem to be a good way for individual page types to decide whether they should have a sidebar or not, if the sidebar is declared in `default.html`. They can make their own, but that's a bad move for maintenance if there are two potential sidebars.
 * I should run `prettier` on all the theme files.
   - Once I do, I should submit a PR to the `tendenci` repo.
 
