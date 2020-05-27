@@ -11,26 +11,78 @@
 
 {% block content %}
 <div id="directory-hero" class="hero"></div>
-    <article id="t-directories-directory-{{ directory.pk }}" class="t-directories-directory">
-        <div class="page-header">
-            <h1>{{ directory.headline }}</h1>
-        </div>
+<article id="t-directories-directory-{{ directory.pk }}" class="t-directories-directory">
+  <div class="hero">
+    <div class="focuspoint"
+      data-focus-x="-0.18" data-focus-y="0.14"
+      data-image-w="2400" data-image-h="1590">
+      <img src="{% static 'img/bigmommas.jpg' %}">
+    </div>
 
-        <div class="t-directories-directory-body">
-            {% if directory.logo %}
-                <p class="t-directories-directory-image-container">
-                    <img class="t-directories-directory-image" src="{{ directory.get_logo_url }}" alt="{{ directory.headline|truncatechars:123 }}" title="{{ directory.headline|truncatechars:123 }}">
-                </p>
-            {% endif %}
+    <h1 id="hero-title">{{ directory.headline }}</h1>
+  </div>
 
-            {{ directory.body|safe }}
-        </div>
+  <div class="flex sm:flex-col md:flex-row-reverse">
+    <div class="sidebar flex flex-col items-center m-4 py-4 px-2 bg-gray-600">
+      {% if directory.logo %}
+        <img class="t-directories-directory-image" src="{{ directory.get_logo_url }}" alt="{{ directory.headline|truncatechars:123 }}" title="{{ directory.headline|truncatechars:123 }}">
+      {% endif %}
 
-		{% if directory.has_social_media %}
-		{% include "directories/include/social_media_links.html" %}
-		{% endif %}
+      <address class="font-serif lg:text-2xl text-gray-100">
+          {% if directory.first_name and directory.last_name %}
+              <p class="font-bold">{{ directory.first_name }} {{ directory.last_name }}</p>
+          {% endif %}
 
-        {% include "directories/meta.html" with show_source=True show_contact=True %}
-    </article>
-    <br />
+          {% if directory.address %}
+              <p class="">{{ directory.address }}</p>
+          {% endif %}
+
+          {% if directory.address2 %}
+              <p class="">{{ directory.address2 }}</p>
+          {% endif %}
+
+          {% if directory.city or directory.state or directory.zip_code %}
+              {% if directory.city %}
+                <p class="">{{ directory.city }}, {{ directory.state }} {{ directory.zip_code }}</p>
+              {% endif %}
+          {% endif %}
+
+          {% if directory.phone %}
+              <p class="">{{ directory.phone|phonenumber }}</p>
+          {% endif %}
+
+          {% if directory.phone2 %}
+              <p class="">{{ directory.phone2|phonenumber }}</p>
+          {% endif %}
+
+          {% if directory.fax %}{% blocktrans with fax=directory.fax %}
+              <p class="">{{ fax }} fax.</p>
+          {% endblocktrans %}{% endif %}
+
+          {% if directory.email %}
+              <p class="">{{ directory.email|obfuscate_email }}</p>
+          {% endif %}
+
+          {% if directory.email2 %}
+              <p class="">{{ directory.email2|obfuscate_email }}</p>
+          {% endif %}
+
+          {% if directory.website %}
+              <p class="">{{ directory.website|urlize }}</p>
+          {% endif %}
+      </address>
+
+      {% if directory.has_social_media %}
+        {% include "directories/include/social_media_links.html" %}
+      {% endif %}
+    </div>
+
+    <div class="flex-auto">
+      {{ directory.body|safe }}
+    </div>
+  </div>
+
+  {% include "directories/meta.html" with show_source=True show_contact=True %}
+</article>
+<br />
 {% endblock %}
