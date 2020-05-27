@@ -29,16 +29,25 @@
 =========================================================== -->
 {% theme_include "header.html" %}<!-- Pulls in Header Include -->
 <!-- Header Ends -->
+<div class="hero {% block hero_classes %}{% endblock %}">
+  {% block hero %}
+    <div class="focuspoint"
+      data-focus-x="-0.18" data-focus-y="0.14"
+      data-image-w="2000" data-image-h="1092">
+      <img src="{% static 'img/Streetscape.jpg' %}">
+    </div>
 
-<div id="page-top">
+    <h1 id="hero-title">Historic C-Street Welcomes You</h1>
+  {% endblock %}
+</div>
+<div id="page-top" class="container">
   <!-- Start -->
-
   <div class="{% block content_classes %} {% endblock %}">
 
     {% block content_messages %}
     {% spaceless %}{% theme_include "base/messages.html" %}{% endspaceless %}
     {% endblock %}
-    
+
     {% block content %}
     {# Main content goes here #}
     <div class="jumbotron">
