@@ -119,9 +119,9 @@ div.focuspoint {
   #site-nav ul.flex>li:not(:first-child) {
     @apply ml-6;
   }
-  /* .hero {
-    @apply h-screen;
-  } */
+  .hero {
+    @apply h-64;
+  }
   #hero-title {
     @apply text-title max-w-5xl;
   }

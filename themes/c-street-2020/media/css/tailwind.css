@@ -1160,9 +1160,9 @@ div.focuspoint {
     margin-left: 1.5rem;
   }
 
-  /* .hero {
-    @apply h-screen;
-  } */
+  .hero {
+    height: 16rem;
+  }
 
   #hero-title {
     font-size: 4rem;
