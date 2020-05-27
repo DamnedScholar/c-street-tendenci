@@ -2,6 +2,14 @@
 
 @tailwind components;
 
+#t-admin-megamenu {
+  @apply text-orange;
+}
+
+.t-admin-inline {
+  display: none; /* Remove this when the site is ready */
+}
+
 div.focuspoint {
   position: absolute;
   @apply w-full h-full;
@@ -28,9 +36,13 @@ div.focuspoint {
 #hero-nav .btn {
   @apply bg-green text-gray-900;
 }
+#site-nav {
+  pointer-events: none;
+}
 #site-nav .btn {
   @apply bg-blue text-gray-200;
   min-width: max-content;
+  pointer-events: auto;
 }
 #site-nav ul.flex>li:not(:first-child) {
   @apply ml-6;
@@ -60,6 +72,19 @@ div.focuspoint {
 
 #site-footer {
   overflow: hidden;
+}
+
+textarea {
+  @apply border rounded-md px-1;
+}
+input {
+  @apply border rounded-full px-1;
+}
+input[type="submit"] {
+  @apply bg-green text-gray-900 text-2xl py-3 px-5 font-bold;
+}
+select {
+  @apply border rounded-full px-1;
 }
 
 @screen sm {
@@ -122,6 +147,9 @@ div.focuspoint {
   }
   .hero {
     @apply h-64;
+  }
+  #front-page-hero {
+    @apply h-96;
   }
   #hero-title {
     @apply text-title max-w-5xl;

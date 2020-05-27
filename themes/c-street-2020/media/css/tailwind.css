@@ -951,6 +951,16 @@ video {
   border-color: #63b3ed;
 }
 
+#t-admin-megamenu {
+  --text-opacity: 1;
+  color: #d1733a;
+  color: rgba(209, 115, 58, var(--text-opacity));
+}
+
+.t-admin-inline {
+  display: none; /* Remove this when the site is ready */
+}
+
 div.focuspoint {
   position: absolute;
   width: 100%;
@@ -1018,6 +1028,10 @@ div.focuspoint {
   color: rgba(54, 69, 79, var(--text-opacity));
 }
 
+#site-nav {
+  pointer-events: none;
+}
+
 #site-nav .btn {
   --bg-opacity: 1;
   background-color: #2d4066;
@@ -1028,6 +1042,7 @@ div.focuspoint {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
+  pointer-events: auto;
 }
 
 #site-nav ul.flex>li:not(:first-child) {
@@ -1062,6 +1077,42 @@ div.focuspoint {
 
 #site-footer {
   overflow: hidden;
+}
+
+textarea {
+  border-width: 1px;
+  border-radius: 0.375rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+input {
+  border-width: 1px;
+  border-radius: 9999px;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+input[type="submit"] {
+  --bg-opacity: 1;
+  background-color: #73a688;
+  background-color: rgba(115, 166, 136, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #36454f;
+  color: rgba(54, 69, 79, var(--text-opacity));
+  font-size: 1.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  font-weight: 700;
+}
+
+select {
+  border-width: 1px;
+  border-radius: 9999px;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 @media (max-width: 767px) {
@@ -1165,6 +1216,10 @@ div.focuspoint {
 
   .hero {
     height: 16rem;
+  }
+
+  #front-page-hero {
+    height: 24rem;
   }
 
   #hero-title {
