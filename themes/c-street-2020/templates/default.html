@@ -38,29 +38,30 @@
     <h1 id="hero-title">Historic C-Street Welcomes You</h1>
   {% endblock %}
 </div>
-<div id="page-top" class="container flex sm:flex-col md:flex-row">
-    <div class="{% block content_classes %}{% endblock %}">
+<div id="page-top" class="container flex sm:flex-col md:flex-row-reverse">
+  <div class="{% block sidebar_classes %}sidebar flex flex-col items-center md:m-4 py-4 px-2 md:bg-gray-600{% endblock %}" id="sidebar">
 
-      {% block content_messages %}
-      {% spaceless %}{% theme_include "base/messages.html" %}{% endspaceless %}
+      {% block sidebar %}
+      <!-- {% theme_include "sidebar.html" %} -->
       {% endblock %}
 
-      {% block content %}
-      {# Main content goes here #}
-      <div class="jumbotron">
-        <h1>{% trans "Welcome to your Tendenci powered site!" %}</h1>
-      </div>
-      {% endblock %}
+  </div>  <!-- close side-bar -->
+  <div class="{% block content_classes %}flex-1 flex-col{% endblock %}">
 
-    </div> <!-- close content -->
+    {% block content_messages %}
+    {% spaceless %}{% theme_include "base/messages.html" %}{% endspaceless %}
+    {% endblock %}
 
-    <div class="{% block sidebar_classes %}sidebar flex flex-col items-center md:m-4 py-4 px-2 md:bg-gray-600{% endblock %}" id="sidebar">
+    {% block content %}
+    {# Main content goes here #}
+    <div class="jumbotron">
+      <h1>{% trans "Welcome to your Tendenci powered site!" %}</h1>
+    </div>
+    {% endblock %}
 
-        {% block sidebar %}
-        <!-- {% theme_include "sidebar.html" %} -->
-        {% endblock %}
+  </div> <!-- close content -->
 
-    </div>  <!-- close side-bar -->
+
 </div> <!-- close page-top -->
 
 <footer class="{% block footer_classes %}col-xs-12 col-sm-12 col-md-12{% endblock %}">
