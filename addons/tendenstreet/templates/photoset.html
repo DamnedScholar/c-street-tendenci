@@ -1,0 +1,12 @@
+
+{% load static %}
+<body>
+    
+    <script src="{% static 'js/photoset.js' %}"></script>
+
+    <a  href="#"
+        data-controller="photoset"
+        data-action="click->photoset#increment"
+        data-count="{{ count }}"
+    >Increment {{ count }}</a>
+</body>
