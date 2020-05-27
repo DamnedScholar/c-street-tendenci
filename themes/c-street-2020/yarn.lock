@@ -7880,6 +7880,11 @@ tailwindcss-animations@^2.0.0:
   dependencies:
     lodash "^4.17.15"
 
+tailwindcss-dropdown@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/tailwindcss-dropdown/-/tailwindcss-dropdown-1.0.0.tgz#1c9958fb93a0f347040afbaf6b163f0572c0031c"
+  integrity sha512-BAtrv25Fx+AlGg2jFe2Vp6s/g+hZFzpGNXnId9iogumtFFkR7FUx+d1PnZZKxtwO04C3rGA+hDoxj1Gzd9Af6Q==
+
 tailwindcss-stimulus-components@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/tailwindcss-stimulus-components/-/tailwindcss-stimulus-components-1.0.2.tgz#cddfd904ff6dbd3ae1851b4326b0401300b15684"

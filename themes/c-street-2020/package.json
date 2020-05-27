@@ -47,6 +47,7 @@
     "sass-brunch": "^3.0.0",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.4",
+    "tailwindcss-dropdown": "^1.0.0",
     "webpack": "^5.0.0-beta.13",
     "webpack-cli": "^3.3.11"
   }

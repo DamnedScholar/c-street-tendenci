@@ -1,16 +1,17 @@
 {% load nav_tags %}
 
+<div class="t-navbar">
+  {% if show_title == "True" %}
+      <h2>{{ nav.title }}</h2>
+  {% endif %}
 
-{% if show_title == "True" %}
-    <h2>{{ nav.title }}</h2>
-{% endif %}
-
-{% if is_site_map %}
-<ul id="t-site-map">
-{% else %}
-<ul class="justify-center flex flex-row md:flex-row sm:flex-col" id="t-navbar-{{ nav.id }}" data-target="dropdown.menu">
-{% endif %}
-    {% for item in items %}
-        {% nav_item item is_site_map=is_site_map %}
-    {% endfor %}
-</ul>
+  {% if is_site_map %}
+  <ul id="t-site-map">
+  {% else %}
+  <ul class="justify-center flex flex-row md:flex-row sm:flex-col" id="t-navbar-{{ nav.id }}" data-target="dropdown.menu">
+  {% endif %}
+      {% for item in items %}
+          {% nav_item item is_site_map=is_site_map %}
+      {% endfor %}
+  </ul>
+</div>
