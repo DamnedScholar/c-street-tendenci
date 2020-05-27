@@ -61,7 +61,7 @@ div.focuspoint {
   overflow: hidden;
 }
 
-@media (max-width: 767px) {
+@screen sm {
   #site-nav .dropdown-menu {
     @apply left-auto right-100 top-0;
   }
@@ -88,7 +88,7 @@ div.focuspoint {
     @apply hidden;
   }
 }
-@media (min-width: 768px) {
+@screen md {
   #site-nav .btn {
     @apply text-base py-1 px-3;
   }
@@ -112,7 +112,7 @@ div.focuspoint {
     @apply hidden;
   }
 }
-@media (min-width: 1024px) {
+@screen lg {
   #site-nav .btn {
     @apply text-lg py-1 px-3;
   }
