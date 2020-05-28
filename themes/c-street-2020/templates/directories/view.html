@@ -2,7 +2,7 @@
 {% load base_filters %}
 {% load base_tags %}
 {% load directory_tags %}
-
+{% load cstreet_tags %}
 
 {% block title %}{{ directory.get_title }}{% endblock %}
 {% block meta_description %}{{ directory.get_description }}{% endblock %}
@@ -22,6 +22,8 @@
 {% block content %}
   <article id="t-directories-directory-{{ directory.pk }}" class="t-directories-directory">
     {{ directory.body|safe }}
+
+    {% photoset with id=2 %}
 
     {% include "directories/meta.html" with show_source=True show_contact=True %}
   </article>

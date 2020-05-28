@@ -16,11 +16,15 @@ bs
 
 // Start StimulusJS
 import { Application, Controller } from "stimulus"
+import ImageGrid from 'stimulus-image-grid'
 import { definitionsFromContext } from "stimulus/webpack-helpers"
 
 const application = Application.start();
 const context = require.context("./controllers", true, /.js$/);
 application.load(definitionsFromContext(context));
+
+// Import stimulus-image-grid
+application.register('image-grid', ImageGrid)
 
 // Import and register all TailwindCSS Components
 // import { Dropdown } from "tailwindcss-stimulus-components"

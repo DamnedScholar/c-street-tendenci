@@ -2,13 +2,26 @@ import { Controller } from 'stimulus';
 import StimulusReflex from 'stimulus_reflex';
 
 export default class extends Controller {
+  const targets = [ 'grid' ]
+
   connect() {
     StimulusReflex.register(this)
+
+    resolvePhotos()
   }
 
-  increment(event) {
-    console.log('increment')
+  resolvePhotos() {
+    kwargs = {  // Leaving space for future arguments
+      photoset: this.data.get('photoset')
+    }
+
+    console.log('Resolving photos for photoset #' + kwargs.photoset)
     event.preventDefault()
-    this.stimulate('PhotosetReflex#increment', 1)
+    this.stimulate('PhotosetReflex#resolve', kwargs)
   }
+
+  // paginate(event) {
+  //   event.preventDefault()
+  //   this.stimulate('PhotosetReflex#paginate')
+  // }
 }

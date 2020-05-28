@@ -1,12 +1,17 @@
 
 {% load static %}
 <body>
-    
+
     <script src="{% static 'js/photoset.js' %}"></script>
 
-    <a  href="#"
-        data-controller="photoset"
-        data-action="click->photoset#increment"
-        data-count="{{ count }}"
-    >Increment {{ count }}</a>
+    <div class="photoset" data-controller="photoset" data-photoset="2">
+      <div
+        data-target="photoset.grid"
+        data-controller="image-grid"
+        data-image-grid-padding-value="10"
+        data-image-grid-target-height-value="150"
+        data-image-grid-display-value="inline-block">
+        <i class="fas fa-spinner animation-spin"></i>
+      </div>
+    </div>
 </body>

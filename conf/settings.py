@@ -39,7 +39,8 @@ ASGI_APPLICATION = 'sockpuppet.routing.application'
 
 INSTALLED_APPS += [
     'channels',
-    'sockpuppet'
+    'sockpuppet',
+    'tendenstreet'
 ]
 
 
