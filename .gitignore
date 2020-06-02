@@ -21,7 +21,7 @@ node_modules
 themes/*/node_modules
 
 # ignore settings
-settings.py
+conf/settings.py
 
 # ignore the symlink monstrosity I use to mock the site
 mock
