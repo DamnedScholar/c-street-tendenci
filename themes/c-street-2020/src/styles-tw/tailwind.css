@@ -24,7 +24,7 @@ div.focuspoint {
 }
 
 #hero-title {
-  @apply font-serif font-bold text-gray-300 z-10;
+  @apply font-serif font-bold text-gray-200 z-10;
   text-shadow: 1px 1px 2px #2d5c66;
 }
 #hero-nav ul {
@@ -65,6 +65,10 @@ div.focuspoint {
   background-clip: padding-box;
   border: 1px solid rgba(38,49,56,0.15);
   border-radius: .25rem;
+  pointer-events: all;
+}
+.dropdown-toggle::after {
+  display: none; /* Remove after I stop using Bootstrap. */
 }
 #site-nav .dropdown-menu.show {
   display: block;

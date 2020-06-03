@@ -997,8 +997,8 @@ div.focuspoint {
   font-family: Crimson Text, serif;
   font-weight: 700;
   --text-opacity: 1;
-  color: #ced7dd;
-  color: rgba(206, 215, 221, var(--text-opacity));
+  color: #e5eaed;
+  color: rgba(229, 234, 237, var(--text-opacity));
   z-index: 10;
   text-shadow: 1px 1px 2px #2d5c66;
 }
@@ -1069,6 +1069,11 @@ div.focuspoint {
   background-clip: padding-box;
   border: 1px solid rgba(38,49,56,0.15);
   border-radius: .25rem;
+  pointer-events: all;
+}
+
+.dropdown-toggle::after {
+  display: none; /* Remove after I stop using Bootstrap. */
 }
 
 #site-nav .dropdown-menu.show {
