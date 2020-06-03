@@ -1,4 +1,43 @@
 --
+-- PostgreSQL database cluster dump
+--
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Roles
+--
+
+CREATE ROLE cstreet;
+ALTER ROLE cstreet WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'md5dada4b4943901b0cc05fa2468731a1cd';
+CREATE ROLE postgres;
+ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS;
+ALTER ROLE cstreet SET client_encoding TO 'UTF8';
+ALTER ROLE cstreet SET default_transaction_isolation TO 'read committed';
+
+
+
+
+
+
+--
+-- Database creation
+--
+
+CREATE DATABASE cstreet WITH TEMPLATE = template0 OWNER = cstreet;
+ALTER DATABASE cstreet SET search_path TO '$user', 'public', 'topology', 'tiger';
+REVOKE CONNECT,TEMPORARY ON DATABASE template1 FROM PUBLIC;
+GRANT CONNECT ON DATABASE template1 TO PUBLIC;
+
+
+\connect cstreet
+
+SET default_transaction_read_only = off;
+
+--
 -- PostgreSQL database dump
 --
 
@@ -14219,6 +14258,9 @@ COPY public.captcha_captchastore (id, challenge, response, hashkey, expiration) 
 3786	URHM	urhm	c4964f2eabd21695c0d0ee30b0d8f9b001c0f32f	2020-06-02 18:11:42.612548+00
 3787	ZCQL	zcql	437d4f912fe0a654d9771294d8cbc84b0091b5e3	2020-06-02 18:11:42.801569+00
 3788	UPIM	upim	18fd75dcd55efcb70519a396e66e5e76ca07de5d	2020-06-02 18:11:42.843547+00
+3802	EWIK	ewik	b64c597e6c52e9dee81d5db3325ef3e0154c4b41	2020-06-03 00:21:49.425615+00
+3803	IJYG	ijyg	45cfe93bad1b093bd2db08498fc6ed3dd527d809	2020-06-03 00:21:49.602443+00
+3804	RNIK	rnik	f36decd1e160577b27de5ae21ada257c300ab344	2020-06-03 00:21:49.639282+00
 3327	GTXT	gtxt	3ed9b27797a3c7a487e1276d32ae6a6d9faf397c	2020-05-27 01:25:39.543502+00
 3328	QUPQ	qupq	5978aa0858959c4183947331f4a419c7f8c8ecf5	2020-05-27 01:25:39.639699+00
 3340	JWNA	jwna	b497f09cfafdbdcc3df4dfce2dbf452cfdcb11b8	2020-05-27 03:43:28.742696+00
@@ -14299,6 +14341,8 @@ COPY public.captcha_captchastore (id, challenge, response, hashkey, expiration) 
 3789	LFWV	lfwv	bbd71aedbf58f7702c136409a2793538e3882ecd	2020-06-02 18:42:23.755824+00
 3790	XIMP	ximp	74ecc48516a552e7ceffa1a6ea8165a9ff9b6d57	2020-06-02 18:42:23.913572+00
 3791	FEII	feii	540f79f089382c5931723359bdb17f0a4e0b78eb	2020-06-02 18:42:23.949793+00
+3805	QZVT	qzvt	1e604f5ab8197303f6547344a8571f73d152f33d	2020-06-03 00:21:50.899511+00
+3806	SZZD	szzd	2a1235e32c1c6b7b7b754ff8513460f0d85bbe72	2020-06-03 00:21:50.937802+00
 3329	TAWQ	tawq	fcc33e6a2708fc273f299d36e33c20ba8c13fddb	2020-05-27 01:30:18.726907+00
 3330	ZZKG	zzkg	7791a46a65e7668ca0e97838b3f1ac65f27d3d86	2020-05-27 01:30:18.774478+00
 3343	CLSA	clsa	dc5fad8c7a88744f20fe19a44bbef6ab8d47f667	2020-05-27 04:20:54.943804+00
@@ -14378,6 +14422,9 @@ COPY public.captcha_captchastore (id, challenge, response, hashkey, expiration) 
 3792	MRVR	mrvr	27d42b420004dd9842eb44cec941e1bfb6e61bcd	2020-06-02 19:01:20.15857+00
 3793	FFAT	ffat	f370362a47e882f05c631021165430d507796c08	2020-06-02 19:01:20.383431+00
 3794	OPAQ	opaq	67a028f23fece133cb2edc94811abfa4f92abe7d	2020-06-02 19:01:20.422457+00
+3807	QYVT	qyvt	ffaf6adec06e6049d6aa27ca3e206738ebea0bec	2020-06-03 02:17:03.614693+00
+3808	ODCZ	odcz	88ad5bc9c0a8e99c9ff159712301e3823f225511	2020-06-03 02:17:03.785857+00
+3809	RAQT	raqt	5ec4e25dcced14cd78391f2bd69a3b23be90f8bb	2020-06-03 02:17:03.823484+00
 3331	ZMWN	zmwn	ead9724d23e3c6ecb1814b9db6490c8944841ddd	2020-05-27 01:55:43.593103+00
 3332	RBVQ	rbvq	899f55de0dcc579955c3e69419b679b31058b1a5	2020-05-27 01:55:43.641094+00
 3345	ZUJJ	zujj	08869c9a51116d06fdf1d39f647139f9daa4566a	2020-05-27 04:21:03.28518+00
@@ -14456,6 +14503,9 @@ COPY public.captcha_captchastore (id, challenge, response, hashkey, expiration) 
 3795	AWVA	awva	0e8b4f8fe8b48b580ee1b40e8ba028536e0831b2	2020-06-03 00:05:41.238082+00
 3796	XSZZ	xszz	478530e5fd6168556166c10513185aa903be4d7a	2020-06-03 00:05:41.538942+00
 3797	BLVW	blvw	85c638863b31fa356bd5650f094050b94beabe68	2020-06-03 00:05:41.57895+00
+3810	VSAR	vsar	60807f6e7816ddc73aaeb68f11a9bbf0186e0412	2020-06-03 05:17:50.9654+00
+3811	EXSQ	exsq	d096785609f8138e09c677d505123007495c1c81	2020-06-03 05:17:51.129241+00
+3812	YACB	yacb	ec4d76b17d6b97322dd2348c0501a7c8d0382d15	2020-06-03 05:17:51.174596+00
 3333	XPWH	xpwh	9e70f8b780230893e164cfb34e5e878a67f9cc83	2020-05-27 01:55:52.365979+00
 3334	FTAK	ftak	33a3f7425eca21c3a638b62d4c1ef4f2834d6ff2	2020-05-27 01:55:52.451605+00
 3347	IGDM	igdm	675ba594030a7dbd74e10180c989fca4e4bca487	2020-05-27 04:23:22.484884+00
@@ -15842,8 +15892,8 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
 qi23p6zwem1p0oqjy5ggjgd4ur8cntie	OGMxMGY2NDc4ZGE4NWMxMTViNmQyMWE0YjdmNzAyNWYyNzYyMWRhNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidGVuZGVuY2kuYXBwcy5wZXJtcy5iYWNrZW5kLk9iamVjdFBlcm1CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjQ2MzY0ZTRmYWUxYzMzYWI2YzA0MDE2Y2YwZTJlOWNmZmY4NTQ4ZSIsIl9zZXNzaW9uX2V4cGlyeSI6MTIwOTYwMCwiZGphbmdvX2xhbmd1YWdlIjoiZW4tdXMifQ==	2020-06-12 21:02:19.275313+00
-suttttsgly4ugxebygb5bg9bya61577c	OGMxMGY2NDc4ZGE4NWMxMTViNmQyMWE0YjdmNzAyNWYyNzYyMWRhNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidGVuZGVuY2kuYXBwcy5wZXJtcy5iYWNrZW5kLk9iamVjdFBlcm1CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjQ2MzY0ZTRmYWUxYzMzYWI2YzA0MDE2Y2YwZTJlOWNmZmY4NTQ4ZSIsIl9zZXNzaW9uX2V4cGlyeSI6MTIwOTYwMCwiZGphbmdvX2xhbmd1YWdlIjoiZW4tdXMifQ==	2020-06-17 00:05:22.331441+00
 ariuu012d08nf6y6c0l7i3cvwvjymevt	OGMxMGY2NDc4ZGE4NWMxMTViNmQyMWE0YjdmNzAyNWYyNzYyMWRhNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidGVuZGVuY2kuYXBwcy5wZXJtcy5iYWNrZW5kLk9iamVjdFBlcm1CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjQ2MzY0ZTRmYWUxYzMzYWI2YzA0MDE2Y2YwZTJlOWNmZmY4NTQ4ZSIsIl9zZXNzaW9uX2V4cGlyeSI6MTIwOTYwMCwiZGphbmdvX2xhbmd1YWdlIjoiZW4tdXMifQ==	2020-05-17 16:04:20.15372+00
+suttttsgly4ugxebygb5bg9bya61577c	OGMxMGY2NDc4ZGE4NWMxMTViNmQyMWE0YjdmNzAyNWYyNzYyMWRhNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoidGVuZGVuY2kuYXBwcy5wZXJtcy5iYWNrZW5kLk9iamVjdFBlcm1CYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNjQ2MzY0ZTRmYWUxYzMzYWI2YzA0MDE2Y2YwZTJlOWNmZmY4NTQ4ZSIsIl9zZXNzaW9uX2V4cGlyeSI6MTIwOTYwMCwiZGphbmdvX2xhbmd1YWdlIjoiZW4tdXMifQ==	2020-06-17 05:31:59.425315+00
 \.
 
 
@@ -17247,6 +17297,10 @@ COPY public.event_logs_eventlog (id, object_id, source, event_id, event_name, ev
 1337	\N		0						anonymous	\N	163.172.50.9	127.0.0.1	/		\N		Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36	GET		2020-06-03 00:00:40.752484+00	85487a5d-1718-405f-aaf1-1b7f963562d0	homepage	homepage		\N	\N	\N	\N
 1338	2		0						damnedscholar	stickfigureonfire@gmail.com	69.55.156.129	127.0.0.1	/accounts/login/	https://eclectic-co.com/accounts/login/?next=/dashboard/	damnedscholar		Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36	POST	next=/dashboard/	2020-06-03 00:03:54.74939+00	a787b4eb-868f-4587-9de6-5f6ee0cb9947	accounts	login	user	5	\N	\N	2
 1339	\N		0					suttttsgly4ugxebygb5bg9bya61577c	damnedscholar	stickfigureonfire@gmail.com	69.55.156.129	127.0.0.1	/dashboard/	https://eclectic-co.com/accounts/login/?next=/dashboard/	\N		Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36	GET		2020-06-03 00:03:54.848575+00	48a94d9a-e779-4c66-88a2-a27e543fbc7d	dashboard	new		\N	\N	\N	2
+1340	\N		0						anonymous	\N	35.188.148.93	127.0.0.1	/		\N		Mozilla/5.0 (Linux; Android 5.1.1; SM-J111F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36	GET		2020-06-03 00:16:49.004256+00	e03b968d-e77f-47e8-b3bd-6a5f8aa70c18	homepage	homepage		\N	\N	\N	\N
+1341	13		0						anonymous	\N	35.188.148.93	127.0.0.1	/test/		test		Mozilla/5.0 (Linux; Android 5.1.1; SM-J111F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.90 Mobile Safari/537.36	GET		2020-06-03 00:16:50.300949+00	88b7511a-62d8-11e5-aebb-0242ac110076	pages	index	page	60	\N	\N	\N
+1342	\N		0						anonymous	\N	184.105.139.67	127.0.0.1	/		\N			GET		2020-06-03 02:12:02.964922+00	e1bde6f5-6484-4550-86bb-04ec22755ec0	homepage	homepage		\N	\N	\N	\N
+1343	\N		0						anonymous	\N	23.237.4.26	127.0.0.1	/		\N		Mozilla/5.0 (compatible; AlphaBot/3.2; +http://alphaseobot.com/bot.html)	GET		2020-06-03 05:12:50.550804+00	39881a77-1d9a-4463-aa99-f010a64bbb70	homepage	homepage		\N	\N	\N	\N
 \.
 
 
@@ -18177,7 +18231,7 @@ COPY public.handler404_report404 (id, url, count) FROM stdin;
 30	/sito/wp-includes/wlwmanifest.xml	4
 72	/struts2_2.3.15.1-showcase/showcase.action	1
 83	//index.jsp	1
-1	/favicon.ico	46
+1	/favicon.ico	48
 84	/theblog/license.txt	1
 7	/solr/	9
 107	/2019/license.txt	1
@@ -18189,6 +18243,7 @@ COPY public.handler404_report404 (id, url, count) FROM stdin;
 64	/admin/config.php	5
 87	/SIPml-api.js	4
 88	/cgi/%3Faction%3DgetInfo	4
+91	/blog/	2
 39	/api/v1/a/	1
 73	/Struts2XMLHelloWorld/User/home.action	1
 100	/manager/	5
@@ -18198,16 +18253,12 @@ COPY public.handler404_report404 (id, url, count) FROM stdin;
 108	/2018/license.txt	1
 36	/asdasdasd/	6
 80	/b/license.txt	1
-89	/wordpress/	1
 70	/frame/first.action	2
 71	/notFound.action	2
 124	/cgi-bin/luci/	17
-90	/wp/	1
-91	/blog/	1
 92	/blogs/	1
 77	/wordpress/license.txt	1
 120	/backup/license.txt	1
-93	/old/	1
 141	/manager/html/	3
 14	/wp-includes/wlwmanifest.xml	4
 15	/xmlrpc.php%3Frsd	4
@@ -18234,7 +18285,6 @@ COPY public.handler404_report404 (id, url, count) FROM stdin;
 82	/blogs/license.txt	1
 94	/tech/	1
 95	/landing/	1
-96	/new/	1
 102	/theme-editor/editor/	2
 104	/careers/	1
 97	/2/license.txt	1
@@ -18265,7 +18315,6 @@ COPY public.handler404_report404 (id, url, count) FROM stdin;
 67	/1/license.txt	2
 99	/api/	2
 54	/license.txt	2
-56	/temp/	2
 115	/owa/auth/logon.aspx	2
 62	/admin/i18n/readme.txt	5
 59	/www/license.txt	2
@@ -18284,17 +18333,38 @@ COPY public.handler404_report404 (id, url, count) FROM stdin;
 58	/ads.txt	9
 152	/blog/wp-login.php	1
 118	/phpmyadmin/scripts/setup.php	10
+90	/wp/	2
 53	/phpMyAdmin/scripts/setup.php	11
 57	/humans.txt	7
+89	/wordpress/	2
+96	/new/	2
+93	/old/	2
+56	/temp/	3
 155	/data.php	5
+161	/main/	1
+162	/site/	1
+163	/backup/	1
+164	/demo/	1
+165	/home/	1
+166	/tmp/	1
+167	/cms/	1
 129	/dashboard/themes/c-street-2020/dist/main.js	2
+168	/dev/	1
+169	/old-wp/	1
+170	/web/	1
 144	/administrator/	6
 145	/administrator/index.php	6
 130	/api/v1/pods/	1
 131	/tmp/license.txt	1
+171	/old-site/	1
 146	/wp-admin/	6
+172	/2018/	1
+173	/2019/	1
 153	/wp/wp-login.php	1
 136	/site/license.txt	1
+174	/bk/	1
+175	/wp1/	1
+176	/wp2/	1
 142	/h2-console/	2
 133	/home.asp	13
 134	/login.cgi%3Furi%3D	12
@@ -18303,9 +18373,17 @@ COPY public.handler404_report404 (id, url, count) FROM stdin;
 126	/remote/login/%3Flang%3Den	17
 127	/index.asp	16
 128	/htmlV/welcomeMain.htm	16
+177	/v1/	1
+178	/v2/	1
+179	/bak/	1
 154	/wordpress/wp-login.php	2
+180	/sito/	1
+181	/2020/	1
 138	/admin/connection/	1
+182	/%2B/	1
+183	/admin/fckeditor/editor/filemanager/connectors/uploadtest.html	2
 156	/index.php%3Fparam1%3Dassert%26param2%3Dprint%28md5%2857575848371%29%29%3B/index.php%3Fparam1%3Dassert%26param2%3Dprint%28md5%2857575848371%29%29%3B	1
+184	/fckeditor/editor/filemanager/connectors/uploadtest.html	2
 12	/api/v1/	3
 51	/cgi-bin/test-cgi/	12
 157	/m/calendar/Calendar.html	1
@@ -20571,7 +20649,7 @@ SELECT pg_catalog.setval('public.campaign_monitor_template_id_seq', 1, false);
 -- Name: captcha_captchastore_id_seq; Type: SEQUENCE SET; Schema: public; Owner: cstreet
 --
 
-SELECT pg_catalog.setval('public.captcha_captchastore_id_seq', 3801, true);
+SELECT pg_catalog.setval('public.captcha_captchastore_id_seq', 3812, true);
 
 
 --
@@ -21012,7 +21090,7 @@ SELECT pg_catalog.setval('public.entities_entity_id_seq', 72, true);
 -- Name: event_logs_eventlog_id_seq; Type: SEQUENCE SET; Schema: public; Owner: cstreet
 --
 
-SELECT pg_catalog.setval('public.event_logs_eventlog_id_seq', 1339, true);
+SELECT pg_catalog.setval('public.event_logs_eventlog_id_seq', 1343, true);
 
 
 --
@@ -21404,7 +21482,7 @@ SELECT pg_catalog.setval('public.forums_topicreadtracker_id_seq', 1, false);
 -- Name: handler404_report404_id_seq; Type: SEQUENCE SET; Schema: public; Owner: cstreet
 --
 
-SELECT pg_catalog.setval('public.handler404_report404_id_seq', 160, true);
+SELECT pg_catalog.setval('public.handler404_report404_id_seq', 184, true);
 
 
 --
@@ -33237,5 +33315,103 @@ ALTER TABLE ONLY public.wp_importer_blogimport
 
 --
 -- PostgreSQL database dump complete
+--
+
+\connect postgres
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1)
+-- Dumped by pg_dump version 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: DATABASE postgres; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON DATABASE postgres IS 'default administrative connection database';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect template1
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1)
+-- Dumped by pg_dump version 10.12 (Ubuntu 10.12-0ubuntu0.18.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: DATABASE template1; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON DATABASE template1 IS 'default template for new databases';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database cluster dump complete
 --
 
