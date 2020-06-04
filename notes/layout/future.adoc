@@ -7,3 +7,6 @@
 ## A more interactive site might want to feel like AJAX
 * `django-sockpuppet` allows for sending data back to the server and reloading the template. Alpine could make HTTP requests, but integrating the state management into Django could be useful. This requires a page reload whenever it happens, so that the server can re-render the template.
   - https://github.com/jonathan-s/django-sockpuppet
+
+## Some of the dependencies are old
+* https://github.com/Fantomas42/django-tagging is unmaintained. A more modern approach might upgrade to https://github.com/jazzband/django-taggit

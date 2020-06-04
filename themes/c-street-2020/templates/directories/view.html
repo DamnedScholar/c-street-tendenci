@@ -23,7 +23,7 @@
   <article id="t-directories-directory-{{ directory.pk }}" class="t-directories-directory">
     {{ directory.body|safe }}
 
-    {% photoset with id=2 %}
+    {% photoset id=2 %}
 
     {% include "directories/meta.html" with show_source=True show_contact=True %}
   </article>

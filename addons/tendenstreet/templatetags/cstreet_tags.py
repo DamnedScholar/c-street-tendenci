@@ -3,7 +3,10 @@ from addons.tendenstreet.views.photoset import PhotosetView
 
 register = template.Library()
 
-def photoset(**kwargs):
-    return PhotosetView.as_view(kwargs)
+def photoset(context, id=0):
+    if id == 0:
+        return "No photoset specified."
 
-register.inclusion_tag('photoset.html')(photoset)
+    PhotosetView.as_view(extra_context={'id': id})
+
+register.inclusion_tag('photoset.html', takes_context=True)(photoset)

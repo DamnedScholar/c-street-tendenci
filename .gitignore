@@ -14,6 +14,8 @@
 
 # ignore files uploaded to the site to save space
 media
+media-original
+media-download
 # but not theme files
 !themes/*/media
 # ignore any node_modules directories
@@ -21,7 +23,7 @@ node_modules
 themes/*/node_modules
 
 # ignore settings
-conf/settings.py
+*/settings.py
 
 # ignore the symlink monstrosity I use to mock the site
 mock

@@ -4,14 +4,19 @@
 
     <script src="{% static 'js/photoset.js' %}"></script>
 
-    <div class="photoset" data-controller="photoset" data-photoset="2">
+    <div class="photoset border border-gray-200" data-controller="photoset" data-photoset="{{ id }}">
       <div
         data-target="photoset.grid"
         data-controller="image-grid"
         data-image-grid-padding-value="10"
         data-image-grid-target-height-value="150"
         data-image-grid-display-value="inline-block">
-        <i class="fas fa-spinner animation-spin"></i>
+        {% for photo in object_list %}
+          <img src="{{ photo.get_small_url }}" alt="{{ photo.title }}">
+        {% endfor %}
+        <!-- <i class="fas fa-spinner animation-spin"></i> -->
       </div>
+
+      <!-- <a data-reflex="click->Photoset#resolve" class="btn btn-primary">Resolve Images</a> -->
     </div>
 </body>
