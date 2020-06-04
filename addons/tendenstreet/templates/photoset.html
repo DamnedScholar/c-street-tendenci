@@ -4,15 +4,20 @@
 
     <script src="{% static 'js/photoset.js' %}"></script>
 
-    <div class="photoset border border-gray-200" data-controller="photoset" data-photoset="{{ id }}">
+    <div class="photoset" data-controller="photoset" data-query="{{ query }}">
       <div
+        class="my-4 grid grid-cols-3 gap-4"
         data-target="photoset.grid"
         data-controller="image-grid"
-        data-image-grid-padding-value="10"
+        data-image-grid-padding-value="0"
         data-image-grid-target-height-value="150"
         data-image-grid-display-value="inline-block">
-        {% for photo in object_list %}
-          <img src="{{ photo.get_small_url }}" alt="{{ photo.title }}">
+        {% for photo in photos %}
+          <div class="">
+            <a href="{% url "photo" photo.pk %}">
+              <img src="{{ photo.get_small_url }}" alt="{{ photo.title }}">
+            </a>
+          </div>
         {% endfor %}
         <!-- <i class="fas fa-spinner animation-spin"></i> -->
       </div>
