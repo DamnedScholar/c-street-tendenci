@@ -5,11 +5,12 @@
 
 from tendenci.urls import handler500  # noqa: F401
 from tendenci.urls import pre_urlpatterns, post_urlpatterns
+from tendenci.urls import remove_url_for_include
 from django.conf.urls import url, include  # noqa: F401
-
+from tendenci.apps.site_settings.utils import get_setting
 
 urlpatterns = pre_urlpatterns + [
-    #url(r'^', include('example_app.urls')),
+    url(r'^', include('addons.custom_directories.urls')),
     #url(r'^tickets/', include('tendenci.apps.helpdesk.urls')),
 ] + post_urlpatterns
 
@@ -21,3 +22,6 @@ urlpatterns = pre_urlpatterns + [
 #remove_includes = ['app1.urls', 'app2.urls']
 #for include in remove_includes:
 #    remove_url_for_include(urlpatterns, include)
+remove_includes = ['tendenci.apps.directories.urls']
+for include in remove_includes:
+   remove_url_for_include(urlpatterns, include)

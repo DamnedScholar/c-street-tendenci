@@ -54,6 +54,8 @@ def details(request, slug=None, template_name="directories/view.html"):
         raise Http403
 
 
+
+
 @is_enabled('directories')
 def search(request, template_name="directories/search.html"):
     filters = get_query_filters(request.user, 'directories.view_directory')

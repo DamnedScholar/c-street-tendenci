@@ -9035,10 +9035,6 @@ select {
   width: 100vw;
 }
 
-.w-thumbnail {
-  width: 200px;
-}
-
 .z-0 {
   z-index: 0;
 }
@@ -19653,10 +19649,6 @@ select {
 
   .sm\:w-screen {
     width: 100vw;
-  }
-
-  .sm\:w-thumbnail {
-    width: 200px;
   }
 
   .sm\:z-0 {
@@ -30276,10 +30268,6 @@ select {
     width: 100vw;
   }
 
-  .md\:w-thumbnail {
-    width: 200px;
-  }
-
   .md\:z-0 {
     z-index: 0;
   }
@@ -40897,10 +40885,6 @@ select {
     width: 100vw;
   }
 
-  .lg\:w-thumbnail {
-    width: 200px;
-  }
-
   .lg\:z-0 {
     z-index: 0;
   }
@@ -51516,10 +51500,6 @@ select {
 
   .xl\:w-screen {
     width: 100vw;
-  }
-
-  .xl\:w-thumbnail {
-    width: 200px;
   }
 
   .xl\:z-0 {

@@ -1,0 +1,192 @@
+{% extends "directories/base.html" %}
+{% load base_tags %}
+{% load base_filters %}
+{% load bootstrap_pagination_tags %}
+{% load directory_tags %}
+{% load search_tags %}
+
+
+{% block title %}
+    {% if MODULE_DIRECTORIES_LABEL_PLURAL %}
+        {% blocktrans %}{{ MODULE_DIRECTORIES_LABEL_PLURAL }} List{% endblocktrans %}
+    {% else %}
+        {% trans "Directories List" %}
+    {% endif %} - {{ block.super }}
+{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="alternate" type="application/rss+xml" title="{% trans 'Latest' %}  {% firstof MODULE_DIRECTORIES_LABEL_PLURAL trans 'Directories' %}" href="{% url 'directory.feed' %}" />
+    <script>
+        // init Isotope
+        var iso = new Isotope( '.grid', {
+            itemSelector: '.directory-listing',
+            layoutMode: 'fitRows'
+        })
+
+        // filter functions
+        var filterFns = {
+            filterTags: function( itemElem ) {
+                var taglist = itemElem.querySelector('.tags').innerText
+                return taglist.match( /ium$/ )
+            },
+            // show if name ends with -ium
+            ium: function( itemElem ) {
+                var name = itemElem.querySelector('.name').textContent
+                return name.match( /ium$/ )
+            }
+        };
+
+        // bind filter button click
+        var filtersElem = document.querySelector('.filters-button-group');
+        filtersElem.addEventListener( 'click', function( event ) {
+        // only work with buttons
+        if ( !matchesSelector( event.target, 'button' ) ) {
+            return;
+        }
+        var filterValue = event.target.getAttribute('data-filter');
+        // use matching filter function
+        filterValue = filterFns[ filterValue ] || filterValue;
+        iso.arrange({ filter: filterValue });
+        });
+
+        // change is-checked class on buttons
+        var buttonGroups = document.querySelectorAll('.button-group');
+        for ( var i=0, len = buttonGroups.length; i < len; i++ ) {
+        var buttonGroup = buttonGroups[i];
+        radioButtonGroup( buttonGroup );
+        }
+
+        function radioButtonGroup( buttonGroup ) {
+        buttonGroup.addEventListener( 'click', function( event ) {
+            // only work with buttons
+            if ( !matchesSelector( event.target, 'button' ) ) {
+            return;
+            }
+            buttonGroup.querySelector('.is-checked').classList.remove('is-checked');
+            event.target.classList.add('is-checked');
+        });
+        }
+    </script>
+{% endblock %}
+
+{% block content_classes %}{{ block.super }} t-search-view{% endblock %}
+
+{% block hero %}
+  <div class="focuspoint"
+    data-focus-x="{{ focus.x }}" data-focus-y="{{ focus.y }}"
+    data-image-w="{{ size.w }}" data-image-h="{{ size.h }}">
+    <img src="{% static hero %}">
+  </div>
+
+  <h1 id="hero-title">{{ headline }}</h1>
+{% endblock %}
+
+{% block sidebar %}
+    
+{% endblock %}
+
+{% block content %}
+    <section class="grid grid-cols-3 gap-4"
+        data-isotope='{ "itemSelector": ".directory-listing", "layoutMode": "fitRows" }'>
+        {% for directory in directories %}
+            <article class="directory-listing flex flex-col items-center">
+                <a href="{{ directory.link }}">
+                    <div class="h-thumbnail w-thumbnail flex flex-col justify-center">
+                        <img
+                        class=""
+                        src="{{ directory.image.url }}"
+                        alt="{% firstof directory.headline trans 'Untitled' %}">
+                    </div>
+                </a>
+            
+                <address class="flex flex-col text-center">
+                <a href="{{ directory.link }}">
+                    <span class="text-2xl inline-block">{% firstof directory.headline trans "Untitled" %}</span>
+                    <span class="serif italic text-lg inline-block">{{ directory.address }}</span>
+                </a>
+                {% if directory.website %}
+                    <a href="{{directory.website}}" class="text-green text-lg">
+                        Visit them at <span class="mono">{{directory.website_display}}</span>!
+                    </a>
+                {% endif %}
+                <div class="flex flex-row flex-wrap justify-center">
+                    {% if directory.facebook %}
+                    <div class="px-2">
+                        <a href="{{directory.facebook}}" class="text-green text-lg">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if directory.instagram %}
+                    <div class="px-2">
+                        <a href="{{directory.instagram}}" class="text-green text-lg">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if directory.twitter %}
+                    <div class="px-2">
+                        <a href="{{directory.twitter}}" class="text-green text-lg">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if directory.linkedin %}
+                    <div class="px-2">
+                        <a href="{{directory.linkedin}}" class="text-green text-lg">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+                </address>
+                
+                <!-- category OR "LEVEL" -->
+                {% with directory.category_set as directory_cat %}
+                
+                <ul class="list-unstyled capitalize">
+                {% if directory.tags %}
+                <li class="tags">
+                    <strong>{% trans "Tags:" %}</strong>
+                    {% for tag in directory.tags|tag_split %}
+                    <a href="{% url 'directories' %}?q=tag:{{ tag|lower|urlencode }}">{% blocktrans with tag_instance=tag %}{{ tag_instance }},{% endblocktrans %}</a>
+                    {% endfor %}
+                </li>
+                {% endif %}
+                
+                </ul>
+                
+                {% endwith %}
+                
+                
+                <!-- tags OR "SPECIALTY" -->
+        
+                
+                
+                <p class="item-content">
+                {% if directory.summary %}
+                {{ directory.summary|striptags|truncatewords:15|safe }}
+                {% else %}
+                {{ directory.body|striptags|truncatewords:15|safe }}
+                {% endif %}
+                </p>
+            
+            </article>
+        {% empty %}
+            {% if user.profile.is_superuser %}
+                <p><a href="{% url 'directory.add' %}">
+                    {% if MODULE_DIRECTORIES_LABEL %}
+                        {% blocktrans %}
+                            Add a New {{ MODULE_DIRECTORIES_LABEL }}
+                        {% endblocktrans %}
+                    {% else %}
+                        {% trans "Add a New Directory" %}
+                    {% endif %}
+                </a></p>
+            {% endif %}
+        {% endfor %}
+    </section>
+
+    {% paginate %}
+{% endblock %}

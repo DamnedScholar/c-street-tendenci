@@ -1,0 +1,12 @@
+
+{% load static %}
+<body>
+    
+    <script src="{% static 'js/isotope.js' %}"></script>
+
+    <a  href="#"
+        data-controller="isotope"
+        data-action="click->isotope#increment"
+        data-count="{{ count }}"
+    >Increment {{ count }}</a>
+</body>

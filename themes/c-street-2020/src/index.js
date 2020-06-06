@@ -5,6 +5,8 @@ require('./styles-bs/base.sass')
 // Importing Focuspoint
 require('jquery-focuspoint')
 
+require('isotope-layout')
+
 // For Bootstrap compatibility, jQuery needs to be attached to `window`
 // jquery = $
 // window.jQuery = $

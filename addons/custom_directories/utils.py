@@ -1,15 +1,7 @@
-from django import template
-from django.shortcuts import get_object_or_404
 from django.db.models import Q
-from addons.tendenstreet.views.photoset import PhotosetView
 from tendenci.apps.photos.models import Image, PhotoSet, AlbumCover, License
 
-from addons.custom_directories.utils import get_images_for_entry
-
-register = template.Library()
-
-@register.inclusion_tag('photoset.html', takes_context=True)
-def photoset(context, query=""):
+def get_images_for_entry(query):
     query_spaceless = query.replace(' ','_')
 
     sets = PhotoSet.objects.filter(     # Look up all matching sets
@@ -25,7 +17,4 @@ def photoset(context, query=""):
         s_photos = Image.objects.filter(photoset=s)
         result = result.union(s_photos)
 
-    return {
-        'photos': result,
-        'query': query
-    }
+    return result

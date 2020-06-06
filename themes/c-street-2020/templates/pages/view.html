@@ -14,6 +14,16 @@
 
 {% block banner %}{% endblock %}
 
+{% block hero %}
+  <div class="focuspoint"
+    data-focus-x="0.5" data-focus-y="0.5"
+    data-image-w="" data-image-h="">
+    <img src="{{ page.get_header_image_url }}">
+  </div>
+
+  <h1 id="hero-title">{{ page.title }}</h1>
+{% endblock %}
+
 {% block content %}
 <article id="t-pages-page-{{ page.pk }}" class="t-pages-page">
   {% if page.title %}
@@ -23,7 +33,7 @@
     <img src="{{ page.get_header_image_url }}" alt="page header" title="page header" class="img-responsive" />
     {% endif %}
     
-    <h1>
+    <!-- <h1>
       {{ page.title }}
       {% if request.user.is_authenticated %}
       {% if request.user.is_superuser %}
@@ -31,7 +41,7 @@
       {% endif %}
       {% if not page.is_public %}<i class="fa fa-lock pulll-right text-danger"></i>{% endif %}
       {% endif %}
-    </h1>
+    </h1> -->
   </div>
   {% endif %}
   

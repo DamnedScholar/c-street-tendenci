@@ -179,6 +179,7 @@ module.exports = {
       ...theme('spacing'),
       full: '100%',
       screen: '100vh',
+      thumbnail: '200px'
     }),
     inset: {
       '0': '0',
@@ -223,6 +224,7 @@ module.exports = {
     maxHeight: {
       full: '100%',
       screen: '100vh',
+      thumbnail: '200px',
     },
     maxWidth: (theme, { breakpoints }) => ({
       none: 'none',
@@ -237,6 +239,7 @@ module.exports = {
       '5xl': '64rem',
       '6xl': '72rem',
       full: '100%',
+      thumbnail: '200px',
       ...breakpoints(theme('screens')),
     }),
     minHeight: (theme) => ({
@@ -332,6 +335,7 @@ module.exports = {
       '11/12': '91.666667%',
       full: '100%',
       screen: '100vw',
+      thumbnail: '200px'
     }),
     zIndex: {
       auto: 'auto',

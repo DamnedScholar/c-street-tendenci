@@ -3,6 +3,8 @@ from tendenci.apps.site_settings.utils import get_setting
 from . import views
 from .feeds import LatestEntriesFeed
 
+# Custom categories
+from custom_directories.views import cats_regex
 
 urlpath = get_setting('module', 'directories', 'url')
 if not urlpath:
@@ -40,6 +42,8 @@ urlpatterns = [
 
     url(r'^%s/get_subcategories/$' % urlpath, views.get_subcategories, name="directory.get_subcategories"),
 
+    # Custom category pages
+    url(r'^%s/(?P<cat>(eat-and-drink|shopping|lifestyle|personal-services|venues-and-events|rentals|professionals)/$' % (urlpath, cats_regex), views.category, name="directory.category"),
 
     url(r'^%s/(?P<slug>[\w\-\/]+)/$' % urlpath, views.details, name="directory"),
 ]

@@ -1,35 +1,43 @@
 {% load base_filters %}
 {% load base_tags %}
 {% load perm_tags %}
-
+<!-- 
 {% has_perm user directories.change_directory directory as can_edit_directory %}
-{% has_perm user directories.delete_directory directory as can_delete_directory %}
+{% has_perm user directories.delete_directory directory as can_delete_directory %} -->
 
 {% if forloop.first %}<div class="row">{% endif %}
 <div class="col-sm-3">
   <article class="panel panel-default t-directories-search-result t-search-result">
     <div class="panel-heading t-search-result-heading directories-heading">
       
-      {% if directory.logo %}
-      <p class="t-directories-directory-image-container text-center">
-        <img class="t-directories-directory-image img-responsive" src="{{ directory.get_logo_url }}" alt="{% firstof directory.headline trans 'Untitled' %}">
-      </p>
-      {% endif %}
+      
+      <a href="{{ directory.get_absolute_url }}">
+        <p class="t-directories-directory-image-container text-center">
+          <img
+            class="t-directories-directory-image img-responsive"
+            src="{% if directory.logo %}{{ directory.get_logo_url }}{% else %}{{ directory.image.get_small_url }}{% endif %}"
+            alt="{% firstof directory.headline trans 'Untitled' %}">
+        </p>
+      </a>
+      
       
     </div>
     
     <div class="panel-body t-search-result-body directories-body">
 
-      <h4><a href="{{ directory.get_absolute_url }}">
-        {% firstof directory.headline trans "Untitled" %}</a></h4>
-      
+      <address class="text-2xl flex flex-col">
+        <a href="{{ directory.get_absolute_url }}">
+          <span class="text-2xl inline-block">{% firstof directory.headline trans "Untitled" %}</span>
+          <span class="serif italic text-lg inline-block">{{ directory.address }}</span>
+        </a>
+      </address>
       
       <!-- category OR "LEVEL" -->
       {% with directory.category_set as directory_cat %}
       
       <ul class="list-unstyled capitalize">
         {% if directory_cat.category %}
-        <li><strong>{% trans "Category:" %}</strong> <a href="{% url 'directories' %}?q=category:{{ directory_cat.category }}">{{ directory_cat.category }}</a></li>
+        <!-- <li><strong>{% trans "Category:" %}</strong> <a href="{% url 'directories' %}?q=category:{{ directory_cat.category }}">{{ directory_cat.category }}</a></li> -->
         <!-- {# if directory_cat.sub_category #}
         <li></li>
         <li><strong>{# trans "Specialty:" #}</strong> <a href="{% url 'directories' %}?q=sub_category:{{ directory_cat.sub_category }}">{{ directory_cat.sub_category }}</a></li>

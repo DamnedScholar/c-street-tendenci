@@ -20,6 +20,10 @@
 
 {% block content_classes %}{{ block.super }} t-search-view{% endblock %}
 
+{% block sidebar %}
+    {% directory_search %}
+{% endblock %}
+
 {% block content %}
     <h1>
         {% firstof trans SITE_GLOBAL_SITEPRIMARYKEYWORDS trans SITE_GLOBAL_SITEDISPLAYNAME %}
@@ -31,14 +35,13 @@
     </h1>
 
     {% autopaginate directories 10 %}
-    {% directory_search %}
 
-    <p id="a-to-z">
+    <!-- <p id="a-to-z">
         {% trans "Directory Starts With:" %}
         {% for letter in a_to_z %}
         <a href="{% url 'directories' %}?search_category=headline&search_method=starts_with&q={{letter }}">{{ letter|upper }}</a>
         {% endfor %}
-    </p>
+    </p> -->
 
     <h4 class="capitalize">
     	<em>
