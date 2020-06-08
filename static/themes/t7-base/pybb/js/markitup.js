@@ -1,1 +1,11 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/pybb/js/markitup.js
+$(function() {
+    if(window.pybb && window.pybb.get_markitup_settings){
+        var mySettings = window.pybb.get_markitup_settings();
+        $('textarea:not([class="no-markitup"])').markItUp(mySettings);
+        $('#emoticons a').on("click", function() {
+            var emoticon = $(this).attr("title");
+            $.markItUp({replaceWith: emoticon});
+            return false;
+        });
+    }
+});

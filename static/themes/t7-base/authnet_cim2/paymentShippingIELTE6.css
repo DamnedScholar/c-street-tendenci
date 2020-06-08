@@ -1,1 +1,3 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/authnet_cim2/paymentShippingIELTE6.css
+body { height:100%; }
+#divAuthorizeNetPopupScreen { position:absolute; }
+.AuthorizeNetShadow { display:none; }

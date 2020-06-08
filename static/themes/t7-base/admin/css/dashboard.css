@@ -1,1 +1,24 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/admin/css/dashboard.css
+/* DASHBOARD */
+
+.dashboard .module table th {
+    width: 100%;
+}
+
+.dashboard .module table td {
+    white-space: nowrap;
+}
+
+.dashboard .module table td a {
+    display: block;
+    padding-right: .6em;
+}
+
+/* RECENT ACTIONS MODULE */
+
+.module ul.actionlist {
+    margin-left: 0;
+}
+
+ul.actionlist li {
+    list-style-type: none;
+}

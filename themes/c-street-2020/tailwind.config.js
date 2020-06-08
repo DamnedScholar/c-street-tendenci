@@ -499,6 +499,7 @@ module.exports = {
     transitionProperty: {
       none: 'none',
       all: 'all',
+      size: 'height, min-height, max-height, width, min-width, max-width',
       default: 'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
       colors: 'background-color, border-color, color, fill, stroke',
       opacity: 'opacity',
@@ -509,7 +510,7 @@ module.exports = {
       linear: 'linear',
       in: 'cubic-bezier(0.4, 0, 1, 1)',
       out: 'cubic-bezier(0, 0, 0.2, 1)',
-      'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      'in-out': 'cubic-bezier(0.65, 0, 0.35, 1)',
     },
     transitionDuration: {
       '75': '75ms',

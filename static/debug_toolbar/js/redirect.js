@@ -1,1 +1,1 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/debug_toolbar/static/debug_toolbar/js/redirect.js
+document.getElementById('redirect_to').focus();

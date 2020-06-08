@@ -1,1 +1,16 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/js/jquery.inputfieldtext.js
+jQuery.fn.inputFieldText = function(string, hintClass) {
+  this.each(function() {
+	  if($(this).val().length <= 0)
+	  	$(this).addClass(hintClass).val(string);
+      $(this).focus(function(){
+        if ($(this).val() == string){
+          $(this).removeClass(hintClass).val('');
+        }
+      });
+      $(this).blur(function(){
+        if ($(this).val() == '' ){
+          $(this).addClass(hintClass).val(string);
+        }
+      });
+  });
+}

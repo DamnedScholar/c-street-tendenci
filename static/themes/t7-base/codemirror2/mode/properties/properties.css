@@ -1,1 +1,3 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/codemirror2/mode/properties/properties.css
+span.cm-key {color: #00c;}
+span.cm-equals {color: #a11;}
+span.cm-value {color: #170;}

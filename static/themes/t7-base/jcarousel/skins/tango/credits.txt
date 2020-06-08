@@ -1,1 +1,1 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/jcarousel/skins/tango/credits.txt
+Button images copyright by Tango Icon Library Team (http://tango.freedesktop.org/Tango_Icon_Library)

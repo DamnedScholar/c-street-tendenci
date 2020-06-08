@@ -1,1 +1,13 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/codemirror2/mode/diff/diff.js
+CodeMirror.defineMode("diff", function() {
+  return {
+    token: function(stream) {
+      var ch = stream.next();
+      stream.skipToEnd();
+      if (ch == "+") return "plus";
+      if (ch == "-") return "minus";
+      if (ch == "@") return "rangeinfo";
+    }
+  };
+});
+
+CodeMirror.defineMIME("text/x-diff", "diff");

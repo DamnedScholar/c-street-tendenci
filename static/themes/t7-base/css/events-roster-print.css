@@ -1,1 +1,25 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/css/events-roster-print.css
+table#registrant-table a {
+	text-decoration: none;
+}
+.back-button {
+	display: none;
+}
+.total {
+	text-align: right;
+	font-size: 2em;
+	font-weight: bold;
+}
+.total .int,
+.total .label {
+	display: inline;
+}
+.roster-sort-wrap, .attendees-export-links, #admin-bar{
+	display: none !important;
+}
+span.member-icon{
+    border: none;
+    display: block;
+    padding: 0;
+    background-color: transparent;
+    color: #000;
+}

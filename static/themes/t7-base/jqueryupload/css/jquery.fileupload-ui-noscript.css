@@ -1,1 +1,17 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/jqueryupload/css/jquery.fileupload-ui-noscript.css
+@charset "UTF-8";
+/*
+ * jQuery File Upload UI Plugin NoScript CSS
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2012, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * https://opensource.org/licenses/MIT
+ */
+
+.fileinput-button i,
+.fileupload-buttonbar .delete,
+.fileupload-buttonbar .toggle {
+  display: none;
+}

@@ -1,1 +1,4 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/css/admin/event-types-color-set.css
+div.field-color_set ul li{
+    list-style-type: none;
+    float: left;
+}

@@ -1,1 +1,5 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/codemirror2/mode/rpm/spec/spec.css
+.cm-s-default span.cm-preamble {color: #b26818; font-weight: bold;}
+.cm-s-default span.cm-macro {color: #b218b2;}
+.cm-s-default span.cm-section {color: green; font-weight: bold;}
+.cm-s-default span.cm-script {color: red;}
+.cm-s-default span.cm-issue {color: yellow;}

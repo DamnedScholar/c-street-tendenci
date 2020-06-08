@@ -1,1 +1,6 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/js/admin/membnotices.js
+(function($) {
+    $(document).ready(function() {
+        $('#notice-time-type input').css({'display': 'inline', 'width': '20%' });
+        $('#notice-time-type select').css({'display': 'inline', 'width': '20%' });
+    });
+}(jQuery));

@@ -1,1 +1,4 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/admin/js/jquery.init.js
+// Puts the included jQuery into our own namespace
+var django = {
+    "jQuery": jQuery.noConflict(true)
+};

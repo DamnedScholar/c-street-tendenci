@@ -1,1 +1,5 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/markitup/templates/preview.css
+/* preview style examples */
+body {
+	background-color:#EFEFEF;
+	font:70% Verdana, Arial, Helvetica, sans-serif;
+}

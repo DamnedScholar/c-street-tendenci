@@ -28,6 +28,16 @@ select {
 
 @tailwind components;
 
+.dropdown ul {
+  @apply h-0 overflow-hidden transition-size ease-in-out duration-300 block;
+}
+.dropdown:focus-within {
+  @apply overflow-visible;
+}
+.dropdown:focus-within ul {
+  height: auto;
+}
+
 #t-admin-megamenu {
   @apply text-orange;
 }
@@ -79,7 +89,7 @@ div.focuspoint {
   top: 100%;
   left: 0;
   z-index: 1000;
-  display: none;
+  /* display: none; */
   float: left;
   padding: 0;
   margin: .125rem 0 0;

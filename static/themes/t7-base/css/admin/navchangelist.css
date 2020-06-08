@@ -1,1 +1,4 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/css/admin/navchangelist.css
+#changelist table thead th:first-child + th,
+#changelist table thead th:first-child + th + th {
+    width: 70px !important;
+}

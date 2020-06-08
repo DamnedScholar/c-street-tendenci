@@ -1,1 +1,16 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/django_admin_bootstrapped/static/admin/css/changelists.css
+/* CHANGELISTS */
+
+.change-list .hiddenfields { display:none; }
+
+/* ACTIONS */
+
+.actions span.all,
+.actions span.action-counter,
+.actions span.clear,
+.actions span.question {
+    display: none;
+}
+
+#action-toggle {
+    display: none;
+}

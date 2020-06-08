@@ -1,1 +1,3 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/tiny_mce/langs/readme.md
+This is where language files should be placed.
+
+Please DO NOT translate these directly use this service: https://www.transifex.com/projects/p/tinymce/

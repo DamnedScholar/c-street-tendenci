@@ -1,1 +1,6 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/codemirror2/README.md
+# CodeMirror 2
+
+CodeMirror 2 is a rewrite of [CodeMirror
+1](http://github.com/marijnh/CodeMirror). The docs live
+[here](http://codemirror.net/doc/manual.html), and the project page is
+[http://codemirror.net/](http://codemirror.net/).

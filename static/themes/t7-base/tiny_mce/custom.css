@@ -1,1 +1,4 @@
-/home/damnedscholar/github/devilbox/data/www/c-street/lib/python3.6/site-packages/tendenci/themes/t7-base/static/tiny_mce/custom.css
+div.mce-fullscreen {
+    top: 30px !important;
+    z-index: 1050 !important;
+}
