@@ -1328,12 +1328,18 @@ div.focuspoint {
   }
 
   #hero-nav .btn {
-    font-size: 1.5rem;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    font-size: 1.25rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     font-weight: 700;
+  }
+
+  #hero-nav a {
+    --text-opacity: 1;
+    color: #2d5c66;
+    color: rgba(45, 92, 102, var(--text-opacity));
   }
 
   #t-admin-megamenu .nav-label, .t-admin-inline, #site-footer {

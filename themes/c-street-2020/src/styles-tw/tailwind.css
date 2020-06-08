@@ -217,7 +217,10 @@ div.focuspoint {
     @apply text-title max-w-5xl;
   }
   #hero-nav .btn {
-    @apply text-2xl py-3 px-5 font-bold;
+    @apply text-xl py-2 px-4 font-bold;
+  }
+  #hero-nav a {
+    @apply text-teal;
   }
 
   #t-admin-megamenu .nav-label, .t-admin-inline, #site-footer {
