@@ -5,36 +5,6 @@
   */
 
 /*!
- * Isotope v3.0.6
- *
- * Licensed GPLv3 for open source use
- * or Isotope Commercial License for commercial use
- *
- * https://isotope.metafizzy.co
- * Copyright 2010-2018 Metafizzy
- */
-
-/*!
- * Masonry layout mode
- * sub-classes Masonry
- * https://masonry.desandro.com
- */
-
-/*!
- * Masonry v4.2.2
- * Cascading grid layout library
- * https://masonry.desandro.com
- * MIT License
- * by David DeSandro
- */
-
-/*!
- * Outlayer v2.1.1
- * the brains and guts of a layout library
- * MIT license
- */
-
-/*!
  * Sizzle CSS Selector Engine v2.3.5
  * https://sizzlejs.com/
  *
@@ -43,12 +13,6 @@
  * https://js.foundation/
  *
  * Date: 2020-03-14
- */
-
-/*!
- * getSize v2.0.3
- * measure size of elements
- * MIT license
  */
 
 /*!

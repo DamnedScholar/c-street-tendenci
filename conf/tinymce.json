@@ -1,0 +1,37 @@
+{
+    "theme": "modern",
+    "plugins": "image advlist autolink lists link charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table contextmenu paste textcolor colorpicker hr",
+    "menubar": "file edit insert view format table",
+    "toolbar": "code insertfile undo redo | styleselect | forecolor backcolor | bold italic hr | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | fullscreen",
+    "image_advtab": "true",
+    "image_title": "true",
+    "media_alt_source": "false",
+    "media_poster": "false",
+    "cache_suffix": "?v=4.3.8",
+    "content_css": [
+        "/themes/c-street-2020/media/css/tailwind.css",
+        "/themes/c-street-2020/node_modules/@fortawesome/fontawesome-pro/css/all.min.css"
+    ],
+    "resize": "both",
+    "link_class_list": [
+        {"title": "None", "value": ""},
+        {"title": "Primary Button", "value": "btn btn-primary"},
+        {"title": "Default Button", "value": "btn btn-default"}
+    ],
+    "image_class_list": [
+        {"title": "none", "value": ""},
+        {"title": "Float left", "value": "float-left"},
+        {"title": "Float right", "value": "float-right"},
+        {"title": "Center", "value": "m-auto"},
+        {"title": "Thumbnail", "value": "max-w-thumbnail max-h-thumbnail"}
+    ],
+    "image_caption": true,
+    "tabfocus_elements": ":prev,:next",
+    "convert_urls": "false",
+    "handle_event_callback": "event_handler",
+    "inline_styles": true,
+    "height": 400,
+    "width": 600,
+    "extended_valid_elements": "iframe[align<bottom?left?middle?right?top|class|allowfullscreen|frameborder|height|id|longdesc|marginheight|marginwidth|name|scrolling<auto?no?yes|src|style|title|width|html|head|title|meta|body|style]",
+    "font_formats": "Lato=Lato,sans-serif;Crimson Text=Crimson Text,serif;Inconsolata=Inconsolata,monospace;"
+}

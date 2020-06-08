@@ -1,5 +1,31 @@
 @tailwind base;
 
+p {
+  @apply mb-3;
+}
+p:last-child {
+  @apply mb-0;
+}
+:not(p) address {
+  @apply flex flex-col items-center text-xl font-mono;
+}
+:not(p) address p {
+  margin-bottom: -0.4em;
+}
+
+textarea {
+  @apply border rounded-md px-1;
+}
+input {
+  @apply border rounded-full px-1;
+}
+input[type="submit"] {
+  @apply bg-green text-gray-900 text-2xl py-3 px-5 font-bold;
+}
+select {
+  @apply border rounded-full px-1;
+}
+
 @tailwind components;
 
 #t-admin-megamenu {
@@ -24,7 +50,7 @@ div.focuspoint {
 }
 
 #hero-title {
-  @apply font-serif font-bold text-gray-200 z-10;
+  @apply font-serif font-bold text-gray-100 z-10;
   text-shadow: 1px 1px 2px #2d5c66;
 }
 #hero-nav ul {
@@ -78,18 +104,6 @@ div.focuspoint {
   overflow: hidden;
 }
 
-textarea {
-  @apply border rounded-md px-1;
-}
-input {
-  @apply border rounded-full px-1;
-}
-input[type="submit"] {
-  @apply bg-green text-gray-900 text-2xl py-3 px-5 font-bold;
-}
-select {
-  @apply border rounded-full px-1;
-}
 
 @screen sm {
   #site-nav .dropdown-menu {

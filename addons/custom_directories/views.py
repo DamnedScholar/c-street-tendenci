@@ -138,12 +138,35 @@ def category(request, cat=None, template_name="category.html"):
     context = {
         'cat': cat,
         'hero': all_cats[cat]['hero'],
+        'focus': all_cats[cat]['focus'],
+        'size': all_cats[cat]['size'],
         'headline': all_cats[cat]['headline'],
         'directories': directories_firm,
         'directory_images': directory_images,
-        'directory_tags': directory_tags,
-        'cats': cat_obj,
-        'repr': repr(directories)
+        'directory_tags': directory_tags
+    }
+
+    return render_to_resp(request=request, template_name=template_name,
+            context=context)
+
+@is_enabled('directories')
+def print(request, cat=None, template_name="print.html"):
+    if not cat: return HttpResponseRedirect(reverse('directories'))
+    
+    all_cats = CustomCats().cats()
+
+    cat_obj = DirectoryCategory.objects.filter(slug=cat)
+    directories = Directory.objects.filter(Q(sub_cat__in=cat_obj))
+
+    directories_firm = list(directories.values())
+
+    context = {
+        'cat': cat,
+        'hero': all_cats[cat]['hero'],
+        'focus': all_cats[cat]['focus'],
+        'size': all_cats[cat]['size'],
+        'headline': all_cats[cat]['headline'],
+        'directories': directories_firm,
     }
 
     return render_to_resp(request=request, template_name=template_name,

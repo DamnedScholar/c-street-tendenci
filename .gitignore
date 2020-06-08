@@ -22,11 +22,12 @@ media-download
 node_modules
 themes/*/node_modules
 
-# ignore settings
-*/settings.py
+# ignore private settings
+secrets.json
 
-# ignore the symlink monstrosity I use to mock the site
-mock
+# ignore generated static files
+static
+mock_tendenci_static
 
 whoosh_index/*
 !whoosh_index/README

@@ -1,5 +1,15 @@
 from tendenci.settings import *
 
+# Load secret and server-specific settings so that we can sync `settings.py`
+import json
+
+with open('conf/secrets.json') as f:
+  secrets = json.load(f)
+
+# Load custom tinymce settings
+with open('conf/tinymce.json') as f:
+  tinymce = json.load(f)
+
 # Configure your site-specific settings here to override the defaults configured
 # by Tendenci and Django.
 #
@@ -37,11 +47,6 @@ if DEBUG:
 # `django-sockpuppet`, but
 ASGI_APPLICATION = 'sockpuppet.routing.application'
 
-INSTALLED_APPS += [
-    'channels',
-    'sockpuppet'
-]
-
 
 # ---------------------------------------------------------------------------- #
 # Required Settings
@@ -55,8 +60,8 @@ INSTALLED_APPS += [
 # at https://www.grc.com/passwords.htm (Use the
 # "63 random alpha-numeric characters" string, and refresh the page to get an
 # additional string.)
-SECRET_KEY = 'ttw2B5paBkIol0w6GNVKoECrtlJpjuIA4dUC4pJmV3BVhXQU5R7HhBIuNiTmgXz'
-SITE_SETTINGS_KEY = 'yZlaKHM0yNPJoDIAJE58NIGk99R2ClQPsjPdaoFV7zS9ecOSBgd2XCLQKzD4bGD'
+SECRET_KEY = secrets['secret_key']
+SITE_SETTINGS_KEY = secrets['site_settings_key']
 
 # This must be set to a list of fully qualified domain names that are valid for
 # this site.  Connections which request any other name will be rejected.
@@ -64,17 +69,17 @@ SITE_SETTINGS_KEY = 'yZlaKHM0yNPJoDIAJE58NIGk99R2ClQPsjPdaoFV7zS9ecOSBgd2XCLQKzD
 # are actually hosted on this server.
 # If this server uses a wildcard DNS record then you can prefix the domain
 # listed here with a '.' to match all subdomains ('.example.com').
-ALLOWED_HOSTS = ['eclectic-co.com', 'www.eclectic-co.com']
+ALLOWED_HOSTS = secrets['allowed_hosts']
 if DEBUG:
-    ALLOWED_HOSTS += ['localhost', '127.0.0.1', '[::1]', '198.58.117.250']
+    ALLOWED_HOSTS += secrets['allowed_hosts_debug']
 
 # Tendenci uses the following PostgreSQL database connection settings by
 # default.  Uncomment and configure settings here to override the defaults.
-#DATABASES['default']['HOST'] = 'localhost'
-#DATABASES['default']['PORT'] = 5432
-DATABASES['default']['USER'] = 'cstreet'
-DATABASES['default']['PASSWORD'] = 'makingspringfieldweirdsince1870'
-DATABASES['default']['NAME'] = 'cstreet'
+DATABASES['default']['HOST'] = secrets['databases']['default']['host']
+DATABASES['default']['PORT'] = secrets['databases']['default']['port']
+DATABASES['default']['USER'] = secrets['databases']['default']['user']
+DATABASES['default']['PASSWORD'] = secrets['databases']['default']['password']
+DATABASES['default']['NAME'] = secrets['databases']['default']['name']
 
 # This must be set to the time zone used by PostgreSQL, which defaults to the
 # system time zone configured in /etc/timezone.
@@ -268,11 +273,24 @@ TIME_ZONE = 'US/Central'
 # To add an app to INSTALLED_APPS:
 #INSTALLED_APPS += ['example_app']
 
+INSTALLED_APPS += [
+    'channels',
+    'sockpuppet',
+    'import_export'
+]
+
 # To remove a default app from INSTALLED_APPS:
 #INSTALLED_APPS.remove('some_app')
 # Or:
 #remove_apps = ['app1', 'app2']
 #for app in remove_apps:
+#    INSTALLED_APPS.remove(app)
+
+# When I need to change the functionality more than just changing the templates can
+# accomplish, I can copy the app code to `addons/` and remove the default app here.
+# `addons/` is automatically checked, so there's no need to tell Django about it.
+# remove_apps = ['tendenci.apps.directories']
+# for app in remove_apps:
 #    INSTALLED_APPS.remove(app)
 
 # To enable custom URL patterns to be configured in urls.py:
@@ -282,6 +300,13 @@ ROOT_URLCONF = 'conf.urls'
 # ROOT_URLCONF above, and uncomment the helpdesk urlpattern in urls.py
 #INSTALLED_APPS += ['markdown_deux', 'bootstrapform', 'tendenci.apps.helpdesk']
 
+TINYMCE_DEFAULT_CONFIG = tinymce
+
+STATICFILES_DIRS += [('themes/c-street-2020', '/home/damnedscholar/github/c-street-tendenci/addons/mock_tendenci_static/static')]
+
+with open('conf/test.py', 'w') as f:
+  f.write(repr(STATICFILES_DIRS))
+  f.write(repr(STATIC_ROOT))
 
 # ---------------------------------------------------------------------------- #
 # Logging Settings
@@ -340,7 +365,7 @@ enable_console_log()
 # Note that if you are running NGINX, all clients appear to be connecting from
 # 127.0.0.1, so this example configuration will give all clients access to these
 # debugging capabilities.
-#if DEBUG:
+# if DEBUG:
 #    INTERNAL_IPS = ['127.0.0.1', '::1']
 
 # Uncomment this setting to enable the Django Debug Toolbar for profiling
@@ -348,7 +373,7 @@ enable_console_log()
 # above will be able to use the toolbar.
 # This toolbar may expose internal/private data, and it will slow down your site
 # significantly, so use this with caution.
-#DEBUG_TOOLBAR_ENABLED = True
+# DEBUG_TOOLBAR_ENABLED = True
 
 
 # ---------------------------------------------------------------------------- #
