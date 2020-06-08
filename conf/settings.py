@@ -302,11 +302,6 @@ ROOT_URLCONF = 'conf.urls'
 
 TINYMCE_DEFAULT_CONFIG = tinymce
 
-STATICFILES_DIRS += [('themes/c-street-2020', '/home/damnedscholar/github/c-street-tendenci/addons/mock_tendenci_static/static')]
-
-with open('conf/test.py', 'w') as f:
-  f.write(repr(STATICFILES_DIRS))
-  f.write(repr(STATIC_ROOT))
 
 # ---------------------------------------------------------------------------- #
 # Logging Settings

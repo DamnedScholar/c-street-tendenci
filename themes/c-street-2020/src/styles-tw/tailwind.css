@@ -12,6 +12,9 @@ p:last-child {
 :not(p) address p {
   margin-bottom: -0.4em;
 }
+td address {
+  @apply text-sm;
+}
 
 textarea {
   @apply border rounded-md px-1;
@@ -25,25 +28,53 @@ input[type="submit"] {
 select {
   @apply border rounded-full px-1;
 }
+section {
+  @apply mt-4;
+}
 
 @tailwind components;
 
+.printable table {
+  @apply w-full;
+}
+
+.dropdown {
+  @apply relative;
+}
 .dropdown ul {
-  @apply h-0 overflow-hidden transition-size ease-in-out duration-300 block;
+  @apply h-0 overflow-hidden transition-size ease-in-out duration-300 inline-block;
 }
 .dropdown:focus-within {
   @apply overflow-visible;
 }
 .dropdown:focus-within ul {
   height: auto;
+  border: 1px solid rgba(38,49,56,0.15);
 }
 
 #t-admin-megamenu {
   @apply text-orange;
 }
+#t-admin-megamenu img.nav-logo {
+  margin-left: 7px;
+  margin-top: 3px;
+  height: 24px;
+}
+#t-admin-megamenu .dropdown {
+  @apply relative;
+}
+#t-admin-megamenu .dropdown-toggle {
+  min-width: max-content;
+}
+#t-admin-megamenu .dropdown-menu {
+  left: 0;
+  top: 34px;
+  @apply absolute;
+  background-color: #fff;
+}
 
 .t-admin-inline {
-  display: none; /* Remove this when the site is ready */
+  display: none !important; /* Remove this when the site is ready */
 }
 
 div.focuspoint {
@@ -99,7 +130,6 @@ div.focuspoint {
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(38,49,56,0.15);
   border-radius: .25rem;
   pointer-events: all;
 }

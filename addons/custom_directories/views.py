@@ -99,7 +99,6 @@ class CustomCats:
 
 @is_enabled('directories')
 def category(request, cat=None, template_name="category.html"):
-    if not cat: return HttpResponseRedirect(reverse('directories'))
     
     all_cats = CustomCats().cats()
 
@@ -151,7 +150,6 @@ def category(request, cat=None, template_name="category.html"):
 
 @is_enabled('directories')
 def print(request, cat=None, template_name="print.html"):
-    if not cat: return HttpResponseRedirect(reverse('directories'))
     
     all_cats = CustomCats().cats()
 

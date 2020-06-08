@@ -25,55 +25,53 @@
 {% block content_classes %}{{ block.super }} t-search-view{% endblock %}
 
 {% block content %}
-<table>
-    <thead>
-        <tr>
-            <th class="hero relative" colspan="42">
-              <div class="focuspoint"
-                  data-focus-x="{{ focus.x }}" data-focus-y="{{ focus.y }}"
-                  data-image-w="{{ size.w }}" data-image-h="{{ size.h }}">
-                  <img src="{% static hero %}">
-              </div>
-  
-              <h1 id="hero-title" class="text-center">{{headline}}</h1>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for directory in directories %}
-        <tr class="directory-listing font-mono">
-            <td class="text-teal font-bold font-serif"><a href="{{ directory.link }}">{{ directory.headline }}</a></td>
-            <td>
-                <address>
-                    {{ directory.address }}<br>
-                    {{ directory.city }}, {{ directory.state }} {{ directory.zip_code }}
-                </address>
-            </td>
-            <td>{{ directory.phone | phonenumber }}</td>
-            <td>{{ directory.email|obfuscate_email }}</td>
-            <td>{{ directory.website }}</td>
-            <td>
-                {% if directory.facebook %}
-                <div class="px-2">
-                    <a href="{{directory.facebook}}" class="text-teal">
-                        <i class="fab fa-facebook"></i> {{directory.facebook | social_name}}
-                    </a>
-                </div>
-                {% endif %}
-            </td>
-            <td>
-                {% if directory.instagram %}
-                <div class="px-2">
-                    <a href="{{directory.instagram}}" class="text-teal">
-                        <i class="fab fa-instagram"></i> {{directory.instagram | social_name}}
-                    </a>
-                </div>
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="printable">
+    <div class="hero relative w-full">
+        <div class="focuspoint"
+            data-focus-x="{{ focus.x }}" data-focus-y="{{ focus.y }}"
+            data-image-w="{{ size.w }}" data-image-h="{{ size.h }}">
+            <img src="{% static hero %}">
+        </div>
+
+        <h1 id="hero-title" class="text-center">{{headline}}</h1>
+      </div>
+    <table>
+        <tbody>
+            {% for directory in directories %}
+            <tr class="directory-listing font-mono">
+                <td class="text-teal text-xl font-bold font-serif"><a href="{{ directory.slug }}">{{ directory.headline }}</a></td>
+                <td>
+                    <address>
+                        {{ directory.address }}<br>
+                        {{ directory.city }}, {{ directory.state }} {{ directory.zip_code }}
+                    </address>
+                </td>
+                <td>{{ directory.phone | phonenumber }}</td>
+                <td>{{ directory.email|obfuscate_email }}</td>
+                <td>{{ directory.website }}</td>
+                <td>
+                    {% if directory.facebook %}
+                    <div class="px-2">
+                        <a href="{{directory.facebook}}" class="text-teal">
+                            <i class="fab fa-facebook"></i> {{directory.facebook | social_name}}
+                        </a>
+                    </div>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if directory.instagram %}
+                    <div class="px-2">
+                        <a href="{{directory.instagram}}" class="text-teal">
+                            <i class="fab fa-instagram"></i> {{directory.instagram | social_name}}
+                        </a>
+                    </div>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
     {% paginate %}
 {% endblock %}
