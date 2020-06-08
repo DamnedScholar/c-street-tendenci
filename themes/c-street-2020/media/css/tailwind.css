@@ -662,6 +662,12 @@ video {
   }
 }
 
+a {
+  --text-opacity: 1;
+  color: #02b3c3;
+  color: rgba(2, 179, 195, var(--text-opacity));
+}
+
 p {
   margin-bottom: 0.75rem;
 }

@@ -1,5 +1,9 @@
 @tailwind base;
 
+a {
+  @apply text-cyan;
+}
+
 p {
   @apply mb-3;
 }
