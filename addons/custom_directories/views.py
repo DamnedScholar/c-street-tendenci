@@ -142,7 +142,8 @@ def category(request, cat=None, template_name="category.html"):
         'headline': all_cats[cat]['headline'],
         'directories': directories_firm,
         'directory_images': directory_images,
-        'directory_tags': directory_tags
+        'directory_tags': directory_tags,
+        'all_cats': all_cats
     }
 
     return render_to_resp(request=request, template_name=template_name,
