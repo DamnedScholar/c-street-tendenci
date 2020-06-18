@@ -5,3 +5,5 @@
 
 django-sockpuppet==0.2
 channels
+django-import-export
+scrapy

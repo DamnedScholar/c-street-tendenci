@@ -5,6 +5,7 @@
 {% load directory_tags %}
 {% load search_tags %}
 {% load nav_tags %}
+{% load custom_dir_tags %}
 
 
 {% block title %}
@@ -88,6 +89,9 @@
 {% endblock %}
 
 {% block content %}
+    {% if cat == "rentals" %}
+        {% airbnb %}
+    {% endif %}
     <section class="grid grid-cols-5 gap-4"
         data-isotope='{ "itemSelector": ".directory-listing", "layoutMode": "fitRows" }'>
         {% for directory in directories %}

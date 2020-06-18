@@ -19,9 +19,9 @@
       </defs>
       <circle fill="url(#radial)"/>
     </svg>
-    <div class="absolute p-1">
-      <!-- Padding makes the logo fit inside the SVG background -->
-      <a href="/"><img class="" src="{% static 'img/logo.png' %}" alt="" /></a>
+    <div class="absolute p-1 pointer-events-auto">
+      <!-- Padding makes the logo fit inside the SVG background and pointer-events-auto is necessary for the link to work. -->
+      <a href="{% url 'home' %}"><img class="" src="{% static 'img/logo.png' %}" alt="" /></a>
     </div>
   </div>
   <div class="collapsable flex flex-col items-start" data-controller="dropdown" data-dropdown-class="sm:hidden">

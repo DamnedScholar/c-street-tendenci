@@ -22,7 +22,6 @@ def get_images_for_entry(query):
 import unicodedata
 
 def strip_accents(text):
-
     try:
         text = unicode(text, 'utf-8')
     except NameError: # unicode is a default on python 3 

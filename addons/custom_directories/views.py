@@ -41,7 +41,7 @@ from tendenci.apps.notifications import models as notification
 from tendenci.apps.base.utils import send_email_notification
 from tendenci.apps.directories.forms import DirectorySearchForm
 
-from .utils import get_images_for_entry
+from .utils.utils import get_images_for_entry
 
 # Custom category pages
 class CustomCats:

@@ -4,7 +4,7 @@ from django.db.models import Q
 from addons.tendenstreet.views.photoset import PhotosetView
 from tendenci.apps.photos.models import Image, PhotoSet, AlbumCover, License
 
-from addons.custom_directories.utils import get_images_for_entry
+from addons.custom_directories.utils.utils import get_images_for_entry
 
 register = template.Library()
 

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.text import slugify
 from import_export import resources
 from import_export.admin import ExportActionModelAdmin, ImportExportMixin, ImportMixin
 from import_export.fields import Field
@@ -6,7 +7,7 @@ from import_export.widgets import Widget, ForeignKeyWidget
 from tendenci.apps.directories.models import Directory, Category
 from tendenci.apps.files.models import File
 
-from .utils import strip_accents
+from .utils.utils import strip_accents
 
 
 class DirectoryResource(resources.ModelResource):
@@ -32,7 +33,7 @@ class DirectoryResource(resources.ModelResource):
         return super(DirectoryResource, self).skip_row(instance, original)
 
     def before_import_row(self, row, row_number=None, **kwargs):
-        # TODO: Might not need this, but just in case, I'm going to make sure there's an empty tag field in kwargs to avoid any possible KeyError. Once it works, I need to test removing this.
+        # Avoiding a KeyError.
         row.update({"tags": ""})
         
         tag_map = {
@@ -61,7 +62,7 @@ class DirectoryResource(resources.ModelResource):
 
         row.update({
             "headline": row["Name"],
-            "slug": strip_accents(row["Name"].lower().replace(' ', '-').replace('\'', '').replace('&', 'and').replace('+', 'and').replace('@', 'at').replace('.', '')),
+            "slug": slugify(row["Name"]),
             "address": row["Address"],
             "city": "Springfield",
             "state": "MO",
@@ -84,9 +85,10 @@ class DirectoryResource(resources.ModelResource):
             "creator_username": "import_bot"
         })
 
+        # Run through the tag-appropriate columns and add them.
         for k, v in row.items():
             if (k in tag_map) & (v == '1'):
-                row.update({"tags": row["tags"] + " %s" % tag_map[k]})
+                row.update({"tags": row["tags"] + ", %s" % tag_map[k]})
         
 
 class DirectoryAdmin(ImportExportMixin, admin.ModelAdmin):
