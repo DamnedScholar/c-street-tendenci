@@ -12,6 +12,8 @@
 !.gitpod.Dockerfile
 !.gitpod.yml
 
+backup
+
 # ignore files uploaded to the site to save space
 media
 media-original
