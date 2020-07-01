@@ -5,10 +5,10 @@
 </style>
 <section class="grid grid-cols-5 gap-4"
     data-isotope='{ "itemSelector": ".directory-listing", "layoutMode": "fitRows" }'>
-    {% for room in rooms %}
-        <article class="directory-listing flex flex-col items-center">
+    {% for id, room in rooms.items %}
+        <article id="room-{{ id }}" class="directory-listing border border-opacity-50 border-dotted border-r-4 flex flex-col items-center">
             <a href="{{ room.url }}">
-                <div class="h-thumbnail w-thumbnail flex flex-col justify-center">
+                <div class="h-thumbnail w-thumbnail">
                     <img
                     class=""
                     src="{{ room.picture_url }}"
@@ -23,12 +23,17 @@
                 </span>
             </a>
             </address>
-            <div class="meta flex flex-row justify-between">
+            <div class="meta flex flex-row justify-between w-full px-2 items-center">
                 <div class="flex flex-col">
                     <meter class="airbnb" min="1" max="5" value="{{ room.avg_rating }}"></meter>
-                    <div>{{ room.reviews_count }}</div>
+                    <div>{{ room.reviews_count }} reviews!</div>
                 </div>
-                <div>{{ room.price }} / night</div>
+                <div class="text-orange text-lg">{{ room.price }} / night</div>
+            </div>
+            <div class="badges flex flex-col w-full px-2 items-center">
+                {% if room.superhost %}
+                    <p><i class="fad fa-medal"></i> Superhost!</p>
+                {% endif %}
             </div>
         </article>
     {% endfor %}

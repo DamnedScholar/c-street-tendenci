@@ -1,12 +1,27 @@
 import scrapy
 import collections
 import json
+from datetime import datetime, timedelta
 from urllib.parse import urlencode
+import logging
 
-class AirbnbSpider(scrapy.Spider):
+from addons.drone_hangar.models import AirBnBData
+
+class AirBnBSpider(scrapy.Spider):
     name = 'airbnb'
     allowed_domains = ['www.airbnb.com']
     start_urls = ['http://www.airbnb.com/']
+
+    def check_age(self):
+        cache = AirBnBData.objects.all()
+        cache_age = (datetime.now() - cache[0].timestamp)
+
+        if cache_age.total_seconds() > timedelta(days=1).total_seconds():
+            logging.debug("> > > The spider cache is old and being refreshed.")
+            return True
+        else:
+            logging.debug("> > > The spider cache is fresh and no spider is being summoned.")
+            return False
 
     def start_requests(self):
         request = {
@@ -43,11 +58,30 @@ class AirbnbSpider(scrapy.Spider):
             
             room['url'] = BASE_URL + str(listing.get('id'))
             room['name'] = listing.get('name')
+            room['timestamp'] = datetime.now()
             room['picture_url'] = listing.get('picture_url')
-            room['price'] = home.get('pricing_quote').get('rate').get('amount')
+            room['profile_picture'] = listing.get('user').get('picture_url')
+            
+            room['lat'] = listing.get('lat')
+            room['lng'] = listing.get('lng')
+
+            room['rate'] = 0
+            room['rate_type'] = home.get('pricing_quote').get('rate_type')
+
             room['avg_rating'] = listing.get('avg_rating')
             room['reviews_count'] = listing.get('reviews_count')
 
+            room['new'] = listing.get('is_new_listing')
+            room['verified'] = listing.get('verified').get('enabled')
+            room['super_host'] = listing.get('user').get('is_super_host')
+            
+            room['guests'] = listing.get('guest_label')
+            room['baths'] = listing.get('bathroom_label')
+            room['bedrooms'] = listing.get('bedroom_label')
+            room['beds'] = listing.get('bed_label')
+
             data_dict[room_id] = room
+            record = AirBnBData(**room)
+            record.save()
 
         yield data_dict
