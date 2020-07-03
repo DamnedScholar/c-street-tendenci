@@ -38,7 +38,7 @@ class AirBnBSpider(scrapy.Spider):
     def start_requests(self):
         logging.warning("> > > Making request.")
 
-        raise TypeError
+        # raise TypeError       # For testing.
 
         request = {
             "place_id": "ChIJ21P2rgUrTI8Ris1fYjy3Ms4",
