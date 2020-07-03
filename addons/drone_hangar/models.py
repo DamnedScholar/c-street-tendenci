@@ -18,7 +18,7 @@ class ArchivedScrapedImage (ScrapedImage):
     archive_time = models.DateTimeField()
 
 class AirBnBData (models.Model):
-    room_id = models.IntegerField(primary_key=True) # AirBnB ID
+    room_id = models.IntegerField(primary_key=True, default=0) # AirBnB ID
     name = models.CharField(max_length=30)
     timestamp = models.DateTimeField()  # When the spider retrieved the data
     primary_picture = models.ForeignKey('AirBnBImage', null=True, on_delete=models.SET_NULL, related_name="+")
@@ -44,4 +44,5 @@ class AirBnBData (models.Model):
     beds = models.CharField(max_length=30, blank=True)
 
 class AirBnBImage (ScrapedImage):
+    # pic_id = models.IntegerField(primary_key=True, default=0) # AirBnB ID
     room = models.ForeignKey('AirBnBData', on_delete=models.CASCADE)

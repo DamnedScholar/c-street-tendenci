@@ -1,1 +1,1 @@
-default_app_config = 'my_app.apps.MyAppConfig'
+# default_app_config = 'addons.drone_hangar.apps.DroneHangarConfig'
