@@ -11,7 +11,7 @@
                 <div class="h-thumbnail w-thumbnail">
                     <img
                     class=""
-                    src="{{ room.picture_url }}"
+                    src="http://localhost:8080/crop/200/200/sm/0/plain/{{ room.picture_url }}"
                     alt="{% firstof room.name trans 'Untitled' %}">
                 </div>
             </a>
@@ -28,7 +28,7 @@
                     <meter class="airbnb" min="1" max="5" value="{{ room.avg_rating }}"></meter>
                     <div>{{ room.reviews_count }} reviews!</div>
                 </div>
-                <div class="text-orange text-lg">{{ room.price }} / night</div>
+                <div class="text-orange text-lg">{{ room.price_string }} / night</div>
             </div>
             <div class="badges flex flex-col w-full px-2 items-center">
                 {% if room.superhost %}

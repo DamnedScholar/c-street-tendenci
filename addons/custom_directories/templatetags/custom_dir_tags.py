@@ -35,45 +35,62 @@ def social_name(value=""):
 
     return strip_url_parts(value)
 
-def airbnb_mock():
-    with open('addons/drone_hangar/scrapy/airbnb_demo.json') as f:
-        data = f.read()
+@register.filter()
+def imgproxy(url, optionsInput):
+    import base64
+    import hashlib
+    import hmac
+    import textwrap
 
-    data = json.loads(data)
+    options = {
+        'resize': 'fill',
+        'width': 300,
+        'height': 300,
+        'gravity': 'no',
+        'enlarge': 0,
+        'extension': 'webp'
+    }
 
-    repr(data)
+    # TODO: If this were built for reliability and sophistication instead of convenience, it would probably have a check that errors out to a return call that changes the output to an image that conveys the error if the input options aren't formatted correctly.
+    options.update(json.loads("{%s}" % optionsInput))
 
-    homes = data.get('explore_tabs')[0].get('sections')[2].get('listings')
+    key = bytes.fromhex("a780243df2e5c90dd05fbe0ff81b82fe6086f43cf7acd240a2ae76389bc630d419eca9e478c63b5aa6e9da11a1e0a9d7af9a0dc9e840f0e4291ba722ccb647db")
+    salt = bytes.fromhex("89367b50dea8a1de807a25df11bdbc81107b54b10f564c617f0509a949e06402e8c842b47a7bfd51c1bd2ca6941b336b5776174edfe415c01cf80793d3b8de0b")
 
-    BASE_URL = 'https://www.airbnb.com/rooms/'
 
-    data_dict = collections.defaultdict(dict)
-    for home in homes:
-        room = {}
-        listing = home.get('listing')
-        room_id = str(listing.get('id'))
-        
-        room['url'] = BASE_URL + str(listing.get('id'))
-        room['name'] = listing.get('name')
-        room['picture_url'] = listing.get('picture_url')
-        room['price'] = "$$$"
-        room['avg_rating'] = listing.get('avg_rating')
-        room['reviews_count'] = listing.get('reviews_count')
-        room['superhost'] = ('SUPERHOST' in listing.get('badges'))
+    encoded_url = base64.urlsafe_b64encode(url).rstrip(b"=").decode()
+    # You can trim padding spaces to get good-looking url
+    encoded_url = '/'.join(textwrap.wrap(encoded_url, 16))
 
-        data_dict[room_id] = room
+    path = "/{resize}/{width}/{height}/{gravity}/{enlarge}/{encoded_url}.{extension}".format(
+        encoded_url=encoded_url,
+        resize=options['resize'],
+        width=options['width'],
+        height=options['height'],
+        gravity=options['gravity'],
+        enlarge=options['enlarge'],
+        extension=options['extension'],
+    ).encode()
+    digest = hmac.new(key, msg=salt+path, digestmod=hashlib.sha256).digest()
 
-    with open('addons/custom_directories/roomdict.txt', 'w') as f:
-        f.write(repr(data_dict))
+    protection = base64.urlsafe_b64encode(digest).rstrip(b"=")
 
-    return data_dict
+    url = b'/%s%s' % (
+        protection,
+        path,
+    )
+
+    # without / in url
+    # /_PQ4ytCQMMp-1w1m_vP6g8Qb-Q7yF9mwghf6PddqxLw/fill/300/300/no/1/aHR0cDovL2ltZy5leGFtcGxlLmNvbS9wcmV0dHkvaW1hZ2UuanBn.png
+
+    # with / in url
+    # /MlF9VpgaHqcmVK3FyT9CTJhfm0rfY6JKnAtxoiAX9t0/fill/300/300/no/1/aHR0cDovL2ltZy5l/eGFtcGxlLmNvbS9w/cmV0dHkvaW1hZ2Uu/anBn.png
+
+    return url.decode()
 
 @register.inclusion_tag('airbnb_list.html')
 def airbnb():
-    # Apparently Django's templates are incompatible with defaultdict, so we need to convert to normal dict
-    query = dict(airbnb_mock())
+    with open('addons/drone_hangar/storage/airbnb/airbnb_data.json') as f:
+        data = f.read()
 
-    with open('addons/custom_directories/roomquery.txt', 'w') as f:
-        f.write(repr(query))
-
-    return { "rooms": query }
+    return { "rooms": json.loads(data) }

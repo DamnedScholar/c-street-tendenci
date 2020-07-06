@@ -5,6 +5,7 @@ import tempfile
 from datetime import datetime, timedelta
 from urllib.parse import urlencode
 import logging
+from contextlib import suppress
 
 from django.core import files
 
@@ -13,35 +14,30 @@ from scrapy.spidermiddlewares.httperror import HttpError
 from twisted.internet.error import DNSLookupError
 from twisted.internet.error import TimeoutError, TCPTimedOutError
 
-from addons.drone_hangar.models import AirBnBData, AirBnBImage
-
 class AirBnBSpider(scrapy.Spider):
     name = 'airbnb'
     # allowed_domains = ['www.airbnb.com']
     # start_urls = ['http://www.airbnb.com/']
 
     def check_age(self):
-        cache = AirBnBData.objects.all()
-        try:
-            cache_age = (datetime.now() - cache[0].timestamp)
+        pass
+        # cache = AirBnBData.objects.all()
+        # try:
+        #     cache_age = (datetime.now() - cache[0].timestamp)
 
-            if cache_age.total_seconds() > timedelta(days=1).total_seconds():
-                logging.warning("> > > The spider cache is old and being refreshed.")
-                return True
-            else:
-                logging.warning("> > > The spider cache is fresh and no spider is being summoned.")
-                return False
-        except IndexError:  # IndexError indicates no cache.
-            logging.warning("> > > The spider cache is empty and being populated.")
-            return True
+        #     if cache_age.total_seconds() > timedelta(days=1).total_seconds():
+        #         logging.warning("> > > The spider cache is old and being refreshed.")
+        #         return True
+        #     else:
+        #         logging.warning("> > > The spider cache is fresh and no spider is being summoned.")
+        #         return False
+        # except IndexError:  # IndexError indicates no cache.
+        #     logging.warning("> > > The spider cache is empty and being populated.")
+        #     return True
 
-    def start_requests(self):
-        logging.warning("> > > Making request.")
-
-        # raise TypeError       # For testing.
-
+    def url(self):
         request = {
-            "place_id": "ChIJ21P2rgUrTI8Ris1fYjy3Ms4",
+            "place_id": "ChIJ21P2rpip gUrTI8Ris1fYjy3Ms4",
             "query": "Springfield, MO",
             "refinement_paths[]": "/homes",
             "search_type": "section_navigation",
@@ -54,9 +50,14 @@ class AirBnBSpider(scrapy.Spider):
         }
 
         url = 'https://www.airbnb.com/api/v2/explore_tabs?' + urlencode(request)
+        
+        return url
+
+    def start_requests(self):
+        logging.warning("> > > Making request.")
 
         # yield scrapy.Request(url=url, callback=self.parse)
-        yield scrapy.Request(url=url, callback=self.parse, errback=self.errback, dont_filter=True)
+        yield scrapy.Request(url=self.url(), callback=self.parse, errback=self.errback, dont_filter=True)
 
     def errback(self, failure):
         # log all failures
@@ -82,11 +83,18 @@ class AirBnBSpider(scrapy.Spider):
     
     def parse(self, response):
         data = json.loads(response.body)
+        # response = requests.get(self.url())
+        # data = response.json()
+
+        with open('airbnb_data_raw.json', 'w') as f:
+            json.dump(data, f, indent=4, sort_keys=True, default=str)
 
         logging.warning("> > > Parsing response data.")
 
-        # TODO: This is brittle; the listings section has `"result_type": "listings"` and we should check for that.
-        homes = data.get('explore_tabs')[0].get('sections')[2].get('listings')
+        sections = data.get('explore_tabs')[0].get('sections')
+        homes = [
+            s for s in sections if s['result_type'] == "listings"
+        ][0]['listings']
 
         BASE_URL = 'https://www.airbnb.com/rooms/'
 
@@ -100,20 +108,31 @@ class AirBnBSpider(scrapy.Spider):
             room['name'] = listing.get('name')
             room['timestamp'] = datetime.now()
             room['picture_url'] = listing.get('picture_url')
-            room['contextual_pictures'] = listing.get('contextual_pictures')
+
+            # with suppress(AttributeError):
+            
+            pictures = listing.get('picture_urls')
+            ids = listing.get('picture_ids')
+            room['contextual_pictures'] = {
+                ids[i]: picture for i, picture in enumerate(pictures)
+                }
+
             room['profile_picture'] = listing.get('user').get('picture_url')
             
             room['lat'] = listing.get('lat')
             room['lng'] = listing.get('lng')
 
-            room['rate'] = 0
+            room['rate'] = home.get('pricing_quote').get('rate').get('amount')
+            room['price_string'] = home.get('pricing_quote').get('price_string')
             room['rate_type'] = home.get('pricing_quote').get('rate_type')
 
             room['avg_rating'] = listing.get('avg_rating')
             room['reviews_count'] = listing.get('reviews_count')
 
             room['new'] = listing.get('is_new_listing')
-            room['verified'] = listing.get('verified').get('enabled')
+            room['verified'] = False
+            with suppress(AttributeError):
+                room['verified'] = listing.get('verified').get('enabled')
             room['super_host'] = listing.get('user').get('is_super_host')
             
             room['guests'] = listing.get('guest_label')
@@ -124,45 +143,47 @@ class AirBnBSpider(scrapy.Spider):
             logging.warning("> > > Saving data for %s." % room['name'])
 
             data_dict[room['room_id']] = room
-            new_room = AirBnBData(**room)
-            new_room.save()
 
-            self.collect_images(self, room=new_room,
-                pictures=room['pictures'])
+            # self.collect_images(self, room=new_room,
+            #     pictures=room['pictures'])
+
+        with open('storage/airbnb/airbnb_data.json', 'w') as f:
+            json.dump(data_dict, f, indent=4, sort_keys=True, default=str)
 
         yield data_dict
 
     def collect_images(self, room=None, pictures=[]):
-        for image in pictures:
-            # Steam the image from the url
-            request = requests.get(image['original_picture'], stream=True)
+        pass
+        # for image in pictures:
+        #     # Steam the image from the url
+        #     request = requests.get(image['original_picture'], stream=True)
 
-            # Was the request OK?
-            # if request.status_code != requests.codes.ok:
-            #     # Nope, error handling, skip file etc etc etc
-            #     continue
+        #     # Was the request OK?
+        #     # if request.status_code != requests.codes.ok:
+        #     #     # Nope, error handling, skip file etc etc etc
+        #     #     continue
             
-            # Get the filename from the url, used for saving later
-            file_name = image['original_picture'].split('/')[-1]
+        #     # Get the filename from the url, used for saving later
+        #     file_name = image['original_picture'].split('/')[-1]
             
-            # Create a temporary file
-            lf = tempfile.NamedTemporaryFile()
+        #     # Create a temporary file
+        #     lf = tempfile.NamedTemporaryFile()
 
-            # Read the streamed image in sections
-            for block in request.iter_content(1024 * 8):
+        #     # Read the streamed image in sections
+        #     for block in request.iter_content(1024 * 8):
                 
-                # If no more file then stop
-                if not block:
-                    break
+        #         # If no more file then stop
+        #         if not block:
+        #             break
 
-                # Write image block to temporary file
-                lf.write(block)
+        #         # Write image block to temporary file
+        #         lf.write(block)
 
-            # Create the model you want to save the image to
-            image = AirBnBImage(id=image["id"], room=room,
-                name=file_name, image=files.File(lf),
-                timestamp=datetime.now())
+        #     # Create the model you want to save the image to
+        #     image = AirBnBImage(id=image["id"], room=room,
+        #         name=file_name, image=files.File(lf),
+        #         timestamp=datetime.now())
 
-            # Save the temporary image to the model#
-            # This saves the model so be sure that is it valid
-            image.save()
+        #     # Save the temporary image to the model#
+        #     # This saves the model so be sure that is it valid
+        #     image.save()
