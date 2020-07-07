@@ -36,11 +36,17 @@ def social_name(value=""):
     return strip_url_parts(value)
 
 @register.filter()
-def imgproxy(url, optionsInput):
+def imgproxy(url):
     import base64
     import hashlib
     import hmac
     import textwrap
+
+    from django.contrib.sites.models import Site
+
+    current_site = Site.objects.get_current()
+    # TODO: This is a dirty hack to get the imgproxy host and port into the URL. Need to make it less shitty by pointing to a config or something.
+    prefix = "http://" + current_site.domain + ":8080"
 
     options = {
         'resize': 'fill',
@@ -52,13 +58,12 @@ def imgproxy(url, optionsInput):
     }
 
     # TODO: If this were built for reliability and sophistication instead of convenience, it would probably have a check that errors out to a return call that changes the output to an image that conveys the error if the input options aren't formatted correctly.
-    options.update(json.loads("{%s}" % optionsInput))
+    # options.update(json.loads("{%s}" % optionsInput))
 
     key = bytes.fromhex("a780243df2e5c90dd05fbe0ff81b82fe6086f43cf7acd240a2ae76389bc630d419eca9e478c63b5aa6e9da11a1e0a9d7af9a0dc9e840f0e4291ba722ccb647db")
     salt = bytes.fromhex("89367b50dea8a1de807a25df11bdbc81107b54b10f564c617f0509a949e06402e8c842b47a7bfd51c1bd2ca6941b336b5776174edfe415c01cf80793d3b8de0b")
 
-
-    encoded_url = base64.urlsafe_b64encode(url).rstrip(b"=").decode()
+    encoded_url = base64.urlsafe_b64encode(url.encode("utf-8")).rstrip(b"=").decode()
     # You can trim padding spaces to get good-looking url
     encoded_url = '/'.join(textwrap.wrap(encoded_url, 16))
 
@@ -75,7 +80,8 @@ def imgproxy(url, optionsInput):
 
     protection = base64.urlsafe_b64encode(digest).rstrip(b"=")
 
-    url = b'/%s%s' % (
+    url = b'%s/%s%s' % (
+        prefix.encode("utf-8"),
         protection,
         path,
     )

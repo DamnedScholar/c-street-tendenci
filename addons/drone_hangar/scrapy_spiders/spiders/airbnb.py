@@ -133,7 +133,7 @@ class AirBnBSpider(scrapy.Spider):
             room['verified'] = False
             with suppress(AttributeError):
                 room['verified'] = listing.get('verified').get('enabled')
-            room['super_host'] = listing.get('user').get('is_super_host')
+            room['superhost'] = listing.get('user').get('is_superhost')
             
             room['guests'] = listing.get('guest_label')
             room['baths'] = listing.get('bathroom_label')
