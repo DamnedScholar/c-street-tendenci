@@ -30,6 +30,10 @@ def photoset(query=""):
         'query': query
     }
 
+@register.simple_tag(takes_context=True)
+def lookup_event(context, key):
+    return context['events'][key]
+
 @register.filter()
 def local_hero(title):
     def get_images_for_entry(query):

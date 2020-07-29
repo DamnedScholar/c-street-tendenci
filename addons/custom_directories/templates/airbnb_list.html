@@ -4,9 +4,14 @@
         background-image: url({% static "webfonts/font-awesome/fa-duotone-900.svg#home-heart" %}) 0 / auto 100%;
     }
 </style>
-<p>{{request}}</p>
+
 <section class="grid grid-cols-5 gap-4"
+    data-controller='isotope'
     data-isotope='{ "itemSelector": ".directory-listing", "layoutMode": "fitRows" }'>
+
+    <!-- Empty semantic nav class to be populated by Stimulus. -->
+    <nav class="w-2/3 flex justify-around" id="isotope-nav"></nav>
+
     {% for id, room in rooms.items %}
         <article id="room-{{ id }}" class="directory-listing border border-opacity-50 flex flex-col items-center justify-between p-2">
             <a href="{{ room.url }}">

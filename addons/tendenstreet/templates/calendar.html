@@ -1,0 +1,47 @@
+{% extends "directories/base.html" %}
+{% load static %}
+{% load base_tags %}
+{% load base_filters %}
+{% load bootstrap_pagination_tags %}
+{% load directory_tags %}
+{% load search_tags %}
+{% load nav_tags %}
+{% load cstreet_tags %}
+
+{% block title %}
+    Calendar of Events - {{ block.super }}
+{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="alternate" type="application/rss+xml" title="{% trans 'Latest' %}  {% firstof MODULE_DIRECTORIES_LABEL_PLURAL trans 'Directories' %}" href="{% url 'events' %}" />
+    {% endblock %}
+
+{% block hero %}
+  <div class="focuspoint"
+    data-focus-x="0.5" data-focus-y="0.3"
+    data-image-w="1000" data-image-h="750">
+    <img src="{% static 'img/JamesAllen.jpg' %}">
+  </div>
+
+  <h1 id="hero-title">{{ headline }}</h1>
+{% endblock %}
+
+{% block content %}
+    <script src="{% static 'js/calendar.js' %}"></script>
+
+    <b-cal>
+        {% for date, event_ids in dates.items %}
+        <div slot="{{ date }}" class="flex flex-col items-center justify-start space-y-2">
+            {% for id in event_ids %}
+                {% lookup_event id as event %}
+                <a
+                    class="block w-full bg-teal shadow-btn-teal rounded-md text-gray-100 px-2 py-1"
+                    href="{{ event.social_link }}">
+                    {{ event.summary }}
+                </a>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </b-cal>
+{% endblock %}

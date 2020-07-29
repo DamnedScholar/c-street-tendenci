@@ -274,6 +274,7 @@ TIME_ZONE = 'US/Central'
 #INSTALLED_APPS += ['example_app']
 
 INSTALLED_APPS += [
+    'django_extensions',
     'channels',
     'sockpuppet',
     'import_export'

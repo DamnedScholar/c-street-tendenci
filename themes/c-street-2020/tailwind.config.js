@@ -112,6 +112,7 @@ module.exports = {
       inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
       outline: '0 0 0 3px rgba(66, 153, 225, 0.5)',
       none: 'none',
+      'btn-teal': '5px 5px 5px 0 rgba(45, 92, 102, 0.5)'
     },
     container: {
       center: true
@@ -603,6 +604,9 @@ module.exports = {
       'running': 'running',
       'paused': 'paused',
     },
+    linearGradientColors: {
+      'teal-cyan': theme => [theme('colors.teal'), theme('colors.cyan')]
+    }
   },
   variants: {
     accessibility: ['responsive', 'focus'],
@@ -716,5 +720,6 @@ module.exports = {
   plugins: [
     require('@tailwindcss/custom-forms'),
     require('tailwindcss-animations'),
+    require('tailwindcss-gradients'),
   ],
 }

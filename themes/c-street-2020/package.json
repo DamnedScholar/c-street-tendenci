@@ -26,6 +26,7 @@
     "stimulus-image-grid": "^1.0.2",
     "tailwindcss": "^1.4.5",
     "tailwindcss-animations": "^2.0.0",
+    "tailwindcss-gradients": "^3.0.0",
     "tailwindcss-stimulus-components": "^1.0.2"
   },
   "devDependencies": {
@@ -51,7 +52,6 @@
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.4",
     "tailwindcss-dropdown": "^1.0.0",
-    "webpack": "^5.0.0-beta.13",
     "webpack-cli": "^3.3.11"
   }
 }

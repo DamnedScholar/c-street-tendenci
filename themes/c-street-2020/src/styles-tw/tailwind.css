@@ -110,7 +110,7 @@ div.focuspoint {
 #site-nav {
   pointer-events: none;
 }
-#site-nav .btn {
+#site-nav .btn, #site-nav .btn a {
   @apply bg-blue text-gray-200;
   min-width: max-content;
   pointer-events: auto;

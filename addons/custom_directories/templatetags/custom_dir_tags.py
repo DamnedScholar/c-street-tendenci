@@ -50,9 +50,9 @@ def imgproxy(url):
 
     options = {
         'resize': 'fill',
-        'width': 300,
-        'height': 300,
-        'gravity': 'no',
+        'width': 200,
+        'height': 200,
+        'gravity': 'sm',
         'enlarge': 0,
         'extension': 'webp'
     }

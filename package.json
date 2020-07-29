@@ -26,7 +26,12 @@
     "prettier": "^2.0.5",
     "sockpuppet-js": "^0.2.3",
     "stimulus_reflex": "^3.2.1",
-    "webpack": "^4.43.0",
+    "webpack": "5.0.0-beta.13",
     "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "backbone": "^1.4.0",
+    "blackstone-ui": "^3.0.0",
+    "less-loader": "^6.2.0"
   }
 }

@@ -22,12 +22,25 @@ const config = {
     mode: process.env.NODE_ENV,
     entry: entryObj,
     output: {
-        path: __dirname + '/dist/js',
+        path: __dirname + '/static/js',
         filename: '[name].js'
     },
     optimization: {
         minimize: false
-    }
+    },
+    resolve: {
+        alias: {
+            "jquery": "blackstone-ui/helpers/backbone/jquery-shim"
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.less$/,
+                loader: 'less-loader', // compiles Less to CSS
+            },
+        ],
+    },
 }
 
 module.exports = config
