@@ -46,7 +46,7 @@ def imgproxy(url):
 
     current_site = Site.objects.get_current()
     # TODO: This is a dirty hack to get the imgproxy host and port into the URL. Need to make it less shitty by pointing to a config or something.
-    prefix = "https://" + current_site.domain + "/imgproxy"
+    prefix = "https://eclectic-co.com/imgproxy"
 
     options = {
         'resize': 'fill',
