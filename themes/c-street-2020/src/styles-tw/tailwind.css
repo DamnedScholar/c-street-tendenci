@@ -36,6 +36,10 @@ section {
   @apply mt-4;
 }
 
+ol {
+  list-style-type: upper-roman;
+}
+
 @tailwind components;
 
 .printable table {
