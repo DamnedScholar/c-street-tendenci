@@ -92,111 +92,111 @@
     {% if cat == "rental" %}
         {% airbnb %}
     {% endif %}
-    <section class="grid grid-cols-5 gap-4"
-        data-controller='isotope'
-        data-isotope='{ "itemSelector": ".directory-listing", "layoutMode": "fitRows" }'>
-
-        <!-- Empty semantic nav class to be populated by Stimulus. -->
-        <nav class="w-2/3 flex justify-around" id="isotope-nav"></nav>
-        
-        {% for directory in directories %}
-            <article class="directory-listing flex flex-col items-center">
-                <a href="{{ directory.link }}">
-                    <div class="h-thumbnail w-thumbnail flex flex-col justify-center">
-                        <img
-                        class=""
-                        src="{{ directory.image.url }}"
-                        alt="{% firstof directory.headline trans 'Untitled' %}">
-                    </div>
-                </a>
+    <div data-controller='isotope'
+    data-isotope='{ "itemSelector": ".directory-listing", "layoutMode": "fitRows" }'>
+        <section class="grid grid-cols-5 gap-4">
+            <!-- Empty semantic nav class to be populated by Stimulus. -->
+            <nav class="w-2/3 flex justify-around" id="isotope-nav"></nav>
             
-                <address class="flex flex-col text-center">
-                <a href="{{ directory.link }}">
-                    <span class="text-2xl inline-block">{% firstof directory.headline trans "Untitled" %}</span>
-                    <span class="serif italic text-lg inline-block">{{ directory.address }}</span>
-                </a>
-                {% if directory.website %}
-                    <a href="{{directory.website}}" class="text-green text-lg">
-                        Visit them at <span class="mono">{{directory.website_display}}</span>!
+            {% for directory in directories %}
+                <article class="directory-listing flex flex-col items-center">
+                    <a href="{{ directory.link }}">
+                        <div class="h-thumbnail w-thumbnail flex flex-col justify-center">
+                            <img
+                            class=""
+                            src="{{ directory.image.url }}"
+                            alt="{% firstof directory.headline trans 'Untitled' %}">
+                        </div>
                     </a>
-                {% endif %}
-                <div class="flex flex-row flex-wrap justify-center">
-                    {% if directory.facebook %}
-                    <div class="px-2">
-                        <a href="{{directory.facebook}}" class="text-green text-lg">
-                            <i class="fab fa-facebook"></i>
+                
+                    <address class="flex flex-col text-center">
+                    <a href="{{ directory.link }}">
+                        <span class="text-2xl inline-block">{% firstof directory.headline trans "Untitled" %}</span>
+                        <span class="serif italic text-lg inline-block">{{ directory.address }}</span>
+                    </a>
+                    {% if directory.website %}
+                        <a href="{{directory.website}}" class="text-green text-lg">
+                            Visit them at <span class="mono">{{directory.website_display}}</span>!
                         </a>
-                    </div>
                     {% endif %}
-                    {% if directory.instagram %}
-                    <div class="px-2">
-                        <a href="{{directory.instagram}}" class="text-green text-lg">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+                    <div class="flex flex-row flex-wrap justify-center">
+                        {% if directory.facebook %}
+                        <div class="px-2">
+                            <a href="{{directory.facebook}}" class="text-green text-lg">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if directory.instagram %}
+                        <div class="px-2">
+                            <a href="{{directory.instagram}}" class="text-green text-lg">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if directory.twitter %}
+                        <div class="px-2">
+                            <a href="{{directory.twitter}}" class="text-green text-lg">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if directory.linkedin %}
+                        <div class="px-2">
+                            <a href="{{directory.linkedin}}" class="text-green text-lg">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                        {% endif %}
                     </div>
+                    </address>
+                    
+                    <!-- category OR "LEVEL" -->
+                    {% with directory.category_set as directory_cat %}
+                    
+                    <ul class="list-unstyled capitalize">
+                    {% if directory.tags %}
+                    <li class="tags">
+                        <strong>{% trans "Tags:" %}</strong>
+                        {% for tag in directory.tags|tag_split %}
+                        <a href="{% url 'directories' %}?q=tag:{{ tag|lower|urlencode }}">{% blocktrans with tag_instance=tag %}{{ tag_instance }},{% endblocktrans %}</a>
+                        {% endfor %}
+                    </li>
                     {% endif %}
-                    {% if directory.twitter %}
-                    <div class="px-2">
-                        <a href="{{directory.twitter}}" class="text-green text-lg">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </div>
-                    {% endif %}
-                    {% if directory.linkedin %}
-                    <div class="px-2">
-                        <a href="{{directory.linkedin}}" class="text-green text-lg">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                    </div>
-                    {% endif %}
-                </div>
-                </address>
-                
-                <!-- category OR "LEVEL" -->
-                {% with directory.category_set as directory_cat %}
-                
-                <ul class="list-unstyled capitalize">
-                {% if directory.tags %}
-                <li class="tags">
-                    <strong>{% trans "Tags:" %}</strong>
-                    {% for tag in directory.tags|tag_split %}
-                    <a href="{% url 'directories' %}?q=tag:{{ tag|lower|urlencode }}">{% blocktrans with tag_instance=tag %}{{ tag_instance }},{% endblocktrans %}</a>
-                    {% endfor %}
-                </li>
-                {% endif %}
-                
-                </ul>
-                
-                {% endwith %}
-                
-                
-                <!-- tags OR "SPECIALTY" -->
-        
-                
-                
-                <p class="item-content">
-                {% if directory.summary %}
-                {{ directory.summary|striptags|truncatewords:15|safe }}
-                {% else %}
-                {{ directory.body|striptags|truncatewords:15|safe }}
-                {% endif %}
-                </p>
+                    
+                    </ul>
+                    
+                    {% endwith %}
+                    
+                    
+                    <!-- tags OR "SPECIALTY" -->
             
-            </article>
-        {% empty %}
-            {% if user.profile.is_superuser %}
-                <p><a href="{% url 'directory.add' %}">
-                    {% if MODULE_DIRECTORIES_LABEL %}
-                        {% blocktrans %}
-                            Add a New {{ MODULE_DIRECTORIES_LABEL }}
-                        {% endblocktrans %}
+                    
+                    
+                    <p class="item-content">
+                    {% if directory.summary %}
+                    {{ directory.summary|striptags|truncatewords:15|safe }}
                     {% else %}
-                        {% trans "Add a New Directory" %}
+                    {{ directory.body|striptags|truncatewords:15|safe }}
                     {% endif %}
-                </a></p>
-            {% endif %}
-        {% endfor %}
-    </section>
-
+                    </p>
+                
+                </article>
+            {% empty %}
+                {% if user.profile.is_superuser %}
+                    <p><a href="{% url 'directory.add' %}">
+                        {% if MODULE_DIRECTORIES_LABEL %}
+                            {% blocktrans %}
+                                Add a New {{ MODULE_DIRECTORIES_LABEL }}
+                            {% endblocktrans %}
+                        {% else %}
+                            {% trans "Add a New Directory" %}
+                        {% endif %}
+                    </a></p>
+                {% endif %}
+            {% endfor %}
+        </section>
+    </div>
+    
     {% paginate %}
 {% endblock %}
