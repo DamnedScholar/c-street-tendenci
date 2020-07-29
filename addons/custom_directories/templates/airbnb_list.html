@@ -11,7 +11,7 @@
     <!-- Empty semantic nav class to be populated by Stimulus. -->
     <nav class="w-2/3 flex justify-around" id="isotope-nav"></nav>>
 
-    <section class="grid grid-cols-5 gap-4"
+    <section class="grid grid-cols-5 gap-4">
         {% for id, room in rooms.items %}
             <article id="room-{{ id }}" class="directory-listing border border-opacity-50 flex flex-col items-center justify-between p-2">
                 <a href="{{ room.url }}">
