@@ -1,6 +1,6 @@
 FROM darthsim/imgproxy:latest
 
-RUN apt upgrade \
+RUN apt update \
   && apt install nginx
 
 RUN export IMGPROXY_KEY=a780243df2e5c90dd05fbe0ff81b82fe6086f43cf7acd240a2ae76389bc630d419eca9e478c63b5aa6e9da11a1e0a9d7af9a0dc9e840f0e4291ba722ccb647db
