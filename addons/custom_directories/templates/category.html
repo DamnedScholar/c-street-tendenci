@@ -94,10 +94,10 @@
     {% endif %}
     <div data-controller='isotope'
     data-isotope='{ "itemSelector": ".directory-listing", "layoutMode": "fitRows" }'>
+        
+        <!-- Empty semantic nav class to be populated by Stimulus. -->
+        <nav class="w-2/3 flex justify-around" id="isotope-nav"></nav>
         <section class="grid grid-cols-5 gap-4">
-            <!-- Empty semantic nav class to be populated by Stimulus. -->
-            <nav class="w-2/3 flex justify-around" id="isotope-nav"></nav>
-            
             {% for directory in directories %}
                 <article class="directory-listing flex flex-col items-center">
                     <a href="{{ directory.link }}">
