@@ -12,7 +12,7 @@ RUN chmod +x /usr/local/bin/imgproxy-nginx
 RUN mkdir -p /run/nginx
 
 ADD default.conf /etc/nginx/conf.d/default.conf
-ADD /etc/letsencrypt/live/eclectic-co.com/fullchain.pem /etc/nginx/ssl/cert.pem
-ADD /etc/letsencrypt/live/eclectic-co.com/privkey.pem /etc/nginx/ssl/key.pem
+ADD cert.pem /etc/nginx/ssl/cert.pem
+ADD key.pem /etc/nginx/ssl/key.pem
 
 CMD ["/usr/local/bin/imgproxy-nginx"]
