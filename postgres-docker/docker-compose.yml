@@ -32,6 +32,7 @@ services:
     container_name: imgproxy
     ports:
       - "8080:8080"
+    env_file: .env
   splash:
     image: scrapinghub/splash
     container_name: splash
