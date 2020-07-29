@@ -81,7 +81,12 @@
   </div>
 
   <h1 id="hero-title">{{ headline }}</h1>
-  <nav id="hero-nav" class="relative w-full">{% nav 5 %}</nav>
+  <nav id="hero-nav" class="relative w-2/3 flex flex-row items-center justify-around">
+      {% for cat_slug, cat in all_cats.items %}
+        <div class="btn btn-success"><a href="{{ request.META.HTTP_HOST }}/directory/{{ cat_slug }}">{{ cat.headline }}</a></div>
+      {% endfor %}
+
+  </nav>
 {% endblock %}
 
 {% block sidebar %}
