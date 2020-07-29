@@ -5,45 +5,47 @@
     }
 </style>
 
-<section class="grid grid-cols-5 gap-4"
-    data-controller='isotope'
+<div data-controller='isotope'
     data-isotope='{ "itemSelector": ".directory-listing", "layoutMode": "fitRows" }'>
 
     <!-- Empty semantic nav class to be populated by Stimulus. -->
-    <nav class="w-2/3 flex justify-around" id="isotope-nav"></nav>
+    <nav class="w-2/3 flex justify-around" id="isotope-nav"></nav>>
 
-    {% for id, room in rooms.items %}
-        <article id="room-{{ id }}" class="directory-listing border border-opacity-50 flex flex-col items-center justify-between p-2">
-            <a href="{{ room.url }}">
-                <div class="h-thumbnail w-thumbnail">
-                    <picture class="h-full w-full">
-                        <source srcset="{{ room.picture_url | imgproxy }}">
-                        <img src="{{ room.picture_url }}" alt="{% firstof room.name trans "Untitled" %}">
-                    </picture>
-                </div>
-            </a>
-        
-            <address class="flex flex-col text-center">
-            <a href="{{ room.url }}">
-                <span class="text-xl inline-block">
-                    {% firstof room.name trans "Untitled" %}
-                </span>
-            </a>
-            </address>
-            <aside class="w-full">
-                <div class="badges flex flex-col w-full px-2 items-center">
-                    {% if room.superhost %}
-                        <p><i class="fad fa-medal"></i> Superhost!</p>
-                    {% endif %}
-                </div>
-                <div class="meta flex flex-row justify-between w-full px-2 items-center">
-                    <div class="flex flex-col">
-                        <meter class="airbnb" min="1" max="5" value="{{ room.avg_rating }}"></meter>
-                        <div>{{ room.reviews_count }} reviews!</div>
+    <section class="grid grid-cols-5 gap-4"
+        {% for id, room in rooms.items %}
+            <article id="room-{{ id }}" class="directory-listing border border-opacity-50 flex flex-col items-center justify-between p-2">
+                <a href="{{ room.url }}">
+                    <div class="h-thumbnail w-thumbnail">
+                        <picture class="h-full w-full">
+                            <source srcset="{{ room.picture_url | imgproxy }}">
+                            <img src="{{ room.picture_url }}" alt="{% firstof room.name trans "Untitled" %}">
+                        </picture>
                     </div>
-                    <div class="text-orange text-lg">{{ room.price_string }} / night</div>
-                </div>
-            </aside>
-        </article>
-    {% endfor %}
-</section>
+                </a>
+            
+                <address class="flex flex-col text-center">
+                <a href="{{ room.url }}">
+                    <span class="text-xl inline-block">
+                        {% firstof room.name trans "Untitled" %}
+                    </span>
+                </a>
+                </address>
+                <aside class="w-full">
+                    <div class="badges flex flex-col w-full px-2 items-center">
+                        {% if room.superhost %}
+                            <p><i class="fad fa-medal"></i> Superhost!</p>
+                        {% endif %}
+                    </div>
+                    <div class="meta flex flex-row justify-between w-full px-2 items-center">
+                        <div class="flex flex-col">
+                            <meter class="airbnb" min="1" max="5" value="{{ room.avg_rating }}"></meter>
+                            <div>{{ room.reviews_count }} reviews!</div>
+                        </div>
+                        <div class="text-orange text-lg">{{ room.price_string }} / night</div>
+                    </div>
+                </aside>
+            </article>
+        {% endfor %}
+    </section>
+</div>
+

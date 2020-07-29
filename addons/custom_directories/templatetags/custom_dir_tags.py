@@ -45,7 +45,7 @@ def imgproxy(url):
     from django.contrib.sites.models import Site
 
     current_site = Site.objects.get_current()
-    # TODO: This is a dirty hack to get the imgproxy host and port into the URL. Need to make it less shitty by pointing to a config or something.
+    # TODO: SSL cert doesn't like `www`.
     prefix = "https://eclectic-co.com/imgproxy"
 
     options = {
