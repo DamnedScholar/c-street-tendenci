@@ -67,7 +67,7 @@ class CustomCats:
                 'focus': Focus(0.5,0.5),
                 'headline': 'Lifestyle'
             },
-            'personal-services': {
+            'services': {
                 'hero': 'img/Footbridge Plaza and Market Pavilion.jpg',
                 'size': Size(1100,345),
                 'focus': Focus(0.5,0.5),
@@ -79,17 +79,11 @@ class CustomCats:
                 'focus': Focus(0.5,0.5),
                 'headline': 'Venues and Events'
             },
-            'rentals': {
+            'rental': {
                 'hero': 'img/Classy Loft.jpg',
                 'size': Size(1100,345),
                 'focus': Focus(0.5,0.5),
                 'headline': 'Rentals'
-            },
-            'professionals': {
-                'hero': 'img/Footbridge Plaza and Market Pavilion.jpg',
-                'size': Size(1100,345),
-                'focus': Focus(0.5,0.5),
-                'headline': 'Professionals'
             }
         }
         return cats
