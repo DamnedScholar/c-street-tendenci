@@ -1,0 +1,59 @@
+{% extends page.template %}
+{% load meta_tags %}
+{% load cstreet_tags %}
+
+{% block title %}{{ page.get_title }}{% endblock %}
+{% block meta_description %}{{ page.get_description }}{% endblock %}
+{% block meta_keywords %}{{ page.get_keywords }}{% endblock %}
+{% block meta_canonical_url %}<link rel="canonical" href="{{ page.get_canonical_url }}" />{% endblock %}
+
+{% block extra_head %}
+{% meta_og_image page "header_image" %}
+{% meta_og_image page "content" %}
+{{ block.super }}
+{% endblock %}
+
+{% block banner %}{% endblock %}
+
+{% block hero %}
+  <div class="focuspoint"
+    data-focus-x="0.5" data-focus-y="0.5"
+    data-image-w="" data-image-h="">
+    <img src="{{ page.get_header_image_url }}">
+  </div>
+
+  <h1 id="hero-title">{{ page.title }}</h1>
+{% endblock %}
+
+{% block sidebar %}
+  <h3 class="text-xl text-italic">Meeting Minutes</h3>
+  <p>
+      As a public institution, the CID keeps minutes from each meeting. We share them here for purposes of transparency and good ethics, but don't let that stop you from perusing the archives a little. Click the links below to see what we've been up to.
+  </p>
+
+  <div class="w-full"
+  data-controller="archive-view" data-archive-view-mode="modal">
+    <ul>
+        {% for file in minutes %}
+            <li class="text-lg">
+                <a href="http://{{ request.META.HTTP_HOST }}/{{ file.url }}"
+                    data-action="archive-view#open">
+                    {{ file.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
+
+{% block content %}
+<article id="t-pages-page-{{ page.pk }}" class="t-pages-page">
+  
+  <div class="t-pages-page-body">
+    {{ page.content|safe }}
+  </div>
+
+  {% include "pages/meta.html" %}
+  
+</article>
+{% endblock %}

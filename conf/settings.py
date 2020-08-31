@@ -280,6 +280,10 @@ INSTALLED_APPS += [
     'import_export'
 ]
 
+TEMPLATE_DIRS = [
+  'addons/tendenstreet/templates'
+]
+
 # To remove a default app from INSTALLED_APPS:
 #INSTALLED_APPS.remove('some_app')
 # Or:
@@ -287,12 +291,23 @@ INSTALLED_APPS += [
 #for app in remove_apps:
 #    INSTALLED_APPS.remove(app)
 
-# When I need to change the functionality more than just changing the templates can
-# accomplish, I can copy the app code to `addons/` and remove the default app here.
-# `addons/` is automatically checked, so there's no need to tell Django about it.
-# remove_apps = ['tendenci.apps.directories']
-# for app in remove_apps:
-#    INSTALLED_APPS.remove(app)
+# Some default apps can't be removed without causing Django to throw a fit because they're used by core Tendenci code, like events.
+#   Protected: events, emails, forums, corporate_memberships, memberships, social_services
+remove_apps = [
+  'tendenci.apps.{}'.format(a) for a in [
+    'accountings',
+    'api_tasty',
+    'discounts',
+    'donations',
+    'resumes',
+    'recurring_payments',
+    'speakers',
+    'stories',
+    'videos'
+  ]
+]
+for app in remove_apps:
+   INSTALLED_APPS.remove(app)
 
 # To enable custom URL patterns to be configured in urls.py:
 ROOT_URLCONF = 'conf.urls'

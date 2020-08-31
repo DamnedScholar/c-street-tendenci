@@ -1,0 +1,89 @@
+{% extends "directories/base.html" %}
+{% load static %}
+{% load base_tags %}
+{% load base_filters %}
+{% load bootstrap_pagination_tags %}
+{% load directory_tags %}
+{% load search_tags %}
+{% load nav_tags %}
+{% load cstreet_tags %}
+
+{% block title %}
+    Calendar of Events - {{ block.super }}
+{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="alternate" type="application/rss+xml" title="{% trans 'Latest' %}  {% firstof MODULE_DIRECTORIES_LABEL_PLURAL trans 'Directories' %}" href="{% url 'events' %}" />
+    {% endblock %}
+
+{% block hero %}
+  <div class="focuspoint"
+    data-focus-x="0.5" data-focus-y="0.3"
+    data-image-w="1000" data-image-h="750">
+    <img src="{% static 'img/JamesAllen.jpg' %}">
+  </div>
+
+  <h1 id="hero-title">{{ headline }}</h1>
+{% endblock %}
+
+{% block content %}
+    <div data-controller="sorting" data-sorting-categories="annual monthly weekly daily">
+        <nav data-target="sorting.nav"></nav>
+        <div data-target="sorting.grid">
+            <h2 id="annual-title" class="text-blue text-2xl">Annual Events</h2>
+            <div class="grid grid-cols-2 grid-flow-col">
+                {% for month, events in recurrence.annual.items %}
+                    <div class="p-2">
+                        <h3 class="text-blue text-xl">{{ month }}</h3>
+                        {% for ids in events %}
+                            {% lookup_event id as event %}
+                            <section class="flex">
+                                <a href="{{ event.htmlLink }}" class="text-lg block">{{ event.summary }}</a>
+                                <span class="block text-sm">{{ event.location }}</span>
+                            </section>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div data-target="sorting.grid">
+            <h2 id="monthly-title" class="text-blue text-2xl">Monthly Events</h2>
+            <div class="grid grid-cols-2 grid-flow-col">
+                {% for month, events in recurrence.monthly.items %}
+                    <div class="p-2">
+                        <h3 class="text-blue text-xl">{{ month }}</h3>
+                        {% for ids in events %}
+                            {% lookup_event id as event %}
+                            <section class="flex">
+                                <a href="{{ event.htmlLink }}" class="text-lg block">{{ event.summary }}</a>
+                                <span class="block text-sm">{{ event.location }}</span>
+                            </section>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div data-target="sorting.grid">
+            <h2 id="weekly-title" class="text-blue text-2xl">Weekly Events</h2>
+            <div class="grid grid-cols-2 grid-flow-col">
+                {% for month, events in recurrence.weekly.items %}
+                    <div class="p-2">
+                        <h3 class="text-blue text-xl">{{ month }}</h3>
+                        {% for ids in events %}
+                            {% lookup_event id as event %}
+                            <section class="flex">
+                                <a href="{{ event.htmlLink }}" class="text-lg block">{{ event.summary }}</a>
+                                <span class="block text-sm">{{ event.location }}</span>
+                            </section>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

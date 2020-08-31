@@ -1,0 +1,11 @@
+<script src="{% static 'js/popup_test.js' %}"></script>
+
+<a href=""
+    data-controller="popup"
+    data-action="mouseover->popup#show mouseout->popup#hide"
+    data-popup-content="This is content!">
+    Link text
+    <div data-target="popup.display"
+        class="dropdown-menu hidden group-hover:block"
+    ></div>
+</a>

@@ -1003,6 +1003,17 @@ ol {
   border-color: #63b3ed;
 }
 
+#brand-background {
+  position: absolute;
+  z-index: -10;
+}
+
+#brand-background circle {
+  cx: 50;
+  cy: 50;
+  r: 50;
+}
+
 .printable table {
   width: 100%;
 }
@@ -1035,6 +1046,10 @@ ol {
   color: rgba(209, 115, 58, var(--text-opacity));
 }
 
+#t-admin-megamenu li {
+  margin-right: 10px;
+}
+
 #t-admin-megamenu img.nav-logo {
   margin-left: 7px;
   margin-top: 3px;
@@ -1060,6 +1075,10 @@ ol {
 
 .t-admin-inline {
   display: none !important; /* Remove this when the site is ready */
+  bottom: -1.6rem;
+  position: absolute;
+  font-size: 0.75rem;
+  padding: 0.25rem;
 }
 
 div.focuspoint {
@@ -1093,6 +1112,13 @@ div.focuspoint {
   color: rgba(252, 253, 253, var(--text-opacity));
   z-index: 10;
   text-shadow: 1px 1px 2px #2d5c66;
+}
+
+#hero-nav a {
+  --text-opacity: 1;
+  color: #2d5c66;
+  color: rgba(45, 92, 102, var(--text-opacity));
+  white-space: nowrap;
 }
 
 #hero-nav ul {
@@ -1135,10 +1161,7 @@ div.focuspoint {
   margin-left: 1.5rem;
 }
 
-#site-nav .dropdown-menu {
-  min-width: -webkit-max-content;
-  min-width: -moz-max-content;
-  min-width: max-content;
+.dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
@@ -1288,12 +1311,6 @@ div.focuspoint {
     padding-left: 1rem;
     padding-right: 1rem;
     font-weight: 700;
-  }
-
-  #hero-nav a {
-    --text-opacity: 1;
-    color: #2d5c66;
-    color: rgba(45, 92, 102, var(--text-opacity));
   }
 
   #t-admin-megamenu .nav-label, .t-admin-inline, #site-footer {
@@ -3562,6 +3579,150 @@ div.focuspoint {
 }
 
 .hidden {
+  display: none;
+}
+
+.hover\:block:hover {
+  display: block;
+}
+
+.hover\:inline-block:hover {
+  display: inline-block;
+}
+
+.hover\:inline:hover {
+  display: inline;
+}
+
+.hover\:flex:hover {
+  display: flex;
+}
+
+.hover\:inline-flex:hover {
+  display: inline-flex;
+}
+
+.hover\:table:hover {
+  display: table;
+}
+
+.hover\:table-caption:hover {
+  display: table-caption;
+}
+
+.hover\:table-cell:hover {
+  display: table-cell;
+}
+
+.hover\:table-column:hover {
+  display: table-column;
+}
+
+.hover\:table-column-group:hover {
+  display: table-column-group;
+}
+
+.hover\:table-footer-group:hover {
+  display: table-footer-group;
+}
+
+.hover\:table-header-group:hover {
+  display: table-header-group;
+}
+
+.hover\:table-row-group:hover {
+  display: table-row-group;
+}
+
+.hover\:table-row:hover {
+  display: table-row;
+}
+
+.hover\:flow-root:hover {
+  display: flow-root;
+}
+
+.hover\:grid:hover {
+  display: grid;
+}
+
+.hover\:inline-grid:hover {
+  display: inline-grid;
+}
+
+.hover\:hidden:hover {
+  display: none;
+}
+
+.group:hover .group-hover\:block {
+  display: block;
+}
+
+.group:hover .group-hover\:inline-block {
+  display: inline-block;
+}
+
+.group:hover .group-hover\:inline {
+  display: inline;
+}
+
+.group:hover .group-hover\:flex {
+  display: flex;
+}
+
+.group:hover .group-hover\:inline-flex {
+  display: inline-flex;
+}
+
+.group:hover .group-hover\:table {
+  display: table;
+}
+
+.group:hover .group-hover\:table-caption {
+  display: table-caption;
+}
+
+.group:hover .group-hover\:table-cell {
+  display: table-cell;
+}
+
+.group:hover .group-hover\:table-column {
+  display: table-column;
+}
+
+.group:hover .group-hover\:table-column-group {
+  display: table-column-group;
+}
+
+.group:hover .group-hover\:table-footer-group {
+  display: table-footer-group;
+}
+
+.group:hover .group-hover\:table-header-group {
+  display: table-header-group;
+}
+
+.group:hover .group-hover\:table-row-group {
+  display: table-row-group;
+}
+
+.group:hover .group-hover\:table-row {
+  display: table-row;
+}
+
+.group:hover .group-hover\:flow-root {
+  display: flow-root;
+}
+
+.group:hover .group-hover\:grid {
+  display: grid;
+}
+
+.group:hover .group-hover\:inline-grid {
+  display: inline-grid;
+}
+
+.group:hover .group-hover\:hidden {
   display: none;
 }
 
@@ -7988,6 +8149,20 @@ div.focuspoint {
   left: auto;
 }
 
+.-inset-50 {
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+}
+
+.-inset-100 {
+  top: -100%;
+  right: -100%;
+  bottom: -100%;
+  left: -100%;
+}
+
 .inset-y-0 {
   top: 0;
   bottom: 0;
@@ -8026,6 +8201,26 @@ div.focuspoint {
 .inset-x-auto {
   right: auto;
   left: auto;
+}
+
+.-inset-y-50 {
+  top: -50%;
+  bottom: -50%;
+}
+
+.-inset-x-50 {
+  right: -50%;
+  left: -50%;
+}
+
+.-inset-y-100 {
+  top: -100%;
+  bottom: -100%;
+}
+
+.-inset-x-100 {
+  right: -100%;
+  left: -100%;
 }
 
 .top-0 {
@@ -8090,6 +8285,38 @@ div.focuspoint {
 
 .left-auto {
   left: auto;
+}
+
+.-top-50 {
+  top: -50%;
+}
+
+.-right-50 {
+  right: -50%;
+}
+
+.-bottom-50 {
+  bottom: -50%;
+}
+
+.-left-50 {
+  left: -50%;
+}
+
+.-top-100 {
+  top: -100%;
+}
+
+.-right-100 {
+  right: -100%;
+}
+
+.-bottom-100 {
+  bottom: -100%;
+}
+
+.-left-100 {
+  left: -100%;
 }
 
 .resize-none {
@@ -9141,6 +9368,14 @@ div.focuspoint {
 
 .w-thumbnail {
   width: 200px;
+}
+
+.w-double {
+  width: 200%;
+}
+
+.w-triple {
+  width: 300%;
 }
 
 .z-0 {
@@ -14237,6 +14472,150 @@ div.focuspoint {
     display: none;
   }
 
+  .sm\:hover\:block:hover {
+    display: block;
+  }
+
+  .sm\:hover\:inline-block:hover {
+    display: inline-block;
+  }
+
+  .sm\:hover\:inline:hover {
+    display: inline;
+  }
+
+  .sm\:hover\:flex:hover {
+    display: flex;
+  }
+
+  .sm\:hover\:inline-flex:hover {
+    display: inline-flex;
+  }
+
+  .sm\:hover\:table:hover {
+    display: table;
+  }
+
+  .sm\:hover\:table-caption:hover {
+    display: table-caption;
+  }
+
+  .sm\:hover\:table-cell:hover {
+    display: table-cell;
+  }
+
+  .sm\:hover\:table-column:hover {
+    display: table-column;
+  }
+
+  .sm\:hover\:table-column-group:hover {
+    display: table-column-group;
+  }
+
+  .sm\:hover\:table-footer-group:hover {
+    display: table-footer-group;
+  }
+
+  .sm\:hover\:table-header-group:hover {
+    display: table-header-group;
+  }
+
+  .sm\:hover\:table-row-group:hover {
+    display: table-row-group;
+  }
+
+  .sm\:hover\:table-row:hover {
+    display: table-row;
+  }
+
+  .sm\:hover\:flow-root:hover {
+    display: flow-root;
+  }
+
+  .sm\:hover\:grid:hover {
+    display: grid;
+  }
+
+  .sm\:hover\:inline-grid:hover {
+    display: inline-grid;
+  }
+
+  .sm\:hover\:hidden:hover {
+    display: none;
+  }
+
+  .group:hover .sm\:group-hover\:block {
+    display: block;
+  }
+
+  .group:hover .sm\:group-hover\:inline-block {
+    display: inline-block;
+  }
+
+  .group:hover .sm\:group-hover\:inline {
+    display: inline;
+  }
+
+  .group:hover .sm\:group-hover\:flex {
+    display: flex;
+  }
+
+  .group:hover .sm\:group-hover\:inline-flex {
+    display: inline-flex;
+  }
+
+  .group:hover .sm\:group-hover\:table {
+    display: table;
+  }
+
+  .group:hover .sm\:group-hover\:table-caption {
+    display: table-caption;
+  }
+
+  .group:hover .sm\:group-hover\:table-cell {
+    display: table-cell;
+  }
+
+  .group:hover .sm\:group-hover\:table-column {
+    display: table-column;
+  }
+
+  .group:hover .sm\:group-hover\:table-column-group {
+    display: table-column-group;
+  }
+
+  .group:hover .sm\:group-hover\:table-footer-group {
+    display: table-footer-group;
+  }
+
+  .group:hover .sm\:group-hover\:table-header-group {
+    display: table-header-group;
+  }
+
+  .group:hover .sm\:group-hover\:table-row-group {
+    display: table-row-group;
+  }
+
+  .group:hover .sm\:group-hover\:table-row {
+    display: table-row;
+  }
+
+  .group:hover .sm\:group-hover\:flow-root {
+    display: flow-root;
+  }
+
+  .group:hover .sm\:group-hover\:grid {
+    display: grid;
+  }
+
+  .group:hover .sm\:group-hover\:inline-grid {
+    display: inline-grid;
+  }
+
+  .group:hover .sm\:group-hover\:hidden {
+    display: none;
+  }
+
   .sm\:flex-row {
     flex-direction: row;
   }
@@ -18660,6 +19039,20 @@ div.focuspoint {
     left: auto;
   }
 
+  .sm\:-inset-50 {
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+  }
+
+  .sm\:-inset-100 {
+    top: -100%;
+    right: -100%;
+    bottom: -100%;
+    left: -100%;
+  }
+
   .sm\:inset-y-0 {
     top: 0;
     bottom: 0;
@@ -18698,6 +19091,26 @@ div.focuspoint {
   .sm\:inset-x-auto {
     right: auto;
     left: auto;
+  }
+
+  .sm\:-inset-y-50 {
+    top: -50%;
+    bottom: -50%;
+  }
+
+  .sm\:-inset-x-50 {
+    right: -50%;
+    left: -50%;
+  }
+
+  .sm\:-inset-y-100 {
+    top: -100%;
+    bottom: -100%;
+  }
+
+  .sm\:-inset-x-100 {
+    right: -100%;
+    left: -100%;
   }
 
   .sm\:top-0 {
@@ -18762,6 +19175,38 @@ div.focuspoint {
 
   .sm\:left-auto {
     left: auto;
+  }
+
+  .sm\:-top-50 {
+    top: -50%;
+  }
+
+  .sm\:-right-50 {
+    right: -50%;
+  }
+
+  .sm\:-bottom-50 {
+    bottom: -50%;
+  }
+
+  .sm\:-left-50 {
+    left: -50%;
+  }
+
+  .sm\:-top-100 {
+    top: -100%;
+  }
+
+  .sm\:-right-100 {
+    right: -100%;
+  }
+
+  .sm\:-bottom-100 {
+    bottom: -100%;
+  }
+
+  .sm\:-left-100 {
+    left: -100%;
   }
 
   .sm\:resize-none {
@@ -19813,6 +20258,14 @@ div.focuspoint {
 
   .sm\:w-thumbnail {
     width: 200px;
+  }
+
+  .sm\:w-double {
+    width: 200%;
+  }
+
+  .sm\:w-triple {
+    width: 300%;
   }
 
   .sm\:z-0 {
@@ -24910,6 +25363,150 @@ div.focuspoint {
     display: none;
   }
 
+  .md\:hover\:block:hover {
+    display: block;
+  }
+
+  .md\:hover\:inline-block:hover {
+    display: inline-block;
+  }
+
+  .md\:hover\:inline:hover {
+    display: inline;
+  }
+
+  .md\:hover\:flex:hover {
+    display: flex;
+  }
+
+  .md\:hover\:inline-flex:hover {
+    display: inline-flex;
+  }
+
+  .md\:hover\:table:hover {
+    display: table;
+  }
+
+  .md\:hover\:table-caption:hover {
+    display: table-caption;
+  }
+
+  .md\:hover\:table-cell:hover {
+    display: table-cell;
+  }
+
+  .md\:hover\:table-column:hover {
+    display: table-column;
+  }
+
+  .md\:hover\:table-column-group:hover {
+    display: table-column-group;
+  }
+
+  .md\:hover\:table-footer-group:hover {
+    display: table-footer-group;
+  }
+
+  .md\:hover\:table-header-group:hover {
+    display: table-header-group;
+  }
+
+  .md\:hover\:table-row-group:hover {
+    display: table-row-group;
+  }
+
+  .md\:hover\:table-row:hover {
+    display: table-row;
+  }
+
+  .md\:hover\:flow-root:hover {
+    display: flow-root;
+  }
+
+  .md\:hover\:grid:hover {
+    display: grid;
+  }
+
+  .md\:hover\:inline-grid:hover {
+    display: inline-grid;
+  }
+
+  .md\:hover\:hidden:hover {
+    display: none;
+  }
+
+  .group:hover .md\:group-hover\:block {
+    display: block;
+  }
+
+  .group:hover .md\:group-hover\:inline-block {
+    display: inline-block;
+  }
+
+  .group:hover .md\:group-hover\:inline {
+    display: inline;
+  }
+
+  .group:hover .md\:group-hover\:flex {
+    display: flex;
+  }
+
+  .group:hover .md\:group-hover\:inline-flex {
+    display: inline-flex;
+  }
+
+  .group:hover .md\:group-hover\:table {
+    display: table;
+  }
+
+  .group:hover .md\:group-hover\:table-caption {
+    display: table-caption;
+  }
+
+  .group:hover .md\:group-hover\:table-cell {
+    display: table-cell;
+  }
+
+  .group:hover .md\:group-hover\:table-column {
+    display: table-column;
+  }
+
+  .group:hover .md\:group-hover\:table-column-group {
+    display: table-column-group;
+  }
+
+  .group:hover .md\:group-hover\:table-footer-group {
+    display: table-footer-group;
+  }
+
+  .group:hover .md\:group-hover\:table-header-group {
+    display: table-header-group;
+  }
+
+  .group:hover .md\:group-hover\:table-row-group {
+    display: table-row-group;
+  }
+
+  .group:hover .md\:group-hover\:table-row {
+    display: table-row;
+  }
+
+  .group:hover .md\:group-hover\:flow-root {
+    display: flow-root;
+  }
+
+  .group:hover .md\:group-hover\:grid {
+    display: grid;
+  }
+
+  .group:hover .md\:group-hover\:inline-grid {
+    display: inline-grid;
+  }
+
+  .group:hover .md\:group-hover\:hidden {
+    display: none;
+  }
+
   .md\:flex-row {
     flex-direction: row;
   }
@@ -29333,6 +29930,20 @@ div.focuspoint {
     left: auto;
   }
 
+  .md\:-inset-50 {
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+  }
+
+  .md\:-inset-100 {
+    top: -100%;
+    right: -100%;
+    bottom: -100%;
+    left: -100%;
+  }
+
   .md\:inset-y-0 {
     top: 0;
     bottom: 0;
@@ -29371,6 +29982,26 @@ div.focuspoint {
   .md\:inset-x-auto {
     right: auto;
     left: auto;
+  }
+
+  .md\:-inset-y-50 {
+    top: -50%;
+    bottom: -50%;
+  }
+
+  .md\:-inset-x-50 {
+    right: -50%;
+    left: -50%;
+  }
+
+  .md\:-inset-y-100 {
+    top: -100%;
+    bottom: -100%;
+  }
+
+  .md\:-inset-x-100 {
+    right: -100%;
+    left: -100%;
   }
 
   .md\:top-0 {
@@ -29435,6 +30066,38 @@ div.focuspoint {
 
   .md\:left-auto {
     left: auto;
+  }
+
+  .md\:-top-50 {
+    top: -50%;
+  }
+
+  .md\:-right-50 {
+    right: -50%;
+  }
+
+  .md\:-bottom-50 {
+    bottom: -50%;
+  }
+
+  .md\:-left-50 {
+    left: -50%;
+  }
+
+  .md\:-top-100 {
+    top: -100%;
+  }
+
+  .md\:-right-100 {
+    right: -100%;
+  }
+
+  .md\:-bottom-100 {
+    bottom: -100%;
+  }
+
+  .md\:-left-100 {
+    left: -100%;
   }
 
   .md\:resize-none {
@@ -30486,6 +31149,14 @@ div.focuspoint {
 
   .md\:w-thumbnail {
     width: 200px;
+  }
+
+  .md\:w-double {
+    width: 200%;
+  }
+
+  .md\:w-triple {
+    width: 300%;
   }
 
   .md\:z-0 {
@@ -35583,6 +36254,150 @@ div.focuspoint {
     display: none;
   }
 
+  .lg\:hover\:block:hover {
+    display: block;
+  }
+
+  .lg\:hover\:inline-block:hover {
+    display: inline-block;
+  }
+
+  .lg\:hover\:inline:hover {
+    display: inline;
+  }
+
+  .lg\:hover\:flex:hover {
+    display: flex;
+  }
+
+  .lg\:hover\:inline-flex:hover {
+    display: inline-flex;
+  }
+
+  .lg\:hover\:table:hover {
+    display: table;
+  }
+
+  .lg\:hover\:table-caption:hover {
+    display: table-caption;
+  }
+
+  .lg\:hover\:table-cell:hover {
+    display: table-cell;
+  }
+
+  .lg\:hover\:table-column:hover {
+    display: table-column;
+  }
+
+  .lg\:hover\:table-column-group:hover {
+    display: table-column-group;
+  }
+
+  .lg\:hover\:table-footer-group:hover {
+    display: table-footer-group;
+  }
+
+  .lg\:hover\:table-header-group:hover {
+    display: table-header-group;
+  }
+
+  .lg\:hover\:table-row-group:hover {
+    display: table-row-group;
+  }
+
+  .lg\:hover\:table-row:hover {
+    display: table-row;
+  }
+
+  .lg\:hover\:flow-root:hover {
+    display: flow-root;
+  }
+
+  .lg\:hover\:grid:hover {
+    display: grid;
+  }
+
+  .lg\:hover\:inline-grid:hover {
+    display: inline-grid;
+  }
+
+  .lg\:hover\:hidden:hover {
+    display: none;
+  }
+
+  .group:hover .lg\:group-hover\:block {
+    display: block;
+  }
+
+  .group:hover .lg\:group-hover\:inline-block {
+    display: inline-block;
+  }
+
+  .group:hover .lg\:group-hover\:inline {
+    display: inline;
+  }
+
+  .group:hover .lg\:group-hover\:flex {
+    display: flex;
+  }
+
+  .group:hover .lg\:group-hover\:inline-flex {
+    display: inline-flex;
+  }
+
+  .group:hover .lg\:group-hover\:table {
+    display: table;
+  }
+
+  .group:hover .lg\:group-hover\:table-caption {
+    display: table-caption;
+  }
+
+  .group:hover .lg\:group-hover\:table-cell {
+    display: table-cell;
+  }
+
+  .group:hover .lg\:group-hover\:table-column {
+    display: table-column;
+  }
+
+  .group:hover .lg\:group-hover\:table-column-group {
+    display: table-column-group;
+  }
+
+  .group:hover .lg\:group-hover\:table-footer-group {
+    display: table-footer-group;
+  }
+
+  .group:hover .lg\:group-hover\:table-header-group {
+    display: table-header-group;
+  }
+
+  .group:hover .lg\:group-hover\:table-row-group {
+    display: table-row-group;
+  }
+
+  .group:hover .lg\:group-hover\:table-row {
+    display: table-row;
+  }
+
+  .group:hover .lg\:group-hover\:flow-root {
+    display: flow-root;
+  }
+
+  .group:hover .lg\:group-hover\:grid {
+    display: grid;
+  }
+
+  .group:hover .lg\:group-hover\:inline-grid {
+    display: inline-grid;
+  }
+
+  .group:hover .lg\:group-hover\:hidden {
+    display: none;
+  }
+
   .lg\:flex-row {
     flex-direction: row;
   }
@@ -40006,6 +40821,20 @@ div.focuspoint {
     left: auto;
   }
 
+  .lg\:-inset-50 {
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+  }
+
+  .lg\:-inset-100 {
+    top: -100%;
+    right: -100%;
+    bottom: -100%;
+    left: -100%;
+  }
+
   .lg\:inset-y-0 {
     top: 0;
     bottom: 0;
@@ -40044,6 +40873,26 @@ div.focuspoint {
   .lg\:inset-x-auto {
     right: auto;
     left: auto;
+  }
+
+  .lg\:-inset-y-50 {
+    top: -50%;
+    bottom: -50%;
+  }
+
+  .lg\:-inset-x-50 {
+    right: -50%;
+    left: -50%;
+  }
+
+  .lg\:-inset-y-100 {
+    top: -100%;
+    bottom: -100%;
+  }
+
+  .lg\:-inset-x-100 {
+    right: -100%;
+    left: -100%;
   }
 
   .lg\:top-0 {
@@ -40108,6 +40957,38 @@ div.focuspoint {
 
   .lg\:left-auto {
     left: auto;
+  }
+
+  .lg\:-top-50 {
+    top: -50%;
+  }
+
+  .lg\:-right-50 {
+    right: -50%;
+  }
+
+  .lg\:-bottom-50 {
+    bottom: -50%;
+  }
+
+  .lg\:-left-50 {
+    left: -50%;
+  }
+
+  .lg\:-top-100 {
+    top: -100%;
+  }
+
+  .lg\:-right-100 {
+    right: -100%;
+  }
+
+  .lg\:-bottom-100 {
+    bottom: -100%;
+  }
+
+  .lg\:-left-100 {
+    left: -100%;
   }
 
   .lg\:resize-none {
@@ -41159,6 +42040,14 @@ div.focuspoint {
 
   .lg\:w-thumbnail {
     width: 200px;
+  }
+
+  .lg\:w-double {
+    width: 200%;
+  }
+
+  .lg\:w-triple {
+    width: 300%;
   }
 
   .lg\:z-0 {
@@ -46256,6 +47145,150 @@ div.focuspoint {
     display: none;
   }
 
+  .xl\:hover\:block:hover {
+    display: block;
+  }
+
+  .xl\:hover\:inline-block:hover {
+    display: inline-block;
+  }
+
+  .xl\:hover\:inline:hover {
+    display: inline;
+  }
+
+  .xl\:hover\:flex:hover {
+    display: flex;
+  }
+
+  .xl\:hover\:inline-flex:hover {
+    display: inline-flex;
+  }
+
+  .xl\:hover\:table:hover {
+    display: table;
+  }
+
+  .xl\:hover\:table-caption:hover {
+    display: table-caption;
+  }
+
+  .xl\:hover\:table-cell:hover {
+    display: table-cell;
+  }
+
+  .xl\:hover\:table-column:hover {
+    display: table-column;
+  }
+
+  .xl\:hover\:table-column-group:hover {
+    display: table-column-group;
+  }
+
+  .xl\:hover\:table-footer-group:hover {
+    display: table-footer-group;
+  }
+
+  .xl\:hover\:table-header-group:hover {
+    display: table-header-group;
+  }
+
+  .xl\:hover\:table-row-group:hover {
+    display: table-row-group;
+  }
+
+  .xl\:hover\:table-row:hover {
+    display: table-row;
+  }
+
+  .xl\:hover\:flow-root:hover {
+    display: flow-root;
+  }
+
+  .xl\:hover\:grid:hover {
+    display: grid;
+  }
+
+  .xl\:hover\:inline-grid:hover {
+    display: inline-grid;
+  }
+
+  .xl\:hover\:hidden:hover {
+    display: none;
+  }
+
+  .group:hover .xl\:group-hover\:block {
+    display: block;
+  }
+
+  .group:hover .xl\:group-hover\:inline-block {
+    display: inline-block;
+  }
+
+  .group:hover .xl\:group-hover\:inline {
+    display: inline;
+  }
+
+  .group:hover .xl\:group-hover\:flex {
+    display: flex;
+  }
+
+  .group:hover .xl\:group-hover\:inline-flex {
+    display: inline-flex;
+  }
+
+  .group:hover .xl\:group-hover\:table {
+    display: table;
+  }
+
+  .group:hover .xl\:group-hover\:table-caption {
+    display: table-caption;
+  }
+
+  .group:hover .xl\:group-hover\:table-cell {
+    display: table-cell;
+  }
+
+  .group:hover .xl\:group-hover\:table-column {
+    display: table-column;
+  }
+
+  .group:hover .xl\:group-hover\:table-column-group {
+    display: table-column-group;
+  }
+
+  .group:hover .xl\:group-hover\:table-footer-group {
+    display: table-footer-group;
+  }
+
+  .group:hover .xl\:group-hover\:table-header-group {
+    display: table-header-group;
+  }
+
+  .group:hover .xl\:group-hover\:table-row-group {
+    display: table-row-group;
+  }
+
+  .group:hover .xl\:group-hover\:table-row {
+    display: table-row;
+  }
+
+  .group:hover .xl\:group-hover\:flow-root {
+    display: flow-root;
+  }
+
+  .group:hover .xl\:group-hover\:grid {
+    display: grid;
+  }
+
+  .group:hover .xl\:group-hover\:inline-grid {
+    display: inline-grid;
+  }
+
+  .group:hover .xl\:group-hover\:hidden {
+    display: none;
+  }
+
   .xl\:flex-row {
     flex-direction: row;
   }
@@ -50679,6 +51712,20 @@ div.focuspoint {
     left: auto;
   }
 
+  .xl\:-inset-50 {
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+  }
+
+  .xl\:-inset-100 {
+    top: -100%;
+    right: -100%;
+    bottom: -100%;
+    left: -100%;
+  }
+
   .xl\:inset-y-0 {
     top: 0;
     bottom: 0;
@@ -50717,6 +51764,26 @@ div.focuspoint {
   .xl\:inset-x-auto {
     right: auto;
     left: auto;
+  }
+
+  .xl\:-inset-y-50 {
+    top: -50%;
+    bottom: -50%;
+  }
+
+  .xl\:-inset-x-50 {
+    right: -50%;
+    left: -50%;
+  }
+
+  .xl\:-inset-y-100 {
+    top: -100%;
+    bottom: -100%;
+  }
+
+  .xl\:-inset-x-100 {
+    right: -100%;
+    left: -100%;
   }
 
   .xl\:top-0 {
@@ -50781,6 +51848,38 @@ div.focuspoint {
 
   .xl\:left-auto {
     left: auto;
+  }
+
+  .xl\:-top-50 {
+    top: -50%;
+  }
+
+  .xl\:-right-50 {
+    right: -50%;
+  }
+
+  .xl\:-bottom-50 {
+    bottom: -50%;
+  }
+
+  .xl\:-left-50 {
+    left: -50%;
+  }
+
+  .xl\:-top-100 {
+    top: -100%;
+  }
+
+  .xl\:-right-100 {
+    right: -100%;
+  }
+
+  .xl\:-bottom-100 {
+    bottom: -100%;
+  }
+
+  .xl\:-left-100 {
+    left: -100%;
   }
 
   .xl\:resize-none {
@@ -51832,6 +52931,14 @@ div.focuspoint {
 
   .xl\:w-thumbnail {
     width: 200px;
+  }
+
+  .xl\:w-double {
+    width: 200%;
+  }
+
+  .xl\:w-triple {
+    width: 300%;
   }
 
   .xl\:z-0 {

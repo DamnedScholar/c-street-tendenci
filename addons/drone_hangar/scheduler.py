@@ -9,16 +9,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from addons.drone_hangar.models import AirBnBData
 from addons.drone_hangar.scrapy.airbnb_spider import AirBnBSpider
 
-
-def summon_airbnb_spider():
-    spider = AirBnBSpider()
-
-    if spider.check_age():
-        logging.warning("> > > Starting request.")
-        spider.start_requests()
-    else:
-        pass
-
 def init_scheduler():
     jobstores = {}
     executors = {

@@ -19,56 +19,6 @@
 {% block extra_head %}
     {{ block.super }}
     <link rel="alternate" type="application/rss+xml" title="{% trans 'Latest' %}  {% firstof MODULE_DIRECTORIES_LABEL_PLURAL trans 'Directories' %}" href="{% url 'directory.feed' %}" />
-    <script>
-        // init Isotope
-        var iso = new Isotope( '.grid', {
-            itemSelector: '.directory-listing',
-            layoutMode: 'fitRows'
-        })
-
-        // filter functions
-        var filterFns = {
-            filterTags: function( itemElem ) {
-                var taglist = itemElem.querySelector('.tags').innerText
-                return taglist.match( /food/ )
-            },
-            filterBooze: function( itemElem ) {
-                var taglist = itemElem.querySelector('.tags').innerText
-                return taglist.match( /alcohol/ )
-            },
-        }
-
-        // bind filter button click
-        var filtersElem = document.querySelector('.filters-button-group');
-        filtersElem.addEventListener( 'click', function( event ) {
-            // only work with buttons
-            if ( !matchesSelector( event.target, 'button' ) ) {
-                return;
-            }
-            var filterValue = event.target.getAttribute('data-filter');
-            // use matching filter function
-            filterValue = filterFns[ filterValue ] || filterValue;
-            iso.arrange({ filter: filterValue });
-        });
-
-        // change is-checked class on buttons
-        var buttonGroups = document.querySelectorAll('.button-group');
-        for ( var i=0, len = buttonGroups.length; i < len; i++ ) {
-            var buttonGroup = buttonGroups[i];
-            radioButtonGroup( buttonGroup );
-        }
-
-        function radioButtonGroup( buttonGroup ) {
-            buttonGroup.addEventListener( 'click', function( event ) {
-                // only work with buttons
-                if ( !matchesSelector( event.target, 'button' ) ) {
-                    return;
-                }
-                buttonGroup.querySelector('.is-checked').classList.remove('is-checked');
-                event.target.classList.add('is-checked');
-            });
-        }
-    </script>
 {% endblock %}
 
 {% block content_classes %}{{ block.super }} t-search-view{% endblock %}
@@ -81,9 +31,13 @@
   </div>
 
   <h1 id="hero-title">{{ headline }}</h1>
-  <nav id="hero-nav" class="relative w-2/3 flex flex-row items-center justify-around">
+  <nav id="hero-nav" class="relative w-2/3 md:w-1/3 flex flex-row items-center justify-center">
       {% for cat_slug, cat in all_cats.items %}
-        <div class="btn btn-success"><a href="{{ request.META.HTTP_HOST }}/directory/{{ cat_slug }}">{{ cat.headline }}</a></div>
+        <div class="btn btn-success mt-2 ml-2">
+            <a href="http://{{ request.META.HTTP_HOST }}/directory/{{ cat_slug }}">
+                {{ cat.headline }}
+            </a>
+        </div>
       {% endfor %}
 
   </nav>
@@ -94,17 +48,45 @@
 {% endblock %}
 
 {% block content %}
-    {% if cat == "rental" %}
-        {% airbnb %}
-    {% endif %}
-    <div data-controller='isotope'
-    data-isotope='{ "itemSelector": ".directory-listing", "layoutMode": "fitRows" }'>
+    <script src="{% static 'js/sorting.js' %}"></script>
+    <div data-controller='sorting'
+        data-sorting-categories="short-term long-term"
+        data-sorting-sorts="name">
+
+        <template data-target="sorting.template">
+            <span class="text-xl text-italic md:w-full" data-target="sorting.cta">Welcome to our searchable directory. Click the buttons or start typing below to find what you seek.</span>
         
-        <!-- Empty semantic nav class to be populated by Stimulus. -->
-        <nav class="w-2/3 flex justify-around" id="isotope-nav"></nav>
-        <section class="grid grid-cols-5 gap-4">
+            <nav class="w-2/3 flex justify-around" data-target="sorting.nav">
+                <ul class="flex items-center text-xl text-italic md:w-full" data-target="sorting.cat-list">
+                    <li data-target="sorting.cat-btn"></li>
+                </ul>
+                <div>
+                    <span data-target="sorting.filter-label">
+                        Filter
+                    </span>
+                    <ul class="flex items-center text-xl text-italic md:w-full" data-target="sorting.filter-list">
+                        <li data-target="sorting.filter-btn"></li>
+                    </ul>
+                </div>
+                <div>
+                    <span data-target="sorting.sort-label">
+                        Sort
+                    </span>
+                    <ul class="flex items-center text-xl text-italic md:w-full" data-target="sorting.sort-list">
+                        <li data-target="sorting.sort-btn"></li>
+                    </ul>
+                </div>
+            </nav>
+        </template>
+
+        {% if cat == "rental" %}
+            {% airbnb %}
+        {% endif %}
+        <!-- Sortable grid. -->
+        <section class="grid grid-cols-5 gap-4" data-target="sorting.grid">
             {% for directory in directories %}
-                <article class="directory-listing flex flex-col items-center">
+                <article class="flex flex-col items-center"
+                    data-target="sorting.item">
                     <a href="{{ directory.link }}">
                         <div class="h-thumbnail w-thumbnail flex flex-col justify-center">
                             <img

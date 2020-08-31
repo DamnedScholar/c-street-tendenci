@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import date, datetime
 import json
 import logging
@@ -93,28 +94,17 @@ class Event:
         return (description, result.group(0))
 
 class CalEventsMixin(YearMixin, MonthMixin, WeekMixin, DayMixin, DateMixin):
-    calendar_id = 'i3srpdc24fn8lkska1il6ann20@group.calendar.google.com'
-
-    # def get_events_for_range(self, start, end, *args, **kwargs):
-        # This is a multipurpose method that can be used for time-slicing a single day or viewing the whole year. It should be completely duration-agnostic and simply return a dictionary of events.
-
-        # TODO: It would be best to support passing in strings and freeform start/end dates. It doesn't take much to check for positional arguments, 'start'/'end' keywords, and date-like strings. For right now, though, I want to pass in keyworded datetime arguments to minimize ambiguity. 
-        # service = build('calendar', 'v3', credentials=get_credentials())
-
-        # now = datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-        # events_result = service.events().list(
-        #     calendarId=self.calendar_id,
-        #     timeMin=start,
-        #     timeMax=end,
-        #     maxResults=250, singleEvents=True,
-        #     orderBy='startTime'
-        # ).execute()
-        # TODO: Right now, we only get 250 events. We don't have nearly enough to hit this limit, but this needs to be fixed before we do. I need to write a new method to iterate through request pages and output a complete list.
+    def get_context_data(self, *args, **kwargs):
+        context = {
+            'events': self.get_events_from_saved(),
+            'recurrence': self.parse_recurrence()
+        }
+        return context
 
     def get_events_from_saved(self):
         events_result = {}
 
-        with open('addons/tendenstreet/cal_test_data.json', 'r') as f:
+        with open('addons/drone_hangar/static/google/calendar.json', 'r') as f:
             events_result = json.loads(f.read())
 
         events_by_id = {}
@@ -142,7 +132,7 @@ class CalEventsMixin(YearMixin, MonthMixin, WeekMixin, DayMixin, DateMixin):
     def parse_recurrence(self):
         events_result = {}
 
-        with open('addons/tendenstreet/cal_recurrence_data.json', 'r') as f:
+        with open('addons/drone_hangar/static/google/recurrence.json', 'r') as f:
             events_result = json.loads(f.read())
 
         recurrence = {}     # Keys should be human-readable recurrence patterns. This is going to be displayed on the Events page in HTML.
@@ -150,11 +140,13 @@ class CalEventsMixin(YearMixin, MonthMixin, WeekMixin, DayMixin, DateMixin):
             'annual': [],
             'monthly': [],
             'weekly': [],
+            'daily': []
         }
 
         for event in events_result:
             rule = {
-                'raw': event.recurrence[0].split(';'),
+                'raw': event['recurrence'][0][6:].split(';'),
+                # TODO: If I ever upgrade to 3.9, I can change the awkward slicing syntax to `removeprefix('RRULE:')`.
                 'freq': '',
                 'byday': [],
                 'bymonth': [],
@@ -167,17 +159,16 @@ class CalEventsMixin(YearMixin, MonthMixin, WeekMixin, DayMixin, DateMixin):
 
             # For each event, generate a tuple with a human-readable description of the recurrence rule, then use dict() to compile them into a dictionary.
 
-            if "FREQ=YEARLY" in rule:
+            if "FREQ=YEARLY" in rule['raw']:
                 rule['freq'] = 'annual'
-            elif "FREQ=MONTHLY" in rule:
+            elif "FREQ=MONTHLY" in rule['raw']:
                 rule['freq'] = 'monthly'
-            elif "FREQ=WEEKLY" in rule:
+            elif "FREQ=WEEKLY" in rule['raw']:
                 rule['freq'] = 'weekly'
-            elif "FREQ=DAILY" in rule:
+            elif "FREQ=DAILY" in rule['raw']:
                 rule['freq'] = 'daily'
             else:
                 logging.debug('> > > No RRULE repetition type found. Jumping to next event.')
-                continue
 
             # RRULE syntax is keyword-based, so we shouldn't care about position here. Just iterate through the list and assign variables as we find them.
             rule_text = ''
@@ -234,7 +225,7 @@ class CalEventsMixin(YearMixin, MonthMixin, WeekMixin, DayMixin, DateMixin):
             interval_text = intervals[rule['interval']]
 
             day_list = [
-                f'{pos[d[-2:]]} {days[d[-2:]]}' for d in rule['byday']
+                f'{pos[d[:-2]]} {days[d[-2:]]}' for d in rule['byday']
             ]
             day_text = ", ".join(
                 day_list[:-2] + [", and ".join(day_list[-2:])])
@@ -264,33 +255,25 @@ class CalEventsMixin(YearMixin, MonthMixin, WeekMixin, DayMixin, DateMixin):
                 rule_text = f'{interval_text} {day_text}'
 
             recurrence_lists[rule['freq']].append(
-                (rule_text, event.id)
+                (rule_text, event['id'])
             )
         
-        recurrence = {
-            k: dict(v) for k, v in recurrence_lists
-        }
+        
+        for key, events in recurrence_lists.items():
+            recurrence.update({
+                    key: defaultdict(list)
+                })
+            for entry in events:
+                recurrence[key][entry[0]].append(entry[1])
+
+                logging.debug(f'{entry[0]} in {key} set to {entry[1]}')
+
+        recurrence = {k: dict(v) for k, v in recurrence.items()}
 
         return recurrence
 
 class CalendarView(CalEventsMixin, TemplateView):
     template_name = 'calendar.html'
 
-    def get_context_data(self, *args, **kwargs):
-        start = date(date.today().year, 1, 1).strftime('%Y-%m-%dT00:00:00-07:00')
-        end = date(date.today().year, 12, 31).strftime('%Y-%m-%dT23:59:59-07:00')
-
-        # context = self.get_events_for_range(start, end)
-        context = self.get_events_from_saved()
-        return context
-
 class EventsView(CalEventsMixin, TemplateView):
     template_name = 'events.html'
-
-    def get_context_data(self, *args, **kwargs):
-        start = date(date.today().year, 1, 1).strftime('%Y-%m-%dT00:00:00-07:00')
-        end = date(date.today().year, 12, 31).strftime('%Y-%m-%dT23:59:59-07:00')
-        
-        # context = self.get_events_for_range(start, end)
-        context = self.get_events_from_saved()
-        return context

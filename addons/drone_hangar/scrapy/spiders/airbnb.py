@@ -54,9 +54,6 @@ class AirBnBSpider(scrapy.Spider):
         return url
 
     def start_requests(self):
-        logging.warning("> > > Making request.")
-
-        # yield scrapy.Request(url=url, callback=self.parse)
         yield scrapy.Request(url=self.url(), callback=self.parse, errback=self.errback, dont_filter=True)
 
     def errback(self, failure):
@@ -86,10 +83,8 @@ class AirBnBSpider(scrapy.Spider):
         # response = requests.get(self.url())
         # data = response.json()
 
-        with open('airbnb_data_raw.json', 'w') as f:
-            json.dump(data, f, indent=4, sort_keys=True, default=str)
-
-        logging.warning("> > > Parsing response data.")
+        # with open('airbnb_data_raw.json', 'w') as f:
+        #     json.dump(data, f, indent=4, sort_keys=True, default=str)
 
         sections = data.get('explore_tabs')[0].get('sections')
         homes = [
@@ -140,14 +135,13 @@ class AirBnBSpider(scrapy.Spider):
             room['bedrooms'] = listing.get('bedroom_label')
             room['beds'] = listing.get('bed_label')
 
-            logging.warning("> > > Saving data for %s." % room['name'])
-
             data_dict[room['room_id']] = room
 
             # self.collect_images(self, room=new_room,
             #     pictures=room['pictures'])
 
-        with open('storage/airbnb/airbnb_data.json', 'w') as f:
+        # TODO: Add dynamic storage function here whenever I get around to polishing this.
+        with open('static/airbnb/airbnb_data.json', 'w') as f:
             json.dump(data_dict, f, indent=4, sort_keys=True, default=str)
 
         yield data_dict

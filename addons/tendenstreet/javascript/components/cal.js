@@ -185,6 +185,9 @@ customElements.define('b-cal', class extends LitElement{
 })
 
 customElements.define('b-cal-day', class extends LitElement{
+    // constructor() {
+    //     this.super()
+    // }
 
     static get styles(){return css`
         :host {
@@ -216,7 +219,52 @@ customElements.define('b-cal-day', class extends LitElement{
             color: #fff;
             background: var(--theme, var(--blue, #2196F3));
         }
+
+        .dropdown-menu {
+            float: left;
+        }
+        :host([data-calendar-day='5']) .dropdown-menu {
+            float: right;
+        }
+        :host([data-calendar-day='6']) .dropdown-menu {
+            float: right;
+        }
     `}
+
+
+    // TODO: Abandoning this for now because I can't figure how the fuck to get the child nodes do do stuff to them.
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLSlotElement/slotchange_event
+    // https://github.com/mdn/web-components-examples/blob/master/slotchange/main.js
+
+    // connectedCallback() {
+    //     super.connectedCallback()
+
+    //     let shadow = this.shadowRoot
+
+    //     console.log(shadow.children)
+    //     console.log(shadow.children[1])
+    //     console.log(shadow.children.namedItem('main'))
+
+    //     let slots = this.shadowRoot.querySelectorAll('slot')
+
+    //     console.log(slots)
+        
+    //     slots[1].addEventListener(
+    //         'slotchange', e => {
+    //             let slot = e.target
+
+    //             slot.assignedElements().forEach((entry) => {
+    //                 let dropdown = entry.querySelector('.dropdown-menu')
+
+    //                 dropdown.style.width = slot.offsetWidth
+    //                 if ( [5, 6].includes(slot.getAttribute('data-calendar-day')) )
+    //                     dropdown.style.float = "right"
+    //                 else
+    //                     dropdown.style.float = "left"
+    //             })
+    //         }
+    //     )
+    // }
 
     get isOverflow(){
         return this.caldate.month() != this.date.month()
@@ -238,7 +286,7 @@ customElements.define('b-cal-day', class extends LitElement{
             </div>
         </header>
         <main>
-            <slot></slot>
+            <slot data-calendar-day="${this.date.weekday()}"></slot>
         </main>
     `}
 
@@ -248,6 +296,8 @@ customElements.define('b-cal-day', class extends LitElement{
         this.toggleAttribute('weekend', this.isWeekend)
         this.toggleAttribute('overflow', this.isOverflow)
         this.toggleAttribute('today', this.isToday)
+        
+        this.setAttribute('data-calendar-day', this.date.weekday())
 
         this.requestUpdate()
     }
@@ -275,7 +325,7 @@ customElements.define('b-cal-day', class extends LitElement{
 
 })
 
-export default class BtnElement extends LitElement {
+export class BtnElement extends LitElement {
 
     static get properties() { return {
         href: {type: String, reflect: true},

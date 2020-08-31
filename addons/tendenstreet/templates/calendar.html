@@ -31,14 +31,20 @@
     <script src="{% static 'js/calendar.js' %}"></script>
 
     <b-cal>
-        {% for date, event_ids in dates.items %}
+        {% for date, event_ids in events.dates.items %}
         <div slot="{{ date }}" class="flex flex-col items-center justify-start space-y-2">
             {% for id in event_ids %}
                 {% lookup_event id as event %}
                 <a
-                    class="block w-full bg-teal shadow-btn-teal rounded-md text-gray-100 px-2 py-1"
+                    data-controller="popup"
+                    data-action="mouseover->popup#show mouseout->popup#hide"
+                    data-popup-content="{{ event.description }}"
+                    class="relative block w-full bg-teal shadow-btn-teal rounded-md text-gray-100 hover:text-gray-100 px-2 py-1"
                     href="{{ event.social_link }}">
                     {{ event.summary }}
+                    <div data-target="popup.display"
+                        class="dropdown-menu hidden w-double my-1 px-1 border border-teal text-xs leading-snug -left-50"
+                    ></div>
                 </a>
             {% endfor %}
         </div>

@@ -39,8 +39,22 @@ const config = {
                 test: /\.less$/,
                 loader: 'less-loader', // compiles Less to CSS
             },
+            {
+                test: /_controller\.js/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            '@babel/preset-env'
+                        ],
+                        plugins: [
+                            '@babel/plugin-proposal-class-properties'
+                        ]
+                    }
+                }
+              }
         ],
-    },
+    }
 }
 
 module.exports = config

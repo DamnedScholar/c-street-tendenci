@@ -187,6 +187,8 @@ module.exports = {
       '50': '50%',
       '100': '100%',
       auto: 'auto',
+      '-50': '-50%',
+      '-100': '-100%'
     },
     letterSpacing: {
       tighter: '-0.05em',
@@ -336,7 +338,9 @@ module.exports = {
       '11/12': '91.666667%',
       full: '100%',
       screen: '100vw',
-      thumbnail: '200px'
+      thumbnail: '200px',
+      double: '200%',
+      triple: '300%',
     }),
     zIndex: {
       auto: 'auto',
@@ -629,7 +633,7 @@ module.exports = {
     boxShadow: ['responsive', 'hover', 'focus'],
     boxSizing: ['responsive'],
     cursor: ['responsive'],
-    display: ['responsive'],
+    display: ['responsive', 'hover', 'group-hover'],
     divideColor: ['responsive'],
     divideOpacity: ['responsive'],
     divideWidth: ['responsive'],

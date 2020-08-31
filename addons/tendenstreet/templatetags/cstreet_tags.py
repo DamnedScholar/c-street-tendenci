@@ -1,3 +1,8 @@
+import os
+import random
+
+from fuzzywuzzy import fuzz, process
+
 from django import template
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
@@ -32,7 +37,8 @@ def photoset(query=""):
 
 @register.simple_tag(takes_context=True)
 def lookup_event(context, key):
-    return context['events'][key]
+    # Yes, this is a little awkward, but the naming actually makes sense when you're breaking it up and assembling it.
+    return context['events']['events'][key]
 
 @register.filter()
 def local_hero(title):
@@ -52,6 +58,21 @@ def local_hero(title):
             s_photos = Image.objects.filter(photoset=s)
             result = result.union(s_photos)
 
-        return result
+        urls = [r.get_large_url() for r in result]
 
-    return get_images_for_entry(title)[3].get_large_url()
+        file_path = 'addons/drone_hangar'
+        static_path = 'static/dropbox/photos'
+
+        dropbox = os.listdir(f'{file_path}/{static_path}')
+        folder_name = process.extractOne(query, dropbox, scorer=fuzz.partial_ratio)[0]
+
+        listdir = os.listdir(f'{file_path}/{static_path}/{folder_name}')
+
+        urls += [f'{static_path}/{folder_name}/{filename}' for filename in listdir]
+
+        # Return a list of URLs.
+        return urls
+
+    result = get_images_for_entry(title)
+
+    return random.choice(result)

@@ -9,7 +9,6 @@ from django.db.models import Q
 from tendenci.apps.photos.models import Image, PhotoSet, AlbumCover, License
 
 from addons.custom_directories.utils.utils import get_images_for_entry
-from addons.drone_hangar.scrapy.airbnb_spider import AirBnBSpider
 
 register = template.Library()
 
@@ -96,7 +95,25 @@ def imgproxy(url):
 
 @register.inclusion_tag('airbnb_list.html')
 def airbnb():
-    with open('addons/drone_hangar/storage/airbnb/airbnb_data.json') as f:
+    with open('addons/drone_hangar/static/airbnb/airbnb_data.json') as f:
         data = f.read()
 
-    return { "rooms": json.loads(data) }
+    rooms = json.loads(data)
+
+    prices = [room['rate'] for room in rooms.values()]
+
+    def divide_chunks(l, n): 
+        # looping till length l 
+        for i in range(0, len(l), n):  
+            yield l[i:i + n] 
+
+    price_tiers = list(divide_chunks(prices, round(len(prices) / 3)))
+
+    for k, v in rooms.items():
+        rooms[k].update({
+            "price_tier": (
+                "$" * len([l[-1] for l in price_tiers if l[0] < v['rate']])
+                )
+        })
+
+    return { "rooms": rooms }

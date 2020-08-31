@@ -27,7 +27,7 @@
     </span>{% endspaceless %}
 
     {% if item.children %}
-        <ul class="dropdown-menu" role="menu">
+        <ul class="dropdown-menu whitespace-no-wrap" role="menu">
             {% for child in item.children %}
                 {% nav_item child %}
             {% endfor %}

@@ -14,6 +14,8 @@
 
 backup
 
+Dropbox
+
 # ignore files uploaded to the site to save space
 media
 media-original
@@ -26,6 +28,7 @@ themes/*/node_modules
 
 # ignore private settings
 secrets.json
+credentials
 
 # ignore generated static files
 static

@@ -30,8 +30,15 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
     "backbone": "^1.4.0",
     "blackstone-ui": "^3.0.0",
-    "less-loader": "^6.2.0"
+    "blissfuljs": "^1.0.6",
+    "isotope-layout": "^3.0.6",
+    "less-loader": "^6.2.0",
+    "voca": "^1.4.0"
   }
 }

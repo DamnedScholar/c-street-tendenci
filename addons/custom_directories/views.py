@@ -4,6 +4,7 @@ import time
 import string
 import json
 from collections import namedtuple
+import random
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -96,36 +97,38 @@ def category(request, cat=None, template_name="category.html"):
     
     all_cats = CustomCats().cats()
 
-    cat_obj = DirectoryCategory.objects.filter(slug=cat)
-    directories = Directory.objects.filter(Q(sub_cat__in=cat_obj))
+    # TODO: Shoehorning this into Tendenci's directory system was a mistake because we don't need to be updating individual entries from the website since that would create discontinuity with the Google Sheet, which should be the Source of Truth. Well, "mistake" is harsh. It makes sense and still functions just fine, but it's not an optimal arrangement if I'm trying to reduce reliance on the CMS and use tools that are natural best fits for specific types of data.
+    # cat_obj = DirectoryCategory.objects.filter(slug=cat)
+    # directories = Directory.objects.filter(Q(sub_cat__in=cat_obj))
 
-    def get_img_or_logo(d):
-        img_list = list(get_images_for_entry(d.headline))
+    directories = []
 
-        if not img_list:
-            return {
-                'url': d.get_logo_url()
-            }
-        else:
-            return {
-                'url': img_list.pop().get_small_url
-            }
+    with open('addons/drone_hangar/static/google/directory.json', 'r') as f:
+        directories = json.loads(f.read())
 
-    # Build a list of querysets and zip it with the directories as keys.
-    # Order the images randomly and then pick the first.
     directory_images = [
-        get_img_or_logo(d) for d in directories
+        get_images_for_entry(d['name']) for d in directories
     ]
-    directory_tags = [
-        d.tags.split(' ') for d in directories
-    ]
+    # directory_tags = set([  # TODO: Look real hard at this. It probably wants to be changed.
+    #     d['tags'] for d in directories
+    # ])
     # Convert queryset to list of dicts.
-    directories_firm = list(directories.values())
-    for i, d in enumerate(directories_firm):
+    # directories_firm = list(directories.values())
+    for i, d in enumerate(directories):
+        image_url = ""
+        website = ""
+
+        if directory_images[i]:
+            image_url = random.choice(directory_images[i])
+            # TODO: This shouldn't be random in production.
+
+        if d.get('website'):
+            website = d.get('website').strip('http\:\/\/').strip('https\:\/\/').strip('www.').rstrip('/')
+
         d.update({
-            'link': directories[i].get_absolute_url,
-            'image': directory_images[i],
-            'website_display': directories[i].website.strip('http\:\/\/').strip('https\:\/\/').strip('www.').rstrip('/')
+            'slug': slugify(d['name']),
+            'image': image_url,
+            'website_display': website
             })
 
     context = {
@@ -134,9 +137,9 @@ def category(request, cat=None, template_name="category.html"):
         'focus': all_cats[cat]['focus'],
         'size': all_cats[cat]['size'],
         'headline': all_cats[cat]['headline'],
-        'directories': directories_firm,
+        'directories': directories,
         'directory_images': directory_images,
-        'directory_tags': directory_tags,
+        # 'directory_tags': directory_tags,
         'all_cats': all_cats
     }
 
@@ -145,7 +148,6 @@ def category(request, cat=None, template_name="category.html"):
 
 @is_enabled('directories')
 def print(request, cat=None, template_name="print.html"):
-    
     all_cats = CustomCats().cats()
 
     cat_obj = DirectoryCategory.objects.filter(slug=cat)
@@ -162,5 +164,10 @@ def print(request, cat=None, template_name="print.html"):
         'directories': directories_firm,
     }
 
+    return render_to_resp(request=request, template_name=template_name,
+            context=context)
+
+def details(request, slug, template_name="view.html"):
+    context = {}
     return render_to_resp(request=request, template_name=template_name,
             context=context)
