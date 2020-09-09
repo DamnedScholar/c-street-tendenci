@@ -302,7 +302,6 @@ remove_apps = [
     'resumes',
     'recurring_payments',
     'speakers',
-    'stories',
     'videos'
   ]
 ]

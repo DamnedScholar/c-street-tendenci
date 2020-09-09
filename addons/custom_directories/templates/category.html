@@ -27,18 +27,28 @@
   <div class="focuspoint"
     data-focus-x="{{ focus.x }}" data-focus-y="{{ focus.y }}"
     data-image-w="{{ size.w }}" data-image-h="{{ size.h }}">
-    <img src="{% static hero %}">
+    {% static hero as picture %}
+    <picture class="h-full w-full">
+        <source media="(max-width:500px)"
+            srcset="{{ picture | imgproxy:"sm-hero" }}">
+        <source media="(min-width:501px)"
+            srcset="{{ picture | imgproxy:"hero" }}">
+        <img class="w-full"
+            src="{{ picture }}" alt="{% firstof room.name trans "Untitled" %}">
+    </picture>
   </div>
 
   <h1 id="hero-title">{{ headline }}</h1>
-  <nav id="hero-nav" class="relative w-2/3 md:w-1/3 flex flex-row items-center justify-center">
-      {% for cat_slug, cat in all_cats.items %}
-        <div class="btn btn-success mt-2 ml-2">
-            <a href="http://{{ request.META.HTTP_HOST }}/directory/{{ cat_slug }}">
-                {{ cat.headline }}
-            </a>
-        </div>
-      {% endfor %}
+  <nav id="hero-nav" class="relative sm:w-full md:w-2/3 flex flex-row items-center justify-center">
+      <ul>
+          {% for cat_slug, cat in all_cats.items %}
+            <li>
+                <a href="http://{{ request.META.HTTP_HOST }}/directory/{{ cat_slug }}">
+                    {{ cat.headline }}
+                </a>
+            </li>
+          {% endfor %}
+      </ul>
 
   </nav>
 {% endblock %}
@@ -49,35 +59,72 @@
 
 {% block content %}
     <script src="{% static 'js/sorting.js' %}"></script>
-    <div data-controller='sorting'
+    <style>
+        ul[data-target="sorting.categories"][active] button[aria-pressed="true"]  {
+            background: rgba(115, 166, 136, 1);
+        }
+        ul[data-target="sorting.filters"][active] li {
+            background: none;
+        }
+        ul[data-target="sorting.filters"][active] button[aria-pressed="true"] {
+            color: white;
+            background: #2d4066;
+        }
+        ul[data-target="sorting.filters"][active] button:not([aria-pressed="true"]) {
+            background: #9fb1be;
+            color: #2d4066;
+        }
+    </style>
+    <div class="sorting"
+        data-controller='sorting'
         data-sorting-categories="short-term long-term"
         data-sorting-sorts="name">
 
         <template data-target="sorting.template">
-            <span class="text-xl text-italic md:w-full" data-target="sorting.cta">Welcome to our searchable directory. Click the buttons or start typing below to find what you seek.</span>
+            <span class="text-xl text-italic md:w-full" data-target="sorting.cta"></span>
         
-            <nav class="w-2/3 flex justify-around" data-target="sorting.nav">
-                <ul class="flex items-center text-xl text-italic md:w-full" data-target="sorting.cat-list">
-                    <li data-target="sorting.cat-btn"></li>
+            <nav class="w-2/3 flex flex-col justify-around" data-target="sorting.nav">
+                <ul class="flex items-center text-2xl text-italic md:w-full" data-target="sorting.categories">
+                    <li class="last:ml-2">
+                        <button class="border-gradient border-gradient-b-green px-3"
+                        data-target="sorting.category-btn"
+                        data-action="sorting#filter"
+                        type="button" name="" aria-pressed="false"></button>
+                    </li>
                 </ul>
-                <div>
-                    <span data-target="sorting.filter-label">
-                        Filter
-                    </span>
-                    <ul class="flex items-center text-xl text-italic md:w-full" data-target="sorting.filter-list">
-                        <li data-target="sorting.filter-btn"></li>
-                    </ul>
-                </div>
-                <div>
-                    <span data-target="sorting.sort-label">
-                        Sort
-                    </span>
-                    <ul class="flex items-center text-xl text-italic md:w-full" data-target="sorting.sort-list">
-                        <li data-target="sorting.sort-btn"></li>
-                    </ul>
+                <div class="flex flex-col justify-end">
+                    <div class="w-1/2 flex flex-row">
+                        <span class="text-xl text-blue"
+                        data-target="sorting.filter-label">
+                            Filter
+                        </span>
+                        <ul class="flex items-center text-md text-italic md:w-full" data-target="sorting.filters">
+                            <li class="py-1 bg-blue text-gray-100 first:rounded-l-md last:rounded-r-md">
+                                <button class="px-1 border-teal border-r last:border-none whitespace-no-wrap"
+                                data-target="sorting.filter-btn"
+                                data-action="sorting#filter"
+                                type="button" name="" aria-pressed="false"></button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="w-1/2 flex flex-row">
+                        <span class="text-xl text-blue"
+                        data-target="sorting.sort-label">
+                            Sort
+                        </span>
+                        <ul class="flex items-center text-md text-italic md:w-full" data-target="sorting.sorts">
+                            <li>
+                                <button class="bg-blue text-gray-100 first:border-l-md last:border-r-md"
+                                data-target="sorting.sort-btn"
+                                data-action="sorting#sort"
+                                type="button" name="" aria-pressed="false"></button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
         </template>
+        <div data-target="sorting.display"></div>
 
         {% if cat == "rental" %}
             {% airbnb %}

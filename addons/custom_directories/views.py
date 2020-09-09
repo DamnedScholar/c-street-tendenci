@@ -131,6 +131,14 @@ def category(request, cat=None, template_name="category.html"):
             'website_display': website
             })
 
+    # Get info for sorting.
+    sorting_controller = {
+        'cta': 'Welcome to our searchable directory. Click the buttons or start typing below to find what you seek.',
+        'categories': [],
+        'filters': [],
+        'sorts': []
+    }
+
     context = {
         'cat': cat,
         'hero': all_cats[cat]['hero'],
@@ -139,6 +147,7 @@ def category(request, cat=None, template_name="category.html"):
         'headline': all_cats[cat]['headline'],
         'directories': directories,
         'directory_images': directory_images,
+        'sorting_controller': sorting_controller,
         # 'directory_tags': directory_tags,
         'all_cats': all_cats
     }

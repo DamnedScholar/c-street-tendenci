@@ -9,16 +9,11 @@
     {% for id, room in rooms.items %}
         <article id="room-{{ id }}" class="border border-opacity-50 flex flex-col items-center justify-between p-2"
         data-target="sorting.item"
-        data-sorting-filters="
-            short-term {{ room.price_tier }} {{ room.guests | slugify }} {{ room.bedrooms | slugify }} {{ room.beds | slugify }} {{ room.baths | slugify }}
-            "
-        data-sorting-name="{{ room.name }}"
-        data-sorting-price="{{ room.rate }}"
-        data-sorting-rating="{{ room.avg_rating }}">
+        data-sorting-metadata="{{ room.sorting }}">
             <a href="{{ room.url }}">
                 <div>
                     <picture class="h-full w-full">
-                        <source srcset="{{ room.picture_url | imgproxy }}">
+                        <source srcset="{{ room.picture_url | imgproxy:"thumb" }}">
                         <img src="{{ room.picture_url }}" alt="{% firstof room.name trans "Untitled" %}">
                     </picture>
                 </div>

@@ -1,11 +1,14 @@
 import collections
 import json
+import math
 
 import scrapy
 
 from django import template
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
+from django.template.defaultfilters import slugify
+
 from tendenci.apps.photos.models import Image, PhotoSet, AlbumCover, License
 
 from addons.custom_directories.utils.utils import get_images_for_entry
@@ -35,7 +38,7 @@ def social_name(value=""):
     return strip_url_parts(value)
 
 @register.filter()
-def imgproxy(url):
+def imgproxy(url, size):
     import base64
     import hashlib
     import hmac
@@ -47,14 +50,53 @@ def imgproxy(url):
     # TODO: SSL cert doesn't like `www`.
     prefix = "https://eclectic-co.com/imgproxy"
 
-    options = {
-        'resize': 'fill',
-        'width': 200,
-        'height': 200,
-        'gravity': 'sm',
-        'enlarge': 0,
-        'extension': 'webp'
+    sizes = {
+        "thumb": {
+            'resize': 'fill',
+            'width': 200,
+            'height': 200,
+            'gravity': 'sm',
+            'enlarge': 0,
+            'extension': 'webp'
+        },
+        "portrait": {
+            'resize': 'fill',
+            'width': 300,
+            'height': 500,
+            'gravity': 'sm',
+            'enlarge': 0,
+            'extension': 'webp'
+        },
+        "sm-hero": {
+            'resize': 'fill',
+            'width': 500,
+            'height': 400,
+            'gravity': 'sm',
+            'enlarge': 0,
+            'extension': 'webp'
+        },
+        "hero": {
+            'resize': 'fill',
+            'width': 1500,
+            'height': 400,
+            'gravity': 'sm',
+            'enlarge': 0,
+            'extension': 'webp'
+        },
+        "front-hero": {
+            'resize': 'fill',
+            'width': 1500,
+            'height': 400,
+            'gravity': 'fp:0.32:0.55',
+            'enlarge': 0,
+            'extension': 'webp'
+        },
     }
+
+    options = sizes[size]
+
+    if url[0] in ['\\', '/']:
+        url = f"http://eclectic-co.com{url}"
 
     # TODO: If this were built for reliability and sophistication instead of convenience, it would probably have a check that errors out to a return call that changes the output to an image that conveys the error if the input options aren't formatted correctly.
     # options.update(json.loads("{%s}" % optionsInput))
@@ -107,13 +149,22 @@ def airbnb():
         for i in range(0, len(l), n):  
             yield l[i:i + n] 
 
-    price_tiers = list(divide_chunks(prices, round(len(prices) / 3)))
+    price_tiers = list(divide_chunks(prices, math.ceil(len(prices) / 3)))
 
     for k, v in rooms.items():
+        price_tier = "$" * len([l[-1] for l in price_tiers if l[0] < v['rate']])
+
         rooms[k].update({
-            "price_tier": (
-                "$" * len([l[-1] for l in price_tiers if l[0] < v['rate']])
-                )
+            "sorting": json.dumps({
+                "category": "short-term",
+                # "filters": [ price_tier, slugify(v['guests']),
+                #     slugify(v['beds']), slugify(v['bedrooms']) ],
+                "filters": [ price_tier, slugify(v['beds']) ],
+                # TODO: Limit the filters we display until I design the UI better so that we can have organized buttons.
+                "name": v['name'],
+                "rating": v['avg_rating'],
+                "rate": v['rate'],
+            })
         })
 
     return { "rooms": rooms }

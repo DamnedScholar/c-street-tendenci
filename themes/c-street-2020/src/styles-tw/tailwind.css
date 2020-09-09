@@ -4,6 +4,10 @@ a {
   @apply text-cyan;
 }
 
+button:focus {
+  outline: none;
+}
+
 p {
   @apply mb-3;
 }
@@ -42,6 +46,15 @@ ol {
 
 @tailwind components;
 
+.border-gradient {
+  border: solid;
+  border-image-slice: 1;
+  border-width: 0 2px 3px 2px;
+}
+.border-gradient-b-green {
+  border-image-source: linear-gradient(to top, rgba(115, 166, 136, 1), rgba(115, 166, 136, 0));
+}
+
 #brand-background {
   position: absolute;
   z-index: -10;
@@ -63,15 +76,26 @@ ol {
   @apply h-0 overflow-hidden transition-size ease-in-out duration-300 inline-block;
 }
 .dropdown:focus-within {
-  @apply overflow-visible;
+  @apply h-auto;
 }
 .dropdown:focus-within ul {
   height: auto;
   border: 1px solid rgba(38,49,56,0.15);
 }
-
 #t-admin-megamenu {
+  display: none !important;
   @apply text-orange;
+  background-color: #4F4F4F;
+  position: fixed;
+  z-index: 100000;
+  top: 0;
+  width: 100%;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+}
+#t-admin-megamenu .navbar-header {
+  height: 30px;
 }
 #t-admin-megamenu li {
   margin-right: 10px;
@@ -101,8 +125,7 @@ ol {
 }
 
 div.focuspoint {
-  position: absolute;
-  @apply w-full h-full;
+  @apply w-full h-full overflow-hidden absolute;
 }
 
 .nav-icon {
@@ -117,25 +140,37 @@ div.focuspoint {
   @apply font-serif font-bold text-gray-100 z-10;
   text-shadow: 1px 1px 2px #2d5c66;
 }
-#hero-nav a {
-  @apply text-teal whitespace-no-wrap;
+#hero-nav ul>li a {
+  @apply inline-block bg-green text-blue text-xl font-semibold leading-relaxed rounded-md mt-2 ml-2 whitespace-no-wrap;
 }
 #hero-nav ul {
-  @apply flex-row flex-wrap justify-center;
+  @apply flex flex-row flex-wrap justify-center;
 }
 #hero-nav ul.flex>li:not(:first-child) {
   @apply ml-8;
 }
-#hero-nav .btn {
-  @apply bg-green text-gray-900;
-}
 #site-nav {
   pointer-events: none;
 }
-#site-nav .btn, #site-nav .btn a {
+#site-nav ul>li a {
   @apply bg-blue text-gray-200;
+  @apply transition-colors duration-100;
   min-width: max-content;
   pointer-events: auto;
+}
+#site-nav ul>li a:focus-within {
+  @apply bg-teal text-gray-300;
+}
+#site-nav ul.dropdown-menu {
+  @apply bg-gray-300 text-blue;
+}
+#site-nav ul.dropdown-menu>li a {
+  @apply block w-full bg-gray-300 text-blue;
+  min-width: max-content;
+  pointer-events: auto;
+}
+#site-nav ul.dropdown-menu>li a:hover {
+  @apply bg-blue text-gray-200;
 }
 #site-nav ul.flex>li:not(:first-child) {
   @apply ml-6;
@@ -174,8 +209,11 @@ div.focuspoint {
   #site-nav .dropdown-menu {
     @apply left-auto right-100 top-0;
   }
-  #site-nav .btn {
+  #site-nav ul>li a {
     @apply text-lg py-2 px-3;
+  }
+  #site-nav ul.dropdown-menu>li a {
+    @apply py-0;
   }
   #site-nav ul.flex>li:not(:first-child) {
     @apply mt-4 ml-0;
@@ -186,7 +224,7 @@ div.focuspoint {
   #hero-title {
     @apply text-4xl max-w-sm;
   }
-  #hero-nav .btn {
+  #hero-nav ul>li a {
     @apply text-sm py-1 px-2;
   }
   #hero-nav ul.flex>li:not(:first-child) {
@@ -198,8 +236,11 @@ div.focuspoint {
   }
 }
 @screen md {
-  #site-nav .btn {
+  #site-nav ul>li a {
     @apply text-base py-1 px-3;
+  }
+  #site-nav ul.dropdown-menu>li a {
+    @apply py-0;
   }
   #site-nav ul.flex>li:not(:first-child) {
     @apply ml-2;
@@ -210,7 +251,7 @@ div.focuspoint {
   #hero-title {
     @apply text-6xl max-w-lg;
   }
-  #hero-nav .btn {
+  #hero-nav ul>li a {
     @apply text-lg py-3 px-5 font-bold;
   }
   #hero-nav ul.flex>li:not(:first-child) {
@@ -222,8 +263,11 @@ div.focuspoint {
   }
 }
 @screen lg {
-  #site-nav .btn {
+  #site-nav ul>li a {
     @apply text-lg py-1 px-3;
+  }
+  #site-nav ul.dropdown-menu>li a {
+    @apply py-0;
   }
   #site-nav ul.flex>li:not(:first-child) {
     @apply ml-6;
@@ -237,7 +281,7 @@ div.focuspoint {
   #hero-title {
     @apply text-title max-w-5xl;
   }
-  #hero-nav .btn {
+  #hero-nav ul>li a {
     @apply text-xl py-2 px-4 font-bold;
   }
 
