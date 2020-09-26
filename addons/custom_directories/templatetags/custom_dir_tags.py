@@ -157,9 +157,10 @@ def airbnb():
         rooms[k].update({
             "sorting": json.dumps({
                 "category": "short-term",
-                # "filters": [ price_tier, slugify(v['guests']),
-                #     slugify(v['beds']), slugify(v['bedrooms']) ],
-                "filters": [ price_tier, slugify(v['beds']) ],
+                "filters": {
+                    'price': price_tier,
+                    'beds': slugify(v['beds']),
+                },
                 # TODO: Limit the filters we display until I design the UI better so that we can have organized buttons.
                 "name": v['name'],
                 "rating": v['avg_rating'],

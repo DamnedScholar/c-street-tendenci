@@ -133,10 +133,8 @@ def category(request, cat=None, template_name="category.html"):
 
     # Get info for sorting.
     sorting_controller = {
-        'cta': 'Welcome to our searchable directory. Click the buttons or start typing below to find what you seek.',
-        'categories': [],
-        'filters': [],
-        'sorts': []
+        'callToAction': 'Welcome to our searchable directory. Click the buttons or start typing below to find what you seek.',
+        'noResultsMsg': 'Looks like there\'s nothing that meets that requirement.'
     }
 
     context = {
