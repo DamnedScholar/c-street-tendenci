@@ -17,7 +17,7 @@ services:
     ports:
       - '5432:5432'
     env_file: .env
-    restart: always
+    restart: on-failure
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
@@ -26,7 +26,7 @@ services:
     ports:
       - "5051:80"
     env_file: .env
-    restart: always
+    restart: on-failure
   imgproxy:
     image: darthsim/imgproxy
     container_name: imgproxy
