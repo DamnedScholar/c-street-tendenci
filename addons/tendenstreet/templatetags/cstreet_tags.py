@@ -6,15 +6,15 @@ from fuzzywuzzy import fuzz, process
 from django import template
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
-from addons.tendenstreet.views.photoset import PhotosetView
+from addons.tendenstreet.views.gallery import GalleryView
 from tendenci.apps.photos.models import Image, PhotoSet, AlbumCover, License
 
 from addons.custom_directories.utils.utils import get_images_for_entry
 
 register = template.Library()
 
-@register.inclusion_tag('photoset.html')
-def photoset(query=""):
+@register.inclusion_tag('gallery.html')
+def gallery(query=""):
     query_spaceless = query.replace(' ','_')
 
     sets = PhotoSet.objects.filter(     # Look up all matching sets

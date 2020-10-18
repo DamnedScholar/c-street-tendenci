@@ -1,9 +1,11 @@
 
 {% load static %}
+<!-- <script type="module" src="{% static 'js/bui/presenters/tabs/index.js' %}"></script> -->
 <script src="{% static 'js/document_viewer.js' %}"></script>
 
 <a href="{{ current }}"
     data-controller="document_viewer"
     data-action="document_viewer#open_viewer"
-    data-links="{{ links }}"
->Increment {{ count }}</a>
+    data-document_viewer-links="{{ links }}"
+    data-target="document_viewer.link"
+>{{ text }}</a>

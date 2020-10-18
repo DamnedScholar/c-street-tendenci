@@ -3,9 +3,9 @@ from django.views.generic.base import TemplateView
 from tendenci.apps.photos.models import Image, PhotoSet, AlbumCover, License
 from tendenci.apps.photos.templatetags.photo_tags import ListPhotosNode, ListPhotoSetsNode
 
-class PhotosetView(ListView):
-    template_name = 'photoset.html'
-    model = Image
+class GalleryView(ListView):
+    template_name = 'gallery.html'
+    # model = Image
 
     # def get_queryset(self):
     #     print("Filtering photos.")

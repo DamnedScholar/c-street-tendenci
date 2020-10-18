@@ -12,16 +12,16 @@ export default class extends Controller {
 
   // resolvePhotos() {
   //   kwargs = {  // Leaving space for future arguments
-  //     photoset: this.data.get('photoset')
+  //     gallery: this.data.get('gallery')
   //   }
 
-  //   console.log('Resolving photos for photoset #' + kwargs.photoset)
+  //   console.log('Resolving photos for gallery #' + kwargs.gallery)
   //   event.preventDefault()
-  //   this.stimulate('PhotosetReflex#resolve', kwargs)
+  //   this.stimulate('GalleryReflex#resolve', kwargs)
   // }
 
   // paginate(event) {
   //   event.preventDefault()
-  //   this.stimulate('PhotosetReflex#paginate')
+  //   this.stimulate('GalleryReflex#paginate')
   // }
 }

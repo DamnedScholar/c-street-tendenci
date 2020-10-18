@@ -10,5 +10,5 @@ urlpatterns = [
     # url(r'^%s/(?P<cat>(%s))/$' % (urlpath, views.CustomCats().cats_regex()), views.category, name="directory.category"),
     url(r'^directory/(?P<cat>(food-and-drink|shopping|lifestyle|services|venues-and-events|rental))/$', views.category, name="directory.category"),
     url(r'^directory/(?P<cat>(food-and-drink|shopping|lifestyle|services|venues-and-events|rental))/print/$', views.print, name="directory.print"),
-    url(r'^(?P<slug>[\w\-\/]+)/$', views.details, name="directory"),
+    # url(r'^(?P<slug>[\w\-\/]+)/$', views.details, name="directory"),
 ]

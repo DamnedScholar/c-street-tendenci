@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const glob = require('glob');
+const TerserPlugin = require('terser-webpack-plugin')
 
 
 let globOptions = {
@@ -18,16 +19,59 @@ entryFiles.forEach(function(file){
     }
 });
 
+const optimize = {
+    production: {
+        usedExports: true,
+        minimize: true
+    },
+    development: {
+        minimize: false
+    }
+}
+
+// const mode = 'production'
+const mode = 'development'
+
+// const babel = {
+//     presets: [
+//         '@babel/preset-env'
+//     ],
+//     plugins: [
+//         '@babel/plugin-proposal-class-properties'
+//     ]
+// }
+
+// https://medium.com/@craigmiller160/how-to-fully-optimize-webpack-4-tree-shaking-405e1c76038
+
+const babel = {
+    env: {
+        development: {
+            presets: [
+                '@babel/preset-env'
+            ]
+        },
+        production: {
+            presets: [
+                '@babel/preset-env'
+            ]
+        }
+    },
+    plugins: [
+        '@babel/plugin-proposal-class-properties'
+    ]
+}
+
+
+
 const config = {
-    mode: process.env.NODE_ENV,
+    // mode: process.env.NODE_ENV,
+    mode: mode,
     entry: entryObj,
     output: {
         path: __dirname + '/static/js',
         filename: '[name].js'
     },
-    optimization: {
-        minimize: false
-    },
+    optimization: optimize[mode],
     resolve: {
         alias: {
             "jquery": "blackstone-ui/helpers/backbone/jquery-shim"
@@ -37,20 +81,28 @@ const config = {
         rules: [
             {
                 test: /\.less$/,
-                loader: 'less-loader', // compiles Less to CSS
+                use: [ 
+                    'style-loader',
+                    'css-loader', 
+                    'less-loader'
+                ]
+            },
+            {
+                test: /\.svg(\.html)?$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: "[name].[ext]",
+                        outputPath: 'images',
+                        publicPath: '/js/'
+                    }
+                },
             },
             {
                 test: /_controller\.js/,
                 use: {
                     loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            '@babel/preset-env'
-                        ],
-                        plugins: [
-                            '@babel/plugin-proposal-class-properties'
-                        ]
-                    }
+                    options: babel
                 }
               }
         ],

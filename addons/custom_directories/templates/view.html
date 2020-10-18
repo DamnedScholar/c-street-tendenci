@@ -23,7 +23,7 @@
   <article class="">
     {{ directory.body|safe }}
 
-    {% photoset query=directory.name %}
+    {% gallery query=directory.name %}
 
     {% include "directories/meta.html" with show_source=True show_contact=True %}
   </article>
