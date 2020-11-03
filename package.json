@@ -26,12 +26,12 @@
     "prettier": "^2.0.5",
     "sockpuppet-js": "^0.2.3",
     "stimulus_reflex": "^3.2.1",
-    "webpack": "5.0.0-beta.13",
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
     "@babel/core": "^7.11.1",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.12.1",
     "@babel/preset-env": "^7.11.0",
     "babel-loader": "^8.1.0",
     "backbone": "^1.4.0",
@@ -39,11 +39,14 @@
     "blissfuljs": "^1.0.6",
     "css-loader": "^5.0.0",
     "file-loader": "^6.1.1",
+    "hashids": "^2.2.1",
     "isotope-layout": "^3.0.6",
     "less-loader": "^6.2.0",
+    "lit-element": "^2.4.0",
     "lit-html": "^1.3.0",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.0.0",
-    "voca": "^1.4.0"
+    "voca": "^1.4.0",
+    "webpack": "^5.1.3"
   }
 }

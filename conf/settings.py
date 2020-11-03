@@ -277,7 +277,8 @@ INSTALLED_APPS += [
     'django_extensions',
     'channels',
     'sockpuppet',
-    'import_export'
+    'import_export',
+    'httpproxy'
 ]
 
 TEMPLATE_DIRS = [

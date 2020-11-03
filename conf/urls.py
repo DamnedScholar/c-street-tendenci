@@ -11,6 +11,7 @@ from tendenci.apps.site_settings.utils import get_setting
 
 urlpatterns = pre_urlpatterns + [
     url(r'^', include('addons.custom_directories.urls')),
+    url(r'^', include('httpproxy.urls')),
     #url(r'^tickets/', include('tendenci.apps.helpdesk.urls')),
 ] + post_urlpatterns
 

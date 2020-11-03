@@ -52,6 +52,9 @@ def merge_minutes():
         merger = PdfFileMerger()    # A new merger for each folder will ensure no 1516-page files.
         dest = os.path.join(storage_path("dropbox/minutes"), f"{folder}.pdf")
 
+        # This drops a merged copy in the Dropbox folder for easy access.
+        reflect = os.path.join(src, f"{folder}.pdf")
+
         def listdir():
             return os.listdir(f'{src}/{folder}')
 
@@ -66,6 +69,7 @@ def merge_minutes():
                     open(os.path.join(f'{src}/{folder}', filename), 'rb')))
 
         merger.write(dest)
+        merger.write(reflect)
 
 if __name__ == "__main__":
     merge_minutes()

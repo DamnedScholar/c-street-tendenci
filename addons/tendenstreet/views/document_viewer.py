@@ -8,13 +8,16 @@ class DocumentViewerView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         context = {
-            'current': 'https://madmimi.com/p/2569311',
+            'current': '/proxy/9a3f711',
             'links': [
-                'https://madmimi.com/p/2569311',
-                'https://madmimi.com/p/2569311',
-                'https://madmimi.com/p/2569311'
+                '/proxy/9a3f711',
+                '/proxy/2cc9611',
+                '/proxy/2569311',
             ],
             'text': 'Check out our newsletter!'
         }
 
         return context
+
+class WebpackView(DocumentViewerView):
+    template_name = 'document_viewer_copy.html'

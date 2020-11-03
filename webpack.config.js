@@ -9,7 +9,8 @@ let globOptions = {
 
 let entryFiles = glob.sync("**/javascript/*.js", globOptions)
 
-let entryObj = {};
+let entryObj = {}
+
 entryFiles.forEach(function(file){
     if (file.includes('.')) {
         let parts = file.split('/')
@@ -17,7 +18,7 @@ entryFiles.forEach(function(file){
         let fileName = path.split('.')[0];
         entryObj[fileName] = `./${file}`;
     }
-});
+})
 
 const optimize = {
     production: {
@@ -57,11 +58,12 @@ const babel = {
         }
     },
     plugins: [
-        '@babel/plugin-proposal-class-properties'
+        [ '@babel/plugin-proposal-decorators', {
+            legacy: true,
+        } ],
+        [ '@babel/plugin-proposal-class-properties', { "loose": true } ],
     ]
 }
-
-
 
 const config = {
     // mode: process.env.NODE_ENV,
@@ -73,6 +75,7 @@ const config = {
     },
     optimization: optimize[mode],
     resolve: {
+        preferRelative: true,
         alias: {
             "jquery": "blackstone-ui/helpers/backbone/jquery-shim"
         }
@@ -94,7 +97,7 @@ const config = {
                     options: {
                         name: "[name].[ext]",
                         outputPath: 'images',
-                        publicPath: '/js/'
+                        publicPath: './images/'
                     }
                 },
             },

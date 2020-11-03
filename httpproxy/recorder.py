@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import logging
+from urllib.parse import urljoin, urlparse
+
+from bs4 import BeautifulSoup
 
 from django.conf import settings
 from django.http import HttpResponse
@@ -14,7 +17,7 @@ from httpproxy.models import Request, Response
 
 logger = logging.getLogger(__name__)
 
-class ProxyRecorder(object):
+class ProxyRecorder:
     """
     Facilitates recording and playback of Django HTTP requests and responses.
     """
@@ -63,7 +66,7 @@ class ProxyRecorder(object):
         Saves the provided :class:`~httpproxy.models.Request`, including its
         :class:`~httpproxy.models.RequestParameter` objects.
         """
-        logger.info('Recording: GET "%s"' % self._request_string(request))
+        logger.info('Recording: GET "%s"', self._request_string(request))
 
         recorded_request, created = Request.objects.get_or_create(
                 method=request.method, domain=self.domain, port=self.port,
@@ -85,7 +88,7 @@ class ProxyRecorder(object):
         The order field is set to reflect the order in which the QueryDict
         returns the GET parameters.
         """
-        recorded_request.parameters.get_query_set().delete()
+        recorded_request.parameters.get_queryset().delete()
         position = 1
         for name, values_list in request.GET.lists():
             for value in values_list:
@@ -113,10 +116,35 @@ class ProxyRecorder(object):
         content_type = response['Content-Type']
         encoding = content_type.partition('charset=')[-1] or 'utf-8'
 
+        payload = response.getvalue().decode(encoding)
+
         # Record the new response
         Response.objects.create(request=recorded_request,
                 status=response.status_code, content_type=content_type,
-                content=response.content.decode(encoding))
+                content=payload)
+
+    def record_images(self, payload, url):
+        # TODO: Use bs to find image links and download them.
+        soup = BeautifulSoup(payload)
+        images = soup.find_all('img')
+        urls = []
+
+        for img in images:
+            img_url = img.attrs.get("src")
+            if not img_url:
+                # if img does not contain src attribute, just skip
+                continue
+            
+            img_url = urljoin(self.domain, img_url)
+
+            try:
+                pos = img_url.index("?")
+                img_url = img_url[:pos]
+            except ValueError:
+                pass
+
+            if self._is_valid(img_url):
+                urls.append(img_url)
 
     def playback(self, request):
         """
@@ -131,7 +159,7 @@ class ProxyRecorder(object):
                     'recorded yet. Please run httpproxy in "record" mode ' \
                     'first.')
 
-        logger.info('Playback: GET "%s"' % self._request_string(request))
+        logger.info('Playback: GET "%s"', self._request_string(request))
         response = matching_request.response # TODO handle "no response" situation
         encoding = self._get_encoding(response.content_type)
 
@@ -141,6 +169,13 @@ class ProxyRecorder(object):
     def response_supported(self, response):
         return response['Content-Type'].partition(';')[0] \
                 in self.response_types_supported
+
+    def _is_valid(self, url):
+        """
+        Checks whether `url` is a valid URL.
+        """
+        parsed = urlparse(url)
+        return bool(parsed.netloc) and bool(parsed.scheme)
 
     def _get_encoding(self, content_type):
         """
@@ -163,4 +198,4 @@ class ProxyRecorder(object):
         Returns an MD5 has of the request's query parameters.
         """
         querystring = request.GET.urlencode()
-        return md5_constructor(querystring).hexdigest()
+        return md5_constructor(querystring.encode('UTF-8')).hexdigest()

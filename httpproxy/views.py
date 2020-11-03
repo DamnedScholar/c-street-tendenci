@@ -80,6 +80,7 @@ class HttpProxy(View):
             return response
 
         response = super(HttpProxy, self).dispatch(request, *args, **kwargs)
+        
         if self.mode == 'record':
             self.record(response)
         if self.rewrite:
@@ -134,7 +135,7 @@ class HttpProxy(View):
         self.get_recorder().record(self.request, response)
 
     def get_recorder(self):
-        url = urllib.parse(self.base_url)
+        url = urllib.parse.urlparse(self.base_url)
         return ProxyRecorder(domain=url.hostname, port=(url.port or 80))
 
     def get(self, *args, **kwargs):
@@ -157,7 +158,7 @@ class HttpProxy(View):
 
     def create_request(self, url, body=None, headers={}):
         request = urllib.request.Request(url, body, headers)
-        logger.info('%s %s' % (request.get_method(), request.get_full_url()))
+        logger.info('%s %s', request.get_method(), request.get_full_url())
         return request
 
     def get_response(self, body=None, headers={}):
@@ -167,10 +168,10 @@ class HttpProxy(View):
         try:
             response_body = response.read()
             status = response.getcode()
-            logger.debug(self._msg % response_body)
+            logger.debug(self._msg, response_body)
         except urllib.error.HTTPError as e:
             response_body = e.read()
-            logger.error(self._msg % response_body)
+            logger.error(self._msg, response_body)
             status = e.code
         return HttpResponse(response_body, status=status,
                             content_type=response.headers['content-type'])

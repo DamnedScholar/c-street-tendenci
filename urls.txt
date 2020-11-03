@@ -2,8 +2,6 @@
 /404/reports/	tendenci.apps.perms.decorators.decorator	reports-404-count
 /<file_name>	tendenci.apps.base.views.base_file
 /<path>	django.views.static.serve
-/<slug>/	addons.custom_directories.views.details	directory
-/<slug>/	addons.custom_directories.views.details	directory
 /<slug>/	tendenci.apps.pages.views.index	page
 /__debug__/render_panel/	debug_toolbar.views.render_panel	djdt:render_panel
 /__debug__/sql_explain/	debug_toolbar.panels.sql.views.sql_explain	djdt:sql_explain
@@ -790,6 +788,7 @@
 /committees/edit/<id>/	tendenci.apps.committees.views.edit	committees.edit
 /committees/edit/meta/<id>/	tendenci.apps.committees.views.edit_meta	committees.edit.meta
 /committees/feed/	tendenci.apps.committees.feeds.LatestEntriesFeed()	committees.feed
+/communique/	addons.tendenstreet.views.document_viewer.DocumentViewerView	views.document_viewer
 /contact/	tendenci.apps.contacts.views.index	form
 /contact/confirmation	tendenci.apps.contacts.views.confirmation	form.confirmation
 /contacts/	tendenci.apps.contacts.views.search	contacts
@@ -1408,6 +1407,7 @@
 /profiles/merge/<sid>/	tendenci.apps.base.decorators.decorator	profile.merge_view
 /profiles/search/	tendenci.apps.profiles.views.search	profile.search
 /profiles/similar/	tendenci.apps.profiles.views.similar_profiles	profile.similar
+/proxy/<url>	httpproxy.views.HttpProxy
 /py/	tendenci.apps.make_payments.views.add	make_payment.add
 /py/<id>/	tendenci.apps.make_payments.views.view	make_payment.view
 /py/conf/<id>/	tendenci.apps.make_payments.views.add_confirm	make_payment.add_confirm
