@@ -1,4 +1,4 @@
-import { Application } from 'https://cdn.skypack.dev/stimulus'
+import { Application } from 'stimulus'
 // import StimulusReflex from 'stimulus_reflex'
 // import WebsocketConsumer from 'sockpuppet-js'
 import Document_ViewerController from './controllers/document_viewer_controller'
