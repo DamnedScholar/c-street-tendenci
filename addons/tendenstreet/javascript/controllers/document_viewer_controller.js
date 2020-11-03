@@ -3,7 +3,7 @@ import { Controller } from 'stimulus'
 
 // TODO: Figure this out.
 import {html, render} from 'lit-html'
-import {LitElement, html as ehtml, property} from 'lit-element'
+import {LitElement, html as ehtml, property, css} from 'lit-element'
 import {styleMap} from 'lit-html/directives/style-map.js'
 import {Panel} from 'blackstone-ui/index.js'
 
