@@ -1,14 +1,14 @@
-import { Controller } from 'https://cdn.skypack.dev/stimulus'
+import { Controller } from 'stimulus'
 // import StimulusReflex from 'stimulus_reflex'
 
 // TODO: Figure this out.
-import {html, render} from 'https://cdn.skypack.dev/lit-html'
-import {LitElement, html as ehtml, property} from 'https://cdn.skypack.dev/lit-element'
-import {styleMap} from 'https://cdn.skypack.dev/lit-html/directives/style-map.js'
-// import {Panel} from '../../bui/index.js'
+import {html, render} from 'lit-html'
+import {LitElement, html as ehtml, property} from 'lit-element'
+import {styleMap} from 'lit-html/directives/style-map.js'
+import {Panel} from '../../bui/index.js'
 
 // Tab bar documentation at https://bui.js.org/#/presenters
-// import Tabs from '../../bui/presenters/tabs/index.js'
+import Tabs from '../../bui/presenters/tabs/index.js'
 // This import shouldn't be touched because even though it seems unused, it defines the custom element for `b-tabs`.
 
 class Viewer extends LitElement {
