@@ -5,10 +5,10 @@ import { Controller } from 'stimulus'
 import {html, render} from 'lit-html'
 import {LitElement, html as ehtml, property} from 'lit-element'
 import {styleMap} from 'lit-html/directives/style-map.js'
-import {Panel} from 'bui/index.js'
+import {Panel} from 'blackstone-ui/index.js'
 
 // Tab bar documentation at https://bui.js.org/#/presenters
-import Tabs from 'bui/presenters/tabs/index.js'
+import Tabs from 'blackstone-ui/presenters/tabs/index.js'
 // This import shouldn't be touched because even though it seems unused, it defines the custom element for `b-tabs`.
 
 class Viewer extends LitElement {
