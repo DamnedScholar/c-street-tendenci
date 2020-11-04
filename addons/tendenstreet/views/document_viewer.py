@@ -8,9 +8,9 @@ class DocumentViewerView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         context = {
-            'current': '/proxy/9a3f711',
+            'current': '/proxy/fdff711',
             'links': [
-                '/proxy/9a3f711',
+                '/proxy/fdff711',
                 '/proxy/2cc9611',
                 '/proxy/2569311',
             ],
@@ -20,4 +20,4 @@ class DocumentViewerView(TemplateView):
         return context
 
 class WebpackView(DocumentViewerView):
-    template_name = 'document_viewer_copy.html'
+    template_name = 'communique.html'

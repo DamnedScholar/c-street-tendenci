@@ -22,7 +22,8 @@ class Viewer extends LitElement {
   static get properties() { return {
     item: {attribute: false},
     loading: {attribute: false},
-    display: {attribute: false}
+    display: {attribute: false},
+    sniffers: {attribute: false, type: Array}
   }}
 
   @property({attribute: true, type: String, reflect: true})
@@ -34,9 +35,20 @@ class Viewer extends LitElement {
     super()
 
     // Set defaults. Nothing dynamic should go here.
+    this.controller = this.parentElement
     this.loading = ehtml`
       Loading...
     `
+
+    this.css = {
+      viewer: {
+        "display": "flex",
+        "flex-direction": "column-reverse"
+      },
+      tabs: {
+        "height": "100%"
+      }
+    }
 
     // TODO: I can make forward/back buttons in b-ui's tab bar using the `.views` property (https://github.com/kjantzer/bui/blob/master/presenters/tabs/index.js#L83) and `tab_bar.views.active` with `tab_bar.views.at(active + 1)` or `(active - 1)`. I need to bind these to hotkeys using `stimulus-hotkeys` and to buttons that appear on mobile devices.
   }
@@ -46,33 +58,74 @@ class Viewer extends LitElement {
   //   super.attributeChangedCallback(name, oldval, newval);
   // }
 
-  updateTab(evt, content) {
-    var tab = evt.target.parentElement.nextElementSibling
-    render(content, tab)
+  updateTab(evt) {
+    // var content = ""
+    var view = evt.target
+
+    // Save a reference to each sniffer for later.
+    this.sniffers.push( setInterval( (view) => {
+      var tab = view.parentElement.nextElementSibling
+      var content = ""
+
+      try {
+        content = view.contentDocument.title.replace(this.croptitle, "")
+      }
+      catch {
+        // Do nothing.
+      }
+      
+      render(content ? content : html`No Title Found`, tab)
+    }, 100, view) )
   }
 
   render() {
     this.item = (link, id) => ehtml`
-      <section title="view-${id}" class="w-full border-1 m-1 py-4 px-2">
-        <iframe class="w-full h-full" src="${link}" frameborder="0"
-          @load="${ (evt) => this.updateTab(evt, html`Page loaded`) }"
+      <section title="view-${id}">
+        <iframe style="height: 500px" src="${link}" frameborder="0"
+          @load="${ (evt) => this.updateTab(evt) }"
         ></iframe>
       </section>
       <span slot="menu:view-${id}">${this.loading}</span>
     `
 
     this.display = ehtml`
-      <b-tabs>
-        ${this.links.map( (v, i) => this.item(v, i) )}
-      </b-tabs>
+      <viewer style=${styleMap(this.css.viewer)}>
+        <b-tabs style=${styleMap(this.css.tabs)} layout="left">
+          ${this.links.map( (v, i) => this.item(v, i) )}
+        </b-tabs>
+        <topbar>
+          ${this.controller.topbarTargets.map( t => t.cloneNode(true) )}
+        </topbar>
+      </viewer>
     `
 
     return ehtml`${this.display}`
   }
-}
 
+  // Build an API for the different organs of this component.
+  //    viewer -> The top-level wrapper.
+  //    views -> Nodelist of all views
+  //    sidebar -> Element containing the sidebar content.
+  //    topbar -> Element containing the topbar content.
+  get viewer() {
+    return this.shadowRoot.querySelector('viewer')
+  }
+
+  get views() {
+    return this.shadowRoot.querySelectorAll('section')
+  }
+
+  get sidebar() {
+    return this.shadowRoot.querySelector('sidebar')
+  }
+
+  get topbar() {
+    return this.shadowRoot.querySelector('topbar')
+  }
+}
+// Jeff from Downtown Springfield Association 234-1022
 export default class extends Controller {
-  static targets = ['link', 'display']
+  static targets = ['link', 'display', 'topbar', 'sidebar']
 
   initialize() {
     this.element[this.identifier] = this
@@ -85,8 +138,8 @@ export default class extends Controller {
 
     // Need to convert the single-quotes string in the data attribute to a double-quotes string for JSON compatibility.
     const links = this.data.get("links").replaceAll('\'', '\"')
-    const empty = []
-    this.links = links ? JSON.parse(links) : empty
+    this.links = links ? JSON.parse(links) : []
+
     this.current = this.linkTarget.getAttribute("href")
     this.linkTarget.setAttribute("href", "#")
     this.linkTarget.style.color = "red"
@@ -109,9 +162,13 @@ export default class extends Controller {
       'd-viewer', this.panelOpts
     )
     this.viewer = this.frame.view
+    this.viewer.controller = this
     this.viewer.setAttribute("links", JSON.stringify(this.links) )
     this.viewer.setAttribute("current", JSON.stringify(this.current) )
     this.viewer.classList.add('w-full', 'h-full')
+
+    this.viewer.croptitle = this.data.get("croptitle")
+
     console.log(this.frame)
     // this.frame = new Panel( () => html`this.display`, this.panelOpts )
 

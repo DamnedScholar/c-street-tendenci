@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^events/$', EventsView.as_view(), name="views.events"),
     url(r'^calendar/$', CalendarView.as_view(), name="views.calendar"),
     url(r'^calendar/<int:yyyy>-<int:mm>$', CalendarView.as_view(), name="views.calendar"),
+    url(r'communique/', document_viewer.DocumentViewerView.as_view(), name="views.document_viewer"),
     url(r'viewer-demo-skypack/', document_viewer.DocumentViewerView.as_view(), name="views.document_viewer"),
     url(r'viewer-demo-webpack/', document_viewer.WebpackView.as_view(), name="views.document_viewer")
 ]

@@ -35,6 +35,21 @@ def gallery(query=""):
         'query': query
     }
 
+@register.inclusion_tag('communique.html')
+def communique_widget():
+    # TODO: Replace mocked content with live API calls.
+    context = {
+            'current': '/proxy/fdff711',
+            'links': [
+                '/proxy/fdff711',
+                '/proxy/2cc9611',
+                '/proxy/2569311',
+            ],
+            'text': 'Check out our newsletter!'
+        }
+    
+    return context
+
 @register.simple_tag(takes_context=True)
 def lookup_event(context, key):
     # Yes, this is a little awkward, but the naming actually makes sense when you're breaking it up and assembling it.
