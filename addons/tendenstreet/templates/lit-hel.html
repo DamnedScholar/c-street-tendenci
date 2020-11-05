@@ -1,0 +1,35 @@
+{% load cstreet_tags %}
+<style>
+    section, div, lit-example, lit-example2 {
+        border: 1px solid black;
+        margin: 0.25em;
+        padding: 1em;
+        font-size: 150%;
+    }
+
+    .lit-html-render {
+        background: green;
+    }
+    .lit-html-content {
+        color: navy;
+    }
+    .lit-element-render {
+        background: cadetblue;
+    }
+    .lit-element-content {
+        color: maroon;
+    }
+</style>
+<script src="{% static 'js/lit-hel.js' %}"></script>
+
+<h3>This section uses node_modules imports.</h3>
+<section class="lit-html-render lit-element-content"></section>
+<section class="lit-html-render lit-html-content"></section>
+<lit-example class="lit-element-render lit-html-content"></lit-example>
+<lit-example class="lit-element-render lit-element-content"></lit-example>
+
+<h3>This section uses CDN imports</h3>
+<div class="lit-html-render lit-element-content"></div>
+<div class="lit-html-render lit-html-content"></div>
+<lit-example2 class="lit-element-render lit-html-content"></lit-example2>
+<lit-example2 class="lit-element-render lit-element-content"></lit-example2>

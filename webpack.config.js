@@ -73,6 +73,9 @@ const config = {
         path: __dirname + '/static/js',
         filename: '[name].js'
     },
+    target: "browserslist:last 2 Chrome versions",
+    // NOTE: Webpack 5 has major architectural improvements regarding targets and different kinds of imports, but they're not fully implemented yet. The following line is a workaround and should be removed when the features are complete. https://webpack.js.org/blog/2020-10-10-webpack-5-release/#improved-target-option
+    externalsPresets: { web: false, webAsync: true },
     optimization: optimize[mode],
     resolve: {
         preferRelative: true,

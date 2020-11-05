@@ -35,7 +35,8 @@ class Viewer extends LitElement {
     super()
 
     // Set defaults. Nothing dynamic should go here.
-    this.controller = this.parentElement
+    this.sniffers = []
+
     this.loading = ehtml`
       Loading...
     `
@@ -47,6 +48,10 @@ class Viewer extends LitElement {
       },
       tabs: {
         "height": "100%"
+      },
+      topbar: {
+        "height": "200px",
+        "display": "flex"
       }
     }
 
@@ -74,8 +79,12 @@ class Viewer extends LitElement {
         // Do nothing.
       }
       
-      render(content ? content : html`No Title Found`, tab)
+      render(content ? html`${content}` : html`No Title Found`, tab)
     }, 100, view) )
+  }
+
+  clone(node) {
+    var newNode = node.cloneNode(true)
   }
 
   render() {
@@ -93,8 +102,13 @@ class Viewer extends LitElement {
         <b-tabs style=${styleMap(this.css.tabs)} layout="left">
           ${this.links.map( (v, i) => this.item(v, i) )}
         </b-tabs>
-        <topbar>
-          ${this.controller.topbarTargets.map( t => t.cloneNode(true) )}
+        <topbar style=${styleMap(this.css.topbar)}>
+          ${this.controller.topbarTargets.map( (t) => {
+            var newNode = t.cloneNode(true)
+            newNode.style = window.getComputedStyle(t)
+
+            return newNode
+          } )}
         </topbar>
       </viewer>
     `

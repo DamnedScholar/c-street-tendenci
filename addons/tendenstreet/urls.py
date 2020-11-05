@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^calendar/<int:yyyy>-<int:mm>$', CalendarView.as_view(), name="views.calendar"),
     url(r'communique/', document_viewer.DocumentViewerView.as_view(), name="views.document_viewer"),
     url(r'viewer-demo-skypack/', document_viewer.DocumentViewerView.as_view(), name="views.document_viewer"),
-    url(r'viewer-demo-webpack/', document_viewer.WebpackView.as_view(), name="views.document_viewer")
+    url(r'viewer-demo-webpack/', document_viewer.WebpackView.as_view(), name="views.document_viewer"),
+    url(r'lit-hel/', TemplateView.as_view(template_name='lit-hel.html'))
 ]
