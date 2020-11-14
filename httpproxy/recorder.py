@@ -116,16 +116,28 @@ class ProxyRecorder:
         content_type = response['Content-Type']
         encoding = content_type.partition('charset=')[-1] or 'utf-8'
 
-        payload = response.getvalue().decode(encoding)
+        payload = self.middleware(response.getvalue().decode(encoding))
 
         # Record the new response
         Response.objects.create(request=recorded_request,
                 status=response.status_code, content_type=content_type,
                 content=payload)
 
-    def record_images(self, payload, url):
+    def middleware(self, payload):
+        # Custom rewrite, filter, and save logic starts here.
+        self.soup = BeautifulSoup(payload)
+        
+        self.rewrite_scripts()
+
+        return self.soup.prettify()
+
+    def rewrite_scripts(self):
+        # This is not written as a one-line comprehension because it's possible that I'll want to expand the scope of this scan and I don't gain anything from brevity.
+        for s in self.soup('script'):
+            s.decompose()
+
+    def record_images(self, payload, soup, url):
         # TODO: Use bs to find image links and download them.
-        soup = BeautifulSoup(payload)
         images = soup.find_all('img')
         urls = []
 

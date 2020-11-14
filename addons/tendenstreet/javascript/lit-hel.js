@@ -11,7 +11,7 @@ const litH2 = html2`Lit-HTML~`
 class LitExample extends LitElement {
     get content() {
         return this.classList.contains('lit-element-content') ?
-        litE : litH
+            litE : litH
     }
     
     render() {
@@ -23,8 +23,8 @@ customElements.define('lit-example', LitExample)
 
 class LitExample2 extends LitElement2 {
     get content() {
-      return this.classList.contains('lit-element-content') ?
-         litE2 : litH2
+        return this.classList.contains('lit-element-content') ?
+            litE2 : litH2
     }
     
     render() {

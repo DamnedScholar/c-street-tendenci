@@ -110,7 +110,7 @@ const config = {
                     loader: 'babel-loader',
                     options: babel
                 }
-              }
+            }
         ],
     }
 }

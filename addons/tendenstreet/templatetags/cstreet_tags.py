@@ -39,14 +39,14 @@ def gallery(query=""):
 def communique_widget():
     # TODO: Replace mocked content with live API calls.
     context = {
-            'current': '/proxy/fdff711',
-            'links': [
-                '/proxy/fdff711',
-                '/proxy/2cc9611',
-                '/proxy/2569311',
-            ],
-            'text': 'Check out our newsletter!'
-        }
+        'current': '/proxy/fdff711',
+        'links': [
+            '/proxy/fdff711',
+            '/proxy/2cc9611',
+            '/proxy/2569311',
+        ],
+        'text': 'Check out our newsletter!'
+    }
     
     return context
 

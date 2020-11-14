@@ -2,28 +2,25 @@ import { Controller } from 'stimulus'
 // import StimulusReflex from 'stimulus_reflex'
 
 // TODO: Figure this out.
-import {html, render} from 'lit-html'
-import {LitElement, html as ehtml, property, css} from 'lit-element'
-import {styleMap} from 'lit-html/directives/style-map.js'
+import {html, render} from 'https://unpkg.com/lit-html?module'
+import {LitElement, html as ehtml, property, css} from 'https://unpkg.com/lit-element?module'
+import {styleMap} from 'https://unpkg.com/lit-html/directives/style-map.js?module'
 import {Panel} from 'blackstone-ui/index.js'
 
 // Tab bar documentation at https://bui.js.org/#/presenters
 import Tabs from 'blackstone-ui/presenters/tabs/index.js'
 // This import shouldn't be touched because even though it seems unused, it defines the custom element for `b-tabs`.
 
-class Viewer extends LitElement {
-  static get styles() { return css`
-    iframe {
-      width: 100%;
-      height: 100%;
-    }
-  ` }
+// console.log(styleMap()({
+//   "display": "flex",
+//   "flex-direction": "column-reverse"}))
 
+class Viewer extends LitElement {
   static get properties() { return {
+    // Trigger a redraw of the element if any of these building block properties change.
     item: {attribute: false},
     loading: {attribute: false},
-    display: {attribute: false},
-    sniffers: {attribute: false, type: Array}
+    css: {attribute: false}
   }}
 
   @property({attribute: true, type: String, reflect: true})
@@ -46,22 +43,31 @@ class Viewer extends LitElement {
         "display": "flex",
         "flex-direction": "column-reverse"
       },
+      // grid: {
+        // TODO: Prototyping for a potential grid version.
+        // "display": "grid",
+        // "grid-template-areas": `
+        //   "topbar topbar"
+        //   "tabs body"
+        //   "sidebar body"
+        // `,
+      // },
       tabs: {
         "height": "100%"
       },
+      frame: {
+        "height": "100%",
+        "width": "100%"
+      },
       topbar: {
         "height": "200px",
-        "display": "flex"
+        "display": "flex",
+        "justify-content": "space-around"
       }
     }
 
     // TODO: I can make forward/back buttons in b-ui's tab bar using the `.views` property (https://github.com/kjantzer/bui/blob/master/presenters/tabs/index.js#L83) and `tab_bar.views.active` with `tab_bar.views.at(active + 1)` or `(active - 1)`. I need to bind these to hotkeys using `stimulus-hotkeys` and to buttons that appear on mobile devices.
   }
-
-  // attributeChangedCallback(name, oldval, newval) {
-  //   console.log('attribute change: ', name, newval);
-  //   super.attributeChangedCallback(name, oldval, newval);
-  // }
 
   updateTab(evt) {
     // var content = ""
@@ -88,7 +94,7 @@ class Viewer extends LitElement {
   }
 
   render() {
-    this.item = (link, id) => ehtml`
+    this.item = (link, id) => html`
       <section title="view-${id}">
         <iframe style="height: 500px" src="${link}" frameborder="0"
           @load="${ (evt) => this.updateTab(evt) }"
@@ -97,7 +103,7 @@ class Viewer extends LitElement {
       <span slot="menu:view-${id}">${this.loading}</span>
     `
 
-    this.display = ehtml`
+    let display = html`
       <viewer style=${styleMap(this.css.viewer)}>
         <b-tabs style=${styleMap(this.css.tabs)} layout="left">
           ${this.links.map( (v, i) => this.item(v, i) )}
@@ -113,7 +119,7 @@ class Viewer extends LitElement {
       </viewer>
     `
 
-    return ehtml`${this.display}`
+    return html`${display}`
   }
 
   // Build an API for the different organs of this component.
@@ -125,8 +131,8 @@ class Viewer extends LitElement {
     return this.shadowRoot.querySelector('viewer')
   }
 
-  get views() {
-    return this.shadowRoot.querySelectorAll('section')
+  get content() {
+    return this.shadowRoot.querySelector('b-tabs')
   }
 
   get sidebar() {
@@ -136,8 +142,34 @@ class Viewer extends LitElement {
   get topbar() {
     return this.shadowRoot.querySelector('topbar')
   }
+
+  get keys() {
+    // Return an array of all tab names.
+    return Array.from(this.content.views.keys())
+  }
+
+  get active() {
+    return this.content.active
+  }
+
+  set active(view) {
+    this.content.active = view
+  }
+
+  // TODO: Test this!
+  forward() {
+    var len = this.keys.length
+    var target = this.keys.indexOf(this.active) + 1
+    this.active = this.keys[target%len]
+  }
+
+  back() {
+    var len = this.keys.length
+    var target = this.keys.indexOf(this.active) + len - 1
+    this.active = this.keys[target%len]
+  }
 }
-// Jeff from Downtown Springfield Association 234-1022
+
 export default class extends Controller {
   static targets = ['link', 'display', 'topbar', 'sidebar']
 
@@ -148,10 +180,8 @@ export default class extends Controller {
   connect() {
     // StimulusReflex.register(this)
 
-    // TODO: Based on a list of links passed through HTML, load several iframes into the DOM without displaying them to the user (`visibility: hidden` in CSS; avoid Tailwind since this CSS will be entirely controlled by JS). When each iframe is loaded (https://stackoverflow.com/a/21471494), make a record of its title (if it's an HTML page) and maybe other important information.
-
     // Need to convert the single-quotes string in the data attribute to a double-quotes string for JSON compatibility.
-    const links = this.data.get("links").replaceAll('\'', '\"')
+    var links = this.data.get("links").replaceAll('\'', '\"')
     this.links = links ? JSON.parse(links) : []
 
     this.current = this.linkTarget.getAttribute("href")
@@ -177,16 +207,10 @@ export default class extends Controller {
     )
     this.viewer = this.frame.view
     this.viewer.controller = this
-    this.viewer.setAttribute("links", JSON.stringify(this.links) )
-    this.viewer.setAttribute("current", JSON.stringify(this.current) )
-    this.viewer.classList.add('w-full', 'h-full')
+    this.viewer.links = this.links
+    this.viewer.current = this.current
 
     this.viewer.croptitle = this.data.get("croptitle")
-
-    console.log(this.frame)
-    // this.frame = new Panel( () => html`this.display`, this.panelOpts )
-
-    console.log(this)
   }
 
   open_viewer() {
