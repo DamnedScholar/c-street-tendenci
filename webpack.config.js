@@ -58,10 +58,11 @@ const babel = {
         }
     },
     plugins: [
-        [ '@babel/plugin-proposal-decorators', {
+        [ "@babel/plugin-proposal-decorators", {
             legacy: true,
         } ],
-        [ '@babel/plugin-proposal-class-properties', { "loose": true } ],
+        [ "@babel/plugin-proposal-class-properties", { "loose": true } ],
+        [ "@babel/plugin-transform-runtime"]
     ]
 }
 
@@ -80,7 +81,8 @@ const config = {
     resolve: {
         preferRelative: true,
         alias: {
-            "jquery": "blackstone-ui/helpers/backbone/jquery-shim"
+            "jquery": "blackstone-ui/helpers/backbone/jquery-shim",
+            "bui": "blackstone-ui"
         }
     },
     module: {
@@ -105,7 +107,8 @@ const config = {
                 },
             },
             {
-                test: /_controller\.js/,
+                test: /\.js/,
+                exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                     options: babel

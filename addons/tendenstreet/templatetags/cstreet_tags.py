@@ -11,6 +11,8 @@ from tendenci.apps.photos.models import Image, PhotoSet, AlbumCover, License
 
 from addons.custom_directories.utils.utils import get_images_for_entry
 
+from ..forms import SubscriptionForm
+
 register = template.Library()
 
 @register.inclusion_tag('gallery.html')
@@ -49,6 +51,10 @@ def communique_widget():
     }
     
     return context
+
+@register.inclusion_tag('subscription.html')
+def subscription_widget():
+    return {'form': SubscriptionForm()}
 
 @register.simple_tag(takes_context=True)
 def lookup_event(context, key):
