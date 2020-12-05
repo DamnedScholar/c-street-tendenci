@@ -1,5 +1,5 @@
 import { Controller } from 'stimulus'
-// import StimulusReflex from 'stimulus_reflex'
+import StimulusReflex from 'stimulus_reflex'
 
 import {html, render} from 'https://unpkg.com/lit-html?module'
 import {LitElement, html as ehtml, property, css} from 'https://unpkg.com/lit-element?module'
@@ -24,17 +24,20 @@ export default class extends Controller {
   }
 
   connect() {
-    // StimulusReflex.register(this)
+    StimulusReflex.register(this)
 
     // Need to convert the single-quotes string in the data attribute to a double-quotes string for JSON compatibility.
-    var links = this.data.get("links").replaceAll('\'', '\"')
-    this.links = links ? JSON.parse(links) : []
+    var links = this.data.get("links")
+    this.links = links ? JSON.parse(links.replaceAll('\'', '\"')) : []
+
+    // TODO: Add support for full-page vs modal modes, determined by a data-attribute.
 
     this.current = this.linkTarget.getAttribute("href")
     this.linkTarget.setAttribute("href", "#")
-    this.linkTarget.style.color = "red"
 
     customElements.define('document-viewer', DocumentViewer)
+
+    console.log("Viewer connected.")
 
     // For reference on the following, see this documentation:
     // https://github.com/kjantzer/bui/tree/master/presenters/panel#panel

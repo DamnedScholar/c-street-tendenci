@@ -4,7 +4,7 @@ volumes:
 
 services:
   db:
-    build:
+    build: 
       context: .
       dockerfile: Dockerfile
     image: postgis/postgis

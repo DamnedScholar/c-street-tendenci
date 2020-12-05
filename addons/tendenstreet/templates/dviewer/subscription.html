@@ -1,0 +1,7 @@
+<form data-controller="subscription" data-reflex-root
+    action="/subscribe/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input data-action="Subscription#submit"
+        type="submit" value="Submit">
+</form>

@@ -133,9 +133,9 @@ div.rag div:last-of-type,
             data-target="document_viewer.link"
             data-action="document_viewer#open_viewer"
         >Read the News</a>
-        <br>and<br>
-        <subscription-widget data-target="document_viewer.topbar"
-            data-action="document_viewer#request_subscription"
-        >Subscribe!</subscription-widget>
+		<br>and<br>
+		<div data-target="document_viewer.topbar">
+			{% subscription_widget %}
+		</div>
     </div>
 </div>

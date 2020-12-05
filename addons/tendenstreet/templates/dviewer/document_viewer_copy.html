@@ -1,0 +1,17 @@
+
+{% load static %}
+<!-- <script type="module">
+    import blackstoneUi from "{% static 'js/bui/index.js' %}"
+</script> -->
+<link rel="stylesheet" href="{% static 'css/tailwind.css' %}" type="text/css">
+<!-- TODO: Remove the above when testing is done (I shouldn't depend at all on Tailwind). -->
+<!-- <script type="module" src="{% static 'js/stimulus/document_viewer.js' %}"></script> -->
+<script src="{% static 'js/document_viewer.js' %}"></script>
+
+<a href="{{ current }}"
+    data-controller="document_viewer"
+    data-action="document_viewer#open_viewer"
+    data-document_viewer-links="{{ links }}"
+    data-document_viewer-croptitle="C-Street News & World Report - "
+    data-target="document_viewer.link"
+>{{ text }}</a>

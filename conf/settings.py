@@ -1,4 +1,5 @@
 from tendenci.settings import *
+import os
 
 # Load secret and server-specific settings so that we can sync `settings.py`
 import json
@@ -43,9 +44,13 @@ if DEBUG:
 
 # Any site-specific settings that do not fit in the sections below can go here.
 
-# Channels requires this setting. Right now, it's handled by a file inside
-# `django-sockpuppet`, but
 ASGI_APPLICATION = 'sockpuppet.routing.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 
 # ---------------------------------------------------------------------------- #
@@ -173,11 +178,11 @@ TIME_ZONE = 'US/Central'
 # Try https://github.com/Nilhcem/FakeSMTP and use the SMTP configuration above,
 # or try https://github.com/PaulSD/django_log_email and use the following
 # configuration.
-#EMAIL_BACKEND = 'django_log_email.backends.EmailBackend'
-#EMAIL_LOG_FILE = '/var/log/tendenci/email.log'
+EMAIL_BACKEND = 'django_log_email.backends.EmailBackend'
+EMAIL_LOG_FILE = './email.log'
 # When using django_log_email, you can leave this setting commented to discard
 # email after logging, or uncomment it to both log and send email.
-#EMAIL_LOG_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_LOG_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # When using django_log_email, you can uncomment this setting to send error
 # alert emails without logging.
 #LOGGING['handlers']['mail_admins']['email_backend'] = 'django.core.mail.backends.smtp.EmailBackend'
@@ -278,11 +283,28 @@ INSTALLED_APPS += [
     'channels',
     'sockpuppet',
     'import_export',
-    'httpproxy'
+    'httpproxy',
+    'simple_history'
 ]
 
-TEMPLATE_DIRS = [
-  'addons/tendenstreet/templates'
+TEMPLATES = [
+  {
+      'BACKEND': 'django.template.backends.django.DjangoTemplates',
+      'DIRS': [os.path.join(PROJECT_ROOT, 'templates'), ],
+      'APP_DIRS': True,
+      'OPTIONS': {
+          'context_processors': [
+              'django.template.context_processors.debug',
+              'django.template.context_processors.request',
+              'django.contrib.auth.context_processors.auth',
+              'django.contrib.messages.context_processors.messages',
+          ],
+      },
+  }
+]
+
+MIDDLEWARE += [
+  'simple_history.middleware.HistoryRequestMiddleware'
 ]
 
 # To remove a default app from INSTALLED_APPS:

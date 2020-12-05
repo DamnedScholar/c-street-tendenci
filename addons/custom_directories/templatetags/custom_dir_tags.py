@@ -91,6 +91,14 @@ def imgproxy(url, size):
             'enlarge': 0,
             'extension': 'webp'
         },
+        "calendar-hero": {
+            'resize': 'fill',
+            'width': 1000,
+            'height': 400,
+            'gravity': 'fp:0.35:0.50',
+            'enlarge': 0,
+            'extension': 'webp'
+        },
     }
 
     options = sizes[size]

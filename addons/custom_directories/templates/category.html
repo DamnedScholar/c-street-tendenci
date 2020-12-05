@@ -24,9 +24,7 @@
 {% block content_classes %}{{ block.super }} t-search-view{% endblock %}
 
 {% block hero %}
-  <div class="focuspoint"
-    data-focus-x="{{ focus.x }}" data-focus-y="{{ focus.y }}"
-    data-image-w="{{ size.w }}" data-image-h="{{ size.h }}">
+  <hero-image>
     {% static hero as picture %}
     <picture class="h-full w-full">
         <source media="(max-width:500px)"
@@ -36,7 +34,7 @@
         <img class="w-full"
             src="{{ picture }}" alt="{% firstof room.name trans "Untitled" %}">
     </picture>
-  </div>
+  </hero-image>
 
   <h1 id="hero-title">{{ headline }}</h1>
   <nav id="hero-nav" class="relative sm:w-full md:w-2/3 flex flex-row items-center justify-center">

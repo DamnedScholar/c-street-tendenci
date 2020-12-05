@@ -20,7 +20,9 @@ export default class extends LitElement{
     ${this.views.map(v=>html`
         ${v.canDisplay&&(!device.isMobile||v.id!='emails')?html`
             <b-btn text icon="${v.icon}" ?active=${v.active} .tabView=${v} @click=${this.onClick}>
-                <span class="text-2x">${v.title}</span>
+                <span class="text-2x">
+                  <slot name="menu:view-${v.id}"></slot>
+                </span>
             </b-btn>
         `:''}
     `)}
