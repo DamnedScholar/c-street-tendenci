@@ -25,16 +25,16 @@ td address {
 }
 
 textarea {
-  @apply border-0 rounded-md px-1;
+  @apply border rounded-md px-1;
 }
 input {
-  @apply border-0 rounded-full px-1;
+  @apply border rounded-full px-1;
 }
 input[type="submit"] {
   @apply bg-green text-gray-900 text-2xl py-3 px-5 font-bold;
 }
 select {
-  @apply border-0 rounded-full px-1;
+  @apply border rounded-full px-1;
 }
 section {
   @apply mt-4;
@@ -137,11 +137,11 @@ div.focuspoint {
 }
 
 #hero-title {
-  @apply font-serif font-bold text-gray-100 z-10 leading-cuddly;
+  @apply font-serif font-bold text-gray-100 z-10;
   text-shadow: 1px 1px 2px #2d5c66;
 }
 #hero-nav ul>li a {
-  @apply inline-block bg-green text-blue text-xl font-semibold leading-relaxed rounded-md mt-2 ml-2 whitespace-nowrap;
+  @apply inline-block bg-green text-blue text-xl font-semibold leading-relaxed rounded-md mt-2 ml-2 whitespace-no-wrap;
 }
 #hero-nav ul {
   @apply flex flex-row flex-wrap justify-center;

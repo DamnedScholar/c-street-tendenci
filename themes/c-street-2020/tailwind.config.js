@@ -1,6 +1,7 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   purge: [],
-  target: 'relaxed',
   prefix: '',
   important: false,
   separator: ':',
@@ -28,6 +29,17 @@ module.exports = {
         700: '#718c9e',
         800: '#465966',
         900: '#36454f'
+      },
+      glass: {
+        100: '#fcfdfd60',
+        200: '#e5eaed60',
+        300: '#ced7dd60',
+        400: '#b7c4cd60',
+        500: '#9fb1be60',
+        600: '#889fae60',
+        700: '#718c9e60',
+        800: '#46596660',
+        900: '#36454f60'
       },
       blue: '#2d4066',
       indigo: '#595e8d',
@@ -201,6 +213,7 @@ module.exports = {
       widest: '0.1em',
     },
     lineHeight: {
+      cuddly: '0.8',
       none: '1',
       tight: '1.25',
       snug: '1.375',
@@ -223,6 +236,7 @@ module.exports = {
     },
     margin: (theme, { negative }) => ({
       auto: 'auto',
+      "nudge": "10%",
       ...theme('spacing'),
       ...negative(theme('spacing')),
     }),
@@ -245,6 +259,9 @@ module.exports = {
       '6xl': '72rem',
       full: '100%',
       thumbnail: '200px',
+      fit: 'fit-content',
+      max: 'max-content',
+      min: 'min-content',
       ...breakpoints(theme('screens')),
     }),
     minHeight: (theme) => ({
@@ -612,7 +629,17 @@ module.exports = {
     },
     linearGradientColors: {
       'teal-cyan': theme => [theme('colors.teal'), theme('colors.cyan')]
-    }
+    },
+    filter: { // defaults to {}
+      'none': 'none',
+      'grayscale': 'grayscale(1)',
+      'invert': 'invert(1)',
+      'sepia': 'sepia(1)',
+    },
+    backdropFilter: { // defaults to {}
+      'none': 'none',
+      'blur': 'blur(2px)',
+    },
   },
   variants: {
     accessibility: ['responsive', 'focus'],
@@ -630,8 +657,8 @@ module.exports = {
     borderColor: ['responsive', 'hover', 'focus'],
     borderOpacity: ['responsive', 'hover', 'focus'],
     borderRadius: ['responsive', 'first', 'last'],
-    borderStyle: ['responsive'],
-    borderWidth: ['responsive'],
+    borderStyle: ['responsive', 'first', 'last'],
+    borderWidth: ['responsive', 'first', 'last'],
     boxShadow: ['responsive', 'hover', 'focus'],
     boxSizing: ['responsive'],
     cursor: ['responsive'],
@@ -670,7 +697,7 @@ module.exports = {
     order: ['responsive'],
     outline: ['responsive', 'focus'],
     overflow: ['responsive'],
-    padding: ['responsive'],
+    padding: ['responsive', 'first', 'last'],
     placeholderColor: ['responsive', 'focus'],
     placeholderOpacity: ['responsive', 'focus'],
     pointerEvents: ['responsive'],
@@ -721,11 +748,23 @@ module.exports = {
     animationDirection: ['responsive'],
     animationFillMode: ['responsive'],
     animationPlayState: ['responsive'],
+    filter: ['responsive', 'hover', 'focus'], // defaults to ['responsive']
+    backdropFilter: ['responsive', 'hover', 'focus'], // defaults to ['responsive']
   },
   corePlugins: {},
   plugins: [
-    require('@tailwindcss/custom-forms'),
+    // require('@tailwindcss/custom-forms'),
     require('tailwindcss-animations'),
     require('tailwindcss-gradients'),
+    require('tailwindcss-filters'),
+    plugin(function({ addUtilities }) {
+      const newUtilities = {
+        '.slight-tilt': {
+          transform: 'perspective(9000000px) rotateX(15deg)',
+        }
+      }
+
+      addUtilities(newUtilities)
+    })
   ],
 }

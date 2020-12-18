@@ -1,4 +1,4 @@
-import {html} from 'https://unpkg.com/lit-html?module'
+import {html} from 'lit-element'
 
 const styleTag = (href) => html`
     <link rel="stylesheet" type="text/css" href="${href}">
@@ -15,6 +15,9 @@ export const injectStyle = (query) => {
     )[0]
     
     return html`
-        ${ sheet ? styleTag(sheet.href) : console.log("No sheet, Sherlock.")}
+        ${ sheet ?
+            styleTag(sheet.href) :
+            console.log(`Style Injector -> A stylesheet matching "${query}" was not found.`)
+        }
     `
 }

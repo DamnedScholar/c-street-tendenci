@@ -19,7 +19,7 @@
     {% endblock %}
 
 {% block hero %}
-  <hero-image class="w-full overflow-hidden">
+  <hero-image class="w-full overflow-visible">
     {% static 'img/JamesAllen.jpg' as picture %}
     <!-- This image just isn't big enough. I need it to at least be 1500 px. -->
     <picture class="h-full w-full">
@@ -38,7 +38,7 @@
 {% block content %}
     <script src="{% static 'js/calendar.js' %}"></script>
 
-    <b-cal>
+    <events-calendar>
         {% for date, event_ids in events.dates.items %}
         <div slot="{{ date }}" class="flex flex-col items-center justify-start space-y-2">
             {% for id in event_ids %}
@@ -57,5 +57,5 @@
             {% endfor %}
         </div>
         {% endfor %}
-    </b-cal>
+    </events-calendar>
 {% endblock %}

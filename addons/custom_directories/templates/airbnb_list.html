@@ -5,26 +5,26 @@
     }
 </style>
 
-<section class="grid grid-cols-5 sm:grid-cols-2 gap-4" data-target="sorting.grid">
+<sortable-grid class="grid grid-cols-5 sm:grid-cols-2 gap-4" data-target="sorting.grid">
     {% for id, room in rooms.items %}
         <article id="room-{{ id }}" class="border border-opacity-50 flex flex-col items-center justify-between p-2"
-        data-target="sorting.item"
+        data-sorting-target="item"
         data-sorting-metadata="{{ room.sorting }}">
-            <a href="{{ room.url }}">
-                <div>
-                    <picture class="h-full w-full">
-                        <source srcset="{{ room.picture_url | imgproxy:"thumb" }}">
-                        <img src="{{ room.picture_url }}" alt="{% firstof room.name trans "Untitled" %}">
-                    </picture>
-                </div>
+            <a href="{{ room.url }}"
+                aria-hidden="true">
+                <picture class="h-full w-full">
+                    <source srcset="{{ room.picture_url | imgproxy:"thumb" }}">
+                    <img src="{{ room.picture_url }}"
+                        alt="{% firstof room.name trans "Untitled" %}">
+                </picture>
             </a>
         
             <address class="flex flex-col text-center">
-            <a href="{{ room.url }}">
-                <span class="text-xl inline-block">
-                    {% firstof room.name trans "Untitled" %}
-                </span>
-            </a>
+                <a href="{{ room.url }}">
+                    <span class="text-xl inline-block">
+                        {% firstof room.name trans "Untitled" %}
+                    </span>
+                </a>
             </address>
             <aside class="w-full">
                 <div class="badges flex flex-col w-full px-2 items-center">
@@ -42,4 +42,4 @@
             </aside>
         </article>
     {% endfor %}
-</section>
+</sortable-grid>

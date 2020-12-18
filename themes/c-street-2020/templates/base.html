@@ -1,5 +1,6 @@
 {% load announcement_tags %}
 {% load perm_tags %}
+{% load static %}
 
 {# admin left for deprecation for custom templates/themes #}
 {% is_admin request.user as admin %}
@@ -36,19 +37,9 @@ Fork us at github.com/tendenci  -->
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss/">
     <link rel="search" type="application/opensearchdescription+xml" title="{{ SITE_GLOBAL_SITEDISPLAYNAME }}" href="{{ SITE_GLOBAL_SITEURL }}{% url 'open_search' %}">
 
-    {% block jquery_script %}
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
-    {% endblock jquery_script %}
-
     {% if request.user.is_authenticated %}
 
     {% endif %}
-
-
-    <link href="{% static 'yamm/yamm.css' %}" rel="stylesheet" type="text/css">
-
-    <link href="{% static 'css/websymbols.css' %}" rel="stylesheet" type="text/css">
 
     {% block extra_head %}{% endblock %}
 
@@ -70,21 +61,17 @@ Fork us at github.com/tendenci  -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- To change Bootswatch Theme, use this link
-    ============================================================================ -->
-    <!-- link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" type="text/css" -->
-
     <!-- Custom styles for this template
     =========================================================== -->
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600;700&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/ea5e0b7c05.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/ea5e0b7c05.js" crossorigin="anonymous"></script> -->
     <!-- <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css"> -->
     <link rel="stylesheet" href="{% static 'css/tailwind.css' %}" type="text/css">
 
     <!-- Custom JS for this template
     =========================================================== -->
-    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-    <script type="text/javascript" src="{% static 'utilities/jquery.focuspoint.min.js' %}"></script>
+    <!-- <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'utilities/jquery.focuspoint.min.js' %}"></script> -->
 
     <!-- FAVICON -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon.ico' %}">
@@ -93,25 +80,10 @@ Fork us at github.com/tendenci  -->
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <link href="https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre:300,400,700|Montserrat|Montserrat+Alternates:400,500" rel="stylesheet">
-    {% if SITE_GLOBAL_GOOGLETAGMANAGERCONTAINERID %}
-    <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','{{ SITE_GLOBAL_GOOGLETAGMANAGERCONTAINERID }}');</script>
-  <!-- End Google Tag Manager -->
-  {% endif %}
     </head>
 
 
   <body id="{% block body_ids %}{% endblock %}" class="{% if request.user.is_superuser %}t-auth-admin-loggedin {% endif %}{% block body_classes %}{% endblock %}">
-    {% if SITE_GLOBAL_GOOGLETAGMANAGERCONTAINERID %}
-    <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ SITE_GLOBAL_GOOGLETAGMANAGERCONTAINERID }}"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-  {% endif %}
     {% block top_bar %}
     {% if request.user.is_superuser %}
     {% if request.user.impersonated_user and not request.user.impersonated_user.is_superuser  %}
@@ -136,28 +108,7 @@ Fork us at github.com/tendenci  -->
 
     {% block html_body %}{% endblock %}
 
-
-    {% include "credits.html" %}
-
-
-    {% if request.user.is_superuser %}{# include "admin_menu/admin_bottom.html" #}{% endif %}
-
-    <script type="text/javascript" src="{% static 'bootstrap3/js/bootstrap.min.js' %}"></script>
-
-    {% if request.user.is_superuser %}
-    <script type="text/javascript" src="{% static 'js/admin_menu.js' %}"></script>
-    {% endif %}
-
-    {% if user.is_authenticated %}
-    <script type="text/javascript" src="{% static 'js/global/authenticated.js' %}"></script>
-    {% endif %}
-
     {% block extra_body %}{% endblock %}
 
-    <script type="text/javascript">
-      jQuery(document).on('click', '.yamm .dropdown-menu', function (e) {
-      e.stopPropagation()
-      })
-    </script>
   </body>
 </html>

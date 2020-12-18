@@ -1,4 +1,4 @@
-import {html} from 'https://unpkg.com/lit-html?module'
+import {html} from 'lit-html'
 
 const styleTag = (href) => html`
     <link rel="stylesheet" type="text/css" href="${href}">

@@ -17,4 +17,6 @@ application.load(definitionsFromContext(context))
 // StimulusReflex.initialize(application, { consumer })
 
 // The library used for the component is Blackstone UI
-import 'blackstone-ui/presenters/cal/index.js'
+// import 'blackstone-ui/presenters/cal/index.js'
+// TODO: I've needed to override the BUI calendar to ensure that it uses my updated `lit-element` dependency, at least until it is released with updated `lit-element`/`lit-html`.
+import './components/cal.js'

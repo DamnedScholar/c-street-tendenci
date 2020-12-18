@@ -1,7 +1,7 @@
-import {render} from 'https://unpkg.com/lit-html?module'
-import {LitElement, html, css} from 'https://unpkg.com/lit-element?module'
-import {styleMap} from 'https://unpkg.com/lit-html/directives/style-map.js?module'
-import {classMap} from 'https://unpkg.com/lit-html/directives/class-map.js?module'
+import {render} from 'lit-html'
+import {LitElement, html, css} from 'lit-element'
+import {styleMap} from 'lit-html/directives/style-map.js'
+import {classMap} from 'lit-html/directives/class-map.js'
 
 import device from 'blackstone-ui/util/device.js'
 import {injectStyle} from './utils/styleinjector.js'
@@ -38,13 +38,13 @@ export default class extends LitElement{
   renderTab(v) {
     return html`
       ${v.canDisplay&&(!device.isMobile||v.id!='emails')?html`
-        <btn text id="${v.id}"
+        <button text id="${v.id}"
           icon="${v.icon}" ?active=${v.active}
           .tabView=${v} @click=${this.menuClick}>
           <span class="text-2x">
-            ${v.title}
+            <slot name="menu:${v.id}">${v.title}</slot>
           </span>
-        </btn>
+        </button>
       `:''}
     `
   }

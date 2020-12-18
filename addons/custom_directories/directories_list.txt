@@ -1,0 +1,168 @@
+The Carrie Aleene Tea Room -> events-and-venues == services
+
+A Wench in the Gear -> shopping == services
+
+All Seasons Chem Dry -> manufacturing == services
+
+Artifacts -> shopping == services
+
+Askinosie & Bilyeu -> services == services
+
+Askinosie Chocolate -> shopping == services
+
+Big Momma's -> food-and-drink == services
+
+Blu Styles -> services == services
+
+BNSF Services -> manufacturing == services
+
+Brick + Tin -> events-and-venues == services
+
+Bridge Upholstery -> services == services
+
+Brown Derby -> shopping == services
+
+C-Space -> services == services
+
+C-Street Boutique -> shopping == services
+
+C-Street Center & Events and Venues -> events-and-venues == services
+
+C-Street Used Furniture -> shopping == services
+
+Café Cusco -> food-and-drink == services
+
+Chabom Teas and Spices -> shopping == services
+
+Commercial Club -> services == services
+
+Crystal's Cuts -> services == services
+
+Culture Boutique Hotel -> rentals == services
+
+Cymphony's -> shopping == services
+
+Dance with Me -> services == services
+
+Della's Beauty Plus -> services == services
+
+Departika -> services == services
+
+Dr. Dewar Dental -> services == services
+
+Drury on C-Street -> arts == services
+
+Elkhart & The Robberson -> food-and-drink == services
+
+Ensley & Swann Boutique and Marketplace -> shopping == services
+
+Eurasia Coffee & Tea -> food-and-drink == services
+
+Faith Stocker -> services == services
+
+Fireside Gallery -> events-and-venues == services
+
+Footbridge Trading Co. -> shopping == services
+
+Furniture & More -> shopping == services
+
+Gallery Art Market -> arts == services
+
+Gate of the Temple -> non-profit == services
+
+GLO Center -> non-profit == services
+
+Groce & DeArmon Law -> services == services
+
+H&R Block -> services == services
+
+Hakaar's Bazaar -> shopping == services
+
+Hatch Building -> non-profit == services
+
+Historic Firehouse No. 2 -> events-and-venues == services
+
+Imaginational -> services == services
+
+Ink Ink -> services == services
+
+Jon Van Arkel Law -> services == services
+
+Lewis Boxing Gym -> services == services
+
+Lindberg's Tavern -> food-and-drink == services
+
+Midtown Appliances -> shopping == services
+
+Midwest Sheet Metal -> manufacturing == services
+
+MJ's Flea Market -> shopping == services
+
+Moon City Pub -> food-and-drink == services
+
+MosaicaRose -> arts == services
+
+Moth Studio Tattoo -> services == services
+
+Ms. Gilmore's Tea Room -> food-and-drink == services
+
+Ms. Gilmore's Vintage Suitcase -> shopping == services
+
+nForm Architecture -> services == services
+
+Ozarks Model Railroad Association -> non-profit == services
+
+Paul Hall Signs -> manufacturing == services
+
+Pedalers Bicycle Museum -> non-profit == services
+
+Pizza House -> food-and-drink == services
+
+Price Cutter -> shopping == services
+
+Prixel Creative -> services == services
+
+Q Enoteca -> food-and-drink == services
+
+Queen City Beauty Spa -> services == services
+
+Rathbone Ace Hardware -> shopping == services
+
+Reed's Plumbing -> services == services
+
+Ruthie's on C-Street -> food-and-drink == services
+
+Sangha Yoga -> services == services
+
+Sangha Yoga -> shopping == services
+
+Savoy Ballroom -> events-and-venues == services
+
+Café Basilico -> food-and-drink == services
+
+Sonic -> food-and-drink == services
+
+Springfield Mercantile Co. -> shopping == services
+
+Stewart Automotive -> manufacturing == services
+
+That Lebanese Place -> food-and-drink == services
+
+The Artisan's Oven -> food-and-drink == services
+
+The Summit Lounge -> events-and-venues == services
+
+Trail Labs -> manufacturing == services
+
+Triad Graphics -> services == services
+
+Uriel's Unusual Bookstore -> shopping == services
+
+Van Gogh's Eeterie -> food-and-drink == services
+
+Vecino Group -> services == services
+
+Wellspring School of Applied Health -> services == services
+
+White River Brewing -> food-and-drink == services
+

@@ -27,7 +27,7 @@
     "stimulus": "^1.1.1",
     "stimulus-image-grid": "^1.0.2",
     "tailwind": "^4.0.0",
-    "tailwindcss": "^1.4.5",
+    "tailwindcss": "2",
     "tailwindcss-animations": "^2.0.0",
     "tailwindcss-gradients": "^3.0.0",
     "tailwindcss-stimulus-components": "^1.0.2"

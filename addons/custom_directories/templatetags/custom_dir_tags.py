@@ -78,7 +78,7 @@ def imgproxy(url, size):
         "hero": {
             'resize': 'fill',
             'width': 1500,
-            'height': 400,
+            'height': 800,
             'gravity': 'sm',
             'enlarge': 0,
             'extension': 'webp'
@@ -167,13 +167,21 @@ def airbnb():
                 "category": "short-term",
                 "filters": {
                     'price': price_tier,
-                    'beds': slugify(v['beds']),
+                    'beds': v['beds'],
                 },
-                # TODO: Limit the filters we display until I design the UI better so that we can have organized buttons.
-                "name": v['name'],
-                "rating": v['avg_rating'],
-                "rate": v['rate'],
+                "sorts": {
+                    "name": v['name'],
+                    "rating": v['avg_rating'],
+                    "rate": v['rate'],
+                }
             })
         })
+
+    # TODO: Limiting my information temporarily. Undo this tourniquet before showing anyone.
+    # return {'rooms': {
+    #     "0": list( rooms.values() )[0],
+    #     "1": list( rooms.values() )[1],
+    #     "2": list( rooms.values() )[2]
+    #     } }
 
     return { "rooms": rooms }

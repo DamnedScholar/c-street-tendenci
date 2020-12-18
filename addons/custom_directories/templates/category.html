@@ -1,4 +1,5 @@
-{% extends "directories/base.html" %}
+{% extends "base-wide.html" %}
+{% load static %}
 {% load base_tags %}
 {% load base_filters %}
 {% load bootstrap_pagination_tags %}
@@ -9,46 +10,45 @@
 
 
 {% block title %}
-    {% if MODULE_DIRECTORIES_LABEL_PLURAL %}
-        {% blocktrans %}{{ MODULE_DIRECTORIES_LABEL_PLURAL }} List{% endblocktrans %}
-    {% else %}
-        {% trans "Directories List" %}
-    {% endif %} - {{ block.super }}
+    C-Street Directory
 {% endblock %}
 
 {% block extra_head %}
     {{ block.super }}
-    <link rel="alternate" type="application/rss+xml" title="{% trans 'Latest' %}  {% firstof MODULE_DIRECTORIES_LABEL_PLURAL trans 'Directories' %}" href="{% url 'directory.feed' %}" />
+    <link rel="alternate" type="application/rss+xml" title="Directories" href="{% url 'directory.feed' %}" />
 {% endblock %}
 
 {% block content_classes %}{{ block.super }} t-search-view{% endblock %}
 
 {% block hero %}
-  <hero-image>
-    {% static hero as picture %}
-    <picture class="h-full w-full">
-        <source media="(max-width:500px)"
-            srcset="{{ picture | imgproxy:"sm-hero" }}">
-        <source media="(min-width:501px)"
-            srcset="{{ picture | imgproxy:"hero" }}">
-        <img class="w-full"
-            src="{{ picture }}" alt="{% firstof room.name trans "Untitled" %}">
-    </picture>
-  </hero-image>
+    
+    <hero-image class="absolute w-full">
+        {% static hero as picture %}
+        <picture class="h-full w-full">
+            <source media="(max-width:500px)"
+                srcset="{{ picture | imgproxy:"sm-hero" }}">
+            <source media="(min-width:501px)"
+                srcset="{{ picture | imgproxy:"hero" }}">
+            <img class="w-full"
+                src="{{ picture }}" alt="{% firstof room.name trans "Untitled" %}">
+        </picture>
+    </hero-image>
+    <hero-block class="w-full h-full flex flex-col justify-end items-center py-2">
+        <h1 id="hero-title">{{ headline }}</h1>
+        <nav id="hero-nav" class="relative sm:w-full md:w-2/5 flex flex-row items-center justify-center">
+            <ul>
+                {% for cat_slug, cat in all_cats.items %}
+                    <li>
+                        <a href="http://{{ request.META.HTTP_HOST }}/{{ cat_slug }}">
+                            {{ cat.headline }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
 
-  <h1 id="hero-title">{{ headline }}</h1>
-  <nav id="hero-nav" class="relative sm:w-full md:w-2/3 flex flex-row items-center justify-center">
-      <ul>
-          {% for cat_slug, cat in all_cats.items %}
-            <li>
-                <a href="http://{{ request.META.HTTP_HOST }}/directory/{{ cat_slug }}">
-                    {{ cat.headline }}
-                </a>
-            </li>
-          {% endfor %}
-      </ul>
-
-  </nav>
+        </nav>
+    </hero-block>
+  
 {% endblock %}
 
 {% block sidebar %}
@@ -56,7 +56,7 @@
 {% endblock %}
 
 {% block content %}
-    <script src="{% static 'js/sorting.js' %}"></script>
+    <script id="sorting-controller" src="{% static 'js/sorting.js' %}"></script>
     <style>
         ul[data-target="sorting.categories"][active] button[aria-pressed="true"]  {
             background: rgba(115, 166, 136, 1);
@@ -74,162 +74,79 @@
         }
     </style>
     <div class="sorting"
-        data-controller='sorting'
-        data-sorting-categories="short-term long-term"
-        data-sorting-sorts="name"
-        data-sorting-metadata="{{ sorting_controller }}">
+        data-controller='sorting'>
 
-        <template data-target="sorting.template">
-            <span class="text-xl text-italic md:w-full" data-target="sorting.cta"></span>
-        
-            <nav class="w-2/3 flex flex-col justify-around" data-target="sorting.nav">
-                <ul class="flex items-center text-2xl text-italic md:w-full" data-target="sorting.categories">
-                    <li class="last:ml-2">
-                        <button class="border-gradient border-gradient-b-green px-3"
-                        data-target="sorting.category-btn"
-                        data-action="sorting#filter"
-                        type="button" name="" aria-pressed="false"></button>
-                    </li>
-                </ul>
-                <div class="flex flex-col justify-end">
-                    <div class="w-1/2 flex flex-row">
-                        <span class="text-xl text-blue"
-                        data-target="sorting.filter-label">
-                            Filter
-                        </span>
-                        <ul class="flex items-center text-md text-italic md:w-full" data-target="sorting.filters">
-                            <li class="py-1 bg-blue text-gray-100 first:rounded-l-md last:rounded-r-md">
-                                <button class="px-1 border-teal border-r last:border-none whitespace-no-wrap"
-                                data-target="sorting.filter-btn"
-                                data-action="sorting#filter"
-                                type="button" name="" aria-pressed="false"></button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="w-1/2 flex flex-row">
-                        <span class="text-xl text-blue"
-                        data-target="sorting.sort-label">
-                            Sort
-                        </span>
-                        <ul class="flex items-center text-md text-italic md:w-full" data-target="sorting.sorts">
-                            <li>
-                                <button class="bg-blue text-gray-100 first:border-l-md last:border-r-md"
-                                data-target="sorting.sort-btn"
-                                data-action="sorting#sort"
-                                type="button" name="" aria-pressed="false"></button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </template>
-        <div data-target="sorting.display"></div>
-
-        {% if cat == "rental" %}
+        {% if cat == "rentals" %}
             {% airbnb %}
         {% endif %}
-        <!-- Sortable grid. -->
-        <section class="grid grid-cols-5 gap-4" data-target="sorting.grid">
-            {% for directory in directories %}
-                <article class="flex flex-col items-center"
-                    data-target="sorting.item">
-                    <a href="{{ directory.link }}">
-                        <div class="h-thumbnail w-thumbnail flex flex-col justify-center">
-                            <img
-                            class=""
-                            src="{{ directory.image.url }}"
-                            alt="{% firstof directory.headline trans 'Untitled' %}">
-                        </div>
-                    </a>
-                
-                    <address class="flex flex-col text-center">
-                    <a href="{{ directory.link }}">
-                        <span class="text-2xl inline-block">{% firstof directory.headline trans "Untitled" %}</span>
-                        <span class="serif italic text-lg inline-block">{{ directory.address }}</span>
-                    </a>
-                    {% if directory.website %}
-                        <a href="{{directory.website}}" class="text-green text-lg">
-                            Visit them at <span class="mono">{{directory.website_display}}</span>!
+            <!-- Sortable grid. -->
+            <sortable-grid class="grid grid-cols-5 sm:grid-cols-2 gap-4" data-target="sorting.grid">
+                {% for id, entry in directories.items %}
+                    <article id="entry-{{ id }}" class="border border-opacity-50 flex flex-col items-center justify-between p-2"
+                    data-sorting-target="item"
+                    data-sorting-metadata="{{ entry.sorting }}">
+                        <a href="url entry.slug"
+                            aria-hidden="true">
+                            <!-- TODO: Enable this template tag once I've added the entries to the database so that Django can query them and know which URLs to reserve. -->
+                            <picture class="h-full w-full">
+                                <!-- <source srcset="{{ entry.picture_url | imgproxy:"thumb" }}"> -->
+                                <img src="{{ entry.picture_url }}"
+                                    alt="{{ entry.name }}">
+                            </picture>
                         </a>
-                    {% endif %}
-                    <div class="flex flex-row flex-wrap justify-center">
-                        {% if directory.facebook %}
-                        <div class="px-2">
-                            <a href="{{directory.facebook}}" class="text-green text-lg">
-                                <i class="fab fa-facebook"></i>
+                    
+                        <address class="flex flex-col text-center">
+                            <a href="url entry.slug">
+                            <!-- TODO: Enable this template tag once I've added the entries to the database so that Django can query them and know which URLs to reserve. -->
+                                <span class="text-2xl inline-block">{% firstof entry.name trans "Untitled" %}</span>
+                                <span class="serif italic text-lg inline-block">{{ entry.address }}</span>
                             </a>
-                        </div>
-                        {% endif %}
-                        {% if directory.instagram %}
-                        <div class="px-2">
-                            <a href="{{directory.instagram}}" class="text-green text-lg">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </div>
-                        {% endif %}
-                        {% if directory.twitter %}
-                        <div class="px-2">
-                            <a href="{{directory.twitter}}" class="text-green text-lg">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div>
-                        {% endif %}
-                        {% if directory.linkedin %}
-                        <div class="px-2">
-                            <a href="{{directory.linkedin}}" class="text-green text-lg">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </div>
-                        {% endif %}
-                    </div>
-                    </address>
-                    
-                    <!-- category OR "LEVEL" -->
-                    {% with directory.category_set as directory_cat %}
-                    
-                    <ul class="list-unstyled capitalize">
-                    {% if directory.tags %}
-                    <li class="tags">
-                        <strong>{% trans "Tags:" %}</strong>
-                        {% for tag in directory.tags|tag_split %}
-                        <a href="{% url 'directories' %}?q=tag:{{ tag|lower|urlencode }}">{% blocktrans with tag_instance=tag %}{{ tag_instance }},{% endblocktrans %}</a>
-                        {% endfor %}
-                    </li>
-                    {% endif %}
-                    
-                    </ul>
-                    
-                    {% endwith %}
-                    
-                    
-                    <!-- tags OR "SPECIALTY" -->
-            
-                    
-                    
-                    <p class="item-content">
-                    {% if directory.summary %}
-                    {{ directory.summary|striptags|truncatewords:15|safe }}
-                    {% else %}
-                    {{ directory.body|striptags|truncatewords:15|safe }}
-                    {% endif %}
-                    </p>
-                
-                </article>
-            {% empty %}
-                {% if user.profile.is_superuser %}
-                    <p><a href="{% url 'directory.add' %}">
-                        {% if MODULE_DIRECTORIES_LABEL %}
-                            {% blocktrans %}
-                                Add a New {{ MODULE_DIRECTORIES_LABEL }}
-                            {% endblocktrans %}
-                        {% else %}
-                            {% trans "Add a New Directory" %}
-                        {% endif %}
-                    </a></p>
-                {% endif %}
-            {% endfor %}
-        </section>
+                            {% if entry.web %}
+                                <a href="{{entry.web}}" class="text-green text-lg">
+                                    Visit them at <span class="mono">{{entry.web_display}}</span>!
+                                </a>
+                            {% endif %}
+                            <div class="flex flex-row flex-wrap justify-center">
+                                {% if entry.facebook %}
+                                <div class="px-2">
+                                    <a href="{{entry.facebook}}" class="text-green text-lg">
+                                        <i class="fab fa-facebook"></i>
+                                    </a>
+                                </div>
+                                {% endif %}
+                                {% if entry.instagram %}
+                                <div class="px-2">
+                                    <a href="{{entry.instagram}}" class="text-green text-lg">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </div>
+                                {% endif %}
+                                {% if entry.twitter %}
+                                <div class="px-2">
+                                    <a href="{{entry.twitter}}" class="text-green text-lg">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </div>
+                                {% endif %}
+                                {% if entry.linkedin %}
+                                <div class="px-2">
+                                    <a href="{{entry.linkedin}}" class="text-green text-lg">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </address>
+                        <aside class="w-full">
+                            <!-- TODO: Tags and such can go here. -->
+                        </aside>
+                    </article>
+                {% endfor %}
+            </sortable-grid>
     </div>
     
-    {% paginate %}
+    <div>
+        <h1>Context</h1>
+        <p>{{ full_context }}</p>
+    </div>
 {% endblock %}

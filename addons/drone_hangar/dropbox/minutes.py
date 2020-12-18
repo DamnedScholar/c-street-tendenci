@@ -45,9 +45,9 @@ class LibreOfficeError(Exception):
         self.output = output
 
 def merge_minutes():
-    src = "/mnt/c/Users/stick/Dropbox/CID-Minutes/"
-    folders = os.listdir(src)
-    folders.remove("desktop.ini")
+    src = "/mnt/c/Users/stick/Dropbox/CID-Minutes"
+    folders = [item.name for item in os.scandir(src) if item.is_dir()]
+
     for folder in folders:
         merger = PdfFileMerger()    # A new merger for each folder will ensure no 1516-page files.
         dest = os.path.join(storage_path("dropbox/minutes"), f"{folder}.pdf")

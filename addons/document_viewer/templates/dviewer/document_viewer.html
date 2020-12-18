@@ -1,17 +1,143 @@
+{% load dviewer_tags %}
 
 {% load static %}
-<!-- <script type="module">
-    import blackstoneUi from "{% static 'js/bui/index.js' %}"
-</script> -->
-<link rel="stylesheet" href="{% static 'css/tailwind.css' %}" type="text/css">
-<!-- TODO: Remove the above when testing is done (I shouldn't depend at all on Tailwind). -->
-<script type="module" src="{% static 'js/stimulus/document_viewer.js' %}"></script>
-<!-- <script src="{% static 'js/document_viewer.js' %}"></script> -->
 
-<a href="{{ current }}"
-    data-controller="document_viewer"
-    data-action="document_viewer#open_viewer"
+<link rel="stylesheet" href="{% static 'css/tailwind.css' %}" type="text/css">
+
+<style>
+    /* ////////////////////////////////////////////////
+//////////////////////////////////////////////// */
+
+body {
+	background-color: #77EEDF;
+}
+
+/* Paper Sheet */
+div.rag {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform:  rotateX(30deg);
+          transform:  rotateX(30deg);
+	white-space: wrap;
+	font-size: 3vw;
+	position: relative;
+	cursor: default;
+	display: grid;
+	grid-template-columns: 200px 200px
+
+	/* Paper Shadow */
+}
+div.rag::before {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	background-color: rgb(60, 119, 112);
+	width: 89%;
+	left: 4%;
+	height: 40%;
+	-webkit-filter: blur(2vw);
+	        filter: blur(2vw);
+	-webkit-transition: all 200ms cubic-bezier(0.0, 0.0, 0.2, 1);
+	transition: all 200ms cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+div.rag {/* Each letter */
+}
+div.rag div {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	        user-select: none;
+	display: block;
+	width: 200px;
+	height: 100%;
+	padding-top: 0.8em;
+	padding-bottom: 0.8em;
+	text-align: center;
+	position: relative;
+	z-index: 1;
+	-webkit-transition: all 1s cubic-bezier(0.0, 0.0, 0.2, 1);
+	transition: all 1s cubic-bezier(0.0, 0.0, 0.2, 1);/* Solid Surface */
+}
+div.rag div::before {
+	content: '';
+	background-color: #F9F8EF;
+	-webkit-transition: all 1s cubic-bezier(0.0, 0.0, 0.2, 1);
+	transition: all 1s cubic-bezier(0.0, 0.0, 0.2, 1);
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+}
+div.rag div {/* Odd letters */
+}
+div.rag div:nth-child(odd) {
+	-webkit-transform: skewY(8deg);
+	        transform: skewY(8deg);
+	color: rgb(217, 213, 200);
+	background: linear-gradient(-30deg, rgb(255, 255, 255), rgb(237, 236, 227));
+	box-shadow: inset -1px 0 0px rgba(255, 255, 255, .3);
+	prospective: 1000px;
+}
+div.rag div {/* Even letters */
+}
+div.rag div:nth-child(even) {
+	-webkit-transform: skewY(-8deg);
+	        transform: skewY(-8deg);
+	color: #C5BEAA;
+	background: linear-gradient(87deg, rgb(199, 198, 191), rgb(237, 236, 227));
+	box-shadow: inset -1px 0 0px rgba(0, 0, 0, .05);
+	prospective: 1000px;
+}
+div.rag div {/* Paper border-radius */
+}
+div.rag div:first-of-type,
+		div.rag div:first-of-type::before {
+	border-radius: 4px 0 0 4px;
+}
+div.rag div:last-of-type,
+		div.rag div:last-of-type:before {
+	border-radius: 0 4px 4px 0;
+}
+/* Hover interaction *//* &:hover {	
+    &::before {
+        opacity: 0.5;
+        filter: blur(2px);
+        left: 1%;
+        width: 98%;
+    }
+    
+    & div {
+        transform: none;
+        color: var(--font-color);
+        box-shadow: none;
+        transition-duration: var(--transition-duration);
+        width: 3.1em;
+                    
+        &::before {
+            opacity: 1;
+            transition-duration: var(--transition-duration);
+        }
+    }
+} */
+</style>
+<script src="{% static 'js/document_viewer.js' %}"></script>
+
+<div class="rag" data-controller="document_viewer"
     data-document_viewer-links="{{ links }}"
     data-document_viewer-croptitle="C-Street News & World Report - "
-    data-target="document_viewer.link"
->{{ text }}</a>
+>
+    <div data-target="document_viewer.topbar">The Communique is your finger on the pulse of C-Street!</div>
+    <div>
+        <a href="{{ current }}"
+            data-target="document_viewer.link"
+            data-action="document_viewer#open_viewer"
+        >Read the News</a>
+		<br>and<br>
+		<div slot="topbar">
+			{% subscription_widget %}
+		</div>
+    </div>
+</div>

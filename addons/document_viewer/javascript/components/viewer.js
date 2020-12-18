@@ -1,6 +1,5 @@
-import {html, render} from 'https://unpkg.com/lit-html?module'
-import {LitElement, html as ehtml, property, css} from 'https://unpkg.com/lit-element?module'
-import {styleMap} from 'https://unpkg.com/lit-html/directives/style-map.js?module'
+import {LitElement, html, css} from 'lit-element'
+import {styleMap} from 'lit-html/directives/style-map.js'
 
 import {injectStyle} from './utils/styleinjector.js'
 
@@ -8,26 +7,35 @@ import ResponsiveTabBar from './tabs.js'
 
 export default class extends LitElement {
     static get properties() { return {
-      // Trigger a redraw of the element if any of these building block properties change.
       item: {attribute: false},
       loading: {attribute: false},
-      css: {attribute: false}
+      retainedHeight: {attribute: false},
+      links: {
+        attribute: 'data-document_viewer-links-value',
+        type: Array,
+        reflect: true
+      },
+      current: {
+        attribute: 'data-document_viewer-current-value',
+        type: String,
+        reflect: true
+      },
+      croptitle: {
+        attribute: 'data-document_viewer-croptitle-value',
+        type: String,
+        reflect: true
+      }
     }}
-  
-    @property({attribute: true, type: String, reflect: true})
-    current = ''
-    @property({attribute: true, type: Array, reflect: true})
-    links = []
   
     constructor() {
       super()
   
       // Set defaults. Nothing dynamic should go here.
       this.sniffers = []
+
+      this.retainedHeight = "0px"
   
-      this.loading = ehtml`
-        Loading...
-      `
+      this.loading = `Loading...`
   
       this.css = {
         viewer: {
@@ -64,79 +72,86 @@ export default class extends LitElement {
     }
   
     updateTab(evt) {
-      var view = evt.target.parentElement
+      var doc = evt.path[0]
+      // `path[1]` is `slot.content` and `path[2]` is `documentFragment` (the shadow root); jump up two to get from the slotted child to the custom element.
+      var parent = evt.path[3]
 
       // Save a reference to each sniffer for later.
-      this.sniffers.push( setInterval( (view) => {
-        var id = view.tabView.id
-        var tabBar = this.content
-        var hasCustomTabBar = tabBar.getAttribute('tab-bar')
-
-        tabBar = hasCustomTabBar ?
-          tabBar.shadowRoot.querySelector(hasCustomTabBar).shadowRoot.querySelector('.tab-bar') :
-          tabBar.shadowRoot.querySelector('.tab-bar')
-        
-        console.log(`Sniffing at ${tabBar.querySelector(id)}`)
-        var tab = tabBar.querySelector(id)
+      this.sniffers.push( setInterval( (doc, parent) => {
+        var id = doc.tabView.id
+        var tab = parent.querySelector(`[slot="menu:${id}"]`)
   
         try {
-          tab.textContent = view.contentDocument.title.replace(this.croptitle, "")
+          tab.textContent = doc.contentDocument.title.replace(
+            this.croptitle, "")
+
+          var bodyHeight = getComputedStyle(doc.contentDocument.body)['height']
+          if (
+            bodyHeight != "auto" &&
+            bodyHeight != "0px" &&
+            bodyHeight != this.retainedHeight
+          )
+            this.retainedHeight = bodyHeight
+
+          this.content.update()
         }
-        catch {
+        catch (e) {
+          console.log(e)
           // Do nothing.
         }
         
-      }, 100, view) )
+      }, 100, doc, parent) )
     }
   
     clone(node) {
       var newNode = node.cloneNode(true)
     }
+
+    item (link, id, title) {
+      return html`
+        <iframe title="view-${id}"
+          class="h-screen w-full" style=${styleMap({height: this.retainedHeight})}
+          src=${link} frameborder="0"
+          @load=${ this.updateTab }
+        ></iframe>
+        <span slot="menu:view-${id}">${title}</span>
+      `
+    }
   
     render() {
-      this.item = (link, id) => ehtml`
-        <section title="Loading..." view-id="view-${id}">
-          <iframe style="${styleMap(this.css.frame)}" src="${link}" frameborder="0"
-            @load="${ (evt) => this.updateTab(evt) }"
-          ></iframe>
-        </section>
-      `
-  
       let hotkeys = {
         "left": "[data-controller='document-viewer']->document_viewer#back",
         "right": "[data-controller='document-viewer']->document_viewer#forward",
       }
 
-      let display = ehtml`
+      let display = html`
         ${injectStyle("tailwind.css")}
-        <viewer style=${styleMap(this.css.viewer)}
+        <viewer-window style=${styleMap(this.css.viewer)}
           data-controller="hotkeys"
           data-hotkeys-bindings-value='${JSON.stringify(hotkeys)}'>
-          <b-tabs tab-bar="responsive-tab-bar" layout="left"
-            style=${styleMap(this.css.tabs)}>
+          <b-tabs old-tab-bar="responsive-tab-bar" layout="left"
+            style=${styleMap(this.css.tabs)}
+          >
             ${this.links.map( (v, i) => {
-              var view = this.item(v, i)
-
+              var title = this.loading
+              var view = this.item(v, i, title)
+      
               Object.assign(view, {
-                'title': this.loading,
+                'title': title,
                 'id': i,
                 'url': v
               })
-
+      
               return view
             } )}
           </b-tabs>
-          <topbar style=${styleMap(this.css.topbar)}>
-            ${this.controller.topbarTargets.map( (t) => {
-              var newNode = t.cloneNode(true)
-  
-              return newNode
-            } )}
-          </topbar>
-        </viewer>
+          <viewer-topbar style=${styleMap(this.css.topbar)}>
+            <slot name="topbar"></slot>
+          </viewer-topbar>
+        </viewer-window>
       `
   
-      return ehtml`${display}`
+      return html`${display}`
     }
   
     // Build an API for the different organs of this component.
