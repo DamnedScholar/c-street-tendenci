@@ -6,6 +6,14 @@ module.exports = {
   important: false,
   separator: ':',
   theme: {
+    extend: {
+      backgroundImage: theme => ({
+        'topographic': "url('../svg/hero-topo.svg')",
+      }),
+      fill: theme => ({
+        'topo-green': theme('colors.green') + '4a',
+      })
+    },
     screens: {
       'sm': {'max': '767px'},
       'md': {'min': '768px'},
@@ -627,9 +635,16 @@ module.exports = {
       'running': 'running',
       'paused': 'paused',
     },
-    linearGradientColors: {
-      'teal-cyan': theme => [theme('colors.teal'), theme('colors.cyan')]
-    },
+    // https://github.com/benface/tailwindcss-gradients#advanced
+    linearGradientColors: theme => ({
+      'teal-cyan': [theme('colors.teal'), theme('colors.cyan')],
+      'active-button': [
+        theme('colors.blue'),
+        theme('colors.teal') + " 30%",
+        theme('colors.teal') + " 70%",
+        theme('colors.blue')
+      ]
+    }),
     filter: { // defaults to {}
       'none': 'none',
       'grayscale': 'grayscale(1)',
@@ -642,103 +657,22 @@ module.exports = {
     },
   },
   variants: {
-    accessibility: ['responsive', 'focus'],
-    alignContent: ['responsive'],
-    alignItems: ['responsive'],
-    alignSelf: ['responsive'],
-    appearance: ['responsive'],
-    backgroundAttachment: ['responsive'],
-    backgroundColor: ['responsive', 'hover', 'focus'],
-    backgroundOpacity: ['responsive', 'hover', 'focus'],
-    backgroundPosition: ['responsive'],
-    backgroundRepeat: ['responsive'],
-    backgroundSize: ['responsive'],
-    borderCollapse: ['responsive'],
-    borderColor: ['responsive', 'hover', 'focus'],
-    borderOpacity: ['responsive', 'hover', 'focus'],
-    borderRadius: ['responsive', 'first', 'last'],
-    borderStyle: ['responsive', 'first', 'last'],
-    borderWidth: ['responsive', 'first', 'last'],
-    boxShadow: ['responsive', 'hover', 'focus'],
-    boxSizing: ['responsive'],
-    cursor: ['responsive'],
-    display: ['responsive', 'hover', 'group-hover'],
-    divideColor: ['responsive'],
-    divideOpacity: ['responsive'],
-    divideWidth: ['responsive'],
-    fill: ['responsive'],
-    flex: ['responsive'],
-    flexDirection: ['responsive'],
-    flexGrow: ['responsive'],
-    flexShrink: ['responsive'],
-    flexWrap: ['responsive'],
-    float: ['responsive'],
-    clear: ['responsive'],
-    fontFamily: ['responsive'],
-    fontSize: ['responsive'],
-    fontSmoothing: ['responsive'],
-    fontStyle: ['responsive'],
-    fontWeight: ['responsive', 'hover', 'focus'],
-    height: ['responsive'],
-    inset: ['responsive'],
-    justifyContent: ['responsive'],
-    letterSpacing: ['responsive'],
-    lineHeight: ['responsive'],
-    listStylePosition: ['responsive'],
-    listStyleType: ['responsive'],
-    margin: ['responsive', 'first', 'last'],
-    maxHeight: ['responsive'],
-    maxWidth: ['responsive'],
-    minHeight: ['responsive'],
-    minWidth: ['responsive'],
-    objectFit: ['responsive'],
-    objectPosition: ['responsive'],
-    opacity: ['responsive', 'hover', 'focus'],
-    order: ['responsive'],
-    outline: ['responsive', 'focus'],
-    overflow: ['responsive'],
-    padding: ['responsive', 'first', 'last'],
-    placeholderColor: ['responsive', 'focus'],
-    placeholderOpacity: ['responsive', 'focus'],
-    pointerEvents: ['responsive'],
-    position: ['responsive'],
-    resize: ['responsive'],
-    space: ['responsive'],
-    stroke: ['responsive'],
-    strokeWidth: ['responsive'],
-    tableLayout: ['responsive'],
-    textAlign: ['responsive'],
-    textColor: ['responsive', 'hover', 'focus'],
-    textOpacity: ['responsive', 'hover', 'focus'],
-    textDecoration: ['responsive', 'hover', 'focus'],
-    textTransform: ['responsive'],
-    userSelect: ['responsive'],
-    verticalAlign: ['responsive'],
-    visibility: ['responsive'],
-    whitespace: ['responsive'],
-    width: ['responsive'],
-    wordBreak: ['responsive'],
-    zIndex: ['responsive'],
-    gap: ['responsive'],
-    gridAutoFlow: ['responsive'],
-    gridTemplateColumns: ['responsive'],
-    gridColumn: ['responsive'],
-    gridColumnStart: ['responsive'],
-    gridColumnEnd: ['responsive'],
-    gridTemplateRows: ['responsive'],
-    gridRow: ['responsive'],
-    gridRowStart: ['responsive'],
-    gridRowEnd: ['responsive'],
-    transform: ['responsive'],
-    transformOrigin: ['responsive'],
-    scale: ['responsive', 'hover', 'focus'],
-    rotate: ['responsive', 'hover', 'focus'],
-    translate: ['responsive', 'hover', 'focus'],
-    skew: ['responsive', 'hover', 'focus'],
-    transitionProperty: ['responsive'],
-    transitionTimingFunction: ['responsive'],
-    transitionDuration: ['responsive'],
-    transitionDelay: ['responsive'],
+    extend: {
+      backgroundColor: ['active'],
+      backgroundOpacity: ['active'],
+      borderColor: ['active'],
+      borderOpacity: ['active'],
+      borderRadius: ['first', 'last'],
+      borderStyle: ['first', 'last'],
+      borderWidth: ['first', 'last', 'active'],
+      boxShadow: ['first', 'last', 'active'],
+      cursor: ['active'],
+      linearGradients: ['first', 'last', 'active'],
+      margin: ['first', 'last'],
+      padding: ['first', 'last'],
+      ringWidth: ['active'],
+      ringColor: ['active'],
+    },
     // Settings for tailwindcss-animations plugin
     animations: ['responsive'],
     animationDuration: ['responsive'],
@@ -753,7 +687,7 @@ module.exports = {
   },
   corePlugins: {},
   plugins: [
-    // require('@tailwindcss/custom-forms'),
+    require('@tailwindcss/forms'),
     require('tailwindcss-animations'),
     require('tailwindcss-gradients'),
     require('tailwindcss-filters'),
@@ -765,6 +699,18 @@ module.exports = {
       }
 
       addUtilities(newUtilities)
+    }),
+    // Expand the `active` variant to also select for the presence of a boolean attribute or a class.
+    plugin(function({ addVariant, e }) {
+      addVariant('active', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `
+            .${e(`active${separator}${className}`)}[active], 
+            .${e(`active${separator}${className}`)}:active, 
+            .${e(`active${separator}${className}`)}.active
+          `
+        })
+      })
     })
   ],
 }

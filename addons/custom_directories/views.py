@@ -137,7 +137,7 @@ def category(request, cat_slug=None, template_name="category.html"):
             context=context)
 
 def print(request, cat_slug=None, template_name="print.html"):
-    return category(request, cat_slug, template)
+    return category(request, cat_slug, template_name)
 
 def details(request, slug, template_name="view.html"):
     context = {}

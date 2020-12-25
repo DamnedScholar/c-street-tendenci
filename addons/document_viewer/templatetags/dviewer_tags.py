@@ -20,6 +20,6 @@ def communique_widget():
     
     return context
 
-@register.inclusion_tag('dviewer/subscription.html')
+@register.inclusion_tag('dviewer/subscription.html', takes_context=True)
 def subscription_widget():
     return {'form': SubscriptionForm()}

@@ -189,10 +189,11 @@ export class SortableGrid extends LitElement {
       
       var filterTest = e.sorting.filters ?
         (
+          // Look in the list of active filters to see if any DO NOT match the item in question and return `false` if a single test fails.
           find(
             Object.keys(this.activeFilters),
-            k=>( e.sorting.filters[k]===this.activeFilters[k] )
-          ) ? true : false
+            k=> ( e.sorting.filters[k] != this.activeFilters[k] )
+          ) ? false : true
         ) : false
 
       return (catTest && filterTest)
@@ -423,9 +424,14 @@ export class SortableGrid extends LitElement {
   btnGroup(action, arr, label="") {
     return html`
       <button-block
-        class="bg-blue text-gray-100 rounded-lg max-w-max px-3 py-1"
+        class="max-w-max text-gray-100
+        border-blue border-r-4 border-l-4 rounded-lg
+        ring-glass-200 ring-2"
       >
         ${repeat(arr, (btn, i) => {
+          if (btn === "")
+            return html``
+
           var isActive = (
             (action == "categorize" && this.activeCat == btn) ||
             (action == "sort" && this.activeSort == btn) ||
@@ -435,7 +441,11 @@ export class SortableGrid extends LitElement {
           return html`
             <button @click=${(e) => this[action](e.target)}
               ?active=${isActive} value=${btn} .label=${label}
-              class="text-xl border-r-2 last:border-r-0 border-glass-100 border-double px-1"
+              class="px-1
+                border-r-2 last:border-r-0 border-glass-200 border-double
+                active:shadow-inner
+                bg-blue active:bg-teal
+                text-xl"
               >
               ${voca.titleCase(btn)}
             </button>

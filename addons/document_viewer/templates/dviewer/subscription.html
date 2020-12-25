@@ -1,7 +1,14 @@
 <form data-controller="subscription" data-reflex-root
     action="/subscribe/" method="post">
     {% csrf_token %}
-    {{ form }}
-    <input data-action="Subscription#submit"
+    {{ form.email }}
+    <span data-subscription-target="display"
+        class="{% if form.errors %}text-red{% endif %}">
+        {{ form.email.errors }}
+        {% if request.session.form %}
+            {{ request.session.form.errors }}
+        {% endif %}
+    </span>
+    <input data-action="subscription#submit"
         type="submit" value="Submit">
 </form>

@@ -1,0 +1,6 @@
+[submodule "django-sockpuppet"]
+	path = django-sockpuppet
+	url = https://github.com/DamnedScholar/django-sockpuppet
+[submodule "django_sockpuppet"]
+	path = django_sockpuppet
+	url = https://github.com/jonathan-s/django-sockpuppet
