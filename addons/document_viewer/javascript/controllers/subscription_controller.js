@@ -15,8 +15,6 @@ export default class SubscriptionController extends Controller {
         this.stimulate('SubscriptionReflex#submit')
             .then(() => {
                 this.element.reset()
-                // optional: set focus on the freshly cleared input
-                this.inputTarget.focus()
             })
             .catch(payload => console.log(payload))
     }

@@ -49,17 +49,17 @@
                 The Communique is your finger on the pulse of C-Street!
             </headline>
             
-            <form data-controller="subscription" data-reflex-root
-                action="/subscribe/" method="post">
+            <form data-controller="subscription"
+                action="/subscribe/" method="post"
+                class="flex flex-row">
                 {% csrf_token %}
-                {{ form.email }}
-                <span data-subscription-target="display"
-                    class="{% if form.errors %}text-red{% endif %}">
-                    {{ form.email.errors }}
-                    {% if request.session.form %}
-                        {{ request.session.form.errors }}
-                    {% endif %}
-                </span>
+                <div class="flex flex-col">
+                    {{ form.email }}
+                    <span data-subscription-target="display"
+                        class="{% if form.errors %}text-red{% endif %}">
+                        {% firstof form.errors.email "No errors." %}
+                    </span>
+                </div>
                 <input data-action="subscription#submit"
                     type="submit" value="Submit">
             </form>

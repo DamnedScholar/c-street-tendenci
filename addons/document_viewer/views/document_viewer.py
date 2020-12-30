@@ -27,7 +27,7 @@ class CommuniqueView(DocumentViewerView):
         'form': SubscriptionForm(label_suffix='!')
     }
 
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
+    # def get(self, request, *args, **kwargs):
+    #     context = self.get_context_data(**kwargs)
 
-        return render(request, self.template_name, context)
+    #     return render(request, self.template_name, context)

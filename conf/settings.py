@@ -281,12 +281,10 @@ EMAIL_LOG_FILE = './email.log'
 INSTALLED_APPS += [
     'django_extensions',
     'channels',
-    # 'sockpuppet',
-    # TODO: I've installed sockpuppet as a git submodule to checkout the latest updates. Undo this for production.
-    'django_sockpuppet.sockpuppet',
     'import_export',
     'httpproxy',
-    'simple_history'
+    'simple_history',
+    'sockpuppet'
 ]
 
 DJANGO_HASHIDS_SALT = "itsy bitsy spider"
@@ -386,11 +384,44 @@ enable_console_log()
 # structure, which is configured in
 # https://github.com/tendenci/tendenci/blob/master/tendenci/settings.py
 # For example:
-LOGGING['loggers'].update({
-  'sockpuppet': {
-    'level': 'WARNING'
-  }
-})
+# LOGGING['loggers'].update({
+#   'sockpuppet': {
+#     'level': 'WARNING'
+#   }
+# })
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO'
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'sockpuppet': {
+          'level': 'DEBUG',
+          'class': 'logging.handlers.RotatingFileHandler',
+          'filename': 'log/sockpuppet.log',
+          'formatter': 'simple'
+        }
+    },
+    'formatters': {
+        'simple': {
+            'format': '%(asctime)s ⚜️  %(name)s 〉 %(levelname)s 〉 %(message)s'
+        },
+    },
+    'loggers': {
+        'sockpuppet': {
+            'level': 'DEBUG',
+            'handlers': ['sockpuppet']
+        }
+    }
+}
 #LOGGING['loggers']['py.warnings'].pop('filters', None)
 
 # To use Sentry (https://docs.sentry.io/):
