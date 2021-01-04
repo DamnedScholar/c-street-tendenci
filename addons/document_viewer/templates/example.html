@@ -1,27 +1,113 @@
-{% load static %}
+<script src="{% static 'js/document_viewer.js' %}"></script>
+<link rel="stylesheet" href="themes/c-street-2020/media/css/tailwind.css">
 
-<body>
-  <script src="{% static 'js/example.js' %}"></script>
-  <div>
-    <a
-      id="link"
-      href="#"
-      data-controller="example"
-      data-action="click->example#increment"
-      data-count="{{ count }}">
-      Increment
-    </a>
-    <div id="counter">{{ count }}</div>
-  </div>
+<h2 class="text-2xl mx-auto">No data-reflex-root</h2>
 
-  <div>
-    <!-- This reflex is never registered in javascript -->
-    <button
-      id="decrementor"
-      data-reflex="click->DecrementReflex#decrement"
-      data-step="1"
-      data-count="{{ otherCount }}"
-    >Decrement</button>
-    <div id="counter-2">{{ otherCount }}</div>
-  </div>
-</body>
+<form data-controller="subscription"
+    action="/subscribe/" method="post"
+    class="flex flex-col items-center justify-around">
+    {% csrf_token %}
+    {{ form.email.label_tag }}
+    <div class="
+        flex flex-row items-center justify-around
+    ">
+        {{ form.email }}
+        <input data-action="subscription#submit"
+        type="submit" value="Subscribe!"
+        class="h-12 px-1 rounded-none first:rounded-l-full last:rounded-r-full">
+    </div>
+    <span data-subscription-target="display"
+        class="
+            {% if form.errors %}text-red{% endif %}
+        ">
+        {% if form.is_bound %}
+            {% firstof form.errors.email "Thank you!" %}
+        {% else %}
+            &nbsp;
+        {% endif %}
+    </span>
+</form>
+
+<h2 class="text-2xl mx-auto">data-reflex-root = True</h2>
+
+<form data-controller="subscription"
+    action="/subscribe/" method="post"
+    class="flex flex-col items-center justify-around"
+    data-reflex-root>
+    {% csrf_token %}
+    {{ form.email.label_tag }}
+    <div class="
+        flex flex-row items-center justify-around
+    ">
+        {{ form.email }}
+        <input data-action="subscription#submit"
+        type="submit" value="Subscribe!"
+        class="h-12 px-1 rounded-none first:rounded-l-full last:rounded-r-full">
+    </div>
+    <span data-subscription-target="display"
+        class="
+            {% if form.errors %}text-red{% endif %}
+        ">
+        {% if form.is_bound %}
+            {% firstof form.errors.email "Thank you!" %}
+        {% else %}
+            &nbsp;
+        {% endif %}
+    </span>
+</form>
+
+<h2 class="text-2xl mx-auto">data-reflex-root = "span"</h2>
+
+<form data-controller="subscription"
+    action="/subscribe/" method="post"
+    class="flex flex-col items-center justify-around"
+    data-reflex-root="span">
+    {% csrf_token %}
+    {{ form.email.label_tag }}
+    <div class="
+        flex flex-row items-center justify-around
+    ">
+        {{ form.email }}
+        <input data-action="subscription#submit"
+        type="submit" value="Subscribe!"
+        class="h-12 px-1 rounded-none first:rounded-l-full last:rounded-r-full">
+    </div>
+    <span data-subscription-target="display"
+        class="
+            {% if form.errors %}text-red{% endif %}
+        ">
+        {% if form.is_bound %}
+            {% firstof form.errors.email "Thank you!" %}
+        {% else %}
+            &nbsp;
+        {% endif %}
+    </span>
+</form>
+
+<h2 class="text-2xl mx-auto">data-reflex-root = "#display"</h2>
+
+<form data-controller="subscription"
+    action="/subscribe/" method="post"
+    class="flex flex-col items-center justify-around"
+    data-reflex-root="#display">
+    {% csrf_token %}
+    {{ form.email.label_tag }}
+    <div class="
+        flex flex-row items-center justify-around
+    ">
+        {{ form.email }}
+        <input data-action="subscription#submit"
+        type="submit" value="Subscribe!"
+        class="h-12 px-1 rounded-none first:rounded-l-full last:rounded-r-full">
+    </div>
+    <span id="display" data-subscription-target="display"
+        class="
+            {% if form.errors %}text-red{% endif %}
+        ">
+        {% if form.is_bound %}
+            {% firstof form.errors.email "Thank you!" %}
+        {% else %}
+            &nbsp;
+        {% endif %}
+    </span>
+</form>

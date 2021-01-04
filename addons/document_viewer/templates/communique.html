@@ -51,17 +51,28 @@
             
             <form data-controller="subscription"
                 action="/subscribe/" method="post"
-                class="flex flex-row">
+                class="flex flex-col items-center justify-around"
+                data-reflex-root="span">
                 {% csrf_token %}
-                <div class="flex flex-col">
+                {{ form.email.label_tag }}
+                <div class="
+                    flex flex-row items-center justify-around
+                ">
                     {{ form.email }}
-                    <span data-subscription-target="display"
-                        class="{% if form.errors %}text-red{% endif %}">
-                        {% firstof form.errors.email "No errors." %}
-                    </span>
+                    <input data-action="subscription#submit"
+                    type="submit" value="Subscribe!"
+                    class="h-12 px-1 rounded-none first:rounded-l-full last:rounded-r-full">
                 </div>
-                <input data-action="subscription#submit"
-                    type="submit" value="Submit">
+                <span data-subscription-target="display"
+                    class="
+                        {% if form.errors %}text-red{% endif %}
+                    ">
+                    {% if form.is_bound %}
+                        {% firstof form.errors.email "Thank you!" %}
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
+                </span>
             </form>
         </div>
     </document-viewer>

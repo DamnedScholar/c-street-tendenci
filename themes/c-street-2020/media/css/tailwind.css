@@ -882,11 +882,11 @@ input[type="submit"] {
   --tw-bg-opacity: 1;
   background-color: rgba(115, 166, 136, var(--tw-bg-opacity));
   font-weight: 700;
-  font-size: 1.4792rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  font-size: 1.1042rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   --tw-text-opacity: 1;
   color: rgba(54, 69, 79, var(--tw-text-opacity));
 }

@@ -31,7 +31,7 @@ input {
   @apply border-0 rounded-full px-1;
 }
 input[type="submit"] {
-  @apply bg-green text-gray-900 text-2xl py-3 px-5 font-bold;
+  @apply bg-green text-gray-900 text-xl py-1 px-4 font-bold;
 }
 select {
   @apply border-0 rounded-full px-1;

@@ -24,7 +24,7 @@ class CommuniqueView(DocumentViewerView):
             'as_list': links,
             'as_json': json.dumps(links)
         },
-        'form': SubscriptionForm(label_suffix='!')
+        'form': SubscriptionForm(auto_id=True)
     }
 
     # def get(self, request, *args, **kwargs):
