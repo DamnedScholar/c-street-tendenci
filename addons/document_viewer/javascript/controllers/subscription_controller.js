@@ -13,6 +13,6 @@ export default class SubscriptionController extends Controller {
         e.preventDefault()
         
         this.stimulate('SubscriptionReflex#submit')
-            .then(() => this.element.reset())
+            .then(() => this.inputTarget.value = '')
     }
 }

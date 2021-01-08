@@ -1,0 +1,40 @@
+<legendary-links>
+    <nav class="justify-center flex sm:flex-col sm:items-end md:flex-row">
+        {% for group in nav_groups %}
+        <link-group aria-labelledby="{{ group.0|slugify }}"
+            class="pointer-events-auto hovering-parent"
+        >
+            <nav-btn id="{{ group.0|slugify }}"
+                class="px-4 py-2 rounded-md bg-blue
+                text-gray-300 text-lg"
+            >
+                <a href="{% firstof group.1 "javascript:void(0)" %}">
+                    {{ group.0 }}
+                </a>
+            </nav-btn>
+            {% if group.2 %}
+                <li class="list-none bg-gray-300 text-blue border-blue
+                    sm:hidden parent-hover:block"
+                >
+                    {% for entry in group.2 %}
+                    <ul class="pointer-events-auto hovering-parent">
+                        <a href="{{ entry.1 }}">{{ entry.0 }}</a>
+                        {% if entry.2 %}
+                            <li class="list-none bg-gray-300 text-blue border-blue
+                            sm:hidden parent-hover:block"
+                        >
+                                {% for subentry in entry.2 %}
+                                <ul>
+                                    <a href="{{ subentry.1 }}">{{ subentry.0 }}</a>
+                                </ul>
+                                {% endfor %}
+                            </li>
+                        {% endif %}
+                    </ul>
+                    {% endfor %}
+                </li>
+            {% endif %}
+        </link-group>
+        {% endfor %}
+    </nav>
+</legendary-links>

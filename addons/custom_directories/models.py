@@ -1,7 +1,5 @@
 from django.db import models
 
-from addons.drone_hangar.models import AirBnBImage
-
 
 # class AirBnBData (models.Model):
 #     room_id = models.IntegerField(primary_key=True) # AirBnB ID

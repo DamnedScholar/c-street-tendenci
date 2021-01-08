@@ -658,20 +658,21 @@ module.exports = {
   },
   variants: {
     extend: {
-      backgroundColor: ['active'],
+      backgroundColor: ['active', 'group-focus', 'parent-hover'],
       backgroundOpacity: ['active'],
-      borderColor: ['active'],
+      borderColor: ['active', 'group-focus', 'parent-hover'],
       borderOpacity: ['active'],
       borderRadius: ['first', 'last'],
       borderStyle: ['first', 'last'],
       borderWidth: ['first', 'last', 'active'],
       boxShadow: ['first', 'last', 'active'],
       cursor: ['active'],
+      display: ['group-hover', 'group-focus', 'parent-hover'],
       linearGradients: ['first', 'last', 'active'],
       margin: ['first', 'last'],
       padding: ['first', 'last'],
       ringWidth: ['active'],
-      ringColor: ['active'],
+      ringColor: ['active', 'group-focus', 'parent-hover'],
     },
     // Settings for tailwindcss-animations plugin
     animations: ['responsive'],
@@ -709,6 +710,15 @@ module.exports = {
             .${e(`active${separator}${className}`)}:active, 
             .${e(`active${separator}${className}`)}.active
           `
+        })
+      })
+    }),
+    // Add a `parent-hover` variant to complement `group-hover`.
+    plugin(function({ addVariant, e }) {
+      addVariant('parent-hover', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.hovering-parent:hover > .${
+            e(`parent-hover${separator}${className}`)}`
         })
       })
     })

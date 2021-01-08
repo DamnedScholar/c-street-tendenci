@@ -51,8 +51,7 @@
             
             <form data-controller="subscription"
                 action="/subscribe/" method="post"
-                class="flex flex-col items-center justify-around"
-                data-reflex-root="span">
+                class="flex flex-col items-center justify-around">
                 {% csrf_token %}
                 {{ form.email.label_tag }}
                 <div class="

@@ -1,15 +1,11 @@
-from tendenci.settings import *
+# from tendenci.settings import *
 import os
 
 # Load secret and server-specific settings so that we can sync `settings.py`
 import json
 
 with open('conf/secrets.json') as f:
-  secrets = json.load(f)
-
-# Load custom tinymce settings
-with open('conf/tinymce.json') as f:
-  tinymce = json.load(f)
+    secrets = json.load(f)
 
 # Configure your site-specific settings here to override the defaults configured
 # by Tendenci and Django.
@@ -284,6 +280,8 @@ INSTALLED_APPS += [
     'import_export',
     'httpproxy',
     'simple_history',
+    'phonenumber_field',
+    'address',
     'sockpuppet'
 ]
 

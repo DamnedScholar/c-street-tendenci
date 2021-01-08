@@ -2,6 +2,7 @@
 {% load nav_tags %}
 {% load box_tags %}
 {% load theme_tags %}
+{% load sitemap_tags %}
 
 <!-- start: navbar outer -->
 <nav id="site-nav" class="z-50 fixed inset-0 flex flex-row justify-between py-8 px-4">
@@ -35,6 +36,8 @@
     <div class="sm:mt-2" id="navTop">
       <!-- main nav -->
       {% nav 1 %}
+
+      {% site_nav %}
     </div>
   </div>
 </nav>

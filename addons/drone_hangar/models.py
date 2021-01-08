@@ -1,9 +1,14 @@
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 
-from tendenci.apps.photos.models import ImageModel
 
-# from addons.custom_directories.models import AirBnBData
-
+class Archive (models.Model):
+    # Create a log of all actions performed by spiders. This will enable lookup and recall operations (in case an API goes down or has a bug and we need to roll back to a previous version of the data) as well as providing proof of the services running.
+    guid = models.UUIDField(primary_key=True)
+    name = models.CharField(verbose_name="Name of the Spider", max_length=50)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    payload = JSONField(verbose_name="API Response")
+    stats = JSONField(verbose_name="Scrapy Stats")
 
 # I'm using a specialized model for each scraper, with a generic model that they can inherit from. The specialized model has rules for how to associate it with other content, such as AirBnB rooms.
 
@@ -17,31 +22,7 @@ class ArchivedScrapedImage (ScrapedImage):
     # Consider a permanent archival model for scraped images that get replaced by a future scraping.
     archive_time = models.DateTimeField()
 
-class AirBnBData (models.Model):
-    room_id = models.IntegerField(primary_key=True, default=0) # AirBnB ID
-    name = models.CharField(max_length=30)
-    timestamp = models.DateTimeField()  # When the spider retrieved the data
-    primary_picture = models.ForeignKey('AirBnBImage', null=True, on_delete=models.SET_NULL, related_name="+")
-    profile_picture = models.ForeignKey('AirBnBImage', null=True, on_delete=models.SET_NULL, related_name="+")
 
-    lat = models.FloatField()
-    lng = models.FloatField()
-
-    # Store a list of amenities in the future?
-
-    avg_rating = models.FloatField()
-    reviews_count = models.IntegerField()
-
-    rate = models.FloatField()
-    rate_type = models.CharField(max_length=30)
-
-    verified = models.BooleanField(default=False)
-    superhost = models.BooleanField(default=False)
-
-    guests = models.CharField(max_length=30, blank=True)
-    baths = models.CharField(max_length=30, blank=True)
-    bedrooms = models.CharField(max_length=30, blank=True)
-    beds = models.CharField(max_length=30, blank=True)
 
 class AirBnBImage (ScrapedImage):
     # pic_id = models.IntegerField(primary_key=True, default=0) # AirBnB ID
