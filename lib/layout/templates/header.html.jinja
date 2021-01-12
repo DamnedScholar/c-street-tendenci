@@ -1,0 +1,36 @@
+<!-- start: navbar outer -->
+<nav id="site-nav" class="z-50 fixed inset-0 flex flex-row justify-between py-8 px-4">
+<!-- logo -->
+  <div class="relative md:w-24 md:h-24 sm:w-16 sm:h-16" href="/">
+    <svg id="brand-background" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="radial" fx="50%" fy="50%" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" style="stop-color:#718c9e; stop-opacity:0.8" />
+          <stop offset="68%" style="stop-color:#718c9e; stop-opacity:0.5" />
+          <stop offset="70%" style="stop-color:#ced7dd; stop-opacity:0.4" />
+          <stop offset="80%" style="stop-color:#e5eaed; stop-opacity:0.8" />
+          <stop offset="100%" style="stop-color:#fcfdfd; stop-opacity:1" />
+        </radialGradient>
+      </defs>
+      <circle fill="url(#radial)"/>
+    </svg>
+    <div class="absolute p-1 pointer-events-auto">
+      <!-- Padding makes the logo fit inside the SVG background and pointer-events-auto is necessary for the link to work. -->
+      <a href="{{ url('home') }}"><img class="" src="{{ static('img/logo.png') }}" alt="" /></a>
+    </div>
+  </div>
+  <div class="collapsable flex flex-col items-start" data-controller="dropdown" data-dropdown-class="sm:hidden">
+    <!-- responsive btn -->
+    <button class="btn btn-primary self-end lg:hidden md:hidden" type="button" data-action="click->dropdown#toggle click@window->dropdown#hide" aria-controls="navTop" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">
+        <i class="far fa-bars"></i>
+      </span>
+    </button>
+    <!-- navigation -->
+    <div class="sm:mt-2" id="navTop">
+      <!-- main nav -->
+      {{ site_nav() }}
+    </div>
+  </div>
+</nav>
+<!-- end: navbar outer -->

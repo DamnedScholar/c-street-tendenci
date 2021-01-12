@@ -1,0 +1,46 @@
+{% extends 'base.html.jinja' %}
+
+<!-- Start of the Body
+=========================================================== -->
+{% block body_classes %}
+bg-topographic
+{% endblock %}
+{% block html_body %}
+
+
+<!-- Header Starts
+=========================================================== -->
+{% include "header.html.jinja" %}
+
+<div class="hero {% block hero_classes %}{% endblock %}">
+  {% block hero %}
+    <div class="focuspoint"
+      data-focus-x="-0.18" data-focus-y="0.14"
+      data-image-w="2000" data-image-h="1092">
+      <img src="{{ static('img/Streetscape.jpg') }}">
+    </div>
+
+    <h1 id="hero-title">Historic C-Street Welcomes You</h1>
+  {% endblock %}
+</div>
+<div id="content" class="
+  px-2 py-6 w-5/6 mx-auto
+  ring-1 ring-glass-800 ring-inset
+  backdrop-blur bg-opacity-40
+  bg-gradient-to-tr from-glass-100 via-glass-200 to-glass-400
+  rounded-md">
+  <!-- Start -->
+  <div class="{% block content_classes %} {% endblock %}">
+
+    {% block content %}
+    {% endblock %}
+
+  </div>
+
+  <footer class="text-gray-800 flex flex-col items-center py-6">
+    <p class="m-0">Content copyright 2020 C-Street Commercial Club</p>
+    <p class="m-0">Kittens discreetly herded by Holland Wilson and eclectic company</p>
+  </footer>
+
+</div>
+{% endblock %}

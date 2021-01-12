@@ -3,26 +3,21 @@
 # settings.py
 #
 
-from tendenci.urls import handler500  # noqa: F401
-from tendenci.urls import pre_urlpatterns, post_urlpatterns
-from tendenci.urls import remove_url_for_include
 from django.conf.urls import url, include  # noqa: F401
-from tendenci.apps.site_settings.utils import get_setting
+from . import settings
 
-urlpatterns = pre_urlpatterns + [
-    url(r'^', include('addons.custom_directories.urls')),
-    url(r'^', include('httpproxy.urls')),
-    #url(r'^tickets/', include('tendenci.apps.helpdesk.urls')),
-] + post_urlpatterns
+from tools.modulation.utils import Registry
+# Modules are bespoke components core to the application.
+lib = Registry('lib')
+# Tools are stand-alone scripts that perform auxilliary functions.
+tools = Registry('tools')
 
+# urlpatterns = lib.get_url_patterns() + tools.get_url_patterns()
 
-# To remove a URL pattern from the default configuration:
-#from tendenci.urls import remove_url_for_include  # noqa: E402
-#remove_url_for_include(urlpatterns, 'some_app.urls')
-# Or:
-#remove_includes = ['app1.urls', 'app2.urls']
-#for include in remove_includes:
-#    remove_url_for_include(urlpatterns, include)
-remove_includes = ['tendenci.apps.directories.urls']
-for include in remove_includes:
-   remove_url_for_include(urlpatterns, include)
+urlpatterns = lib.get_url_patterns() + [url(r'', include('%s.urls' % 'httpproxy'))]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

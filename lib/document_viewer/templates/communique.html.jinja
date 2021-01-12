@@ -1,0 +1,71 @@
+{% extends "content.html.jinja" %}
+
+{% block title %}
+    Communique - {{ super() }}
+{% endblock %}
+
+{% block extra_head %}
+    {{ super() }}
+{% endblock %}
+
+{% block hero %}
+  <hero-image class="absolute w-full overflow-visible">
+    <picture class="h-full w-full">
+        <source media="(max-width:500px)"
+            srcset="{{ 'https://imgur.com/1EG1GRy.jpg' | imgproxy("sm-hero") }}">
+        <source media="(min-width:501px)"
+            srcset="{{ 'https://imgur.com/1EG1GRy.jpg' | imgproxy("hero") }}">
+        <img class="w-full"
+            src="{{ 'https://imgur.com/1EG1GRy.jpg' }}" alt="{{ page_title }}">
+    </picture>
+  </hero-image>
+
+    <hero-block class="w-full h-full flex flex-col justify-end items-center py-2">
+        <h1 id="hero-title">The Communique</h1>
+        <nav id="hero-nav" class="relative sm:w-full md:w-2/5 flex flex-row items-center justify-center min-h-12">
+        </nav>
+    </hero-block>
+{% endblock %}
+
+{% block content %}
+    <script src="{{ static('js/document_viewer.js') }}"></script>
+
+    <document-viewer data-controller="document_viewer"
+        data-document_viewer-links-value="{{ links.as_json }}"
+        data-document_viewer-current-value="{{ current }}"
+        data-document_viewer-croptitle-value="C-Street News & World Report - "
+    >
+        <div slot="topbar" data-target="document_viewer.topbar"
+            class="w-full flex flex-row items-center justify-between px-4"
+        >
+            <headline class="text-xl">
+                The Communique is your finger on the pulse of C-Street!
+            </headline>
+            
+            <form data-controller="subscription"
+                action="/subscribe/" method="post"
+                class="flex flex-col items-center justify-around">
+                {% csrf_token %}
+                {{ form.email.label_tag() }}
+                <div class="
+                    flex flex-row items-center justify-around
+                ">
+                    {{ form.email }}
+                    <input data-action="subscription#submit"
+                    type="submit" value="Subscribe!"
+                    class="h-12 px-1 rounded-none first:rounded-l-full last:rounded-r-full">
+                </div>
+                <span data-subscription-target="display"
+                    class="
+                        {% if form.errors %}text-red{% endif %}
+                    ">
+                    {% if form.is_bound %}
+                        {{ form.errors.email | default("Thank you!", true) }}
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
+                </span>
+            </form>
+        </div>
+    </document-viewer>
+{% endblock %}

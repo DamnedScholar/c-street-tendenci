@@ -105,8 +105,8 @@ $(document).ready(function(){
     });
     $("#add-addons-button").on("click", function(){
         var addons = $('input:checkbox[name=add-addons]:checked');
-        if (addons.length > 0){
-            for(var i = 0; i<addons.length; i++){
+        if (modules.length > 0){
+            for(var i = 0; i<modules.length; i++){
                 var addon = $(addons[i]);
                 if(addon.val()){
                     var addon_d = {};

@@ -1,7 +1,6 @@
 from django.conf.urls import url
-from tendenci.apps.site_settings.utils import get_setting
 
-from httpproxy.views import HttpProxy
+from .views import HttpProxy
 
 urlpatterns = [
     url(r'^proxy/(?P<url>.*)$',

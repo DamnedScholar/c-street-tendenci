@@ -8,7 +8,7 @@
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}" />
 <link rel="stylesheet" href="{% static 'css/event-anon-registration.css' %}" />
-<link rel="stylesheet" href="{% static 'css/event-addons.css' %}" />
+<link rel="stylesheet" href="{% static 'css/event-modules.css' %}" />
 {% endblock %}
 {% block content %}
 <div class="t">
@@ -228,7 +228,7 @@
             </div>
             {% if addons %}
                 <div class="addon-forms">
-                    {% include 'events/addons/formset.html' %}
+                    {% include 'events/lib/formset.html' %}
                 </div>
             {% else %}
                 {{ addon_formset.management_form }}
@@ -252,7 +252,7 @@
             </div>
             {% if addons %}
                 <div class="add-addons-box">
-                {% include 'events/addons/addon-add-box.html' %}
+                {% include 'events/lib/addon-add-box.html' %}
                 </div>
             {% endif %}
             <div id="email-validation">
@@ -295,7 +295,7 @@
 <script type="text/javascript" >
     {% include 'events/include/events-registration-summary.js' %}
     {% include 'events/registration/include/register-registrant.js' %}
-    {% include 'events/addons/register-addon.js' %}
+    {% include 'events/lib/register-addon.js' %}
     {% include 'events/registration/include/register.js' %}
 </script>
 {{ block.super }}

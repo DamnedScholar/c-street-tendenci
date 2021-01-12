@@ -7,7 +7,7 @@
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/events.css' %}" />
 <link rel="stylesheet" href="{% static 'css/event-registration.css' %}" />
-<link rel="stylesheet" href="{% static 'css/event-addons.css' %}" />
+<link rel="stylesheet" href="{% static 'css/event-modules.css' %}" />
 <link rel="stylesheet" href="{% static 'css/events-reg.css' %}" />
 <style type="text/css">
     input.registrant-pricing {
@@ -287,11 +287,11 @@
             {% if addons %}
             <div class="addon-wrap">
                 <div class="add-addons-box">
-                {% include 'events/addons/addon-add-box.html' %}
+                {% include 'events/lib/addon-add-box.html' %}
                 </div>
                 <div class="addon-forms">
                     <div>{% trans "Addons Added:" %}</div>
-                    {% include 'events/addons/formset.html' %}
+                    {% include 'events/lib/formset.html' %}
                </div>
            </div>
             {% else %}
@@ -430,7 +430,7 @@
 <script type="text/javascript">
     {% include 'events/include/events-registration-summary.js' %}
     {% include 'events/reg8n/include/register-registrant.js' %}
-    {% include 'events/addons/register-addon.js' %}
+    {% include 'events/lib/register-addon.js' %}
     {% include 'events/reg8n/include/register.js' %}
     {% if do_confirmation %}
     $(document).ready(function(){

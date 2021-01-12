@@ -25899,7 +25899,7 @@ var stimulus_reflex = __webpack_require__(9764);
 // EXTERNAL MODULE: ./node_modules/sockpuppet-js/javascript/stimulus-websocket/index.js + 1 modules
 var stimulus_websocket = __webpack_require__(5206);
 
-// CONCATENATED MODULE: ./addons/tendenstreet/javascript/controllers/calendar_controller.js
+// CONCATENATED MODULE: ./lib/tendenstreet/javascript/controllers/calendar_controller.js
 
 
 
@@ -29235,7 +29235,7 @@ customElements.define('b-cal', class extends LitElement{
 })
 
 /* harmony default export */ const cal = (customElements.get('b-cal'));
-// CONCATENATED MODULE: ./addons/tendenstreet/javascript/calendar.js
+// CONCATENATED MODULE: ./lib/tendenstreet/javascript/calendar.js
 // Django-Sockpuppet and Stimulus
 
 

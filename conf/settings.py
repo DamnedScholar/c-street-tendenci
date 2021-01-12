@@ -1,25 +1,17 @@
 # from tendenci.settings import *
+import json
 import os
+from django import __path__ as django_path
+
+from tools.modulation.utils import Registry
+lib = Registry('lib')
+tools = Registry('tools')
+
 
 # Load secret and server-specific settings so that we can sync `settings.py`
-import json
-
+# TODO: Replace this with a .env file.
 with open('conf/secrets.json') as f:
     secrets = json.load(f)
-
-# Configure your site-specific settings here to override the defaults configured
-# by Tendenci and Django.
-#
-# See https://github.com/tendenci/tendenci/blob/master/tendenci/settings.py for
-# Tendenci defaults.  See https://docs.djangoproject.com/en/1.11/ref/settings/
-# for Django defaults.
-#
-# To override part of a data structure configured by Tendenci without replacing
-# the entire data structure, you can use something like:
-# Add a list item: INSTALLED_APPS += ['example_app']
-# Remove a list item: INSTALLED_APPS.remove('some_app')
-# Remove a hash key: LOGGING['handlers']['mail_admins'].pop('class', None)
-
 
 # ---------------------------------------------------------------------------- #
 # Debug Setting
@@ -30,8 +22,8 @@ with open('conf/secrets.json') as f:
 # uncomment this setting.
 DEBUG = True
 
-if DEBUG:
-    disable_template_cache()
+# if DEBUG:
+#     disable_template_cache()
 
 
 # ---------------------------------------------------------------------------- #
@@ -52,6 +44,9 @@ CHANNEL_LAYERS = {
 # ---------------------------------------------------------------------------- #
 # Required Settings
 # ---------------------------------------------------------------------------- #
+
+# This is for the Sites framework.
+SITE_ID = 1
 
 # These must be set to two different random strings, at least 50 characters in
 # length, that are unique to this site.  Django will refuse to start if these
@@ -76,11 +71,16 @@ if DEBUG:
 
 # Tendenci uses the following PostgreSQL database connection settings by
 # default.  Uncomment and configure settings here to override the defaults.
-DATABASES['default']['HOST'] = secrets['databases']['default']['host']
-DATABASES['default']['PORT'] = secrets['databases']['default']['port']
-DATABASES['default']['USER'] = secrets['databases']['default']['user']
-DATABASES['default']['PASSWORD'] = secrets['databases']['default']['password']
-DATABASES['default']['NAME'] = secrets['databases']['default']['name']
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'HOST': secrets['databases']['default']['host'],
+        'PORT': secrets['databases']['default']['port'],
+        'USER': secrets['databases']['default']['user'],
+        'PASSWORD': secrets['databases']['default']['password'],
+        'NAME': secrets['databases']['default']['name'],
+    }
+}
 
 # This must be set to the time zone used by PostgreSQL, which defaults to the
 # system time zone configured in /etc/timezone.
@@ -103,7 +103,7 @@ TIME_ZONE = 'US/Central'
 # This will allow Tendenci to properly detect HTTP vs HTTPS client connections
 # when using NGINX.  DO NOT use this if Tendenci is not behind NGINX, as that
 # will open a security hole.
-#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Uncomment these if NGINX is configured to redirect all HTTP connections to
 # HTTPS.  This is strongly recommended for live sites.
@@ -128,135 +128,18 @@ TIME_ZONE = 'US/Central'
 
 
 # ---------------------------------------------------------------------------- #
-# EMail Settings
+# Email Settings
 # ---------------------------------------------------------------------------- #
-
-# Tendenci EMail is disabled by default.
-
-# If EMail is enabled below, these must be uncommented and set to an appropriate
-# "From" address.
-#DEFAULT_FROM_EMAIL = 'no-reply@example.com'
-#SERVER_EMAIL = DEFAULT_FROM_EMAIL
-
-# If EMail is enabled, optionally uncomment and configure this to send an alert
-# email to the specified addresses any time Python, Django, or Tendenci
-# encounter an error.  This also enables some other non-error Tendenci email
-# notifications.
-#ADMINS = [('John', 'john@example.com'), ('Mary', 'mary@example.com')]
-# To disable error emails and send only non-error Tendenci email notifications:
-#disable_admin_emails()
-
-# To send EMail via an SMTP server:
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_USE_TLS = False
-#EMAIL_HOST = 'localhost'
-#EMAIL_PORT = 25
-#EMAIL_HOST_USER = ''
-#EMAIL_HOST_PASSWORD = ''
-
-# To send EMail via Amazon SES:
-#EMAIL_BACKEND = "django_ses.SESBackend"
-#AWS_ACCESS_KEY_ID = ''
-#AWS_SECRET_ACCESS_KEY = ''
-
-# To send newsletters via an SMTP server (example: mailgun):
-#NEWSLETTER_EMAIL_HOST = 'smtp.mailgun.org'
-#NEWSLETTER_EMAIL_PORT = 587
-#NEWSLETTER_EMAIL_HOST_USER = ''
-#NEWSLETTER_EMAIL_HOST_PASSWORD = ''
-
-# To send newsletters via Amazon SES:
-#NEWSLETTER_EMAIL_BACKEND = "django_ses.SESBackend"
-#AWS_ACCESS_KEY_ID = ''
-#AWS_SECRET_ACCESS_KEY = ''
-
-# For development/testing:
-# Try https://github.com/Nilhcem/FakeSMTP and use the SMTP configuration above,
-# or try https://github.com/PaulSD/django_log_email and use the following
-# configuration.
-EMAIL_BACKEND = 'django_log_email.backends.EmailBackend'
-EMAIL_LOG_FILE = './email.log'
-# When using django_log_email, you can leave this setting commented to discard
-# email after logging, or uncomment it to both log and send email.
-# EMAIL_LOG_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# When using django_log_email, you can uncomment this setting to send error
-# alert emails without logging.
-#LOGGING['handlers']['mail_admins']['email_backend'] = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 # ---------------------------------------------------------------------------- #
 # Payment Gateway Settings
 # ---------------------------------------------------------------------------- #
 
-#MERCHANT_LOGIN = ''
-#MERCHANT_TXN_KEY = ''
-
-# Authorize.Net
-#AUTHNET_POST_URL = 'https://secure2.authorize.net/gateway/transact.dll'
-#AUTHNET_MD5_HASH_VALUE = ''
-
-#AUTHNET_CIM_API_TEST_URL = 'https://apitest.authorize.net/xml/v1/request.api'
-#AUTHNET_CIM_API_URL = 'https://api2.authorize.net/xml/v1/request.api'
-
-# FirstData
-#FIRSTDATA_POST_URL = 'https://secure.linkpt.net/lpcentral/servlet/lppay'
-
-# FirstData E4
-#FIRSTDATAE4_POST_URL = 'https://checkout.globalgatewaye4.firstdata.com/payment'
-#FIRSTDATAE4_POST_URL = 'https://globalgatewaye4.firstdata.com/pay'
-#FIRSTDATA_RESPONSE_KEY = ''
-#FIRSTDATA_USE_RELAY_RESPONSE = False
-
-# PayPal PayFlow Link
-#PAYFLOWLINK_PARTNER = ''
-#PAYPAL_MERCHANT_LOGIN = ''
-#PAYFLOWLINK_POST_URL = 'https://payflowlink.paypal.com'
-
-# PayPal
-#PAYPAL_POST_URL = 'https://www.paypal.com/cgi-bin/webscr'
-#PAYPAL_POST_URL = PAYPAL_SANDBOX_POST_URL
-
-# Stripe
-#STRIPE_SECRET_KEY = ''
-#STRIPE_PUBLISHABLE_KEY = ''
-
 
 # ---------------------------------------------------------------------------- #
 # Cache Settings
 # ---------------------------------------------------------------------------- #
-
-# If pylibmc is installed then Tendenci will attempt to connect to memcached on
-# localhost.  If pylibmc and/or memcached is not installed then caching will be
-# disabled.
-
-# If multiple Tendenci sites share the same memcached, uncomment and configure
-# the following settings with a value that is unique to this site.  This is used
-# to prevent cache collisions between sites.
-#SITE_CACHE_KEY = 'tendenci'
-#CACHE_PRE_KEY = SITE_CACHE_KEY
-
-# To change the memcached host/port:
-#CACHES['default']['LOCATION'] = '127.0.0.1:11211'
-
-# To change the cache timeout:
-# (Default is 30 days)
-#CACHES['default']['TIMEOUT'] = 60*60*24*30
-
-
-# ---------------------------------------------------------------------------- #
-# Amazon S3 Storage Settings
-# ---------------------------------------------------------------------------- #
-
-#AWS_LOCATION = ''    # This is usually your site name
-#AWS_ACCESS_KEY_ID = ''
-#AWS_SECRET_ACCESS_KEY = ''
-#AWS_STORAGE_BUCKET_NAME = ''
-#USE_S3_STORAGE = all([
-#    AWS_LOCATION,
-#    AWS_ACCESS_KEY_ID,
-#    AWS_SECRET_ACCESS_KEY,
-#    AWS_STORAGE_BUCKET_NAME
-#])
 
 
 # ---------------------------------------------------------------------------- #
@@ -271,122 +154,110 @@ EMAIL_LOG_FILE = './email.log'
 # Custom Application Settings
 # ---------------------------------------------------------------------------- #
 
-# To add an app to INSTALLED_APPS:
-#INSTALLED_APPS += ['example_app']
+PROJECT_ROOT = os.getcwd()
 
-INSTALLED_APPS += [
-    'django_extensions',
-    'channels',
-    'import_export',
-    'httpproxy',
-    'simple_history',
-    'phonenumber_field',
-    'address',
-    'sockpuppet'
-]
+STATIC_URL = '/static/'
+
+STATIC_ROOT = PROJECT_ROOT + '/static/'
+
+INSTALLED_APPS = lib.modules + \
+    tools.modules + \
+    [
+        # Project imports
+        'httpproxy',
+        'address',
+        'django_extensions',
+        'django_jinja',
+        'channels',
+        'gunicorn',
+        'haystack',
+        'import_export',
+        'simple_history',
+        'phonenumber_field',
+        'sockpuppet',
+        'formtools',
+        'dj_pagination',
+        'tagging',
+        'captcha',
+        'tastypie',
+        'timezone_field',
+
+        # Django libraries
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.sites',
+        'django.contrib.humanize',
+        'django.contrib.sitemaps',
+        'django.contrib.messages',
+        'django.contrib.admindocs',
+        'django.contrib.staticfiles',
+        'django.contrib.gis',
+    ]
 
 DJANGO_HASHIDS_SALT = "itsy bitsy spider"
 
-# TEMPLATES = [
-#   {
-#       'BACKEND': 'django.template.backends.django.DjangoTemplates',
-#       'DIRS': [os.path.join(PROJECT_ROOT, 'themes/c-street-2020/templates'), ],
-#       'APP_DIRS': True,
-#       'OPTIONS': {
-#         'context_processors': [
-#             'django.template.context_processors.debug',
-#             'django.template.context_processors.request',
-#             'django.contrib.auth.context_processors.auth',
-#             'django.contrib.messages.context_processors.messages',
-#         ],
-#         'builtins': [
-#           'django.templatetags.static',
-#           'django.templatetags.i18n',
-#         ]
-#       }
-#   }
-# ]
-
-MIDDLEWARE += [
-  'simple_history.middleware.HistoryRequestMiddleware'
+TEMPLATES = [
+    {
+        "BACKEND": "django_jinja.backend.Jinja2",
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "match_extension": ".jinja",
+        }
+    },
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        "APP_DIRS": True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.request',
+                'django.template.context_processors.static',
+                'django.contrib.messages.context_processors.messages',
+            ],
+            'libraries': {
+                # Empty for now
+            },
+            'builtins': [
+                # TODO: Look at the value of adding more builtins so that I don't have to explicitly define tags in all of my templates. But do that in the Jinja entry above. ^
+                'django.templatetags.i18n',
+            ],
+        },
+        'DIRS': [django_path[0]+'/forms/templates'],
+    }
 ]
 
-# To remove a default app from INSTALLED_APPS:
-#INSTALLED_APPS.remove('some_app')
-# Or:
-#remove_apps = ['app1', 'app2']
-#for app in remove_apps:
-#    INSTALLED_APPS.remove(app)
-
-# Some default apps can't be removed without causing Django to throw a fit because they're used by core Tendenci code, like events.
-#   Protected: events, emails, forums, corporate_memberships, memberships, social_services
-remove_apps = [
-  'tendenci.apps.{}'.format(a) for a in [
-    'accountings',
-    'api_tasty',
-    'discounts',
-    'donations',
-    'resumes',
-    'recurring_payments',
-    'speakers',
-    'videos'
-  ]
+STATICFILES_DIRS = [
+    # TODO: Change this to be dynamic and/or appropriate to my app.
+    "themes/c-street-2020/media"
 ]
-for app in remove_apps:
-   INSTALLED_APPS.remove(app)
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+
+MIDDLEWARE = [
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'dj_pagination.middleware.PaginationMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
+]
+if os.path.exists(os.path.join(PROJECT_ROOT, 'lib/impersonation/')):
+    MIDDLEWARE += ['lib.impersonation.middleware.ImpersonationMiddleware']
 
 # To enable custom URL patterns to be configured in urls.py:
 ROOT_URLCONF = 'conf.urls'
-
-# To enable the Tendenci helpdesk app, uncomment this setting, uncomment
-# ROOT_URLCONF above, and uncomment the helpdesk urlpattern in urls.py
-#INSTALLED_APPS += ['markdown_deux', 'bootstrapform', 'tendenci.apps.helpdesk']
-
-TINYMCE_DEFAULT_CONFIG = tinymce
 
 
 # ---------------------------------------------------------------------------- #
 # Logging Settings
 # ---------------------------------------------------------------------------- #
-
-# By default, Tendenci logs all INFO and greater log messages to
-# /var/log/tendenci/app.log
-#
-# When DEBUG is True, Tendenci logs DEBUG and greater log messages to
-# /var/log/mysite/debug.log (in addition to logging INFO and greater log
-# messages to /var/log/mysite/app.log)
-
-# To change the log file names:
-set_app_log_filename('/var/log/mysite/app.log')
-set_debug_log_filename('/var/log/mysite/debug.log')
-
-# To change the log level for the app.log file:
-# (Valid levels are: 'DEBUG' 'INFO' 'WARNING' 'ERROR' 'CRITICAL')
-#set_app_log_level('INFO')
-
-# To disable logging:
-# disable_app_log()
-# disable_debug_log()
-
-# To disable debug.log and write DEBUG messages to app.log when DEBUG is True:
-#disable_debug_log()
-#if DEBUG: set_app_log_level('DEBUG')
-
-# To log to the console in addition to the log files (or instead of the log
-# files if they are disabled above):
-enable_console_log()
-# To change the console log level:
-# set_console_log_level('DEBUG')
-
-# For more advanced configuration, you can modify the default LOGGING data
-# structure, which is configured in
-# https://github.com/tendenci/tendenci/blob/master/tendenci/settings.py
-# For example:
-# LOGGING['loggers'].update({
-#   'sockpuppet': {
-#     'level': 'WARNING'
-#   }
-# })
 
 LOGGING = {
     'version': 1,
@@ -429,6 +300,40 @@ LOGGING = {
 
 
 # ---------------------------------------------------------------------------- #
+# Haystack Search
+# ---------------------------------------------------------------------------- #
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(PROJECT_ROOT, 'whoosh_index', 'main'),
+    }
+}
+
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+
+# HAYSTACK_INDEX_LIMITS - row amount to index per core application
+# Override for rebuild_index command exists in base core app
+HAYSTACK_INDEX_LIMITS = {
+    'event_logs': 3000,
+}
+
+INDEX_FILE_CONTENT = False
+# TODO: This is a dummy setting that doesn't do anything. When I get to setting up Haystack (and Celery, Redis, Solr, etc.).
+# https://django-haystack.readthedocs.io/en/master/signal_processors.html
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'
+
+# django-sql-explorer
+EXPLORER_CONNECTIONS = { 'default': 'default' }
+EXPLORER_DEFAULT_CONNECTION = 'default'
+EXPLORER_UNSAFE_RENDERING = True
+def EXPLORER_PERMISSION_VIEW(u):
+    return u.is_superuser
+def EXPLORER_PERMISSION_CHANGE(u):
+    return u.is_superuser
+
+
+# ---------------------------------------------------------------------------- #
 # Additional Debugging Settings
 # ---------------------------------------------------------------------------- #
 
@@ -442,16 +347,14 @@ LOGGING = {
 # if DEBUG:
 #    INTERNAL_IPS = ['127.0.0.1', '::1']
 
-# Uncomment this setting to enable the Django Debug Toolbar for profiling
-# (measuring CPU/SQL/cache/etc timing).  Only clients matching INTERNAL_IPS
-# above will be able to use the toolbar.
-# This toolbar may expose internal/private data, and it will slow down your site
-# significantly, so use this with caution.
-# DEBUG_TOOLBAR_ENABLED = True
-
-
-# ---------------------------------------------------------------------------- #
-# These lines must remain at the end of this file
-# ---------------------------------------------------------------------------- #
-from tendenci.apps.registry.utils import update_addons  # noqa: E402
-INSTALLED_APPS = update_addons(INSTALLED_APPS, SITE_ADDONS_PATH)
+DEBUG_TOOLBAR_ENABLED = False
+try:
+    import debug_toolbar  # noqa: F401
+    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
+    INSTALLED_APPS += ['debug_toolbar']
+    DEBUG_TOOLBAR_CONFIG = {
+        'SHOW_TOOLBAR_CALLBACK': lambda req: DEBUG_TOOLBAR_ENABLED,
+        'SHOW_COLLAPSED': False,
+    }
+except ImportError:
+    pass

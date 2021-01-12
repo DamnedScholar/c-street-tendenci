@@ -202,7 +202,7 @@
             <a href="{% url "event" event.pk %}">{% trans "Register More People" %}</a>
         </div>
 
-        <div style="font-weight: bold;">{% trans "Addons" %} ... ({{ addons.count }})</div>
+        <div style="font-weight: bold;">{% trans "Addons" %} ... ({{ modules.count }})</div>
         <table class="registrants-table" border="0" cellspaceing="0" cellpadding="0">
             {% for addon in addons %}
             <tr>

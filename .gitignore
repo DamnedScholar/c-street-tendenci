@@ -32,7 +32,7 @@ credentials
 
 # ignore generated static files
 static
-mock_tendenci_static
+static-old
 
 whoosh_index/*
 !whoosh_index/README

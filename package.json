@@ -55,8 +55,9 @@
     "stimulus": "2",
     "stimulus-hotkeys": "^1.0.3",
     "stimulus_reflex": "3.4.0",
-    "tailwindcss": "^2.0.1",
+    "tailwindcss": "^2.0.2",
     "tailwindcss-filters": "^3.0.0",
+    "tailwindcss-gradients": "^3.0.0",
     "voca": "^1.4.0"
   }
 }
