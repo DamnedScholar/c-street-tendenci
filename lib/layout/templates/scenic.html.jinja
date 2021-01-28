@@ -1,0 +1,53 @@
+{% extends 'base.html.jinja' %}
+
+<!-- Start of the Body
+=========================================================== -->
+{% block body_classes -%}
+  bg-topographic
+{%- endblock %}
+{% block html_body -%}
+
+  {%- include "header.html.jinja" -%}
+
+  {# {%- set hero_src = local_hero() -%} #}
+  {%- set hero_src = static("img/Streetscape.jpg") -%}
+
+
+  <hero-block class="block relative">
+    <hero-image class="block absolute w-screen h-screen">
+      <picture class="h-full w-full">
+        <source media="(max-width:500px)"
+            srcset="{{ hero_src | imgproxy("sm-hero") }}">
+        <source media="(min-width:501px)"
+            srcset="{{ hero_src | imgproxy("hero") }}">
+        <img class="w-full"
+            src="{{ hero_src }}" alt="{{ title }}">
+      </picture>
+    </hero-image>
+
+    <hero-title class="w-full h-full flex flex-col justify-end items-center py-2">
+      <h1 id="hero-title">{{ title }}</h1>
+      <nav id="hero-nav" class="relative sm:w-full md:w-2/5 flex flex-row items-center justify-center min-h-12">
+      </nav>
+    </hero-title>
+  </hero-block>
+  <div id="content-frame"
+    class="px-2 py-6 mx-auto
+      ring-1 ring-glass-800 ring-inset
+      backdrop-blur bg-opacity-40
+      bg-gradient-to-tr from-glass-100 via-glass-200 to-glass-400
+      rounded-md"
+  >
+    <!-- Start -->
+    <div class="{% block content_classes %}{% endblock %}">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    <footer class="text-gray-800 flex flex-col items-center py-6">
+      <p class="m-0">Content copyright 2020 C-Street Commercial Club</p>
+      <p class="m-0">Kittens discreetly herded by Holland Wilson and eclectic company</p>
+    </footer>
+
+  </div>
+{% endblock %}

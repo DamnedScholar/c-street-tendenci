@@ -6,8 +6,8 @@
 /__debug__/sql_profile/	debug_toolbar.panels.sql.views.sql_profile	djdt:sql_profile
 /__debug__/sql_select/	debug_toolbar.panels.sql.views.sql_select	djdt:sql_select
 /__debug__/template_source/	debug_toolbar.panels.templates.views.template_source	djdt:template_source
-/calendar/	lib.tendenstreet.views.calendar.CalendarView	views.calendar
-/calendar/<int:yyyy>-<int:mm>	lib.tendenstreet.views.calendar.CalendarView	views.calendar
+/calendar/	lib.puppet_show.views.calendar.CalendarView	views.calendar
+/calendar/<int:yyyy>-<int:mm>	lib.puppet_show.views.calendar.CalendarView	views.calendar
 /communique	lib.document_viewer.views.document_viewer.CommuniqueView	views.communique
 /delete/<slug:slug>/	lib.trixie_pages.controllers.page.delete	trixie-delete
 /edit/<slug:slug>/	lib.trixie_pages.controllers.page.edit	trixie-edit

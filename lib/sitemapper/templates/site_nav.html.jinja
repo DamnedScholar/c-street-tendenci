@@ -1,33 +1,40 @@
-<legendary-links>
-    <nav class="justify-center flex sm:flex-col sm:items-end md:flex-row">
+<legendary-links class="block w-full">
+    <nav class="w-full flex justify-between sm:flex-col sm:items-end md:flex-row">
         {% for group in nav_groups %}
         <link-group aria-labelledby="{{ group.0|slugify }}"
-            class="pointer-events-auto hovering-parent"
+            class="pointer-events-auto hovering-parent overflow-visible relative"
         >
             <nav-btn id="{{ group.0|slugify }}"
-                class="px-4 py-2 rounded-md bg-blue
-                text-gray-300 text-lg"
+                class="inline-block px-4 py-1 rounded-md bg-blue
+                text-gray-300 text-xl bold"
             >
                 <a href="{{ group.1 }}">
                     {{ group.0 }}
                 </a>
             </nav-btn>
             {% if group.2 %}
-                <li class="list-none bg-gray-300 text-blue border-blue
-                    sm:hidden parent-hover:block"
+                <li class="list-none min-w-max bg-gray-300 text-blue border-blue
+                    hidden parent-hover:block absolute transition-all"
                 >
                     {% for entry in group.2 %}
                     <ul class="pointer-events-auto hovering-parent">
-                        <a href="{{ entry.1 }}">{{ entry.0 }}</a>
+                        <a href="{{ entry.1 }}"
+                            class="block w-full min-w-max px-2 text-blue
+                                border-b-default border-glass-900"
+                        >
+                            {{ entry.0 }}</a>
                         {% if entry.2 %}
-                            <li class="list-none ml-2
+                            <li class="list-none pl-2
                             bg-gray-100 text-blue border-blue
                             text-italic
-                            sm:hidden parent-hover:block"
+                            hidden parent-hover:block"
                         >
                                 {% for subentry in entry.2 %}
                                 <ul>
-                                    <a href="{{ subentry.1 }}">{{ subentry.0 }}</a>
+                                    <a href="{{ subentry.1 }}"
+                                        class="block min-w-max text-blue italic bg-transparent border-glass-300"
+                                    >
+                                        {{ subentry.0 }}</a>
                                 </ul>
                                 {% endfor %}
                             </li>

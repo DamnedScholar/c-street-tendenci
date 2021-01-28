@@ -20,7 +20,7 @@ from google.auth.transport.requests import Request
 def get_credentials():
     creds = None
     SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-    SERVICE_ACCOUNT_FILE = 'lib/tendenstreet/credentials/google-service-account.json'
+    SERVICE_ACCOUNT_FILE = 'lib/puppet_show/credentials/google-service-account.json'
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.

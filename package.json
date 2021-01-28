@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
-    "watch": "webpack --watch --info-verbosity verbose"
+    "watch": "webpack --watch --info-verbosity verbose",
+    "tw": "tailwindcss build lib/layout/css/tailwind.css -o lib/layout/static/css/tailwind.css -c lib/layout/tailwind.config.js"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,13 @@
+{% extends 'scenic.html.jinja' %}
+
+{% block content %}
+    <form action="/login" method="POST">
+        {% csrf_token %}
+        {{ form }}
+
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
+
+
+

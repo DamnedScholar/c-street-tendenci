@@ -6,7 +6,9 @@ from fuzzywuzzy import fuzz, process
 from django import template
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
-from lib.tendenstreet.views.gallery import GalleryView
+from lib.puppet_show.views.gallery import GalleryView
+
+from django_jinja import library
 
 from lib.custom_directories.utils.utils import get_images_for_entry
 

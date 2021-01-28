@@ -92,6 +92,36 @@ TIME_ZONE = 'US/Central'
 
 
 # ---------------------------------------------------------------------------- #
+# Auth0 Settings
+# ---------------------------------------------------------------------------- #
+
+SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
+SOCIAL_AUTH_AUTH0_KEY = os.environ.get('AUTH0_CLIENT_ID')
+SOCIAL_AUTH_AUTH0_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
+SOCIAL_AUTH_AUTH0_SCOPE = [
+    'openid',
+    'profile',
+    'email'
+]
+SOCIAL_AUTH_AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
+AUDIENCE = None
+if os.environ.get('AUTH0_AUDIENCE'):
+    AUDIENCE = os.environ.get('AUTH0_AUDIENCE')
+else:
+    if SOCIAL_AUTH_AUTH0_DOMAIN:
+        AUDIENCE = 'https://' + SOCIAL_AUTH_AUTH0_DOMAIN + '/userinfo'
+if AUDIENCE:
+    SOCIAL_AUTH_AUTH0_AUTH_EXTRA_ARGUMENTS = {'audience': AUDIENCE}
+AUTHENTICATION_BACKENDS = {
+    'tools.gatekeeper.backends.Auth0',
+    'django.contrib.auth.backends.ModelBackend'
+}
+
+LOGIN_URL = '/login/auth0'
+LOGIN_REDIRECT_URL = '/dashboard'
+
+
+# ---------------------------------------------------------------------------- #
 # HTTPS and Session Settings
 # ---------------------------------------------------------------------------- #
 
@@ -165,6 +195,7 @@ INSTALLED_APPS = lib.modules + \
     [
         # Project imports
         'httpproxy',
+        'social_django',
         'address',
         'django_extensions',
         'django_jinja',
@@ -203,7 +234,7 @@ TEMPLATES = [
         "BACKEND": "django_jinja.backend.Jinja2",
         "APP_DIRS": True,
         "OPTIONS": {
-            "match_extension": ".jinja",
+            "match_extension": (".jinja", ".html")
         }
     },
     {

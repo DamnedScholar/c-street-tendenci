@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from ..forms import SubscriptionForm
 from ..models import SubscriptionLog
 
-# from lib.tendenstreet.mailgun import mailgun
+# from lib.puppet_show.mailgun import mailgun
 
 
 # Entry point.

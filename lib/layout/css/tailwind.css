@@ -69,61 +69,6 @@ ol {
   @apply w-full;
 }
 
-.dropdown {
-  @apply relative;
-}
-.dropdown ul {
-  @apply h-0 overflow-hidden transition-size ease-in-out duration-300 inline-block;
-}
-.dropdown:focus-within {
-  @apply h-auto;
-}
-.dropdown:focus-within ul {
-  height: auto;
-  border: 1px solid rgba(38,49,56,0.15);
-}
-#t-admin-megamenu {
-  display: none !important;
-  @apply text-orange;
-  background-color: #4F4F4F;
-  position: fixed;
-  z-index: 100000;
-  top: 0;
-  width: 100%;
-  height: 30px;
-  padding: 0;
-  margin: 0;
-}
-#t-admin-megamenu .navbar-header {
-  height: 30px;
-}
-#t-admin-megamenu li {
-  margin-right: 10px;
-}
-#t-admin-megamenu img.nav-logo {
-  margin-left: 7px;
-  margin-top: 3px;
-  height: 24px;
-}
-#t-admin-megamenu .dropdown {
-  @apply relative;
-}
-#t-admin-megamenu .dropdown-toggle {
-  min-width: max-content;
-}
-#t-admin-megamenu .dropdown-menu {
-  left: 0;
-  top: 34px;
-  @apply absolute;
-  background-color: #fff;
-}
-
-.t-admin-inline {
-  display: none !important; /* Remove this when the site is ready */
-  bottom: -1.6rem;
-  @apply absolute text-xs p-1;
-}
-
 div.focuspoint {
   @apply w-full h-full overflow-hidden absolute;
 }
@@ -152,25 +97,8 @@ div.focuspoint {
 #site-nav {
   pointer-events: none;
 }
-#site-nav ul>li a {
-  @apply bg-blue text-gray-200;
-  @apply transition-colors duration-100;
-  min-width: max-content;
-  pointer-events: auto;
-}
 #site-nav ul>li a:focus-within {
   @apply bg-teal text-gray-300;
-}
-#site-nav ul.dropdown-menu {
-  @apply bg-gray-300 text-blue;
-}
-#site-nav ul.dropdown-menu>li a {
-  @apply block w-full bg-gray-300 text-blue;
-  min-width: max-content;
-  pointer-events: auto;
-}
-#site-nav ul.dropdown-menu>li a:hover {
-  @apply bg-blue text-gray-200;
 }
 #site-nav ul.flex>li:not(:first-child) {
   @apply ml-6;
@@ -193,12 +121,6 @@ div.focuspoint {
   border-radius: .25rem;
   pointer-events: all;
 }
-.dropdown-toggle::after {
-  display: none; /* Remove after I stop using Bootstrap. */
-}
-#site-nav .dropdown-menu.show {
-  display: block;
-}
 
 #site-footer {
   overflow: hidden;
@@ -206,18 +128,6 @@ div.focuspoint {
 
 
 @screen sm {
-  #site-nav .dropdown-menu {
-    @apply left-auto right-100 top-0;
-  }
-  #site-nav ul>li a {
-    @apply text-lg py-2 px-3;
-  }
-  #site-nav ul.dropdown-menu>li a {
-    @apply py-0;
-  }
-  #site-nav ul.flex>li:not(:first-child) {
-    @apply mt-4 ml-0;
-  }
   .hero {
     @apply h-96;
   }
@@ -231,20 +141,8 @@ div.focuspoint {
     @apply ml-4;
   }
 
-  #t-admin-megamenu .nav-label, .t-admin-inline, #site-footer {
-    @apply hidden;
-  }
 }
 @screen md {
-  #site-nav ul>li a {
-    @apply text-base py-1 px-3;
-  }
-  #site-nav ul.dropdown-menu>li a {
-    @apply py-0;
-  }
-  #site-nav ul.flex>li:not(:first-child) {
-    @apply ml-2;
-  }
   .hero {
     @apply h-128;
   }
@@ -258,20 +156,8 @@ div.focuspoint {
     @apply ml-6;
   }
 
-  #t-admin-megamenu .nav-label, .t-admin-inline, #site-footer {
-    @apply hidden;
-  }
 }
 @screen lg {
-  #site-nav ul>li a {
-    @apply text-lg py-1 px-3;
-  }
-  #site-nav ul.dropdown-menu>li a {
-    @apply py-0;
-  }
-  #site-nav ul.flex>li:not(:first-child) {
-    @apply ml-6;
-  }
   .hero {
     @apply h-64;
   }
@@ -285,9 +171,6 @@ div.focuspoint {
     @apply text-xl py-2 px-4 font-bold;
   }
 
-  #t-admin-megamenu .nav-label, .t-admin-inline, #site-footer {
-    @apply inline-block;
-  }
 }
 /* @media (orientation:landscape) {
   .hero {

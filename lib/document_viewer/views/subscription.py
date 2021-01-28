@@ -7,7 +7,7 @@ from django.shortcuts import render
 from ..forms import SubscriptionForm
 from ..controllers import subscription
 
-# from lib.tendenstreet.mailgun import mailgun
+# from lib.puppet_show.mailgun import mailgun
 
 def submitOrDisplay(request):
     print("This is the form.")

@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('tendenstreet', '0001_initial'),
+        ('puppet_show', '0001_initial'),
     ]
 
     operations = [

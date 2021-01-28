@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('tendenstreet', '0002_subscriptionlog'),
+        ('puppet_show', '0002_subscriptionlog'),
     ]
 
     operations = [

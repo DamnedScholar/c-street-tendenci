@@ -1,0 +1,15 @@
+<script type="module" src="{% raw %}{{ static('js/{{ reflex_name }}.js') }}{% endraw %}"></script>
+
+<a href="#"
+    data-controller="{{ reflex_name }}"
+    data-action="click->{{ reflex_name }}#increment"
+    data-count="{% raw %}{{ count }}{% endraw %}"
+>
+  Increment
+</a>
+
+{% raw -%}
+<span>
+  {{ count }}
+</span>
+{%- endraw %}
