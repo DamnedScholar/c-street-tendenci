@@ -138,6 +138,7 @@ def imgproxy(url, size):
     return url.decode()
 
 # @register.inclusion_tag('airbnb_list.html')
+@library.global_function
 @library.render_with('airbnb_list.html.jinja')
 def airbnb():
     with open('lib/drone_hangar/static/airbnb/airbnb_data.json') as f:

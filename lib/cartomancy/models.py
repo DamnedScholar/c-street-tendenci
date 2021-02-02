@@ -5,6 +5,7 @@ from django.contrib.postgres.fields import JSONField
 
 from address.models import AddressField
 from django_hashids import HashidsField
+from partial_date import PartialDateField
 from phonenumber_field.modelfields import PhoneNumberField
 
 class Entity (models.Model):
@@ -49,7 +50,7 @@ class Addressable:
         default=get_address)
 
 class Business (Entity, Addressable, Contactable):
-    pass
+    open_since = PartialDateField(blank=True)
 
 class AirBnB (Entity, Addressable, Contactable):
     room_id = models.IntegerField(default=0) # AirBnB ID

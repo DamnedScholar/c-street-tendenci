@@ -5,10 +5,11 @@
             class="pointer-events-auto hovering-parent overflow-visible relative"
         >
             <nav-btn id="{{ group.0|slugify }}"
-                class="inline-block px-4 py-1 rounded-md bg-blue
-                text-gray-300 text-xl bold"
+                class="inline-block px-4 py-1 rounded-md bg-blue"
             >
-                <a href="{{ group.1 }}">
+                <a href="{{ group.1 }}"
+                    class="text-gray-200 text-xl bold font-serif"
+                >
                     {{ group.0 }}
                 </a>
             </nav-btn>
