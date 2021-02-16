@@ -1,3 +1,5 @@
+from django.conf import Settings
+
 from django_jinja import library
 from jinja2 import contextfunction
 
@@ -14,3 +16,17 @@ def local_hero(context):
     target = slug
     
     return target
+
+@contextfunction
+@library.global_function
+def get_title(context):
+    title = ''
+
+    if context.get('object'):
+        title = context['object'].title
+    elif context.get('title'):
+        title = context['title']
+    else:
+        title = 'Historic C-Street'
+
+    return title

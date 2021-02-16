@@ -11,9 +11,10 @@
 
   {# {%- set hero_src = local_hero() -%} #}
   {%- set hero_src = static("img/Streetscape.jpg") -%}
+  {%- set title = get_title() -%}
 
 
-  <hero-block class="block relative">
+  <hero-block class="block relative h-48">
     <hero-image class="block absolute w-full overflow-visible">
       <picture class="h-full w-full">
         <source media="(max-width:500px)"

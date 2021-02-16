@@ -110,10 +110,17 @@ const config = {
             {
                 test: /\.js/,
                 exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: babel
-                }
+                oneOf: [
+                    {
+                        resourceQuery: /original/, // lit-html?original
+                    },
+                    {
+                        use: {
+                            loader: 'babel-loader',
+                            options: babel
+                        }
+                    }
+                  ]
             }
         ],
     }
