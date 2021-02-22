@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+###
+# In order to perform certain database operations, Django needs access to the Geos library, which in this infrastructure is stored in a container running the database. When the Python environment is set up, the machine or container running the server code needs to download a copy of `libgeos-dev`. Github: https://github.com/libgeos/geos
+###
+
+[packages]
+django-partial-date = "1.3.1"
+social-auth-app-django = "3.1"
+python-jose = "3.0"
+python-dotenv = "0.9"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"
+
+[scripts]
+run = "python manage.py runserver"
+webpack = "npm run watch"
+urls = "python manage.py show_urls |> introspection/urls.txt && code introspection/urls.txt"
+mm = "python manage.py makemigrations"
+m = "python manage.py migrate"

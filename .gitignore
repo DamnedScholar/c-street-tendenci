@@ -1,16 +1,19 @@
 # Ignore all dotfiles...
 .*
 
-# Ignore all pyc file
-*.pyc
-
 # except for .gitignore and .gitkeep
 !.gitignore
 !.gitkeep
 
+# Ignore all pyc file
+*.pyc
+
 # also don't ignore Gitpod files
 !.gitpod.Dockerfile
 !.gitpod.yml
+
+# Ignore Pipfile.lock so that we can test multiple versions
+Pipfile.lock
 
 backup
 

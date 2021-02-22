@@ -17,9 +17,6 @@ billiard==3.6.3.0
 black==19.10b0
 bleach==3.1.5
 blinker==1.4
-boto==2.49.0
-boto3==1.12.8
-botocore==1.15.49
 bs4==0.0.1
 cachetools==4.1.1
 celery==4.4.0
@@ -54,7 +51,6 @@ django-hashids==0.3.0
 django-haystack==2.8.1
 django-import-export==2.2.0
 django-localflavor==1.4.1
-django-log-email @ git+https://github.com/PaulSD/django_log_email@c38a98cd2d7a73ec2e98eb768aab37175415a90e
 django-markdown-deux==1.0.5
 django-nocaptcha-recaptcha==0.0.20
 django-picklefield==2.1.1
@@ -210,8 +206,6 @@ sqlparse==0.2.4
 sshtunnel==0.1.5
 stripe==2.42.0
 tablib==2.0.0
-tendenci==12.0.8
-tendenci-django-admin-bootstrapped==4.0
 toml==0.10.1
 Twisted==20.3.0
 txaio==20.4.1
