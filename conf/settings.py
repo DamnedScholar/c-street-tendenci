@@ -1,4 +1,3 @@
-# from tendenci.settings import *
 import json
 import os
 from django import __path__ as django_path
@@ -201,14 +200,13 @@ INSTALLED_APPS = lib.modules + \
         'django_jinja',
         'channels',
         'gunicorn',
-        'haystack',
+        # 'haystack',
         'import_export',
         'simple_history',
         'phonenumber_field',
         'sockpuppet',
         'formtools',
         'dj_pagination',
-        'tagging',
         'captcha',
         'tastypie',
         'timezone_field',

@@ -52,11 +52,11 @@ django-phonenumber-field==5.0.0
     - sqlparse [required: Any, installed: 0.2.4]
 django-simple-history==2.12.0
   - six [required: Any, installed: 1.15.0]
-django-sockpuppet==0.5.1
+django-sockpuppet==0.4.2
   - bs4 [required: Any, installed: 0.0.1]
     - beautifulsoup4 [required: Any, installed: 4.8.2]
       - soupsieve [required: >=1.2, installed: 2.0.1]
-  - channels [required: Any, installed: 2.4.0]
+  - channels [required: >=2.0,<3.0.0, installed: 2.4.0]
     - asgiref [required: ~=3.2, installed: 3.2.7]
     - daphne [required: ~=2.3, installed: 2.5.0]
       - asgiref [required: ~=3.2, installed: 3.2.7]

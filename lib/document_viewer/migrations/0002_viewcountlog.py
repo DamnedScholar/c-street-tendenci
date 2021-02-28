@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('timestamp', models.DateTimeField(auto_now_add=True)),
-                ('target', models.ForeignKey(on_delete=None, to='document_viewer.ViewCountTarget')),
+                ('target', models.ForeignKey(on_delete=models.CASCADE, to='document_viewer.ViewCountTarget')),
             ],
         ),
     ]

@@ -1,7 +1,7 @@
 from uuid import uuid4
 
 from django.db import models
-from django.contrib.postgres.fields import JSONField
+from django.db.models import JSONField
 
 from address.models import AddressField
 from django_hashids import HashidsField

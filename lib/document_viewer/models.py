@@ -12,7 +12,7 @@ class ViewCountTarget (models.Model):
     views = models.IntegerField()
 
 class ViewCountLog (models.Model):
-    target = models.ForeignKey('ViewCountTarget', on_delete=None)
+    target = models.ForeignKey('ViewCountTarget', on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
