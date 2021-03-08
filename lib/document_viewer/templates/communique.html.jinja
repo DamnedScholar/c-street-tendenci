@@ -36,11 +36,11 @@
         data-document_viewer-croptitle-value="C-Street News & World Report - "
     >
         <div slot="topbar" data-target="document_viewer.topbar"
-            class="w-full flex flex-row items-center justify-between px-4"
+            class="w-full flex flex-row sm:flex-col items-center justify-between px-4 sm:px-0 sm:py-1"
         >
-            <headline class="text-xl">
+            <aside class="text-xl text-center text-serif">
                 The Communique is your finger on the pulse of C-Street!
-            </headline>
+            </aside>
             
             <form data-controller="subscription"
                 action="/subscribe/" method="post"
@@ -48,6 +48,7 @@
                 {% csrf_token %}
                 {{ form.email.label_tag() }}
                 <div class="
+                    sm:px-2
                     flex flex-row items-center justify-around
                 ">
                     {{ form.email }}

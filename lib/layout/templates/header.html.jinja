@@ -1,7 +1,11 @@
 <!-- start: navbar outer -->
-<nav id="site-nav" class="vw z-50 fixed inset-0 flex flex-row justify-between py-8 px-4">
+<nav id="site-nav" class="
+  z-50 fixed inset-0
+  vw py-8 px-4 sm:px-2 sm:py-1
+  flex flex-row justify-between
+  ">
 <!-- logo -->
-  <div class="relative md:w-24 md:h-24 sm:w-16 sm:h-16" href="/">
+  <div class="relative md:w-24 md:h-24 sm:w-20 sm:h-20" href="/">
     <svg id="brand-background" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <radialGradient id="radial" fx="50%" fy="50%" cx="50%" cy="50%" r="50%">
@@ -21,7 +25,7 @@
     </div>
   </div>
   <!-- navigation -->
-  <div class="sm:mt-2 w-4/12" id="navTop">
+  <div class="sm:mt-2 w-4/12 md:w-6/12 absolute right-0" id="navTop">
     <!-- main nav -->
     {{ site_nav() }}
   </div>

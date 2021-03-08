@@ -1,28 +1,22 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
+from mptt.models import MPTTModel
+from mptt.fields import TreeForeignKey, TreeManyToManyField
 
 
-# class AirBnBData (models.Model):
-#     room_id = models.IntegerField(primary_key=True) # AirBnB ID
-#     name = models.CharField(max_length=30)
-#     timestamp = models.DateTimeField()  # When the spider retrieved the data
-#     primary_picture = models.ForeignKey('AirBnBImage', null=True, on_delete=models.SET_NULL, related_name="+")
-#     profile_picture = models.ForeignKey('AirBnBImage', null=True, on_delete=models.SET_NULL, related_name="+")
+class Category(MPTTModel):
+    """
+    Hierarchical category data for the directory.
+    """
 
-#     lat = models.FloatField()
-#     lng = models.FloatField()
+    name = models.CharField(max_length=50)
+    parent = TreeForeignKey("self", blank=True, null=True, on_delete=models.PROTECT)
 
-#     # Store a list of amenities in the future?
 
-#     avg_rating = models.FloatField()
-#     reviews_count = models.IntegerField()
+class Categorizable:
+    """
+    A mixin to attach categorization behavior to another model.
+    """
 
-#     rate = models.FloatField()
-#     rate_type = models.CharField(max_length=30)
-
-#     verified = models.BooleanField(default=False)
-#     super_host = models.BooleanField(default=False)
-
-#     guests = models.CharField(max_length=30, blank=True)
-#     baths = models.CharField(max_length=30, blank=True)
-#     bedrooms = models.CharField(max_length=30, blank=True)
-#     beds = models.CharField(max_length=30, blank=True)
+    categories = TreeManyToManyField(Category, verbose_name=_("Categories"))
