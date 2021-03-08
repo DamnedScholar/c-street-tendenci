@@ -119,7 +119,7 @@ jmespath==0.10.0
 kombu==4.6.9
 lazy-object-proxy==1.4.3
 ldap3==2.7
-lxml==4.5.1
+lxml==4.6.2
 MadMimi==1.3
 mailchimp-transactional==1.0.19
 Mako==1.1.3
