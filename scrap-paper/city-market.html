@@ -1,0 +1,87 @@
+<h3>Get ready! The Market reopens in April!</h3>
+<address>
+    Thursdays 4<sup>PM</sup>↣8<sup>PM</sup>
+    <br />&<br />
+    Saturdays 9<sup>AM</sup>↣2<sup>PM</sup>
+    <br />@<br />
+    The Historic Footbridge Plaza
+</address>
+<p>The C-Street City Market is a signature project, proudly offered by Commercial Club of Springfield, since 2005. Lovingly referred to as "the sweetest little market in town," the C-Street City Market offers a wide range of homegrown, handmade and locally produced products from our friendly family of vendors, on a weekly basis from April through November. We look forward to becoming a favorite destination for you and your family!</p>
+
+<call-out class="bg-pink text-gray-900 border-glass-500 rounded-l-lg px-4 py-6">
+    <h4 class="text-lg italic text-indigo shadow-default">Interested in becoming a vendor?</h4>
+    <p>We love our vendor family, but before you can be adopted by Amy, you have to read a policy document and fill out an application to make the lawyers happy.</p>
+    <div class="flex flex-row gap-4 justify-around text-lg">
+        <button type="button">📑 Market Policy.pdf</button>
+        <button type="button">📑 Vendor Application.pdf</button>
+    </div>
+</call-out>
+
+<script id="sorting-controller" src="/static/js/sorting.js"></script>
+<div class="sorting"
+    data-controller='sorting'>
+    <!-- Sortable grid. -->
+    <sortable-grid class="grid grid-cols-5 sm:grid-cols-2 gap-4" data-target="sorting.grid">
+            <article id="entry-1" class="border border-opacity-50 flex flex-col items-center justify-between p-2"
+            data-sorting-target="item"
+            data-sorting-metadata="">
+                <a href="/static/Dropbox/Market/Vendors"
+                    aria-hidden="true">
+                    <picture class="h-full w-full">
+                        <!-- <source srcset="{{ entry.picture_url | imgproxy("thumb" }}"> -->)
+                        <img src="/static/Dropbox/Market/Vendors"
+                            alt="{{ entry.name }}">
+                    </picture>
+                </a>
+            
+                <address class="flex flex-col text-center">
+                    <a href="url entry.slug">
+                    <!-- TODO: Enable this template tag once I've added the entries to the database so that Django can query them and know which URLs to reserve. -->
+                        <span class="text-2xl inline-block">
+                            {{ entry.name }}</span>
+                        <span class="serif italic text-lg inline-block">
+                            {{ entry.address }}</span>
+                    </a>
+                    {% if entry.web %}
+                        <a href="{{entry.web}}" class="text-green text-lg">
+                            Visit them at <span class="mono">{{entry.web_display}}</span>!
+                        </a>
+                    {% endif %}
+                    <div class="flex flex-row flex-wrap justify-center">
+                        {% if entry.facebook %}
+                        <div class="px-2">
+                            <a href="{{entry.facebook}}" class="text-green text-lg">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if entry.instagram %}
+                        <div class="px-2">
+                            <a href="{{entry.instagram}}" class="text-green text-lg">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if entry.twitter %}
+                        <div class="px-2">
+                            <a href="{{entry.twitter}}" class="text-green text-lg">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if entry.linkedin %}
+                        <div class="px-2">
+                            <a href="{{entry.linkedin}}" class="text-green text-lg">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </address>
+                <aside class="w-full">
+                    <!-- TODO: Tags and such can go here. -->
+                </aside>
+            </article>
+        {% endfor %}
+    </sortable-grid>
+</div>
