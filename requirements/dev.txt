@@ -124,7 +124,7 @@ passlib==1.7.2
 pathspec==0.8.0
 pdfminer.six==20170720
 pgadmin4==4.22
-Pillow==7.0.0
+Pillow==7.1.0
 pisa==3.0.33
 Protego==0.1.16
 psutil==5.7.0
