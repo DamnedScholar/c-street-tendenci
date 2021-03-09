@@ -11,6 +11,9 @@ from phonenumber_field.modelfields import PhoneNumberField
 from lib.sitemapper.models import GUID, Slug
 
 
+# TODO: I seem to have fucked up the database tables for this one, somehow. I need to take a deep dive on learning how to unfuck them, but that is a project for a future time because it's not something I can show to Connie on Tuesday.
+
+
 class Entity(models.Model):
     """
     An entity is anything we might want to @mention.

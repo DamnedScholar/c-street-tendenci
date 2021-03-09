@@ -14,6 +14,6 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "conf.settings")
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-os.environ.setdefault('TENDENCI_PROJECT_ROOT', PROJECT_ROOT)
+os.environ.setdefault('PROJECT_ROOT', PROJECT_ROOT)
 
 application = get_wsgi_application()

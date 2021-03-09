@@ -31,11 +31,24 @@ def site_nav():
                 ('Rentals', '/rentals'),
             ]),
             ('Calendar', '/calendar'),
-            ('Communique', '/communique'),
-        ]
+            ('Newsletter', '/communique'),
+        ],
+        "scheme": {
+            "top": {
+                "bg": "blue",
+                "text": "gray-300",
+            },
+            "lv1": {
+                "bg": "gray-300",
+                "text": "blue",
+            },
+            "lv2": {
+                "bg": "gray-100",
+                "text": "blue",
+            }
+        }
     }
 
-# @register.inclusion_tag('hero_nav.html')
 @library.global_function
 @library.render_with('site_nav.html.jinja')
 def hero_nav(cluster_name):
@@ -55,5 +68,11 @@ def hero_nav(cluster_name):
         ]
     }
     return {
-        'hero_nav': clusters[cluster_name]
+        'hero_nav': clusters[cluster_name],
+        "scheme": {
+            "top": {
+                "bg": "green",
+                "text": "gray-900",
+            }
+        }
     }
