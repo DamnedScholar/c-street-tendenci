@@ -170,6 +170,24 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Cache Settings
 # ---------------------------------------------------------------------------- #
 
+CACHES = {
+    # The default cache must not be locmem on production, but should be a memory-based store like Red
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    },
+    'db': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'c_street_cache',
+    },
+    'fs': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/c_street_cache',
+    }
+}
 
 # ---------------------------------------------------------------------------- #
 # Celery Settings
@@ -323,9 +341,28 @@ LOGGING = {
 #LOGGING['loggers']['py.warnings'].pop('filters', None)
 
 # To use Sentry (https://docs.sentry.io/):
-#SENTRY_DSN = ''
-#INSTALLED_APPS += ['raven.contrib.django.raven_compat']
-#RAVEN_CONFIG = {'dsn': SENTRY_DSN}
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn=os.environ['SENTRY_DSN'],
+    integrations=[DjangoIntegration()],
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production,
+    traces_sample_rate=1.0,
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True,
+
+    # By default the SDK will try to use the SENTRY_RELEASE
+    # environment variable, or infer a git commit
+    # SHA as release, however you may want to set
+    # something more human-readable.
+    # release="myapp@1.0.0",
+)
 
 
 # ---------------------------------------------------------------------------- #

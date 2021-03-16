@@ -45,6 +45,8 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "@sentry/browser": "^6.2.2",
+    "@sentry/tracing": "^6.2.2",
     "@tailwindcss/forms": "^0.2.1",
     "backbone": "^1.4.0",
     "blackstone-ui": "github:kjantzer/bui",

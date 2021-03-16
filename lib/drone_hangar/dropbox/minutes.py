@@ -6,6 +6,8 @@ import subprocess
 import re
 import logging
 
+logger = logging.getLogger()
+
 # try:
 #     from ..utils import storage_path
 # except:
@@ -80,6 +82,7 @@ def merge_minutes():
                 convert(f"{src}/{folder}", filename)
 
         for filename in listdir():
+            logger.warn(f"Merging {filename}")
             if filename.endswith(".pdf"):
                 merger.append(
                     PdfFileReader(open(os.path.join(f"{src}/{folder}", filename), "rb"))
