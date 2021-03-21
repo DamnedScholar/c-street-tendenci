@@ -40,3 +40,36 @@ if [ -f /opt/backups/restore.dump ]; then
   echo "Restoring backup..."
   pg_restore -d gis --clean --if-exists /opt/backups/restore.dump
 fi
+
+function create_database() {
+	local database=$1
+	echo "  Creating user and database '$database'"
+	psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
+	    CREATE DATABASE $database;
+	    GRANT ALL PRIVILEGES ON DATABASE $database TO $POSTGRES_USER;
+EOSQL
+}
+
+if [ -n "$POSTGRES_MULTIPLE_DATABASES" ]; then
+	echo "Multiple database creation requested: $POSTGRES_DB"
+	for db in $(echo $POSTGRES_DB | tr ',' ' '); do
+		create_user_and_database $db
+	done
+	echo "Multiple databases created"
+fi
+
+# Create the 'template_postgis' template db
+"${psql[@]}" <<- 'EOSQL'
+CREATE DATABASE template_postgis IS_TEMPLATE true;
+EOSQL
+
+# Load PostGIS into both template_database and $POSTGRES_DB
+for DB in template_postgis $(echo $POSTGRES_DB | tr ',' ' '); do
+	echo "Loading PostGIS extensions into $DB"
+	"${psql[@]}" --dbname="$DB" <<-'EOSQL'
+		CREATE EXTENSION IF NOT EXISTS postgis;
+		CREATE EXTENSION IF NOT EXISTS postgis_topology;
+		CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
+		CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
+EOSQL
+done

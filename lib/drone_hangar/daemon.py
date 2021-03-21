@@ -1,10 +1,17 @@
 import os
 from collections import namedtuple
 
+from apscheduler.schedulers.background import BackgroundScheduler
 
 class Daemon:
-    # The ur-class at the root of all Daemon activity.
     path = os.getcwd() + 'lib/drone_hangar/static'
+
+    def __init__(self):
+        self.scheduler = BackgroundScheduler()
+
+    def start_job(self, wrapped):
+        # Pass a function to this method to instruct the Daemon on a new job.
+        pass
 
     def storage_path(self, uri):
         check = ''

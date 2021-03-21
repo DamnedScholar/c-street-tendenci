@@ -3,15 +3,11 @@ import logging
 
 from django.apps import AppConfig
 
-from apscheduler.schedulers.background import BackgroundScheduler
-
-from lib.drone_hangar.models import AirBnBData
-from lib.drone_hangar.scrapy.airbnb_spider import AirBnBSpider
-
 
 class DroneHangarConfig(AppConfig):
-    name = 'drone_hangar'
+    name = 'lib.drone_hangar'
 
-    # def ready(self):
-        # super()
+    def ready(self):
+        # TODO: Define model signals here. This will be relevant when we get to consistently updating the stored values and want to hook off of them.
+        super()
         

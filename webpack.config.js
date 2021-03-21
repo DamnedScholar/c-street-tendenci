@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const glob = require('glob');
 const TerserPlugin = require('terser-webpack-plugin')
+const path = require('path')
 
 
 let globOptions = {
@@ -77,6 +78,12 @@ const config = {
     target: "browserslist:last 2 Chrome versions",
     // NOTE: Webpack 5 has major architectural improvements regarding targets and different kinds of imports, but they're not fully implemented yet. The following line is a workaround and should be removed when the features are complete. https://webpack.js.org/blog/2020-10-10-webpack-5-release/#improved-target-option
     externalsPresets: { web: false, webAsync: true },
+    plugins: [
+        new webpack.ProvidePlugin({
+            Sentry: path.resolve(path.join(__dirname, 'lib/puppet_show/javascript/sentry.js')),
+            // ...
+          }),
+    ],
     optimization: optimize[mode],
     cache: false,
     resolve: {

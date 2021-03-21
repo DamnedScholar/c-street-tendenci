@@ -255,6 +255,7 @@ django-mptt = "*"
 django-mptt-admin = "*"
 sentry-sdk = "*"
 redis-queue = "*"
+dropbox = "*"
 
 [dev-packages]
 
