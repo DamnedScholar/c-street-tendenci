@@ -203,9 +203,13 @@ CACHES = {
 
 PROJECT_ROOT = os.getcwd()
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = PROJECT_ROOT + MEDIA_URL
+
 STATIC_URL = '/static/'
 
-STATIC_ROOT = PROJECT_ROOT + '/static/'
+STATIC_ROOT = PROJECT_ROOT + STATIC_URL
 
 INSTALLED_APPS = lib.modules + \
     tools.modules + \

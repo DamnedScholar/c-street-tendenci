@@ -256,6 +256,9 @@ django-mptt-admin = "*"
 sentry-sdk = "*"
 redis-queue = "*"
 dropbox = "*"
+fs = "*"
+"fs.dropboxfs" = "*"
+"fs.googledrivefs" = "*"
 
 [dev-packages]
 
