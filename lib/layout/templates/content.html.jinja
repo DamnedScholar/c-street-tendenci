@@ -9,8 +9,8 @@
 
   {%- include "header.html.jinja" -%}
 
-  {# {%- set hero_src = local_hero() -%} #}
-  {%- set hero_src = static("img/Streetscape.jpg") -%}
+  {%- set hero_src = mediabox.get_relative_url(query='streetscape.jpg') -%}
+  {# {%- set hero_src = static("img/Streetscape.jpg") -%} #}
   {%- set title = get_title() -%}
 
 

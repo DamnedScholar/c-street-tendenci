@@ -4,7 +4,7 @@ from django.contrib import admin
 from django_jinja import views
 
 from . import settings
-from lib.trixie_pages.views import UnknownPageView
+from lib.pageboy.views import UnknownPageView
 from tools.modulation.utils import Registry
 
 

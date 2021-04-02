@@ -36,7 +36,7 @@ def site_nav():
         "scheme": {
             "top": {
                 "bg": "blue",
-                "text": "gray-300",
+                "text": "gray-100",
             },
             "lv1": {
                 "bg": "gray-300",

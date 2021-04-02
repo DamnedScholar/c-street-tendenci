@@ -1,4 +1,3 @@
-from PyPDF2 import PdfFileMerger, PdfFileReader
 from datetime import datetime
 import os
 import shutil
@@ -8,11 +7,55 @@ import logging
 
 logger = logging.getLogger()
 
-# try:
-#     from ..utils import storage_path
-# except:
-#     from lib.drone_hangar.utils import storage_path
+from celery import shared_task
+from pikepdf import Pdf
+from PyPDF2 import PdfFileMerger, PdfFileReader
 
+from . import mediabox
+
+@shared_task
+def compile_minutes():
+    '''
+    Using the directory of minutes documents from Dropbox, walk through each directory and concatenate all PDFs. Output the merged files, named identically to the directories they came from, into the root directory, then use the exposed PyFS API on the Mediabox object to upload the new files.
+    '''
+
+    # TODO: The full loop has been tested to completion. It just needs to be set up to run automatically on server start and react to a webhook to notify it about updates. Additional flow control should also be put in to make calls to the server only for new files, and to only create PDFs from changed directories. With how rarely this script runs, such performance tweaks aren't high priorities.
+
+    # First we make sure that the requested part of the filesystem is up to date.
+    walker = mediabox.MediaWalker(
+        filter_dirs=['CID Minutes*'],
+    )
+    results = [entry for entry
+        in mediabox.dbfs.glob('CID-Minutes/**/*.pdf', path='/CID-Minutes/')]
+
+    download_paths = [entry.path for entry in results]
+    
+    if mediabox.downstream(download_paths):
+        logger.warn(f'Minutes synced.')
+    else:
+        logger.warn(f'We done fucked up.')
+    
+    # Then we take a list of folders that match our walker.
+    dirs = [entry for entry in walker.dirs(mediabox.fs, path=f'/CID-Minutes')]
+
+    with mediabox.work_dir(f'CID-Minutes/out') as outputfs:
+        for dirpath in sorted(dirs):
+            out = Pdf.new()
+
+            dirname = mediabox.fs.getinfo(dirpath).name
+
+            files = [file for file in walker.files(mediabox.fs, path=dirpath)]
+
+            for file in sorted(files):
+                file = mediabox.fs.getsyspath(file)
+                src = Pdf.open(file)
+                out.pages.extend(src.pages)
+
+            out.save(outputfs.getsyspath('') + f'/{dirname}.pdf')
+
+            mediabox.upstream([f'/CID-Minutes/out/{dirname}.pdf'])   # Needs to take a list.
+
+    return dirs
 
 def storage_path(uri):
     path = "lib/drone_hangar/static"
@@ -31,6 +74,7 @@ def storage_path(uri):
 
     return os.path.abspath(result)
 
+# TODO: Need to fix this! Conversion code is brittle because it only works if LibreOffice is installed. In the short term, we can ignore the issue because nobody's saving in docx any more. In the long term, we should ensure that LibreOffice is somewhere in the provisioning scripts (either on the Gunicorn container or the host) and the conversion part of this script fails gracefully if not.
 
 # TODO: Conversion code cribbed from https://michalzalecki.com/converting-docx-to-pdf-using-python/
 def convert(folder, filename, timeout=None):

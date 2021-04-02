@@ -11,6 +11,7 @@ urls = "python manage.py show_urls"
 pipreqs = "pipreqs . --ignore 'node_modules,templates' --force"
 mm = "python manage.py makemigrations"
 m = "python manage.py migrate"
+static = "python manage.py collectstatic"
 fakeinitial = "python manage.py migrate --fake-initial"
 minutes = "python manage.py minutes"
 
@@ -259,6 +260,8 @@ dropbox = "*"
 fs = "*"
 "fs.dropboxfs" = "*"
 "fs.googledrivefs" = "*"
+django-quill-editor = "*"
+django-celery-results = "*"
 
 [dev-packages]
 

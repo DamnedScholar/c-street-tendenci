@@ -193,8 +193,7 @@ CACHES = {
 # Celery Settings
 # ---------------------------------------------------------------------------- #
 
-# Uncomment this setting if you are running the Celery Task System.
-#CELERY_IS_ACTIVE = True
+CELERY_RESULT_BACKEND = 'django-db'
 
 
 # ---------------------------------------------------------------------------- #
@@ -232,6 +231,8 @@ INSTALLED_APPS = lib.modules + \
         'captcha',
         'tastypie',
         'timezone_field',
+        'django_quill',
+        'django_celery_results',
 
         # Django libraries
         'django.contrib.admin',
@@ -254,7 +255,7 @@ TEMPLATES = [
         "BACKEND": "django_jinja.backend.Jinja2",
         "APP_DIRS": True,
         "OPTIONS": {
-            "match_extension": (".jinja", ".html")
+            "match_regex": r".*\.jinja"
         }
     },
     {
@@ -299,8 +300,6 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
 ]
-if os.path.exists(os.path.join(PROJECT_ROOT, 'lib/impersonation/')):
-    MIDDLEWARE += ['lib.impersonation.middleware.ImpersonationMiddleware']
 
 # To enable custom URL patterns to be configured in urls.py:
 ROOT_URLCONF = 'conf.urls'

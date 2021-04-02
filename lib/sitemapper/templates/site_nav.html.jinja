@@ -9,7 +9,9 @@
                 px-4 py-1 rounded-md bg-{{ scheme.top.bg }}
             "
         >
-            <a href="#" class="text-{{ scheme.top.text }}">Explore ↯</a>
+            <a href="#" class="font-bold text-{{ scheme.top.text }}">
+                Explore ↯
+            </a>
         </nav-btn>
         {% for group in nav_groups %}
         <link-group aria-labelledby="{{ group.0|slugify }}"
@@ -19,7 +21,7 @@
                 class="inline-block px-4 py-1 rounded-md bg-{{ scheme.top.bg }}"
             >
                 <a href="{{ group.1 }}"
-                    class="text-{{ scheme.top.text }} text-xl bold font-serif"
+                    class="text-{{ scheme.top.text }} text-xl font-bold font-serif"
                 >
                     {{ group.0 }}
                 </a>

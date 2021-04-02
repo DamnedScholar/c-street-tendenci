@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8">
 
-    {% block full_title %}<title>{% block title %}{{ SITE_GLOBAL_SITEDISPLAYNAME }}{% endblock %}</title>{% endblock %}
+    {% block full_title %}
+      <title>
+        {% block title %}
+          {{ SITE_GLOBAL_SITEDISPLAYNAME }}
+        {% endblock %}
+      </title>
+    {% endblock %}
 
     {% block full_meta_description %}<meta name="description"
     content="{% block meta_description %}{{ SITE_GLOBAL_SITEPRIMARYKEYWORDS }}{% endblock %}" />{% endblock %}
@@ -21,6 +27,8 @@
     {% if request.user.is_authenticated %}
 
     {% endif %}
+
+    {{ form.media }}
 
     {% block extra_head %}{% endblock %}
 
