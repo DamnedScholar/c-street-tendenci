@@ -45,9 +45,11 @@ class Registry:
     def get_url_patterns(self):
         items = []
         for module in self.modules:
+            logger.warn(f"Trying {module}...")
             try:
                 __import__('.'.join([module, 'urls']))
                 items.append(url(r'', include('%s.urls' % module,)))
-            except ImportError:
-                pass
+                logger.warn(f"Added.")
+            except ImportError as e:
+                logger.warn(f"We didn't get it added. {e}")
         return items

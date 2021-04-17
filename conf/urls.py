@@ -1,5 +1,11 @@
-from django.conf.urls import url, include  # noqa: F401
+from django.urls import path, re_path, include
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
+
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.core import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
 
 from django_jinja import views
 
@@ -19,13 +25,16 @@ handler404 = UnknownPageView.as_view()
 # handler500 = views.ServerError.as_view()
 
 urlpatterns = tools.get_url_patterns() + [
-    url(r'', include('%s.urls' % 'httpproxy')),
-    url(r'admin/', admin.site.urls),
+    path('proxy/', include('%s.urls' % 'httpproxy')),
+    path('admin/', admin.site.urls),
+    path('cms/', include(wagtailadmin_urls)),
+    path('documents/', include(wagtaildocs_urls)),
+    path('', include(wagtail_urls)),
     # url(r'', include('%s.urls' % 'django.contrib.auth')),
-] + lib.get_url_patterns()
+] + lib.get_url_patterns() + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
+        path('__debug__/', include(debug_toolbar.urls)),
     ]

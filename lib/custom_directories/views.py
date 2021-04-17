@@ -8,8 +8,8 @@ import random
 import os
 import logging
 
+from django.shortcuts import render_to_response
 from django.template.defaultfilters import slugify
-from tendenci.apps.theme.shortcuts import themed_response as render_to_resp
 
 import hashids
 

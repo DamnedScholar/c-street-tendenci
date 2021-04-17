@@ -1,10 +1,15 @@
-from django.conf.urls import url
+from django.urls import path, re_path
 
 from .dropbox import views
 
 urlpatterns = [
-    url(r'^dropbox/(?P<path>.*)$', views.get_redirect, name='dropbox.get-path'),
-    url(r'^dropbox/get/(?P<query>.*)$', views.get_redirect, name='dropbox.get-query'),
-    url(r'^dropbox/random/(?P<query>.*)$', views.get_redirect, {'random': True},
+    re_path(r'^dropbox/((?P<segment>.*)/)?get/(?P<query>.*)$',
+        views.get_redirect,
+        name='dropbox.get-query'),
+    re_path(r'^dropbox/((?P<segment>.*)/)?random/(?P<query>.*)$',
+        views.get_redirect, {'random': True},
         name='dropbox.random'),
+    re_path(r'^dropbox/((?P<segment>.*)/)?(?P<path>.*)$',
+        views.get_redirect,
+        name='dropbox.get-path'),
 ]

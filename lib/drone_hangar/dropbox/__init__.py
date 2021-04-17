@@ -7,6 +7,8 @@ import logging
 
 logger = logging.getLogger('dropbox-fs')
 
+from collections import namedtuple
+
 from random import choice, choices, sample
 
 from django.conf import settings
@@ -29,11 +31,19 @@ from fs.tools import is_thread_safe
 from fs.tree import render
 from fs.walk import Walker
 
+from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
+from fuzzywuzzy.string_processing import StringProcessor
 
 import sentry_sdk as sentry
 
+MediaboxResult = namedtuple('MediaboxResult', ['basename', 'path', 'contents'])
+
 class Mediabox:
+    segments = {
+        'photos': '/C-Street Website/',
+        'minutes': '/CID-Minutes/'
+    }
     def __init__(self):
         '''
         Mediabox is a class that integrates the Django media folder with Dropbox. The class has the ability to mirror the Dropbox folder to the local server and then serve files locally that were deposited by people with no access to the site.
@@ -60,28 +70,46 @@ class Mediabox:
         (dirs, files) = render(self.fs, with_color=True, file=None)
         return f'Found {dirs} directories and {files} files.'
 
-    def fuzz(self, query):
-        return [
-            e[0] for e in
-            process.extractWithoutOrder(
-                query, self.index, score_cutoff=90)
-            ]
+    # def fuzz(self, query, segment):
+    #     return [
+    #         e[0] for e in
+    #         process.extractWithoutOrder(
+    #             query, self.index[segment],
+    #             score_cutoff=90)
+    #         ]
 
-    def get(self, query='', path='', random=False):
+    def fuzz(self, query, segment):
+        return process.extractBests(
+                query, self.index[segment], scorer=fuzz.token_set_ratio)
+
+    def get(self, query='', path='', segment='', random=False):
         '''
         Get the first or a random file according to a query parameter and/or path string.
         '''
-        if path and path in self.index:
+
+        # Fuzzywuzzy tokenizes strings based on space separators, and the multi-token query string syntax resembles subdirectories, so we can easily swap one to the other. It doesn't matter if this is a little messy, since the match is fuzzy and doesn't care about specific directory or file names.
+
+        def tokenify(query):
+            return query.replace('/', ' ').replace('.', ' ')
+
+        if not segment:
+            segment = 'photos'
+
+        if path and path in self.index[segment]:
             return path
         elif not random:
-            return process.extractOne(query, self.index)[0]
+            logger.warn(f"Looking for the best match for '{query}' "
+                "in {self.segments[segment]}.")
+            return process.extractOne(
+                query, self.index[segment], scorer=fuzz.token_set_ratio)[0]
         else:
-            return choice(self.fuzz(query))
+            return choice(self.fuzz(query, segment))[0]
 
     def urlize(self, path):
         '''
         Take a PyFS path and convert it into a URL accessible from the outside.
         '''
+        logger.warn(f'Creating URL for {path}')
         return os.path.join(self.local_url, path)
 
     def get_relative_url(self, **kwargs):
@@ -98,6 +126,16 @@ class Mediabox:
         Return a list of urls matching the query parameters.
         '''
         return [self.urlize(url) for url in self.fuzzy_clump(query, max)]
+
+    def open(self, path):
+        '''
+        Open a file.
+        '''
+        return MediaboxResult(
+            basename(path),
+            path,
+            self.fs.openbin(relpath(path))
+        )
 
     def downstream(self, paths, walker=None):
         '''
@@ -216,12 +254,18 @@ class Mediabox:
         '''
         Iterate through the local mirror and build a list of all files that can be efficiently searched. These files are stored as relative paths because other functions use `os.path.join()`, which has specific behavior around absolute paths.
         '''
-        results = []
+        segments = {}
 
-        for file in self.fs.walk.files():
-            results.append(relpath(file))
+        for segment, path in self.segments.items():
+            results = []
 
-        self.index = results
+            for file in self.fs.walk.files(path=path):
+                results.append(relpath(file))
+
+            segments.update({ segment: results })
+
+        self.index = segments
+
 
 @jinja_library.extension
 class MediaboxExtension(Extension):

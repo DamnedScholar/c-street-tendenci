@@ -162,8 +162,10 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # ---------------------------------------------------------------------------- #
-# Payment Gateway Settings
+# Google API Settings
 # ---------------------------------------------------------------------------- #
+
+GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
 
 
 # ---------------------------------------------------------------------------- #
@@ -194,6 +196,7 @@ CACHES = {
 # ---------------------------------------------------------------------------- #
 
 CELERY_RESULT_BACKEND = 'django-db'
+CELERY_RESULT_EXTENDED = True
 
 
 # ---------------------------------------------------------------------------- #
@@ -233,6 +236,26 @@ INSTALLED_APPS = lib.modules + \
         'timezone_field',
         'django_quill',
         'django_celery_results',
+        'django_redis',
+
+        # Wagtail
+        'wagtail.contrib.forms',
+        'wagtail.contrib.redirects',
+        'wagtail.embeds',
+        'wagtail.sites',
+        'wagtail.users',
+        'wagtail.snippets',
+        'wagtail.documents',
+        'wagtail.images',
+        'wagtail.search',
+        'wagtail.admin',
+        'wagtail.core',
+
+        'modelcluster',
+        'taggit',
+
+        # 'ls.joyous',
+        'wagtail.contrib.modeladmin',
 
         # Django libraries
         'django.contrib.admin',
@@ -299,6 +322,7 @@ MIDDLEWARE = [
     'dj_pagination.middleware.PaginationMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 # To enable custom URL patterns to be configured in urls.py:
@@ -367,6 +391,34 @@ sentry_sdk.init(
     # release="myapp@1.0.0",
 )
 
+
+# ---------------------------------------------------------------------------- #
+# Wagtail and Extensions
+# ---------------------------------------------------------------------------- #
+
+WAGTAIL_SITE_NAME = 'C-Street Almanac'
+
+from lib.pageboy.quill import quill_config
+QUILL_CONFIGS = {
+    'default': quill_config()
+}
+
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    'default': {
+        'WIDGET': 'django_quill.widgets.QuillWidget'
+    },
+    'legacy': {
+        'WIDGET': 'wagtail.admin.rich_text.HalloRichTextArea',
+    }
+}
+
+# Package: wagtailgmaps
+# Mandatory
+WAGTAIL_ADDRESS_MAP_CENTER = 'Springfield, MO, USA'  # It must be a properly formatted address
+WAGTAIL_ADDRESS_MAP_KEY = os.environ.get('GOOGLE_API_KEY')
+
+# Package: ls.joyous
+USE_TZ = True
 
 # ---------------------------------------------------------------------------- #
 # Haystack Search
