@@ -19,11 +19,8 @@ from wagtail.images.models import Image
 
 import arrow
 
-from django_jinja import library as jinja_library
-from jinja2.ext import Extension
-
 import dropbox
-import fs
+from fs import open_fs
 from fs._bulk import Copier
 from fs.copy import copy_file_if_newer, copy_fs_if_newer, copy_structure
 from fs.errors import DirectoryExpected, DirectoryExists, ResourceNotFound
@@ -55,8 +52,8 @@ class Mediabox:
         self.local_url = os.path.join(settings.MEDIA_URL, 'dropbox/')
         self.oauth = os.environ.get('DROPBOX_OAUTH')
         self.api = dropbox.Dropbox(self.oauth)
-        self.fs = fs.open_fs(f'osfs://{self.local_root}')
-        self.dbfs = fs.open_fs(
+        self.fs = open_fs(f'osfs://{self.local_root}')
+        self.dbfs = open_fs(
             f'dropbox://dropbox.com?access_token={self.oauth}')
 
         self._index()
@@ -156,6 +153,8 @@ class Mediabox:
 
             if copy_file_if_newer(self.dbfs, path, self.fs, path):
                 logger.warn(f'Copied {path} on Dropbox to the local fs.')
+
+        self._index()
 
         return True
 
@@ -274,12 +273,5 @@ class Mediabox:
             segments.update({ segment: results })
 
         self.index = segments
-
-
-@jinja_library.extension
-class MediaboxExtension(Extension):
-    def __init__(self, environment):
-        super(MediaboxExtension, self).__init__(environment)
-        environment.globals["mediabox"] = Mediabox()
 
 mediabox = Mediabox()
