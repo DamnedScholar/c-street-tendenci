@@ -140,7 +140,7 @@ class Mediabox:
         return MediaboxResult(
             basename(path),
             path,
-            self.fs.openbin(relpath(path))
+            self.fs.readbytes(relpath(path))
         )
 
     def downstream(self, paths, walker=None):
