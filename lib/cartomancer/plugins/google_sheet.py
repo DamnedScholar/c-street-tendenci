@@ -12,33 +12,6 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
-# try:
-#     from ..utils import storage_path
-# except:
-#     from lib.drone_hangar.utils import storage_path
-
-def storage_path(uri):
-    path = 'lib/drone_hangar/static'
-    check = ''
-    p_list = path.split('/')
-
-    p_len = len(p_list)
-
-    while p_len != 0:
-        check = '/'.join([p_list[p_len - 1], check])
-        if os.path.exists(check):
-            result = os.path.join(check, uri)
-            print(
-                ' '.join([
-                    '>>> Storage file populated at', result
-                    ])
-            )
-            return result
-
-        p_len = p_len - 1
-
-    return os.path.abspath(result)
-
 def get_credentials():
     creds = None
     SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
@@ -63,7 +36,7 @@ def get_credentials():
     
     return creds
 
-def get_directory():
+def call_api():
     '''
     Returns a dict with the keys being the slugified text of the first column.
     '''
@@ -79,5 +52,8 @@ def get_directory():
 
     return data
 
-if __name__ == "__main__":
-    get_directory()
+def to_model(modelCls=None, result=None):
+    """
+    Takes a model class and an iterable of data structures that should resemble the model class, and tries to make them fit.
+    """
+    pass

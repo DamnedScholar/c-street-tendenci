@@ -28,7 +28,9 @@
 
     {% endif %}
 
-    {{ form.media }}
+    {% if form is defined %}
+      {{ form.media }}
+    {% endif %}
 
     {% block extra_head %}{% endblock %}
 

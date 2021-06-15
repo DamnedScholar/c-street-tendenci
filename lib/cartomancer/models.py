@@ -1,75 +1,100 @@
 from datetime import datetime
+import random
+import re
 
+import arrow
+
+import logging; logger = logging.getLogger('Cartomancer 🗺 ')
+
+from django.apps import apps
 from django.contrib.auth.models import User
+from django.contrib.gis.db import models as geom
+from django.contrib.gis.geos import Point
 from django.conf import settings
 from django.core.validators import RegexValidator
 from django.db import models
-from django.contrib.gis.db import models as geom
-from django.db.models import JSONField
+from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 
+# from clint.textui import indent, prompt
+
 from address.models import AddressField
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
 from partial_date import PartialDateField
 from phonenumber_field.modelfields import PhoneNumberField
 
-from modelcluster.fields import ParentalKey
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 
-from wagtail.core.fields import StreamField
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
-from wagtail.core.models import Orderable, Page
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel
+from wagtail.core.models import Collection, Orderable, Page
+from wagtail.snippets.models import register_snippet
 from wagtail.search import index
+from wagtail.images.models import Image
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+from wagtailgmaps.edit_handlers import MapFieldPanel
+
+from lib.pageboy.models import HeroicPage
 from lib.pageboy.blocks import BaseStreamBlock
 # TODO: https://github.com/wagtail/bakerydemo/blob/master/bakerydemo/base/blocks.py#L53
 from lib.chronomancy.choices import DAY_CHOICES
 
-class Contact(Page):
+from .apps import CartomancerConfig
+
+
+@register_snippet
+class Contact_Card(models.Model):
     """
     This represents a person or organization that could be contacted. The `details` property is meant as a freeform data structure to hold information that can't fit into the model. It might sometimes have redundant information, or it could have additional phone numbers.
     """
-    details = JSONField(verbose_name="Contact Card", null=True)
+    details = models.JSONField(verbose_name="Contact Card", null=True)
     first_name = models.CharField(_("First name"), max_length=255)
     last_name = models.CharField(_("Last name"), max_length=255)
     email = models.EmailField(null=True)
-    phone = PhoneNumberField(null=True)
+    office_phone = PhoneNumberField(null=True)
+    cell_phone = PhoneNumberField(null=True)
     address = AddressField(null=True)
     account = models.ForeignKey(
         User, related_name="account", on_delete=models.SET_NULL, null=True
     )
 
-class Location(Page):
+    panels = [
+        MultiFieldPanel([
+            FieldRowPanel([
+                FieldPanel('first_name'),
+                FieldPanel('last_name')
+            ])
+        ], heading="Personal Details"),
+        MultiFieldPanel([
+            FieldPanel('email'),
+            FieldRowPanel([
+                FieldPanel('office_phone'),
+                FieldPanel('cell_phone')
+            ]),
+            MapFieldPanel('address')
+        ], heading="Contact"),
+        FieldPanel('account')
+    ]
+
+@register_snippet
+class Location_Pin(models.Model):
     # TODO: Locations should be able to be serialized as GeoJSON Feature objects in a FeatureCollection. This means they at least need to store the same data, and I should probably build a `__str__` override that just outputs the correct JSON so that it's effortless on the receiving end.
 
-    def get_slug(self):
-        return self.plus
-
-    point = geom.PointField(geography=True,
-        default=(-93.29067081212997, 37.230544082999714)
+    coords = geom.PointField(geography=True, null=True, blank=True,
+        default='POINT(-93.29067081212997 37.230544082999714)'
     )
-    address = AddressField(related_name="+", blank=True)
+    address = AddressField(related_name="+", blank=True,
+        on_delete=models.PROTECT
+    )
     plus = models.CharField(max_length=20, blank=True)
 
-class Contactable:
-    """
-    This is a mixin to allow for adding contact information to different types of models.
-    """
-    # Don't allow referenced contacts to be deleted.
-    contacts = models.ManyToManyField(Contact, related_name='representing')
-
-    def get_phone(self):
-        """
-        If there isn't a phone number set when the model is first saved, look in its contacts for phone numbers and add one of them.
-
-        TODO: In the future, I should put in a measure to double-check with a human that the automatically acquired number is the correct one.
-        """
-        try:
-            return self.contacts.first().phone
-        except BaseException:
-            return ''
-
-    phone = PhoneNumberField(verbose_name='Primary Number', blank=True,
-        default=get_phone)
+    panels = [
+        MapFieldPanel('coords', latlng=True),
+        MapFieldPanel('address'),
+        FieldPanel('plus')
+    ]
 
 class OperatingHours(models.Model):
     """
@@ -138,30 +163,27 @@ class EntityOperatingHours(Orderable, OperatingHours):
     )
 
 
-class EntitiesIndexPage(Page):
+class EntitiesIndexPage(HeroicPage):
     """
     A Page model that creates an index page (a listview)
     """
     introduction = models.TextField(
         help_text='Text to describe the page',
         blank=True)
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        help_text='Landscape mode only; horizontal width between 1000px and 3000px.'
-    )
 
-    # Only EntityPage objects can be added underneath this index page
-    subpage_types = ['EntityPage']
+    # Only entries and child indices can be added underneath this index page
+    subpage_types = ['EntityPage', 'EntitiesIndexPage']
 
     # Allows children of this indexpage to be accessible via the indexpage
     # object on templates. We use this on the homepage to show featured
     # sections of the site and their child pages
-    def children(self):
+    def directory(self):
         return self.get_children().specific().live()
+
+    templates = {
+        'page': 'index_page.html.jinja',
+        'listing': 'index_listing.html.jinja'
+    }
 
     # Overrides the context to list all child
     # items, that are live, by the date that they were published
@@ -175,72 +197,89 @@ class EntitiesIndexPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('introduction', classname="full"),
-        ImageChooserPanel('image'),
+        ImageChooserPanel('hero'),
     ]
 
 
-class EntityPage(Page):
+class EntityPage(HeroicPage):
     """
-    Detail for a specific bakery entity.
+    Detail for a specific directory entity.
     """
     introduction = models.TextField(
         help_text='Text to describe the page',
         blank=True)
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        help_text='Landscape mode only; horizontal width between 1000px and 3000px.'
-    )
-    body = StreamField(
-        BaseStreamBlock(), verbose_name="Page body", blank=True
-    )
+    body = RichTextField(blank=True)
 
-    map = models.ForeignKey(Location, related_name='entities',
-        on_delete=models.PROTECT)
+    website = models.URLField(blank=True, default='')
+    social = models.JSONField(verbose_name="Social media accounts", blank=True, default={})
+
+    data = models.JSONField(blank=True, default={})
+
+    map = models.ForeignKey(Location_Pin, blank=True, null=True,
+        related_name='entities', on_delete=models.PROTECT)
 
     def get_address(self):
-        return self.location.address
+        return self.map.address
 
     address = AddressField(related_name="+", blank=True,
-        default=get_address)
+        null=True)
 
-    lat_long = models.CharField(
-        max_length=36,
-        help_text="Comma separated lat/long. (Ex. 64.144367, -21.939182) \
-                   Right click Google Maps and select 'What\'s Here'",
-        validators=[
-            RegexValidator(
-                regex=r'^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$',
-                message='Lat Long must be a comma-separated numeric lat and long',
-                code='invalid_lat_long'
-            ),
-        ]
-    )
-
-    contacts = models.ManyToManyField(Contact, related_name='representing')
+    contacts = ParentalManyToManyField(Contact_Card, related_name='representing', blank=True)
 
     # Search index configuration
-    search_fields = Page.search_fields + [
-        index.SearchField('address'),
-        index.SearchField('body'),
-    ]
+    # search_fields = Page.search_fields + [
+    #     index.SearchField('address'),
+    #     index.SearchField('body'),
+    # ]
 
     # Fields to show to the editor in the admin view
     content_panels = [
         FieldPanel('title', classname="full"),
         FieldPanel('introduction', classname="full"),
-        ImageChooserPanel('image'),
-        StreamFieldPanel('body'),
+        ImageChooserPanel('hero'),
+        FieldPanel('body', classname="full"),
         FieldPanel('address', classname="full"),
-        FieldPanel('lat_long'),
         InlinePanel('hours_of_operation', label="Hours of Operation"),
+        # InlinePanel('contacts')
     ]
 
     def __str__(self):
         return self.title
+
+    @property
+    def thumbnail(self):
+        """
+        To find a list of thumbnail candidates, collections can be filtered inexactly against the title of the page (to catch spelling errors).
+        """
+        colls = []
+        q_title = Collection.objects.filter(name__iexact=self.title)
+        q_slug = Collection.objects.filter(name__iexact=self.slug)
+        # We cast a very broad net to find all collections with a name matching the slug or title of the page. Collections created by Mediabox will have a name matching the name of the subdirectory they came from, so names are not unique.
+
+        colls.append([e for e in q_title])
+        colls.append([e for e in q_slug])
+        candidates = []
+
+        for coll in colls:
+            imgs_for_coll = Image.objects.filter(collection=coll)
+
+            candidates.append(
+                [entry.title for entry in imgs_for_coll]
+            )
+
+        for query in ['thumbnail', 'directory', self.title]:
+            hit = process.extractBests(
+                query, candidates, score_cutoff=70)
+            
+            if hit:
+                return Image.objects.get(title__iexact=hit[0])
+
+        consolation = random.choice(candidates)     # Just pick one.
+        return Image.objects.get(title__iexact=consolation)
+
+    @property
+    def lat_long(self):
+        return '0,0'
 
     @property
     def operating_hours(self):
@@ -262,14 +301,80 @@ class EntityPage(Page):
         except EntityOperatingHours.DoesNotExist:
             return False
 
+    templates = {
+        'page': 'entity_page.html.jinja',
+        'listing': 'entity_listing.html.jinja'
+    }
+
     # Makes additional context available to the template so that we can access
     # the latitude, longitude and map API key to render the map
     def get_context(self, request):
         context = super(EntityPage, self).get_context(request)
         context['lat'] = self.lat_long.split(",")[0]
         context['long'] = self.lat_long.split(",")[1]
-        context['google_map_api_key'] = settings.GOOGLE_MAP_API_KEY
+        context['google_api_key'] = settings.GOOGLE_API_KEY
         return context
 
-    # Can only be placed under a EntitiesIndexPage object
-    parent_page_types = ['EntitiesIndexPage']
+    # Can only be placed under a EntitiesIndexPage object or another entity.
+    parent_page_types = ['EntitiesIndexPage', 'EntityPage']
+
+class AirBnBPage(EntityPage):
+    '''
+    To save on LoC in the data model, data about specific AirBnB units can be kept in the EntityPage.data field. For the most part we only need it when we're filling out the template. We'll also use EntityPage.image and EntityPage.map.
+    '''
+    templates = {
+        'page': 'airbnb_page.html.jinja',
+        'listing': 'airbnb_listing.html.jinja'
+    }
+
+@register_snippet
+class APISource(models.Model):
+    title = models.CharField(max_length=255)
+    plugin = models.CharField(max_length=255)
+
+    panels = [
+        FieldRowPanel([
+            FieldPanel('title'),
+            FieldPanel('plugin')
+        ])
+    ]
+
+class APIResult(models.Model):
+    timestamp = models.DateTimeField(auto_now_add=True, editable=False)
+    source = models.ForeignKey(APISource, blank=True, on_delete=models.PROTECT, related_name='results')
+    data = models.JSONField()
+    model = models.CharField(max_length=50, blank=True)
+
+    def __str__(self):
+        title, model, timestamp = (
+            self.source.title,
+            self.model,
+            arrow.get(self.timestamp).humanize()
+        )
+
+        return f"{title} 🢩 {model} 🕰️ {timestamp}"
+
+    def get_model(self):
+        cls = apps.get_model(
+            app_label="lib.cartomancer", model_name=self.model, require_ready=True)
+
+        return cls
+
+    def injest(self):
+        cls = self.get_model()
+
+        if isinstance(self.data, list):
+            raw = self.data
+        else:
+            try:
+                raw = self.data.values()
+            except AttributeError:
+                logger.warn("The data is neither a list nor a dict. Aborting injest function.")
+
+                return False
+
+        for entry in raw:
+            logger.debug(f"Entering\n\n{dir(entry)}")
+            logger.debug(f"Compare to model\n\n{dir(cls)}")
+
+            # prompt.yn()

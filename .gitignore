@@ -16,6 +16,7 @@
 Pipfile.lock
 
 backup
+secrets
 
 Dropbox
 

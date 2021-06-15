@@ -1,0 +1,113 @@
+{% extends 'content.html.jinja' %}
+
+{% block content %}
+<div>
+    <p>{{ page.introduction }}</p>
+</div>
+
+<div class="">
+    <div class="">
+        {% for listing in page.children() %}
+            <div class="">
+                <a href="{%  %}">
+                <h1 class="">
+                    <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt }}" class="" />
+
+                    <span class="">{{ location.title }}</span>
+
+                </h1></a>
+                    <address>{{ location.address }}</address>
+                    <a href="https://google.com/maps/?q={{ location.lat_long }}" class="" target="_blank">Map</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script id="sorting-controller" src="{{ static('js/sorting.js') }}"></script>
+<style>
+    ul[data-target="sorting.categories"][active] button[aria-pressed="true"]  {
+        background: rgba(115, 166, 136, 1);
+    }
+    ul[data-target="sorting.filters"][active] li {
+        background: none;
+    }
+    ul[data-target="sorting.filters"][active] button[aria-pressed="true"] {
+        color: white;
+        background: #2d4066;
+    }
+    ul[data-target="sorting.filters"][active] button:not([aria-pressed="true"]) {
+        background: #9fb1be;
+        color: #2d4066;
+    }
+</style>
+<div class="sorting"
+    data-controller='sorting'>
+    <!-- Sortable grid. -->
+    <sortable-grid class="grid grid-cols-5 sm:grid-cols-2 gap-4"
+        data-target="sorting.grid">
+        {% for listing in page.children() %}
+            <article id="entry-{{ listing.pk }}" class="border border-opacity-50 flex flex-col items-center justify-between p-2"
+                data-sorting-target="item"
+                data-sorting-metadata="{{ listing.sorting }}">
+                <a href="{% url listing.slug %}"
+                    aria-hidden="true">
+                    <!-- TODO: Enable this template tag once I've added the entries to the database so that Django can query them and know which URLs to reserve. -->
+                    <picture class="h-full w-full">
+                        <!-- <source srcset="{{ listing.picture_url | imgproxy("thumb" }}"> -->
+                        <img src="{% image listing.image fill-200x200 %}"
+                            alt="{{ listing.name }}">
+                    </picture>
+                </a>
+            
+                <address class="flex flex-col text-center">
+                    <a href="{% url listing.slug %}">
+                    <!-- TODO: Enable this template tag once I've added the entries to the database so that Django can query them and know which URLs to reserve. -->
+                        <span class="text-2xl inline-block">
+                            {{ listing.title }}</span>
+                        <span class="serif italic text-lg inline-block">
+                            {{ listing.address }}</span>
+                    </a>
+                    {% if listing.data.website %}
+                        <a href="{{listing.data.website}}" class="text-green text-lg">
+                            Visit them at <span class="mono">{{listing.web_display}}</span>!
+                        </a>
+                    {% endif %}
+                    <div class="flex flex-row flex-wrap justify-center">
+                        {% if listing.data.facebook %}
+                        <div class="px-2">
+                            <a href="{{listing.data.facebook}}" class="text-green text-lg">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if listing.data.instagram %}
+                        <div class="px-2">
+                            <a href="{{listing.data.instagram}}" class="text-green text-lg">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if listing.twitter %}
+                        <div class="px-2">
+                            <a href="{{listing.twitter}}" class="text-green text-lg">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if listing.linkedin %}
+                        <div class="px-2">
+                            <a href="{{listing.linkedin}}" class="text-green text-lg">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </address>
+                <aside class="w-full">
+                    <!-- TODO: Tags and such can go here. -->
+                </aside>
+            </article>
+        {% endfor %}
+    </sortable-grid>
+</div>
+{% endblock %}

@@ -240,6 +240,7 @@ INSTALLED_APPS = lib.modules + \
 
         # Wagtail
         'wagtail.contrib.forms',
+        'wagtail.contrib.postgres_search',
         'wagtail.contrib.redirects',
         'wagtail.embeds',
         'wagtail.sites',
@@ -256,6 +257,7 @@ INSTALLED_APPS = lib.modules + \
 
         # 'ls.joyous',
         'wagtail.contrib.modeladmin',
+        'wagtailmedia',
 
         # Django libraries
         'django.contrib.admin',
@@ -351,6 +353,18 @@ LOGGING = {
           'class': 'logging.handlers.RotatingFileHandler',
           'filename': 'log/sockpuppet.log',
           'formatter': 'simple'
+        },
+        'cartomancer': {
+          'level': 'DEBUG',
+          'class': 'logging.handlers.RotatingFileHandler',
+          'filename': 'log/cartomancer.log',
+          'formatter': 'simple'
+        },
+        'mediabox': {
+          'level': 'DEBUG',
+          'class': 'logging.handlers.RotatingFileHandler',
+          'filename': 'log/mediabox.log',
+          'formatter': 'simple'
         }
     },
     'formatters': {
@@ -362,6 +376,14 @@ LOGGING = {
         'sockpuppet': {
             'level': 'DEBUG',
             'handlers': ['sockpuppet']
+        },
+        'Cartomancer 🗺 ': {
+            'level': 'INFO',
+            'handlers': ['cartomancer']
+        },
+        'Mediabox': {
+            'level': 'INFO',
+            'handlers': ['mediabox']
         }
     }
 }
@@ -397,6 +419,12 @@ sentry_sdk.init(
 # ---------------------------------------------------------------------------- #
 
 WAGTAIL_SITE_NAME = 'C-Street Almanac'
+
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.contrib.postgres_search.backend',
+    },
+}
 
 from lib.pageboy.quill import quill_config
 QUILL_CONFIGS = {

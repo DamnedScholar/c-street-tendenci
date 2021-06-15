@@ -11,11 +11,10 @@ from collections import namedtuple
 
 from random import choice, choices, sample
 
+from django.core.files.images import ImageFile
+from django.core.files.storage import Storage
 from django.conf import settings
 from django.http import HttpResponseRedirect
-
-from wagtail.core.models import Collection
-from wagtail.images.models import Image
 
 import arrow
 
@@ -29,7 +28,7 @@ from fs.opener import manage_fs
 from fs.path import basename, iteratepath, relpath
 from fs.tools import is_thread_safe
 from fs.tree import render
-from fs.walk import Walker
+from fs.walk import BoundWalker, Walker
 
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
@@ -37,7 +36,7 @@ from fuzzywuzzy.string_processing import StringProcessor
 
 import sentry_sdk as sentry
 
-MediaboxResult = namedtuple('MediaboxResult', ['basename', 'path', 'contents'])
+MediaboxResult = namedtuple('MediaboxResult', ['basename', 'fs_path', 'media_path'])
 
 class Mediabox:
     segments = {
@@ -48,8 +47,9 @@ class Mediabox:
         '''
         Mediabox is a class that integrates the Django media folder with Dropbox. The class has the ability to mirror the Dropbox folder to the local server and then serve files locally that were deposited by people with no access to the site.
         '''
-        self.local_root = os.path.join(settings.MEDIA_ROOT, 'dropbox/')
-        self.local_url = os.path.join(settings.MEDIA_URL, 'dropbox/')
+        self.directory = 'dropbox/'
+        self.local_root = os.path.join(settings.MEDIA_ROOT, self.directory)
+        self.local_url = os.path.join(settings.MEDIA_URL, self.directory)
         self.oauth = os.environ.get('DROPBOX_OAUTH')
         self.api = dropbox.Dropbox(self.oauth)
         self.fs = open_fs(f'osfs://{self.local_root}')
@@ -57,12 +57,6 @@ class Mediabox:
             f'dropbox://dropbox.com?access_token={self.oauth}')
 
         self._index()
-
-        # self.collection = Collection.objects.get_or_create(name="Mediabox")
-        
-        # for path in self.index:
-        #     # TODO: Run `wagtail.images.models.Image.objects.get_or_create` for each file path in the index, and ensure that each of them is added to `self.collection`.
-        #     wagtail_image = Image.objects.get_or_create()
 
     def __del__(self):
         # Ensure opened filesystems are closed.
@@ -76,14 +70,6 @@ class Mediabox:
         (dirs, files) = render(self.fs, with_color=True, file=None)
         return f'Found {dirs} directories and {files} files.'
 
-    # def fuzz(self, query, segment):
-    #     return [
-    #         e[0] for e in
-    #         process.extractWithoutOrder(
-    #             query, self.index[segment],
-    #             score_cutoff=90)
-    #         ]
-
     def fuzz(self, query, segment):
         return process.extractBests(
                 query, self.index[segment], scorer=fuzz.token_set_ratio)
@@ -93,11 +79,6 @@ class Mediabox:
         Get the first or a random file according to a query parameter and/or path string.
         '''
 
-        # Fuzzywuzzy tokenizes strings based on space separators, and the multi-token query string syntax resembles subdirectories, so we can easily swap one to the other. It doesn't matter if this is a little messy, since the match is fuzzy and doesn't care about specific directory or file names.
-
-        def tokenify(query):
-            return query.replace('/', ' ').replace('.', ' ')
-
         if not segment:
             segment = 'photos'
 
@@ -105,7 +86,7 @@ class Mediabox:
             return path
         elif not random:
             logger.warn(f"Looking for the best match for '{query}' "
-                "in {self.segments[segment]}.")
+                f"in {self.segments[segment]}.")
             return process.extractOne(
                 query, self.index[segment], scorer=fuzz.token_set_ratio)[0]
         else:
@@ -122,26 +103,37 @@ class Mediabox:
         '''
         Get a specific path or query result in a URL form from the perspective of the HTTP server, which is the path at which the file is accessible from the outside world.
         '''
-        return self.urlize(self.get(**kwargs))
+        return relpath(self.urlize(self.get(**kwargs)))
 
     def fuzzy_clump(self, query='', max=6):
-        return choices(self.fuzz(query), k=max)
+        return choices(self.fuzz(query, segment='photos'), k=max)
 
-    def get_url_list(self, query='', max=6):
+    def get_relative_url_list(self, query='', max=6):
         '''
         Return a list of urls matching the query parameters.
         '''
         return [self.urlize(url) for url in self.fuzzy_clump(query, max)]
 
-    def open(self, path):
+    def info(self, path):
         '''
-        Open a file.
+        Return information about a file.
         '''
-        return MediaboxResult(
-            basename(path),
-            path,
-            self.fs.readbytes(relpath(path))
+
+        from conf.settings import MEDIA_ROOT
+
+        # root = settings.MEDIA_ROOT
+
+        logger.warn(f"File located. Building result for '{basename(path)}' at '{path}' with root '{MEDIA_ROOT}' -> {os.path.join(MEDIA_ROOT, 'dropbox', path)}")
+
+        result = MediaboxResult(
+            basename(path),     # File name
+            path,               # File path
+            os.path.join(MEDIA_ROOT, 'dropbox', path)
         )
+        
+        logger.warn(f"Result: {result}")
+
+        return result
 
     def downstream(self, paths, walker=None):
         '''
@@ -257,6 +249,30 @@ class Mediabox:
         Take a dict of config variables to define a PyFS Walker, and then return the instantiated Walker. This is to be used as a convenience function to allow creating arbitrary Walkers without having to use PyFS imports outside this file: anything that uses Mediabox to get files will be able to quickly define Walker behavior.
         '''
         pass
+
+    def get_walker(self, config):
+        return BoundWalker(self.fs)
+
+    class MediaboxStorage(Storage):
+        def __init__(self, mediabox):
+            self.mediabox = mediabox
+
+        def _open(self, name, mode):
+            return open(f'{name}', mode)
+
+        def _save(self):
+            # Currently we don't need to save via the custom storage.
+            pass
+
+        def url(self, name):
+            return f'{self.mediabox.local_url}{name}'
+
+        def path(self, name):
+            return f'{self.mediabox.directory}{name}'
+
+    @property
+    def storage(self):
+        return self.MediaboxStorage(self)
 
     def _index(self):
         '''

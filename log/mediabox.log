@@ -1,0 +1,76 @@
+2021-06-11 08:32:46,686 ⚜️  Mediabox 〉 WARNING 〉 Here we go.
+2021-06-11 08:32:46,702 ⚜️  Mediabox 〉 WARNING 〉 Trying to purge 3 collections.
+2021-06-11 08:32:46,754 ⚜️  Mediabox 〉 WARNING 〉 The managed collection tree has been purged.
+2021-06-11 08:32:46,755 ⚜️  Mediabox 〉 WARNING 〉 Inspecting []
+2021-06-11 08:32:46,755 ⚜️  Mediabox 〉 WARNING 〉 The current collection is Mediabox.
+2021-06-11 08:32:46,755 ⚜️  Mediabox 〉 WARNING 〉 Collection Mediabox established with contents
+
+[]
+2021-06-11 08:32:46,756 ⚜️  Mediabox 〉 WARNING 〉 Inspecting ['CID-Minutes']
+2021-06-11 08:32:46,772 ⚜️  Mediabox 〉 WARNING 〉 The current collection is /CID-Minutes.
+2021-06-11 08:32:46,772 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2014.pdf'> as an image.
+2021-06-11 08:32:46,772 ⚜️  Mediabox 〉 WARNING 〉 File name: CID Minutes 2014.pdf
+2021-06-11 08:32:46,773 ⚜️  Mediabox 〉 WARNING 〉 File path: /CID-Minutes/CID Minutes 2014.pdf
+2021-06-11 08:32:46,851 ⚜️  Mediabox 〉 WARNING 〉 CID Minutes 2014.pdf
+2021-06-11 08:32:46,853 ⚜️  Mediabox 〉 WARNING 〉 Couldn't save this file as an image. Saving as a document instead. Error: null value in column "width" violates not-null constraint
+DETAIL:  Failing row contains (120, CID Minutes 2014.pdf, /home/damnedscholar/github/c-street-tendenci/media/dropbox/CID-M..., null, null, 2021-06-11 13:32:46.85169+00, null, null, null, null, null, null, 971, ).
+
+2021-06-11 08:32:46,854 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2014.pdf'> as a document.
+2021-06-11 08:32:46,857 ⚜️  Mediabox 〉 WARNING 〉 CID Minutes 2014.pdf
+2021-06-11 09:08:22,648 ⚜️  Mediabox 〉 WARNING 〉 Here we go.
+2021-06-11 09:08:22,656 ⚜️  Mediabox 〉 WARNING 〉 Trying to purge 3 collections.
+2021-06-11 09:08:22,690 ⚜️  Mediabox 〉 WARNING 〉 The managed collection tree has been purged.
+2021-06-11 09:08:22,691 ⚜️  Mediabox 〉 WARNING 〉 Inspecting []
+2021-06-11 09:08:22,691 ⚜️  Mediabox 〉 WARNING 〉 The current collection is Mediabox.
+2021-06-11 09:08:22,691 ⚜️  Mediabox 〉 WARNING 〉 Collection Mediabox established with contents
+
+[]
+2021-06-11 09:08:22,691 ⚜️  Mediabox 〉 WARNING 〉 Inspecting ['CID-Minutes']
+2021-06-11 09:08:22,705 ⚜️  Mediabox 〉 WARNING 〉 The current collection is /CID-Minutes.
+2021-06-11 09:08:22,705 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2014.pdf'> as an image.
+2021-06-11 09:08:22,706 ⚜️  Mediabox 〉 WARNING 〉 File name: CID Minutes 2014.pdf
+2021-06-11 09:08:22,706 ⚜️  Mediabox 〉 WARNING 〉 File path: /CID-Minutes/CID Minutes 2014.pdf
+2021-06-11 09:08:22,709 ⚜️  Mediabox 〉 WARNING 〉 Couldn't save this file as an image. Saving as a document instead. Error: 'WagtailImageField' object has no attribute 'storage'
+2021-06-11 09:08:22,709 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2014.pdf'> as a document.
+2021-06-11 09:08:22,716 ⚜️  Mediabox 〉 WARNING 〉 CID Minutes 2014.pdf
+2021-06-11 09:08:22,820 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2015.pdf'> as an image.
+2021-06-11 09:08:22,820 ⚜️  Mediabox 〉 WARNING 〉 File name: CID Minutes 2015.pdf
+2021-06-11 09:08:22,820 ⚜️  Mediabox 〉 WARNING 〉 File path: /CID-Minutes/CID Minutes 2015.pdf
+2021-06-11 09:08:22,822 ⚜️  Mediabox 〉 WARNING 〉 Couldn't save this file as an image. Saving as a document instead. Error: 'WagtailImageField' object has no attribute 'storage'
+2021-06-11 09:08:22,823 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2015.pdf'> as a document.
+2021-06-11 09:08:22,825 ⚜️  Mediabox 〉 WARNING 〉 CID Minutes 2015.pdf
+2021-06-11 09:08:22,841 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2020.pdf'> as an image.
+2021-06-11 09:08:22,841 ⚜️  Mediabox 〉 WARNING 〉 File name: CID Minutes 2020.pdf
+2021-06-11 09:08:22,841 ⚜️  Mediabox 〉 WARNING 〉 File path: /CID-Minutes/CID Minutes 2020.pdf
+2021-06-11 09:08:22,843 ⚜️  Mediabox 〉 WARNING 〉 Couldn't save this file as an image. Saving as a document instead. Error: 'WagtailImageField' object has no attribute 'storage'
+2021-06-11 09:08:22,844 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2020.pdf'> as a document.
+2021-06-11 09:08:22,845 ⚜️  Mediabox 〉 WARNING 〉 CID Minutes 2020.pdf
+2021-06-11 09:08:22,860 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2016.pdf'> as an image.
+2021-06-11 09:08:22,860 ⚜️  Mediabox 〉 WARNING 〉 File name: CID Minutes 2016.pdf
+2021-06-11 09:08:22,861 ⚜️  Mediabox 〉 WARNING 〉 File path: /CID-Minutes/CID Minutes 2016.pdf
+2021-06-11 09:08:22,863 ⚜️  Mediabox 〉 WARNING 〉 Couldn't save this file as an image. Saving as a document instead. Error: 'WagtailImageField' object has no attribute 'storage'
+2021-06-11 09:08:22,863 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2016.pdf'> as a document.
+2021-06-11 09:08:22,865 ⚜️  Mediabox 〉 WARNING 〉 CID Minutes 2016.pdf
+2021-06-11 09:08:22,883 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2021.pdf'> as an image.
+2021-06-11 09:08:22,883 ⚜️  Mediabox 〉 WARNING 〉 File name: CID Minutes 2021.pdf
+2021-06-11 09:08:22,883 ⚜️  Mediabox 〉 WARNING 〉 File path: /CID-Minutes/CID Minutes 2021.pdf
+2021-06-11 09:08:22,886 ⚜️  Mediabox 〉 WARNING 〉 Couldn't save this file as an image. Saving as a document instead. Error: 'WagtailImageField' object has no attribute 'storage'
+2021-06-11 09:08:22,886 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2021.pdf'> as a document.
+2021-06-11 09:08:22,888 ⚜️  Mediabox 〉 WARNING 〉 CID Minutes 2021.pdf
+2021-06-11 09:08:22,904 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2009-2015.pdf'> as an image.
+2021-06-11 09:08:22,904 ⚜️  Mediabox 〉 WARNING 〉 File name: CID Minutes 2009-2015.pdf
+2021-06-11 09:08:22,904 ⚜️  Mediabox 〉 WARNING 〉 File path: /CID-Minutes/CID Minutes 2009-2015.pdf
+2021-06-11 09:08:22,906 ⚜️  Mediabox 〉 WARNING 〉 Couldn't save this file as an image. Saving as a document instead. Error: 'WagtailImageField' object has no attribute 'storage'
+2021-06-11 09:08:22,906 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'CID Minutes 2009-2015.pdf'> as a document.
+2021-06-11 09:08:22,908 ⚜️  Mediabox 〉 WARNING 〉 CID Minutes 2009-2015.pdf
+2021-06-11 09:08:22,927 ⚜️  Mediabox 〉 WARNING 〉 Collection /CID-Minutes established with contents
+
+[<Document: CID Minutes 2014.pdf>, <Document: CID Minutes 2015.pdf>, <Document: CID Minutes 2020.pdf>, <Document: CID Minutes 2016.pdf>, <Document: CID Minutes 2021.pdf>, <Document: CID Minutes 2009-2015.pdf>]
+2021-06-11 09:08:22,928 ⚜️  Mediabox 〉 WARNING 〉 Inspecting ['C-Street Website']
+2021-06-11 09:08:22,953 ⚜️  Mediabox 〉 WARNING 〉 The current collection is /C-Street Website.
+2021-06-11 09:08:22,954 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'Directory as of 7-15-19.pdf'> as an image.
+2021-06-11 09:08:22,954 ⚜️  Mediabox 〉 WARNING 〉 File name: Directory as of 7-15-19.pdf
+2021-06-11 09:08:22,954 ⚜️  Mediabox 〉 WARNING 〉 File path: /C-Street Website/Directory as of 7-15-19.pdf
+2021-06-11 09:08:22,957 ⚜️  Mediabox 〉 WARNING 〉 Couldn't save this file as an image. Saving as a document instead. Error: 'WagtailImageField' object has no attribute 'storage'
+2021-06-11 09:08:22,958 ⚜️  Mediabox 〉 WARNING 〉 Processing file <file 'Directory as of 7-15-19.pdf'> as a document.
+2021-06-11 09:08:22,960 ⚜️  Mediabox 〉 WARNING 〉 Directory as of 7-15-19.pdf

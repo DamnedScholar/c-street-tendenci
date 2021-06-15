@@ -2256,6 +2256,13 @@ bytes@3.1.0, bytes@^3.0.0:
   dependencies:
     morphdom "^2.6.1"
 
+cable_ready@^4.4.5:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/cable_ready/-/cable_ready-4.5.0.tgz#1207218dd16934d12addfbd34c26ead853570672"
+  integrity sha512-9bom1DuYe1teBdRckgKWjg+rWRLWrkOvkhzlXkhb33X+Pfu/QK9e4vGk6hGK9PVKVr0SYZC41dByFGknW4spLg==
+  dependencies:
+    morphdom "^2.6.1"
+
 cacache@^15.0.0:
   version "15.0.5"
   resolved "https://registry.yarnpkg.com/cacache/-/cacache-15.0.5.tgz#69162833da29170d6732334643c60e005f5f17d0"
@@ -4149,6 +4156,11 @@ graceful-fs@^4.1.5:
   version "4.2.5"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.5.tgz#bc18864a6c9fc7b303f2e2abdb9155ad178fbe29"
   integrity sha512-kBBSQbz2K0Nyn+31j/w36fUfxkBW9/gfwRWdUY1ULReH3iokVJgddZAFcD1D0xlgTmFxJCbUkUclAlc6/IDJkw==
+
+gsap@^3.5.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.6.1.tgz#618f2338044d2b78b8cbced8ea8bf246d1cf6407"
+  integrity sha512-hCkjk7UVbeEmlpFbiy7lIsh742bwVlMhdCnnQ1CvVOAdURyPX8hXjFZGh/0YzUyAcWPyJPE0/paMhSYtLhGlfA==
 
 gulp-cli@^2.2.0:
   version "2.2.0"
@@ -6572,6 +6584,15 @@ quill-delta@^3.6.2:
     parchment "^1.1.4"
     quill-delta "^3.6.2"
 
+radiolabel@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/radiolabel/-/radiolabel-1.1.0.tgz#12881f63e845e11bbd733f4875a831118d4a1e6d"
+  integrity sha512-I/dqX7IdtJ0dt/YDkwqSydvgbiq7GQ90TY9V/PfL+KkRMCo5AuHNYIH7PC3isUzTEvP35jyhSv+i/C1CpXIWYA==
+  dependencies:
+    cable_ready "^4.4.5"
+    gsap "^3.5.1"
+    stimulus "^2.0.0"
+
 randombytes@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"
@@ -7528,7 +7549,7 @@ stimulus-use@^0.23.0:
   resolved "https://registry.yarnpkg.com/stimulus-use/-/stimulus-use-0.23.0.tgz#7f35e99c98dc4ded59ada8d89a83b6a85b847099"
   integrity sha512-9oYoT1kSzPLfvNHf4RoZKk6LTEtZ07mzUtq3BY5Cp1068eimgXES+TxGV2Cze8CeGBubWJXUxJ15LeLlR3bBtA==
 
-stimulus@2:
+stimulus@2, stimulus@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/stimulus/-/stimulus-2.0.0.tgz#713c8b91a72ef90914b90955f0e705f004403047"
   integrity sha512-xipy7BS5TVpg4fX6S8LhrYZp7cmHGjmk09WSAiVx1gF5S5g43IWsuetfUhIk8HfHUG+4MQ9nY0FQz4dRFLs/8w==

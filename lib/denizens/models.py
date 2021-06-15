@@ -8,9 +8,9 @@ from wagtail.core.models import Page, PageManager
 # TODO: https://blog.khophi.co/extending-django-user-model-userprofile-like-a-pro/
 
 
-class Team (Page):
-    guid = models.UUIDField(default=uuid4, editable=False)
+# class Team (Page):
+#     guid = models.UUIDField(default=uuid4, editable=False)
 
-    def serve_preview():
-        # TODO: Override.
-        pass
+#     def serve_preview():
+#         # TODO: Override.
+#         pass
