@@ -30,24 +30,18 @@ def image_from_file(file, path='/', collection=managed_collection):
     logger.warn(f"File name: {file.name}")
     logger.warn(f"File path: {path}")
 
-    # img = Image(
-    #     title=file.name,
-    #     file=ImageFieldFile(
-    #         instance=Image(),
-    #         field=ImageField(),
-    #         name=mediabox.fs.getospath(path).decode('utf-8')
-    #     ),
-    #     collection=collection
-    # )
+    # img = Image(file=ImageFile(file, name=file.name),
+    #     title=file.name, collection=collection)
     img = ImageForm({
         'title': file.name,
-        'file': ImageFieldFile(
-            instance=Image(),
-            field=WagtailImageField(),
-            name=mediabox.fs.getospath(path).decode('utf-8')
-        ),
+        'file': file,
         'collection': collection
     })
+
+    img.clean()
+
+    if img:
+        logger.warn(f"We got some errors: {img.errors}")
 
     img.save()
     
@@ -59,17 +53,16 @@ def document_from_file(file, path='/', collection=managed_collection):
 
     logger.warn(f"Processing file {file} as a document.")
 
-    doc = Document(
-        title=file.name,
-        file=FieldFile(
-            instance=Document(),
-            field=FileField(),
-            name=mediabox.fs.getospath(path).decode('utf-8')
-        ),
-        collection=collection
-    )
+    # doc = Document(file=file, title=file.name, collection=collection)
+
+    doc = DocumentForm({
+        title: file.name,
+        file: file,
+        collection: collection
+    })
 
     logger.warn(doc)
+    logger.warn(doc.file.name)
 
     doc.save()
 

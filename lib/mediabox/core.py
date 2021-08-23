@@ -24,6 +24,7 @@ from fs._bulk import Copier
 from fs.copy import copy_file_if_newer, copy_fs_if_newer, copy_structure
 from fs.errors import DirectoryExpected, DirectoryExists, ResourceNotFound
 from fs.mirror import _mirror
+# from overrides.mirror import _mirror
 from fs.opener import manage_fs
 from fs.path import basename, iteratepath, relpath
 from fs.tools import is_thread_safe
@@ -181,6 +182,10 @@ class Mediabox:
             # If Sentry is integrated correctly, logging calls below Error
             # are added as breadcrumbs to submitted transactions.
             logger.info(
+                f'Local: {dest_fs.getdetails(dest_path).size}, Remote: {src_fs.getdetails(src_path).size}'
+            )
+
+            logger.info(
                 f'Copied {src_path} on Dropbox to {dest_path} in the local fs.'
             )
 
@@ -226,6 +231,7 @@ class Mediabox:
                             walker=walker,
                             copy_if_newer=copy_if_newer,
                             copy_file=on_copy,
+                            # preserve_time=True
                         )
 
         with sentry.start_transaction(name='Automirror Dropbox') as watcher:

@@ -51,9 +51,3 @@ def call_api():
     data = { str(slugify(v[0])): dict(zip(fields, v)) for v in sheet['values'][1:] }
 
     return data
-
-def to_model(modelCls=None, result=None):
-    """
-    Takes a model class and an iterable of data structures that should resemble the model class, and tries to make them fit.
-    """
-    pass

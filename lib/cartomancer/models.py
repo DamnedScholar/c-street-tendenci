@@ -1,4 +1,5 @@
 from datetime import datetime
+import json
 import random
 import re
 
@@ -11,6 +12,7 @@ from django.contrib.auth.models import User
 from django.contrib.gis.db import models as geom
 from django.contrib.gis.geos import Point
 from django.conf import settings
+from django.core import serializers
 from django.core.validators import RegexValidator
 from django.db import models
 from django.forms import ModelForm
@@ -360,21 +362,23 @@ class APIResult(models.Model):
 
         return cls
 
+
+    # TODO: Replace all this with a proper deserialize strategy. https://docs.djangoproject.com/en/3.2/topics/serialization/
     def injest(self):
-        cls = self.get_model()
+        for slug, fields in self.data.items():
+            cls = this.get_model()
 
-        if isinstance(self.data, list):
-            raw = self.data
-        else:
-            try:
-                raw = self.data.values()
-            except AttributeError:
-                logger.warn("The data is neither a list nor a dict. Aborting injest function.")
+            existing = cls.objects.get(slug=slug)
 
-                return False
+            template = {
+                "model": self.model,
+                "fields": fields
+            }
 
-        for entry in raw:
-            logger.debug(f"Entering\n\n{dir(entry)}")
-            logger.debug(f"Compare to model\n\n{dir(cls)}")
+            if existing:
+                template['pk'] = existing.pk
 
-            # prompt.yn()
+            fmt = json.dumps()
+
+            obj = serializers.deserialize('json', fmt, ignorenonexistent=True)
+
