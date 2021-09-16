@@ -57,7 +57,7 @@ django-authority==0.14
 django-bootstrap-form==3.4
 django-component==0.1.7
 django-countries==6.1.2
-django-debug-toolbar==2.2
+django-debug-toolbar==2.2.1
 django-extensions==3.0.3
 django-form-utils==1.0.3
 django-formtools==2.2
