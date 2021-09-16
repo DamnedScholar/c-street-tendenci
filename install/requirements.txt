@@ -17,7 +17,7 @@ asgiref==3.3.1; python_version >= '3.5'
 astroid==2.4.1
 async-timeout==3.0.1
 attrs==19.3.0
-autobahn==20.4.3
+autobahn==20.12.3
 automat==20.2.0
 babel==2.8.0
 bcrypt==3.1.7
