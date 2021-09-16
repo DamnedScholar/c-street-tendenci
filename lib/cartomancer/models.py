@@ -183,8 +183,8 @@ class EntitiesIndexPage(HeroicPage):
         return self.get_children().specific().live()
 
     templates = {
-        'page': 'index_page.html.jinja',
-        'listing': 'index_listing.html.jinja'
+        'page': 'index_page.html',
+        'listing': 'index_listing.html'
     }
 
     # Overrides the context to list all child
@@ -304,8 +304,8 @@ class EntityPage(HeroicPage):
             return False
 
     templates = {
-        'page': 'entity_page.html.jinja',
-        'listing': 'entity_listing.html.jinja'
+        'page': 'entity_page.html',
+        'listing': 'entity_listing.html'
     }
 
     # Makes additional context available to the template so that we can access
@@ -325,8 +325,8 @@ class AirBnBPage(EntityPage):
     To save on LoC in the data model, data about specific AirBnB units can be kept in the EntityPage.data field. For the most part we only need it when we're filling out the template. We'll also use EntityPage.image and EntityPage.map.
     '''
     templates = {
-        'page': 'airbnb_page.html.jinja',
-        'listing': 'airbnb_listing.html.jinja'
+        'page': 'airbnb_page.html',
+        'listing': 'airbnb_listing.html'
     }
 
 @register_snippet

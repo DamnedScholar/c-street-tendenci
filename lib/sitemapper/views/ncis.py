@@ -2,7 +2,7 @@ from django.views.generic.base import TemplateView
 
 
 class NcisView(TemplateView):
-    template_name = 'ncis.html.jinja'
+    template_name = 'ncis.html'
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)

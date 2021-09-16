@@ -2,7 +2,7 @@ from django.views.generic import ListView
 from django.views.generic.base import TemplateView
 
 class GalleryView(ListView):
-    template_name = 'gallery.html.jinja'
+    template_name = 'gallery.html'
     # model = Image
 
     # def get_queryset(self):

@@ -273,7 +273,7 @@ class CalEventsMixin(YearMixin, MonthMixin, WeekMixin, DayMixin, DateMixin):
         return recurrence
 
 class CalendarView(CalEventsMixin, TemplateView):
-    template_name = 'calendar.html.jinja'
+    template_name = 'calendar.html'
 
 class EventsView(CalEventsMixin, TemplateView):
-    template_name = 'events.html.jinja'
+    template_name = 'events.html'

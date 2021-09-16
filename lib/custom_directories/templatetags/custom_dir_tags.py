@@ -138,7 +138,7 @@ def imgproxy(url, size):
     return url.decode()
 
 @library.global_function
-@library.render_with('airbnb_list.html.jinja')
+@library.render_with('airbnb_list.html')
 def airbnb():
     with open('lib/drone_hangar/static/airbnb/airbnb_data.json') as f:
         data = f.read()

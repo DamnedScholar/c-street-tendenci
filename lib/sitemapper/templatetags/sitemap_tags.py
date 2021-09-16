@@ -5,9 +5,9 @@ import jinja2
 # register = template.Library()
 
 
-# @register.inclusion_tag('site_nav.html.jinja')
+# @register.inclusion_tag('nav/site_nav.html')
 @library.global_function
-@library.render_with('site_nav.html.jinja')
+@library.render_with('nav/site_nav.html')
 def site_nav():
     return {
         'nav_groups': [
@@ -50,7 +50,7 @@ def site_nav():
     }
 
 @library.global_function
-@library.render_with('site_nav.html.jinja')
+@library.render_with('nav/site_nav.html')
 def hero_nav(cluster_name):
     clusters = {
         'groups': [

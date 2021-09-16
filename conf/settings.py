@@ -275,12 +275,22 @@ INSTALLED_APPS = lib.modules + \
 
 DJANGO_HASHIDS_SALT = "itsy bitsy spider"
 
+from django_jinja.builtins import DEFAULT_EXTENSIONS
+
 TEMPLATES = [
     {
         "BACKEND": "django_jinja.backend.Jinja2",
         "APP_DIRS": True,
         "OPTIONS": {
-            "match_regex": r".*\.jinja"
+            "match_extension": ".html",
+            "match_regex": r"^(?!(wagtail)?admin/).*",
+            "app_dirname": "jinja2",
+            'extensions': DEFAULT_EXTENSIONS + [
+                'lib.mediabox.jinja_ext.MediaboxExtension',
+                'wagtail.core.jinja2tags.core',
+                'wagtail.admin.jinja2tags.userbar',
+                'wagtail.images.jinja2tags.images',
+            ],
         }
     },
     {
@@ -431,14 +441,15 @@ QUILL_CONFIGS = {
     'default': quill_config()
 }
 
-WAGTAILADMIN_RICH_TEXT_EDITORS = {
-    'default': {
-        'WIDGET': 'django_quill.widgets.QuillWidget'
-    },
-    'legacy': {
-        'WIDGET': 'wagtail.admin.rich_text.HalloRichTextArea',
-    }
-}
+# TODO: Something about how Quill was working was nuking the editor widget if there was a single quote anywhere in the string. Switched back to Draftail temporarily while I figure it out.
+# WAGTAILADMIN_RICH_TEXT_EDITORS = {
+#     'default': {
+#         'WIDGET': 'django_quill.widgets.QuillWidget'
+#     },
+#     'legacy': {
+#         'WIDGET': 'wagtail.admin.rich_text.HalloRichTextArea',
+#     }
+# }
 
 # Package: wagtailgmaps
 # Mandatory

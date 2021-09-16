@@ -9,10 +9,10 @@ from django.views.generic.base import TemplateView
 from ..forms import SubscriptionForm
 
 class DocumentList(TemplateView):
-    template_name = 'dviewer/document_viewer.html.jinja'
+    template_name = 'dviewer/document_viewer.html'
 
 class CommuniqueView(DocumentList):
-    template_name = 'communique.html.jinja'
+    template_name = 'communique.html'
     links = [
         '/proxy/fdff711',
         '/proxy/2cc9611',

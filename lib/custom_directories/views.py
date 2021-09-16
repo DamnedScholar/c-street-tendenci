@@ -63,7 +63,7 @@ class CustomCats:
     def cats_regex(self):
         return str(list(self.cats().keys())).replace(', ','|').replace('\'','').replace('[','').replace(']','')
 
-def category(request, cat_slug=None, template_name="category.html.jinja"):
+def category(request, cat_slug=None, template_name="category.html"):
     
     all_cats = CustomCats().cats()
     hasher = hashids.Hashids('salty cats')
