@@ -215,7 +215,7 @@ requests==2.23.0
 requirements-detector==0.7
 rsa==4.6
 s3transfer==0.3.3
-scrapy==2.1.0
+scrapy==2.6.2
 scrapyd-client==1.1.0
 scrapyd==1.2.1
 selenium==3.141.0
